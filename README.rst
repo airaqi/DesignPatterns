@@ -51,10 +51,10 @@ properly, and also the case study implementation of the Lexi Text Editor.
 Working on this  project has went through all software development cycle, all the way through requirements gathering (during reading the book), design, implementation, testing, and deployment,
  and some post deployment technical support usage.
 
- Patterns
- ========
+Patterns
+========
 
- All patterns structures has been documented and samples has been created.
+All patterns structures has been documented and samples has been created.
 
 .. csv-table:: 
     :header-rows: 1
@@ -62,7 +62,7 @@ Working on this  project has went through all software development cycle, all th
     :align: center
 
     "Pattern","Description"
-    "`Abstract Factory`!<workspace/docs/abstract_factory/abstract_factory.rst>", "Provide an interface for creating families of related or dependent objects withoutspecifying their concrete classes."
+    "`Abstract Factory <workspace/docs/abstract_factory/abstract_factory>_`", "Provide an interface for creating families of related or dependent objects withoutspecifying their concrete classes."
 
 Requirements analysis
 =====================
