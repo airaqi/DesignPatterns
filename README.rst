@@ -62,7 +62,8 @@ All patterns structures has been documented and samples has been created.
     :align: center
 
     "Pattern","Description"
-    "`Abstract Factory <workspace/docs/abstract_factory/abstract_factory>_`", "Provide an interface for creating families of related or dependent objects withoutspecifying their concrete classes."
+    `Abstract Factory <workspace/docs/abstract_factory/abstract_factory>`_, "Provide an interface for creating families of related or dependent objects withoutspecifying their concrete classes."
+
 
 Requirements analysis
 =====================
