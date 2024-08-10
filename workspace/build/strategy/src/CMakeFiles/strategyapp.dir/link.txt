@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/strategyapp.dir/main.cpp.o -o strategyapp

@@ -1,2 +1,0 @@
-/usr/bin/ar qc libdecorator.a CMakeFiles/decorator.dir/decorator.cpp.o CMakeFiles/decorator.dir/decorator_border.cpp.o CMakeFiles/decorator.dir/decorator_scroll.cpp.o CMakeFiles/decorator.dir/text_view.cpp.o
-/usr/bin/ranlib libdecorator.a

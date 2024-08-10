@@ -1,2 +1,0 @@
-/usr/bin/ar qc liblexi.a CMakeFiles/lexi.dir/glyph.cpp.o CMakeFiles/lexi.dir/glyph_composite.cpp.o CMakeFiles/lexi.dir/glyph_leaf.cpp.o CMakeFiles/lexi.dir/glyph_row.cpp.o CMakeFiles/lexi.dir/glyph_column.cpp.o CMakeFiles/lexi.dir/glyph_character.cpp.o CMakeFiles/lexi.dir/glyph_rectangle.cpp.o
-/usr/bin/ranlib liblexi.a

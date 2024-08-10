@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/decoratorapp.dir/main.cpp.o -o decoratorapp  ../decorator/src/libdecorator.a

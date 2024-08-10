@@ -1,2 +1,0 @@
-/usr/bin/ar qc libcomposite.a CMakeFiles/composite.dir/equipment.cpp.o CMakeFiles/composite.dir/composite_equipment.cpp.o CMakeFiles/composite.dir/leaf_equipment.cpp.o
-/usr/bin/ranlib libcomposite.a
