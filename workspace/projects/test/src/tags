@@ -1,0 +1,29 @@
+!_TAG_FILE_SORTED	2	/0=unsorted, 1=sorted, 2=foldcase/
+CHECK_EQ	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_point.cpp	/^        CHECK_EQ(p5, p2 * p3);$/;"	p	language:C++	file:
+index	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_list.cpp	/^        long index = list.find("How");$/;"	v	language:C++	typeref:typename:long
+list	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_list.cpp	/^    List<std::string> list;$/;"	v	language:C++	typeref:typename:List<std::string>
+moveBy	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_rect.cpp	/^        r1.moveBy(p3);$/;"	p	language:C++	typeref:typename:r1.	file:
+moveTo	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_rect.cpp	/^        r1.moveTo(p3);$/;"	p	language:C++	typeref:typename:r1.	file:
+p1	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_point.cpp	/^    Point p1;$/;"	v	language:C++	typeref:typename:Point
+p1	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_rect.cpp	/^    Point p1(1,2);$/;"	v	language:C++	typeref:typename:Point
+p2	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_point.cpp	/^    Point p2(1, 2);$/;"	v	language:C++	typeref:typename:Point
+p2	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_rect.cpp	/^    Point p2(3,4);$/;"	v	language:C++	typeref:typename:Point
+p3	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_point.cpp	/^    Point p3(3, 4);$/;"	v	language:C++	typeref:typename:Point
+p3	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_rect.cpp	/^    Point p3(10, 10);$/;"	v	language:C++	typeref:typename:Point
+p4	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_point.cpp	/^    Point p4(4, 6);$/;"	v	language:C++	typeref:typename:Point
+p4	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_rect.cpp	/^    Point p4(11, 12);$/;"	v	language:C++	typeref:typename:Point
+p5	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_point.cpp	/^    Point p5(3, 8);$/;"	v	language:C++	typeref:typename:Point
+p5	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_rect.cpp	/^    Point p5(2, 2);$/;"	v	language:C++	typeref:typename:Point
+p6	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_rect.cpp	/^    Point p6(4, 6);$/;"	v	language:C++	typeref:typename:Point
+p7	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_rect.cpp	/^    Point p7(2,3);$/;"	v	language:C++	typeref:typename:Point
+p8	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_rect.cpp	/^    Point p8(5, 7);$/;"	v	language:C++	typeref:typename:Point
+p9	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_rect.cpp	/^    Point p9 = p2 + p3;$/;"	v	language:C++	typeref:typename:Point
+r0	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_rect.cpp	/^    Rect r0;$/;"	v	language:C++	typeref:typename:Rect
+r1	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_rect.cpp	/^    Rect r1(1,2,3,4);$/;"	v	language:C++	typeref:typename:Rect
+r2	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_rect.cpp	/^    Rect r2(p1,p1 + p2);$/;"	v	language:C++	typeref:typename:Rect
+r3	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_rect.cpp	/^    Rect r3(p7, p4);$/;"	p	language:C++	typeref:typename:Rect	file:
+r4	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_rect.cpp	/^    Rect r4(p3, p3 + p2);$/;"	v	language:C++	typeref:typename:Rect
+r5	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_rect.cpp	/^    Rect r5(p7, p6);$/;"	p	language:C++	typeref:typename:Rect	file:
+r6	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_rect.cpp	/^    Rect r6(p1, p4);$/;"	p	language:C++	typeref:typename:Rect	file:
+remove_at	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/test_list.cpp	/^        list.remove_at(index);$/;"	p	language:C++	typeref:typename:list.	file:
+test	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/test/src/CMakeLists.txt	/^add_executable(test test_all.cpp)$/;"	t	language:CMake

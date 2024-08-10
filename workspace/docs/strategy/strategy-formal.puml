@@ -1,0 +1,19 @@
+@startuml
+
+left to right direction
+
+Context : ContextInterface()
+
+Strategy : AlgorithmInterface()
+
+ConcreteStrategyA : AlgorithmInterface()
+ConcreteStrategyB : AlgorithmInterface()
+ConcreteStrategyC : AlgorithmInterface()
+
+Strategy <|-- ConcreteStrategyA
+Strategy <|-- ConcreteStrategyB
+Strategy <|-- ConcreteStrategyC
+
+Context "strategy" o--> Strategy
+
+@enduml

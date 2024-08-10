@@ -1,0 +1,107 @@
+!_TAG_FILE_SORTED	2	/0=unsorted, 1=sorted, 2=foldcase/
+append	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.cpp	/^void List<Item>::append(const Item& item)$/;"	f	language:C++	class:List	typeref:typename:void
+append	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        void append(const Item&);$/;"	p	language:C++	class:List	typeref:typename:void
+bottom	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        Coord bottom() const;   void bottom(Coord);$/;"	p	language:C++	class:Rect	typeref:typename:Coord
+bottom	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        Coord bottom() const;   void bottom(Coord);$/;"	p	language:C++	class:Rect	typeref:typename:void
+combine	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        Rect combine(const Rect&);$/;"	p	language:C++	class:Rect	typeref:typename:Rect
+contains	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        bool contains(const Point&) const;$/;"	p	language:C++	class:Rect	typeref:typename:bool
+Coord	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/coord.h	/^typedef float Coord;$/;"	t	language:C++	typeref:typename:float
+count	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.cpp	/^long List<Item>::count() const $/;"	f	language:C++	class:List	typeref:typename:long
+count	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        long count() const; $/;"	p	language:C++	class:List	typeref:typename:long
+DEFAULT_LIST_CAPACITY	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^#define DEFAULT_LIST_CAPACITY /;"	d	language:C++
+ERR_DIVIDE_BY_ZERO	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/point.h	/^const std::string ERR_DIVIDE_BY_ZERO = "Divide by Zero";$/;"	v	language:C++	typeref:typename:const std::string
+extent	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        Point& extent();        void extent(const Point&);$/;"	p	language:C++	class:Rect	typeref:typename:Point &
+extent	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        Point& extent();        void extent(const Point&);$/;"	p	language:C++	class:Rect	typeref:typename:void
+find	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.cpp	/^long List<Item>::find(const Item& item) const$/;"	f	language:C++	class:List	typeref:typename:long
+find	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        long find(const Item&) const;$/;"	p	language:C++	class:List	typeref:typename:long
+first	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.cpp	/^Item& List<Item>::first() const { return get(0); }$/;"	f	language:C++	class:List	typeref:typename:Item &
+first	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        Item& first() const;$/;"	p	language:C++	class:List	typeref:typename:Item &
+get	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.cpp	/^Item& List<Item>::get(long index) const $/;"	f	language:C++	class:List	typeref:typename:Item &
+get	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        Item& get(long index) const;$/;"	p	language:C++	class:List	typeref:typename:Item &
+height	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        Coord height() const;   void height(Coord);$/;"	p	language:C++	class:Rect	typeref:typename:Coord
+height	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        Coord height() const;   void height(Coord);$/;"	p	language:C++	class:Rect	typeref:typename:void
+includes	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.cpp	/^bool List<Item>::includes(const Item& item) const$/;"	f	language:C++	class:List	typeref:typename:bool
+includes	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        bool includes(const Item&) const;$/;"	p	language:C++	class:List	typeref:typename:bool
+insert	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.cpp	/^void List<Item>::insert(const Item& item, int index)$/;"	f	language:C++	class:List	typeref:typename:void
+insert	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        void insert(const Item&, int);$/;"	p	language:C++	class:List	typeref:typename:void
+intersect	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        Rect intersect(const Rect&);$/;"	p	language:C++	class:Rect	typeref:typename:Rect
+intersects	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        bool intersects(const Rect&) const;$/;"	p	language:C++	class:Rect	typeref:typename:bool
+isEmpty	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        bool isEmpty() const;$/;"	p	language:C++	class:Rect	typeref:typename:bool
+last	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.cpp	/^Item& List<Item>::last() const { return get(count() - 1); }$/;"	f	language:C++	class:List	typeref:typename:Item &
+last	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        Item& last() const;$/;"	p	language:C++	class:List	typeref:typename:Item &
+left	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        Coord left() const;     void left(Coord);$/;"	p	language:C++	class:Rect	typeref:typename:Coord
+left	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        Coord left() const;     void left(Coord);$/;"	p	language:C++	class:Rect	typeref:typename:void
+List	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.cpp	/^List<Item>::List(List& other) $/;"	f	language:C++	class:List
+List	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.cpp	/^List<Item>::List(long size) : _items(new Item[size]), _count(0), _size(size) {}$/;"	f	language:C++	class:List
+List	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        List(List&);$/;"	p	language:C++	class:List
+List	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        List(long size = DEFAULT_LIST_CAPACITY);$/;"	p	language:C++	class:List
+List	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^class List$/;"	c	language:C++
+moveBy	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        void moveBy(const Point&);$/;"	p	language:C++	class:Rect	typeref:typename:void
+moveTo	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        void moveTo(const Point&);$/;"	p	language:C++	class:Rect	typeref:typename:void
+operator *=	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/point.h	/^        Point& operator*=(const Point&);$/;"	p	language:C++	class:Point	typeref:typename:Point &
+operator +=	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/point.h	/^        Point& operator+=(const Point&);$/;"	p	language:C++	class:Point	typeref:typename:Point &
+operator -	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/point.h	/^        Point operator-();$/;"	p	language:C++	class:Point	typeref:typename:Point
+operator -=	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/point.h	/^        Point& operator-=(const Point&);$/;"	p	language:C++	class:Point	typeref:typename:Point &
+operator /=	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/point.h	/^        Point& operator\/=(const Point&);$/;"	p	language:C++	class:Point	typeref:typename:Point &
+operator =	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.cpp	/^List<Item>& List<Item>::operator=(const List& other) $/;"	f	language:C++	class:List	typeref:typename:List<Item> &
+operator =	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        List& operator=(const List&);$/;"	p	language:C++	class:List	typeref:typename:List &
+origin	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        Point& origin();        void origin(const Point&);$/;"	p	language:C++	class:Rect	typeref:typename:Point &
+origin	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        Point& origin();        void origin(const Point&);$/;"	p	language:C++	class:Rect	typeref:typename:void
+Point	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/point.h	/^        Point(Coord x = 0.0, Coord y = 0.0);$/;"	p	language:C++	class:Point
+Point	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/point.h	/^class Point$/;"	c	language:C++
+pop	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.cpp	/^Item& List<Item>::pop() $/;"	f	language:C++	class:List	typeref:typename:Item &
+pop	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        Item& pop();$/;"	p	language:C++	class:List	typeref:typename:Item &
+prepend	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.cpp	/^void List<Item>::prepend(const Item& item)$/;"	f	language:C++	class:List	typeref:typename:void
+prepend	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        void prepend(const Item&);$/;"	p	language:C++	class:List	typeref:typename:void
+push	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.cpp	/^void List<Item>::push(const Item& item)$/;"	f	language:C++	class:List	typeref:typename:void
+push	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        void push(const Item&);$/;"	p	language:C++	class:List	typeref:typename:void
+Rect	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        Rect(const Point& origin, const Point& extent);$/;"	p	language:C++	class:Rect
+Rect	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        Rect(Coord x = 0.0, Coord y = 0.0, Coord w = 0.0, Coord h = 0.0);$/;"	p	language:C++	class:Rect
+Rect	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^class Rect$/;"	c	language:C++
+remove	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.cpp	/^void List<Item>::remove(const Item& item)$/;"	f	language:C++	class:List	typeref:typename:void
+remove	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        void remove(const Item&);$/;"	p	language:C++	class:List	typeref:typename:void
+remove_all	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.cpp	/^void List<Item>::remove_all()$/;"	f	language:C++	class:List	typeref:typename:void
+remove_all	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        void remove_all();$/;"	p	language:C++	class:List	typeref:typename:void
+remove_at	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.cpp	/^void List<Item>::remove_at(long index)$/;"	f	language:C++	class:List	typeref:typename:void
+remove_at	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        void remove_at(long);$/;"	p	language:C++	class:List	typeref:typename:void
+remove_first	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.cpp	/^void List<Item>::remove_first()$/;"	f	language:C++	class:List	typeref:typename:void
+remove_first	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        void remove_first();$/;"	p	language:C++	class:List	typeref:typename:void
+remove_last	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.cpp	/^void List<Item>::remove_last()$/;"	f	language:C++	class:List	typeref:typename:void
+remove_last	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        void remove_last();$/;"	p	language:C++	class:List	typeref:typename:void
+right	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        Coord right() const;    void right(Coord);$/;"	p	language:C++	class:Rect	typeref:typename:Coord
+right	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        Coord right() const;    void right(Coord);$/;"	p	language:C++	class:Rect	typeref:typename:void
+shift_left	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.cpp	/^void List<Item>::shift_left(int index)$/;"	f	language:C++	class:List	typeref:typename:void
+shift_left	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        void shift_left(int index = 0);$/;"	p	language:C++	class:List	typeref:typename:void
+shift_right	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.cpp	/^void List<Item>::shift_right(int index)$/;"	f	language:C++	class:List	typeref:typename:void
+shift_right	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        void shift_right(int index = 0);$/;"	p	language:C++	class:List	typeref:typename:void
+size	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.cpp	/^long List<Item>::size() const$/;"	f	language:C++	class:List	typeref:typename:long
+size	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        long size() const;$/;"	p	language:C++	class:List	typeref:typename:long
+top	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.cpp	/^Item& List<Item>::top() const$/;"	f	language:C++	class:List	typeref:typename:Item &
+top	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        Item& top() const;$/;"	p	language:C++	class:List	typeref:typename:Item &
+top	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        Coord top() const;      void top(Coord);$/;"	p	language:C++	class:Rect	typeref:typename:Coord
+top	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        Coord top() const;      void top(Coord);$/;"	p	language:C++	class:Rect	typeref:typename:void
+to_string	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.cpp	/^std::string List<Item>::to_string()$/;"	f	language:C++	class:List	typeref:typename:std::string
+to_string	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        std::string to_string();$/;"	p	language:C++	class:List	typeref:typename:std::string
+to_string	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/point.h	/^        std::string to_string() const;$/;"	p	language:C++	class:Point	typeref:typename:std::string
+to_string	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        std::string to_string() const;$/;"	p	language:C++	class:Rect	typeref:typename:std::string
+width	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        Coord width() const;    void width(Coord);$/;"	p	language:C++	class:Rect	typeref:typename:Coord
+width	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        Coord width() const;    void width(Coord);$/;"	p	language:C++	class:Rect	typeref:typename:void
+x	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/point.h	/^        Coord x() const; void x(Coord x);$/;"	p	language:C++	class:Point	typeref:typename:Coord
+x	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/point.h	/^        Coord x() const; void x(Coord x);$/;"	p	language:C++	class:Point	typeref:typename:void
+y	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/point.h	/^        Coord y() const; void y(Coord y);$/;"	p	language:C++	class:Point	typeref:typename:Coord
+y	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/point.h	/^        Coord y() const; void y(Coord y);$/;"	p	language:C++	class:Point	typeref:typename:void
+Zero	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/point.h	/^        static const Point Zero;$/;"	m	language:C++	class:Point	typeref:typename:const Point
+Zero	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        static const Rect Zero;$/;"	m	language:C++	class:Rect	typeref:typename:const Rect
+_count	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        long _count;$/;"	m	language:C++	class:List	typeref:typename:long
+_extent	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        Point _extent;$/;"	m	language:C++	class:Rect	typeref:typename:Point
+_items	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        Item* _items;$/;"	m	language:C++	class:List	typeref:typename:Item *
+_origin	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^        Point _origin;$/;"	m	language:C++	class:Rect	typeref:typename:Point
+_size	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        long _size;$/;"	m	language:C++	class:List	typeref:typename:long
+_x	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/point.h	/^        Coord _x;$/;"	m	language:C++	class:Point	typeref:typename:Coord
+_y	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/point.h	/^        Coord _y;$/;"	m	language:C++	class:Point	typeref:typename:Coord
+__COORD_H__	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/coord.h	/^#define __COORD_H__ /;"	d	language:C++
+__LIST_H__	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^#define __LIST_H__ /;"	d	language:C++
+__POINT_H__	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/point.h	/^#define __POINT_H__ /;"	d	language:C++
+__RECT_H__	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/rect.h	/^#define __RECT_H__ /;"	d	language:C++
+~List	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.cpp	/^List<Item>::~List() { delete[] _items; }$/;"	f	language:C++	class:List
+~List	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/include/list.h	/^        ~List();$/;"	p	language:C++	class:List

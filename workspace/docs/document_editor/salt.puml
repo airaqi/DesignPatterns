@@ -1,0 +1,54 @@
+@startuml
+salt
+
+{
+    Just plain text
+    [Button]
+    () Unchecked radio
+    (X) checked radio
+    [] Unchecked box
+    [X] Checked box
+    "Enter text here"
+    ^Dropdown list^
+    .    
+    ^Open droplist ^^ Item 1 ^^ Item 2^
+    .
+    .
+
+    {+
+         This is a long 
+         text in textarea.
+         .
+         .
+         "                                          "
+    }
+    
+    {SI
+        .
+        .
+        .
+        "                                          "
+        }
+
+        {+
+            Login          | "Username   "
+            Password | "****       "
+            [  Cancle ] | [     Ok    ]
+        }
+        
+        
+        {T+
+            +Region            | Population (Mil)             | Age
+            ++World            | 7130                                    | 30
+            +++America    | 964                                  | 30
+            ++++Canada    | 35                                        | 30
+             ++++USA            | 319 | 30
+            +++++New York | 8 | 30
+            +++++Boston | 0.617 | 30
+            ++++Mexico | 0.117 | 30
+        }    
+}
+
+
+
+@enduml

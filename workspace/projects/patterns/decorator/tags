@@ -1,0 +1,2 @@
+!_TAG_FILE_SORTED	2	/0=unsorted, 1=sorted, 2=foldcase/
+INCLUDE_DIR	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/patterns/decorator/CMakeLists.txt	/^set(INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}\/include")$/;"	v	language:CMake

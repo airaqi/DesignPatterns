@@ -1,0 +1,36 @@
+@startuml
+
+allowmixing
+
+class Component {
+        Operation()
+        Add(Component)
+        Remove(Component)
+        GetChild(int)
+    }
+
+class Leaf {
+        Operation()
+    }
+
+class Composite {
+        Operation()
+        Add(Component)
+        Remove(Component)
+        GetChild(int)
+    }
+
+note left of Composite::Operation
+    forall g in children
+        g.Operation();
+end note
+
+rectangle Client
+
+Component <|-- Leaf
+Component <|-- Composite
+
+Component <--o "children" Composite
+Client -right-> Component
+
+@enduml

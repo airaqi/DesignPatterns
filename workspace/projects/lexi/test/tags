@@ -1,0 +1,16 @@
+!_TAG_FILE_SORTED	2	/0=unsorted, 1=sorted, 2=foldcase/
+c01	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/lexi/test/test_glyph_column.cpp	/^    GlyphColumn c01;$/;"	v	language:C++	typeref:typename:GlyphColumn
+ch00	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/lexi/test/test_glyph_character.cpp	/^    GlyphCharacter ch00;$/;"	v	language:C++	typeref:typename:GlyphCharacter
+ch01	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/lexi/test/test_glyph_character.cpp	/^    GlyphCharacter ch01('a');$/;"	v	language:C++	typeref:typename:GlyphCharacter
+ch01	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/lexi/test/test_glyph_column.cpp	/^    GlyphCharacter ch01('a');$/;"	v	language:C++	typeref:typename:GlyphCharacter
+ch01	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/lexi/test/test_glyph_row.cpp	/^    GlyphCharacter ch01;$/;"	v	language:C++	typeref:typename:GlyphCharacter
+ch02	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/lexi/test/test_glyph_character.cpp	/^    GlyphCharacter ch02('b');$/;"	v	language:C++	typeref:typename:GlyphCharacter
+ch02	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/lexi/test/test_glyph_row.cpp	/^    GlyphCharacter ch02('a');$/;"	v	language:C++	typeref:typename:GlyphCharacter
+ch03	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/lexi/test/test_glyph_character.cpp	/^    GlyphCharacter ch03('c', 100, 100);$/;"	v	language:C++	typeref:typename:GlyphCharacter
+DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/lexi/test/doctest_main.h	/^#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN$/;"	d	language:C++
+p1	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/lexi/test/test_glyph_character.cpp	/^        Point p1(0, 0);$/;"	v	language:C++	typeref:typename:Point
+p2	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/lexi/test/test_glyph_character.cpp	/^        Point p2(100, 100);$/;"	v	language:C++	typeref:typename:Point
+r01	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/lexi/test/test_glyph_column.cpp	/^    GlyphRow r01;$/;"	v	language:C++	typeref:typename:GlyphRow
+rec1	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/lexi/test/test_glyph_column.cpp	/^    GlyphRectangle rec1(Rect(10, 10, 100, 100));$/;"	v	language:C++	typeref:typename:GlyphRectangle
+row	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/lexi/test/test_glyph_row.cpp	/^    GlyphRow row;$/;"	v	language:C++	typeref:typename:GlyphRow
+test_lexi	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/lexi/test/CMakeLists.txt	/^add_executable(test_lexi test_all.cpp)$/;"	t	language:CMake

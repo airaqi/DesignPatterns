@@ -1,0 +1,152 @@
+@startuml
+
+left to right direction
+
+note as n1
+    <b>Composite pattern</b> 
+    
+    Organizes composnents into heirarchy tree, in which
+    some components can contain more components (composite)
+    and others cannot (leafs).
+
+    In this example,
+
+    Equipments are divided into Composites and Leafs
+    Each Composite can contain more Equipments, while
+    Leaf can only be added to a Composite.
+end note
+
+abstract Equipment {
+        - _name : String
+        
+        #Equipment(String)
+        
+        +isComposite() : bool
+        +isLeaf() : bool
+        
+        +name() : String
+
+        +power() : Watt
+        +netPrice(): Currency
+        +discountPrice(): Currency
+        
+        +add(Equipment) : void
+        +remove(Equipment) : void
+        +createIterator() : Iterator<Equipment>
+    }
+    
+abstract CompositeEquipment {
+        #CompositEquipment(String)
+        
+        +isComposite() : bool
+        
+        +add(Equipment) : void
+        +remove(Equipment) : void
+        +createIterator() : Iterator<Equipment>
+    }
+    
+abstract Leaf {
+        +isLeaf() : bool
+    }
+
+note as n2
+    Check if object is a composite
+end note
+
+n2 .. CompositeEquipment::isComposite
+n2 .right. Equipment::isComposite
+
+note as n3
+    Check if object is leaf
+end note
+
+n3 .. Leaf::isLeaf
+n3 .left. Equipment::isLeaf
+
+class Floppy {
+        +Floppy(String)
+        
+        power() : Watt
+        netPrice() : Currency
+        discountPrice() : Currency
+    }
+    
+class Drive {
+        +Drive(String)
+        
+        power() : Watt
+        netPrice() : Currency
+        discountPrice() : Currency
+    }
+    
+class Card {
+        +Drive(String)
+        
+        power() : Watt
+        netPrice() : Currency
+        discountPrice() : Currency
+    }
+    
+class PlannerBoard {
+        +PlannerBoard(String)
+        
+        power() : Watt
+        netPrice() : Currency
+        discountPrice() : Currency
+    }
+    
+class Cicuite {
+        +Cicuite(String)
+        
+        power() : Watt
+        netPrice() : Currency
+        discountPrice() : Currency
+    }
+    
+class Switch {
+        +Switch(String)
+        
+        power() : Watt
+        netPrice() : Currency
+        discountPrice() : Currency
+    }
+    
+class Chassis {
+        +Chassis(String)
+        
+        +add(Equipment) : void
+        +remove(Equipment) : void
+        +createIterator() : Iterator<Equipment>
+        }
+    
+class Bus {
+        +Bus(String)
+        
+        +add(Equipment) : void
+        +remove(Equipment) : void
+        +createIterator() : Iterator<Equipment>
+        }
+    
+class Cabinet {
+        +Cabinet(String)
+        
+        +add(Equipment) : void
+        +remove(Equipment) : void
+        +createIterator() : Iterator<Equipment>
+        }
+    
+Equipment <|-- Leaf
+Equipment <|-- CompositeEquipment
+
+Leaf <|-- Floppy
+Leaf <|-- Drive
+Leaf <|-- Card
+Leaf <|-- PlannerBoard
+Leaf <|-- Cicuite
+Leaf <|-- Switch
+
+CompositeEquipment <|-- Chassis
+CompositeEquipment <|-- Bus
+CompositeEquipment <|-- Cabinet
+
+@enduml

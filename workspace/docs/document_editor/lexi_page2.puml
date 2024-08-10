@@ -1,0 +1,37 @@
+@startuml
+salt
+
+{+
+    ' -----> Header
+'    {
+        {     [  L ] |
+           "Lexi                                                                                  " | 
+            [-] | 
+            [O] | 
+            [X] 
+        }
+'    }  
+    ' <--- Header
+    
+    ' ------ > Body
+    {
+    }
+    ' <------  Body
+
+    {#
+        {
+            Header
+        }
+        {#
+        .|.|
+        {
+            {Menu}
+            {Body}
+        }
+        }
+    }
+    
+}
+
+
+@enduml

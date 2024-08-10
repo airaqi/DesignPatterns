@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/compositeapp.dir/main.cpp.o -o compositeapp  ../composite/src/libcomposite.a ../../common/src/libcommon.a

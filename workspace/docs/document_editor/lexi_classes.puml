@@ -1,0 +1,188 @@
+@startuml
+
+left to right direction
+
+title Lexi: Document Structure
+
+note as general
+    <b>Design Patterns</b>
+    <i>Elements of Reusable Object-Oriented Software</i>
+        <b>Lexi :</b>         Graphical document editor design
+        <b>Scope: </b>     Document Structure, Formatting
+        <b>Patterns:</b> Composite
+end note
+
+class glyph.Glyph {
+        -parent: Glyph
+        -- apearance --
+        +draw(Window): void
+        +bounds(Rect) : void
+        -- hit detection --
+        +intersects(Point)
+        -- structure --
+        +insert(Glyph, int)
+        +remove(Glyph): void
+        +child(int): Glyph
+        +parent(): Glyph
+        #parent(Glyph) : void
+        +rect() : Rect
+        #rect(Rect) : void
+        +isLeaf() : Boolean
+        +isComposite(): Boolean
+    }
+    
+class glyph.GlyphComposite {
+        -children: Glyph[0..*]
+        -compositor : GlyphStrategyCompositor
+        +rect() : Rect
+        +isComposite(): Boolean
+    }
+        
+class glyph.GlyphLeaf {
+        -rect: Rect
+        +isLeaf() : Boolean
+    }
+
+note as nReturnTrue
+    return true
+end note
+
+note as nGlyphLeaf
+    GlyphLeaf class is added to implement
+    common methods in sub leafs.
+end note
+nGlyphLeaf .. GlyphLeaf
+
+nReturnTrue .. GlyphLeaf::isLeaf
+nReturnTrue .. GlyphComposite::isComposite
+
+note as nReturnFalse
+    return false
+end note
+
+nReturnFalse .. Glyph::isLeaf
+nReturnFalse .. Glyph::isComposite
+
+class glyph.GlyphCharacter {
+        -c : char
+        +draw(w: Window)
+        +intersects(p: Point)
+        }
+        
+note as nCharDraw
+    return true if point p 
+    intersects this character
+end note
+nCharDraw .. GlyphCharacter::draw
+        
+note as nCharIntersects 
+    w ->drawCharacter(c)
+end note
+nCharIntersects .. GlyphCharacter::intersects
+
+class glyph.GlyphRectangle {
+        +draw(Window)
+        +intersects(Point)
+    }
+
+class glyph.GlyphPolygon {
+        +draw(Window)
+        +intersects(Point)
+    }
+
+class glyph.GlyphRow {
+        +draw(w: Window): void
+        +intersects(p: Point) : bool
+        +insert(g: Glyph, i: int) : void
+    }
+        
+note  as nGlyphRowDraw 
+    for all c in children
+    ensure c is positioned
+    correctly;
+        c->draw(w)
+end note
+nGlyphRowDraw .. GlyphRow::draw
+    
+note as nGlypRowIntersects
+    for all c in children
+    if c->intersects(p) return true
+end note
+nGlypRowIntersects .. GlyphRow::intersects
+
+note as nGlypRowInsert
+    insert g into
+    children at position i
+end note
+nGlypRowInsert .. GlyphRow::insert
+
+class glyph.GlyphColumn {
+        +draw(w: Window) : void
+        +intersect(p: Point) : bool
+        +insert(g: Glyph, i: int) : void
+     }
+     
+Glyph <|-- GlyphComposite
+Glyph <|-- GlyphLeaf
+
+GlyphComposite <|-- GlyphRow
+GlyphComposite <|-- GlyphColumn
+
+GlyphLeaf <|-- GlyphCharacter
+GlyphLeaf <|-- GlyphRectangle
+GlyphLeaf <|-- GlyphPolygon
+
+'-------------------------------------
+' Formatting
+
+class glyph.strategy.GlyphStrategyCompositor <<strategy>>
+class glyph.strategy.GlyphStrategyArrayCompositor <<strategy>>
+class glyph.strategy.GlyphStrategyTeXCompositor <<strategy>>
+class glyph.strategy.GlyphStrategySimpleCompositor <<strategy>>
+
+note as nGlyphStrategyCompositionInsert
+    Glyph::Insert(g, i)
+    compositor.compose()
+end note 
+nGlyphStrategyCompositionInsert .. GlyphComposite::insert
+
+GlyphStrategyCompositor : -composition : GlyphComposite
+GlyphStrategyCompositor : +compose()
+GlyphStrategyCompositor : +setComposition()
+
+GlyphStrategyArrayCompositor : +compose()
+GlyphStrategyTeXCompositor : +compose()
+GlyphStrategySimpleCompositor : +compose()
+
+GlyphStrategyCompositor <|-- GlyphStrategyArrayCompositor
+GlyphStrategyCompositor <|-- GlyphStrategyTeXCompositor
+GlyphStrategyCompositor <|-- GlyphStrategySimpleCompositor
+
+Glyph <--o "children" GlyphComposite
+GlyphComposite "compsitor" o--> GlyphStrategyCompositor
+GlyphComposite <-- "composition" GlyphStrategyCompositor
+
+'-------------------------------------------
+' User interface imbellishment
+
+class glyph.decorator.GlyphDecorator <<decorator>>
+class glyph.decorator.GlyphDecoratorBorder <<decorator>>
+class glyph.decorator.GlyphDecoratorScroller <<decorator>>
+
+GlyphDecorator  : -component : Glyph
+GlyphDecorator  : +draw(Window) : void
+
+GlyphDecoratorBorder : draw(Window) : void
+GlyphDecoratorBorder : drawBorder(Window) : void
+
+GlyphDecoratorScroller : draw(Window) : void
+
+Glyph <|-- GlyphDecorator
+
+GlyphDecorator <|-- GlyphDecoratorBorder
+GlyphDecorator <|-- GlyphDecoratorScroller
+
+Glyph <--o "component" GlyphDecorator
+
+@enduml
+

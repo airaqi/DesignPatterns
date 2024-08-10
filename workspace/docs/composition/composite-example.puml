@@ -1,0 +1,35 @@
+@startuml
+
+abstract Graphic {
+        Draw()
+        Add(Graphic)
+        Remove(Graphic)
+        GetChild(int)
+    }
+
+Line : Draw()
+Rectangle : Draw()
+
+Picture : Draw()
+Picture : Add(Graphic)
+Picture : Remove(Graphic)
+Picture : GetChild(int)
+
+note left of Picture::Draw
+    for all g in graphics
+        g.Draw()
+end note
+
+note left of Picture::Add
+    add g to list of graphics
+end note
+
+
+Graphic <|-- Line
+Graphic <|-- Rectangle
+Graphic <|-- Text
+Graphic <|-- Picture
+
+Graphic <--o "graphics" Picture
+
+@enduml

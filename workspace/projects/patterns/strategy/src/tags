@@ -1,0 +1,11 @@
+!_TAG_FILE_SORTED	2	/0=unsorted, 1=sorted, 2=foldcase/
+ArrayCompositor	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/strategy/src/compositor_array.cpp	/^ArrayCompositor::ArrayCompositor()$/;"	f	language:C++	class:ArrayCompositor
+compose	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/strategy/src/compositor_array.cpp	/^int ArrayCompositor::compose(Coord natural[], Coord stretch[], Coord shrink[], int componentCoun/;"	f	language:C++	class:ArrayCompositor	typeref:typename:int
+compose	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/strategy/src/compositor_simple.cpp	/^int SimpleCompositor::compose(Coord natural[], Coord stretch[], Coord shrink[], int componentCou/;"	f	language:C++	class:SimpleCompositor	typeref:typename:int
+compose	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/strategy/src/compositor_tex.cpp	/^int TeXCompositor::compose(Coord natural[], Coord stretch[], Coord shrink[], int componentCount,/;"	f	language:C++	class:TeXCompositor	typeref:typename:int
+Compositor	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/strategy/src/compositor.cpp	/^Compositor::Compositor()$/;"	f	language:C++	class:Compositor
+repair	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/strategy/src/composition.cpp	/^void Composition::repair()$/;"	f	language:C++	class:Composition	typeref:typename:void
+SimpleCompositor	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/strategy/src/compositor_simple.cpp	/^SimpleCompositor::SimpleCompositor()$/;"	f	language:C++	class:SimpleCompositor
+strategy	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/strategy/src/CMakeLists.txt	/^add_library(strategy $/;"	t	language:CMake
+TeXCompositor	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/strategy/src/compositor_tex.cpp	/^TeXCompositor::TeXCompositor()$/;"	f	language:C++	class:TeXCompositor
+~Composition	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/strategy/src/composition.cpp	/^Composition::~Composition()$/;"	f	language:C++	class:Composition

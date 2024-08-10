@@ -1,0 +1,34 @@
+@startuml
+
+left to right direction
+
+title Strategy Pattern Example
+
+note as general
+    <b>Strategy Pattern</b>
+    Defines a family of algorithms, 
+    encapsulates each one,  and makes 
+    them interchangable
+end note
+
+Composition : Traverse()
+Composition : Repair()
+
+note as nCompositionRepair
+    compositor->Compose()
+end note
+nCompositionRepair .. Composition::Repair
+
+Compositor : Compose()
+
+SimpleCompositor : Compose()
+TeXCompositor : Compose()
+ArrayCompositor : Compose()
+
+Compositor <|-- SimpleCompositor
+Compositor <|-- TeXCompositor
+Compositor <|-- ArrayCompositor
+
+Composition "compositor" o--> Compositor
+
+@enduml

@@ -1,0 +1,42 @@
+@startuml
+
+left to right direction
+
+title Decorator Pattern (Formal)
+
+note as nGeneral
+    Formal structure of Decorator Pattern
+end note
+
+Component : Operation()
+
+ConcreteComponent : Operation()
+
+Decorator : Operation()
+
+ConcreteDecoratorA : addedState
+ConcreteDecoratorA : Operation()
+
+ConcreteDecoratorB : Operation()
+ConcreteDecoratorB : AddedBehaviour()
+
+Component <|-- ConcreteComponent
+Component <|-- Decorator
+
+Component <--o "compenent" Decorator
+
+Decorator <|-- ConcreteDecoratorA
+Decorator <|-- ConcreteDecoratorB
+
+note as nDecoratorOperation
+    component.Operation();
+end note
+nDecoratorOperation .. Decorator::Operation
+
+note as nConcreteDecoratorBOperation
+    Decorator::Operation();
+    AddedBehaviour();
+end note
+nConcreteDecoratorBOperation .. ConcreteDecoratorB::Operation
+
+@enduml

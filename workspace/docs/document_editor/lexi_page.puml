@@ -1,0 +1,93 @@
+@startsalt
+
+{+
+    {     [  L ] |
+       "Lexi                                                                                  " | 
+        [-] | 
+        [O] | 
+        [X] 
+    }
+    {+
+    .| .|
+    {
+        {+ 
+            {* 
+                File | 
+                edit | 
+                Style | 
+                Symbol
+                
+                Style | 
+                <&empty>    Align Left| 
+                <&empty>    Center| 
+                <&empty>    Align right | 
+                <&check> Justify | 
+                - |     
+                <&check> Roman | 
+                <&empty>   Baldface | 
+                <&empty>   Italic | 
+                <&empty>   Typewriter | 
+                <&empty>   Sans Serif | 
+                - | 
+                <&empty>   <size:8>Gnu</size> | 
+                <&empty>   <size:10>Gnu</size> |
+                 <&check> <size:12>Gnu</size> |
+                 <&empty>   <size:14>Gnu</size> |
+                 <&empty>   <size:16>Gnu</size> |
+                 <&empty>   <size:18>Gnu</size> |
+                 <&empty>   <size:20>Gnu</size> |
+                 <&empty>   <size:22>Gnu</size>
+            }
+        }
+        {S 
+            {
+                . | 
+                {
+                    <img  src="blah2.png">
+                     <b>                                     Figure 4: Blah Image
+                } |
+                *
+                
+                . | 
+                {
+                     the internal representation of the TextView. The draw
+                     operation (which is not shown) simply calls draw on the 
+                     TBBox.
+                     The code that builds a TextView is simplar to the 
+                     original draw code, except that instead of calling
+                     functions to draw the characters, we build objects
+                     that will draw themselves whenever necessary. Using
+                     objects solves the redraw problem because only those
+                     objects that lie within the damaged region will get 
+                     draw calls. The programmer doesn't have to write the
+                     code that decides what objects to redraw-that code is
+                     in the toolkit (in this example, in the implementation
+                     of the Box draw operation). Indeed, the glyph-based 
+                     implementation of TextView is even sompler than the
+                     original code because the programmer need only declare
+                     what objects he wants - he doesn't need to specify how
+                     the objects should interact.
+                 } | 
+                {
+                    text (kanjii and kana characters) we create Characters
+                    that use of the 16-bit JIS-encoded "k14" font.
+                    .
+                    <b> ?.? Mixing text and graphics
+                    We can put any glyph inside a combosite glyph; that
+                    it is straightforward to extend Textview to display
+                    embeded graphics. Figure 7 shows the modified 
+                    code that builds the view.
+                    A stencil is a glyph that displays a bitmap
+                    ---
+                    <i> while ((c = getc(file)) != EOF) 
+                }
+            }
+        }
+        {
+            [ - ] | [ + ] | . | . | [ < ] | [ << ] | [1] | [2] | [3] |<size:20> ...</size> | [10] | [ >> ] | [ > ] 
+        }
+        }
+    }
+}
+@endsalt
+

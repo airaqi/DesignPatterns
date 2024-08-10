@@ -1,0 +1,2 @@
+/usr/bin/ar qc libcommon.a CMakeFiles/common.dir/currency.cpp.o CMakeFiles/common.dir/watt.cpp.o CMakeFiles/common.dir/point.cpp.o CMakeFiles/common.dir/rect.cpp.o
+/usr/bin/ranlib libcommon.a

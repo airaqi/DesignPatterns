@@ -1,0 +1,4 @@
+!_TAG_FILE_SORTED	2	/0=unsorted, 1=sorted, 2=foldcase/
+CMAKE_CXX_STANDARD	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/CMakeLists.txt	/^set(CMAKE_CXX_STANDARD 17)$/;"	v	language:CMake
+CMAKE_CXX_STANDARD_REQUIRED	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/CMakeLists.txt	/^set(CMAKE_CXX_STANDARD_REQUIRED True)$/;"	v	language:CMake
+composite	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/CMakeLists.txt	/^project(composite VERSION 1.0)$/;"	p	language:CMake

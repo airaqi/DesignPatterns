@@ -1,0 +1,51 @@
+@startuml
+
+left to right direction
+title Decorator Pattern
+
+note as n1
+    <b>Decorator pattern</b> 
+    is used as its name implies to add dynamic new functionality
+    to an existing component dynamically, instead of subclassing
+    the component class.
+    
+    Decorator classes should enclose one component that it 
+    wraps, and should implement the component interface 
+    in order to be able to wrap it and have the same class 
+    behaviours.
+end note
+
+VisualComponent : Draw()
+
+TextView : Draw()
+
+Decorator : Draw()
+
+note as nDecoratorDraw
+    component.Draw()
+end note
+nDecoratorDraw .. Decorator::Draw
+
+ScrollDecorator :  scrollPosition
+ScrollDecorator : Draw()
+ScrollDecorator : ScrollTo()
+
+BorderDecorator : borderWidth
+BorderDecorator : Draw()
+BorderDecorator : DrawBorder()
+
+note as nBorderDecoratorDraw
+    Decorator::Draw();
+    DrawBorder();
+end note
+nBorderDecoratorDraw .. BorderDecorator::Draw
+
+VisualComponent <|-- TextView
+VisualComponent <|-- Decorator
+
+Decorator <|-- ScrollDecorator
+Decorator <|-- BorderDecorator
+
+VisualComponent <--o "component" Decorator
+
+@enduml

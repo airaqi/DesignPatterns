@@ -1,0 +1,2 @@
+/usr/bin/ar qc libstrategy.a CMakeFiles/strategy.dir/composition.cpp.o CMakeFiles/strategy.dir/compositor.cpp.o CMakeFiles/strategy.dir/compositor_simple.cpp.o CMakeFiles/strategy.dir/compositor_tex.cpp.o CMakeFiles/strategy.dir/compositor_array.cpp.o
+/usr/bin/ranlib libstrategy.a
