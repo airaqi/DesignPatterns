@@ -75,7 +75,7 @@ All patterns structures has been documented and samples has been implemented.
 Requirements analysis
 =====================
 
-.. figure:: workspace/docs/document_editor/lexi_page.svg
+.. figure:: workspace/projects/lexi/docs/lexi_page.svg
     :width: 827
     :height: 920
     :scale: 60%
@@ -94,7 +94,7 @@ Full Design
 Below figure shows a full design of the Lexi Text editor according the book implementation.
 
 
-.. figure:: workspace/docs/document_editor/lexi_classes.svg
+.. figure:: workspace/projects/lexi/docs/lexi_classes.svg
     :width: 1408
     :height: 1030
     :scale: 40%
