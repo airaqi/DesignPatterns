@@ -1,5 +1,4 @@
 !_TAG_FILE_SORTED	2	/0=unsorted, 1=sorted, 2=foldcase/
-border	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/patterns/decorator/test/test_decorator_border.cpp	/^   DecoratorBorder* border = new DecoratorBorder(view, 5);$/;"	v	language:C++	typeref:typename:DecoratorBorder *
-component	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/patterns/decorator/test/test_decorator_border.cpp	/^   VisualComponent* component = border;$/;"	v	language:C++	typeref:typename:VisualComponent *
+INCLUDE_DIR	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/patterns/decorator/test/CMakeLists.txt	/^set(INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}\/include")$/;"	v	language:CMake
+SRC_DIR	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/patterns/decorator/test/CMakeLists.txt	/^set(SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}\/src")$/;"	v	language:CMake
 test_decorator	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/patterns/decorator/test/CMakeLists.txt	/^add_executable(test_decorator test_all.cpp)$/;"	t	language:CMake
-view	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/patterns/decorator/test/test_decorator_border.cpp	/^   TextView* view = new TextView; $/;"	v	language:C++	typeref:typename:TextView *
