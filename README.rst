@@ -1,10 +1,4 @@
-.. raw:: html
-
-    <style> .red {color: red;} </style>
-
-.. role:: red
-
-.. attention:: :red:`THIS IS A WORK IN PROGRESS PROJECT`
+.. attention:: THIS IS A WORK IN PROGRESS PROJECT
 
 ==================
 Text Editor (Lexi)
