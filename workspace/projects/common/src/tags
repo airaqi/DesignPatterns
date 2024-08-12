@@ -2,7 +2,6 @@
 bottom	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/src/rect.cpp	/^Coord Rect::bottom() const { return _extent.y(); }$/;"	f	language:C++	class:Rect	typeref:typename:Coord
 bottom	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/src/rect.cpp	/^void Rect::bottom(Coord y) { _extent.y(y); }$/;"	f	language:C++	class:Rect	typeref:typename:void
 combine	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/src/rect.cpp	/^Rect Rect::combine(const Rect& rect)$/;"	f	language:C++	class:Rect	typeref:typename:Rect
-common	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/src/CMakeLists.txt	/^add_library(common currency.cpp watt.cpp point.cpp rect.cpp)$/;"	t	language:CMake
 contains	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/src/rect.cpp	/^bool Rect::contains(const Point& p) const$/;"	f	language:C++	class:Rect	typeref:typename:bool
 extent	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/src/rect.cpp	/^Point& Rect::extent() { return _extent; }$/;"	f	language:C++	class:Rect	typeref:typename:Point &
 extent	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/src/rect.cpp	/^void Rect::extent(const Point& e) { _extent = e; }$/;"	f	language:C++	class:Rect	typeref:typename:void
@@ -40,6 +39,7 @@ Rect	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/pro
 Rect	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/src/rect.cpp	/^Rect::Rect(Coord x, Coord y, Coord w, Coord h) : Rect(Point(x, y), Point(x+w, y+h)) {}$/;"	f	language:C++	class:Rect
 right	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/src/rect.cpp	/^Coord Rect::right() const { return _extent.x(); }$/;"	f	language:C++	class:Rect	typeref:typename:Coord
 right	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/src/rect.cpp	/^void Rect::right(Coord x) { _extent.x(x); } $/;"	f	language:C++	class:Rect	typeref:typename:void
+TARGET_SOURCES	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/src/CMakeLists.txt	/^set(TARGET_SOURCES currency.cpp watt.cpp point.cpp rect.cpp)$/;"	v	language:CMake
 top	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/src/rect.cpp	/^Coord Rect::top() const { return _origin.y(); }$/;"	f	language:C++	class:Rect	typeref:typename:Coord
 top	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/src/rect.cpp	/^void Rect::top(Coord y) { _origin.y(y); }$/;"	f	language:C++	class:Rect	typeref:typename:void
 to_string	/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace/projects/common/src/point.cpp	/^std::string Point::to_string() const$/;"	f	language:C++	class:Point	typeref:typename:std::string
