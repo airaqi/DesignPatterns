@@ -1,3 +1,11 @@
+.. raw:: html
+
+    <style> .red {color: red;} </style>
+
+.. role:: red
+
+.. attention:: :red:`THIS IS A WORK IN PROGRESS PROJECT`
+
 ==================
 Text Editor (Lexi)
 ==================
@@ -17,10 +25,11 @@ Details
     :width: 90%
     :widths: 20, 80
     :align: center
+    :stub-columns: 1
 
     Project, Text Editor (Lexi)
     Book, Design Patterns Elements of Reusable Object-Oriented Software
-    Author, Ahmed Iraqi
+    Author, airaqi
     Version, 1.0
 
 ---------------
@@ -54,7 +63,7 @@ Working on this  project has went through all software development cycle, all th
 Patterns
 ========
 
-All patterns structures has been documented and samples has been created.
+All patterns structures has been documented and samples has been implemented.
 
 .. csv-table::
     :header-rows: 1
@@ -62,7 +71,11 @@ All patterns structures has been documented and samples has been created.
     :align: center
 
     "Pattern","Description"
-    `Abstract Factory <workspace/docs/abstract_factory/abstract_factory.rst>`_, "Provide an interface for creating families of related or dependent objects withoutspecifying their concrete classes."
+    `Abstract Factory <workspace/projects/patterns/abstract_factory/README.rst>`_, "Provide an interface for creating families of related or dependent objects without specifying their concrete classes."
+    `Composite <workspace/projects/patterns/composite/README.rst>`_, "Compose objects into tree structures to represent part-whole hierarchies."
+    `Decorator <workspace/projects/patterns/decorator/README.rst>`_, "Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality"
+    `Singleton <workspace/projects/patterns/singlton/README.rst>`_, "Ensure a class only has one instance, and provide a global point of access to it."
+    `Strategy <workspace/projects/patterns/strategy/README.rst>`_, "Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it."
 
 
 Requirements analysis
@@ -116,5 +129,4 @@ Implementing the project has been organized into several libraries, as follows
     "strategyapp", "Strategy application executable"
     "lexi", "Lexi Text Editor implementation"
     "lexiapp", "Lexi Editor executable"
-
 
