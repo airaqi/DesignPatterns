@@ -1,0 +1,3 @@
+add_executable(abstract_factory_app main.cpp)
+
+target_link_libraries(abstract_factory_app abstract_factory)

@@ -1,0 +1,132 @@
+@startuml
+
+'left to right direction
+
+title Anstract Factory: Maze Generation Example
+
+'-----------------------------------------------
+' Classes
+
+class MapSite
+class Room
+class Wall
+class Door
+class Maze
+class MazeGame
+enum Direction
+
+class AbstractMazeFactory
+class MazeFactory
+class BombMazeFactory
+
+class RoomBomb
+class WallBlown
+
+'-----------------------------------------------
+' Members
+
+MapSite : +enter() : void
+MapSite : +isDoor() : bool
+MapSite : +mark() : void
+MapSite : +marked() : bool
+
+Room : -roomNumber : int
+Room : -sides : MapSite
+Room : +enter()
+Room : +setSide(Direction, MapSite)
+Room : +getSide(Directioin)
+
+Door : -room1 : Room
+Door : -room2 : Room
+Door : -isOpen : bool
+Door : +enter()
+Door : +isDoor() : bool
+Door : +otherSideRoom(Room) : Room
+
+Maze : -rooms : Room[0..*]
+Maze : -start : int
+Maze : -target : int
+Maze : -current : int
+Maze : +addRoom() : void
+Maze : +addStart() : void
+Maze : +addTarget() : void
+Maze : +roomNo() : Room
+Maze : +isTarget() : bool
+Maze : +start() : int
+Maze : +target() : int
+
+MazeGame : createMaze() : Maze
+MazeGame : createMaze(AbstractMazeFactory) : Maze
+
+Direction : North
+Direction : South
+Direction : East
+Direction : West
+
+AbstractMazeFactory : +makeMaze() : Maze
+AbstractMazeFactory : +makeRoom() : Room
+AbstractMazeFactory : +makeWall() : Wall
+AbstractMazeFactory : +makeDoor() : Door
+
+MazeFactory : +makeMaze() : Maze
+MazeFactory : +makeRoom(int) : Room
+MazeFactory : +makeWall() : Wall
+MazeFactory : +makeDoor(Room,Room) : Door
+
+BombMazeFactory : +makeMaze() : Maze
+BombMazeFactory : +makeRoom(int) : RoomBomb
+BombMazeFactory : +makeWall() : Wall
+BombMazeFactory : +makeDoor(Room,Room) : Door
+
+RoomBomb : isBlown : bool
+RoomBomb : blow() : void
+
+'-----------------------------------------------
+' Inheritance
+
+AbstractMazeFactory <|-- MazeFactory
+AbstractMazeFactory <|-- BombMazeFactory
+
+MapSite <|-- Room
+MapSite <|-- Wall
+MapSite <|-- Door
+
+Room <|-- RoomBomb
+Wall <|-- WallBlown
+
+'-----------------------------------------------
+' Relations
+
+Maze "rooms" --> Room
+Room "sides" -> MapSite
+
+Room "sides" .> Direction
+
+MazeGame .> Maze : create
+
+MazeFactory ..> Maze : create
+BombMazeFactory ..> Maze : create
+
+'-----------------------------------------------
+' Notes
+
+note as nMapSiteMark
+    mark() MapSite for deletion 
+    marked() returns true if marked
+    (used for deleting doors)
+end note
+nMapSiteMark . MapSite::mark
+nMapSiteMark . MapSite::marked
+
+note as nBombMazeFactory
+    More specific categorization
+end note
+nBombMazeFactory . BombMazeFactory
+
+note as nRoomBomb
+    blow() replace 
+    Walls with WallBlown
+end note
+nRoomBomb . RoomBomb
+
+@enduml

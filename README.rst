@@ -56,7 +56,7 @@ Patterns
 
 All patterns structures has been documented and samples has been created.
 
-.. csv-table:: 
+.. csv-table::
     :header-rows: 1
     :width: 90%
     :align: center
@@ -67,6 +67,15 @@ All patterns structures has been documented and samples has been created.
 
 Requirements analysis
 =====================
+
+.. figure:: workspace/docs/document_editor/lexi_page.svg
+    :width: 827
+    :height: 920
+    :scale: 60%
+    :figwidth: 90%
+
+    Figure 1.1: Lexi User interface
+
 
 Design
 ======
@@ -89,15 +98,6 @@ Below figure shows a full design of the Lexi Text editor according the book impl
     Figure 1.0: Lexi Text Editor class diagram
 
 Figure 1.1, models the required Lexi user interface, as depected by the book.
-
-.. figure:: workspace/docs/document_editor/lexi_page.svg
-    :width: 827
-    :height: 920
-    :scale: 60%
-    :figwidth: 90%
-
-    Figure 1.1: Lexi User interface
-
 
 Implementation
 ==============

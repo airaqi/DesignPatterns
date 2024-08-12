@@ -1,0 +1,55 @@
+@startuml
+
+allowmixing
+left to right direction
+
+title Abstract Factory Example
+
+note as general
+    <b>Abstract Factory
+    Supporting several window system
+end note
+
+class WidgetFactory
+class MotifWidgetFactory
+class PMWidgetFactory
+
+WidgetFactory : CreateScrollBar()
+WidgetFactory : CreateWindow()
+
+MotifWidgetFactory : CreateScrollBar()
+MotifWidgetFactory : CreateWindow()
+
+PMWidgetFactory : CreateScrollBar()
+PMWidgetFactory : CreateWindow()
+
+rectangle Client
+rectangle Window
+rectangle PMWindow
+rectangle MotifWindow
+rectangle ScrollBar
+rectangle PMScrollBar
+rectangle MotifScrollBar
+
+WidgetFactory <|--  MotifWidgetFactory
+WidgetFactory <|-- PMWidgetFactory
+
+Window <|-- PMWindow
+Window <|-- MotifWindow
+
+ScrollBar <|-- PMScrollBar
+ScrollBar <|-- MotifScrollBar
+
+Client --> WidgetFactory
+
+Client --> Window
+Client --> ScrollBar
+
+MotifWidgetFactory ..> MotifWindow
+MotifWidgetFactory ..> MotifScrollBar
+
+PMWidgetFactory ..> PMWindow
+PMWidgetFactory ..> PMScrollBar
+
+
+@enduml
