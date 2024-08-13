@@ -51,8 +51,9 @@ goal cannot be achieved except by implementing chapter two case study in full.
 This project contains all patterns sample codes, and test cases verifiying that they works
 properly, and also the case study implementation of the Lexi Text Editor.
 
-Working on this  project has went through all software development cycle, all the way through requirements gathering (during reading the book), design, implementation, testing, and deployment,
- and some post deployment technical support usage.
+Working on this  project has went through all software development cycle, all the way through 
+requirements gathering (during reading the book), design, implementation, testing, and deployment,
+and some post deployment technical support usage.
 
 Patterns
 ========
