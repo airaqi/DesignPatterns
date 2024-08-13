@@ -1,0 +1,44 @@
+@startuml
+
+allowmixing
+title Factory Method Pattern Sample Code
+
+class MazeGame
+class BombMazeGame
+rectangle Maze
+rectangle Door
+
+MazeGame : +createMaze() : Maze
+MazeGame : +makeMaze() : Maze
+MazeGame : +makeRoom(int) : Room
+MazeGame : +makeDoor(Room,Room) : Door
+MazeGame : +makeWall() : Wall
+
+BombMazeGame : +makeMaze() : Maze
+BombMazeGame : +makeRoom(int) : Room
+BombMazeGame : +makeDoor(Room,Room) : Door
+BombMazeGame : +makeWall() : Wall
+
+MazeGame <|-- BombMazeGame
+
+MazeGame .left.> Maze : create
+MazeGame .right.> Door : create
+
+note as nMazeGameCreateMaze
+    <i>createMaze()</i> uses factory methods
+    implemented here
+end note
+nMazeGameCreateMaze .. MazeGame::createMaze
+nMazeGameCreateMaze .. BombMazeGame::createMaze
+
+note as nMazeGameMakeRoom
+    return new Room(n);
+end note
+nMazeGameMakeRoom .. MazeGame::makeRoom
+
+note as nBombMazeGameMakeRoom
+    return new BombRoom(n);
+end note
+nBombMazeGameMakeRoom .. BombMazeGame::makeRoom
+
+@enduml

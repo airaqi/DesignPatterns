@@ -1,0 +1,40 @@
+@startuml
+
+allowmixing
+
+title Factory Method Pattern Examples
+
+class Document
+rectangle MyDocument
+class Application
+class MyApplication
+
+Document : open()
+Document : close()
+Document : save()
+Document : revert()
+
+Application : createDocument()
+Application : newDocument()
+Application : openDocument()
+
+MyApplication : createDocument()
+
+Application <|-- MyApplication
+Document <|-- MyDocument
+
+Application "docs" o-left-> Document
+
+note as nApplicationNewDocument
+    Document* doc = createDocument();
+    docs.add(doc);
+    doc->open();
+end note
+nApplicationNewDocument .left. Application::newDocument
+
+note as nMyApplicationCreateDocument
+    return new MyDocument;
+end note
+nMyApplicationCreateDocument .left. MyApplication::createDocument
+
+@enduml

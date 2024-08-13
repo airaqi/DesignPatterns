@@ -1,0 +1,34 @@
+@startuml
+
+title Factory Method Pattern
+
+allowmixing
+
+class Creator
+class ConcreteCreator
+rectangle Product
+rectangle ConcreteProduct
+
+Creator  : factoryMethod()
+Creator : operation()
+
+ConcreteCreator : factoryMethod()
+
+Creator <|-- ConcreteCreator
+Product <|-- ConcreteProduct
+
+ConcreteCreator -left-> ConcreteProduct
+
+note as nCreatorFactoryMethod
+     ...
+    product = factoryMethod();
+    ...
+end note
+nCreatorFactoryMethod .left. Creator::factoryMethod
+
+note as nConcreteCreatorFactoryMethod
+    return new ConcreteProduct;
+end note
+nConcreteCreatorFactoryMethod .left. ConcreteCreator::factoryMethod
+
+@enduml

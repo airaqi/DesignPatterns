@@ -70,6 +70,7 @@ All patterns structures has been documented and samples has been implemented.
     `Decorator <workspace/projects/patterns/decorator/README.rst>`_, "Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality"
     `Singleton <workspace/projects/patterns/singlton/README.rst>`_, "Ensure a class only has one instance, and provide a global point of access to it."
     `Strategy <workspace/projects/patterns/strategy/README.rst>`_, "Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it."
+    `Factory Method <workspace/projects/patterns/factory_method/README.rst`_, "Define an interface for creating an object, but let subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses."
 
 
 Requirements analysis
