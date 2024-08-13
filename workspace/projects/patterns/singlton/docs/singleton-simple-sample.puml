@@ -1,0 +1,58 @@
+@startuml
+
+title Simple Singleton Sample Code
+
+allowmixing
+
+abstract class AbstractMazeFactory
+class MazeFactory
+class BombMazeFactory
+rectangle Maze
+rectangle Room
+
+AbstractMazeFactory : +makeMaze() : Maze
+AbstractMazeFactory : +makeRoom() : Room
+AbstractMazeFactory : +makeWall() : Wall
+AbstractMazeFactory : +makeDoor() : Door
+
+
+MazeFactory : - {static} uniqueInstance : MazeFactory
+MazeFactory : +{static} instance() : MazeFactory
+MazeFactory : #MazeFactory()
+MazeFactory : +makeMaze() : Maze
+MazeFactory : +makeRoom(int) : Room
+MazeFactory : +makeWall() : Wall
+MazeFactory : +makeDoor(Room,Room) : Door
+
+BombMazeFactory : -{static} uniqueInstance : BombMazeFactory
+BombMazeFactory : +{static} instance() : BombMazeFactory
+BombMazeFactory : #BombMazeFactory()
+BombMazeFactory : +makeMaze() : Maze
+BombMazeFactory : +makeRoom(int) : RoomBomb
+BombMazeFactory : +makeWall() : Wall
+BombMazeFactory : +makeDoor(Room,Room) : Door
+
+AbstractMazeFactory <|-- MazeFactory
+AbstractMazeFactory <|-- BombMazeFactory
+
+MazeFactory ..> Maze : create
+BombMazeFactory ..> Maze : create
+MazeFactory ..> Room : create
+BombMazeFactory ..> Room : create
+
+note as general
+    <b>Note</b> that every subclass has its own
+    uniqueInstance object, which means 
+    that we can have more than one unique 
+    factory at the same time.
+end note
+
+note as ninstance
+    if (instance == 0)
+        instance = new Singleton
+    return instance;
+end note
+ninstance . MazeFactory::instance
+ninstance . BombMazeFactory::instance
+
+@enduml

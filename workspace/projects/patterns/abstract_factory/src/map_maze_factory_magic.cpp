@@ -6,6 +6,15 @@ BombMazeFactory::BombMazeFactory() { }
 
 BombMazeFactory::~BombMazeFactory() { }
 
+BombMazeFactory* BombMazeFactory::_instance = nullptr;
+
+BombMazeFactory* BombMazeFactory::instance()
+{
+    if (_instance == nullptr)
+        _instance = new BombMazeFactory();
+    return _instance;
+}
+
 Room* BombMazeFactory::makeRoom(int roomNo)
 {
     return fillWalls(new RoomBomb(roomNo));

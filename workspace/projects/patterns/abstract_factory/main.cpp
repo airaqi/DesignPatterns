@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
 
     std::cout << "\n\n";
 
-    AbstractMazeFactory* factory = new MazeFactory();
+    AbstractMazeFactory* factory = MazeFactory::instance();
     Maze* maze2 = game.createMaze(*factory);
 
     play(maze2);
@@ -57,7 +57,7 @@ int main(int argc, char* argv[])
 
     std::cout << "\n\n";
 
-    factory = new BombMazeFactory();
+    factory = BombMazeFactory::instance();
     Maze* maze3 = game.createMaze(*factory);
 
     play(maze3);

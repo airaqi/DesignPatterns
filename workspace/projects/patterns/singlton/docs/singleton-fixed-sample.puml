@@ -1,0 +1,61 @@
+@startuml
+
+title Fixed Inherited Singleton Sample Code
+
+allowmixing
+
+class AbstractMazeFactory
+class MazeFactory
+class BombMazeFactory
+rectangle Maze
+rectangle Room
+
+AbstractMazeFactory  : - {static} uniqueInstance : AbstractMazeFactory 
+AbstractMazeFactory : #AbstractMazeFactory()
+AbstractMazeFactory : + {static} instance(name : String) : AbstractMazeFactory 
+AbstractMazeFactory : +{abstract} makeMaze() : Maze
+AbstractMazeFactory : +{abstract} makeRoom() : Room
+AbstractMazeFactory : +{abstract} makeWall() : Wall
+AbstractMazeFactory : +{abstract} makeDoor() : Door
+
+MazeFactory : +{static} NAME : String
+MazeFactory : #MazeFactory()
+MazeFactory : +makeMaze() : Maze
+MazeFactory : +makeRoom(int) : Room
+MazeFactory : +makeWall() : Wall
+MazeFactory : +makeDoor(Room,Room) : Door
+
+BombMazeFactory : +{static} NAME : String
+BombMazeFactory : #BombMazeFactory()
+BombMazeFactory : +makeMaze() : Maze
+BombMazeFactory : +makeRoom(int) : RoomBomb
+BombMazeFactory : +makeWall() : Wall
+BombMazeFactory : +makeDoor(Room,Room) : Door
+
+AbstractMazeFactory <|-- MazeFactory
+AbstractMazeFactory <|-- BombMazeFactory
+
+MazeFactory ..> Maze : create
+BombMazeFactory ..> Maze : create
+
+MazeFactory ..> Room : create
+BombMazeFactory ..> Room : create
+
+note as general
+    <b>Note</b> who subclasses are hardcoded 
+    int the instance method, which means 
+    that any new subclasses needed 
+    requires base class to changed as well.
+end note
+
+note as nAbstractMazeFactoryInstance
+    if(uniqueInstance != 0)
+        return uniqueInstance;    
+    if (name == "MAZE") 
+        uniqueInstance = new MazeFactory;
+    else
+        uniqueInstance = new BombMazeFactory;
+end note
+nAbstractMazeFactoryInstance .. AbstractMazeFactory::instance
+
+@enduml

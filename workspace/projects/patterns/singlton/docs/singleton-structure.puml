@@ -1,0 +1,45 @@
+@startuml
+
+'left to right direction
+allowmixing
+
+title Singleton Pattern
+
+class Singleton
+class SingletonInheritable
+rectangle Client
+rectangle SingletonExtended
+
+Singleton : -{static} uniqueInstance : Singleton
+Singleton : -singletonData
+Singleton : +{static} instance() : Singleton
+Singleton : +operation() : void
+Singleton : +getData() : data
+
+SingletonInheritable : -{static} instance : SingletonInheritable
+SingletonInheritable : -{static} registry : NameSingletonPair[0..*]
+SingletonInheritable : +{static} register(name: string, object: SingletonInheritable)
+SingletonInheritable : +{static} instance() : SingletonInheritable
+SingletonInheritable : #{static} lookup(name : String) : SingletonInheritable
+
+Singleton <|-- SingletonInheritable
+SingletonInheritable <|-- SingletonExtended
+
+Client .left.> Singleton : Singleton::instance()
+Client ..> SingletonInheritable : SingletonInheritable::instance()
+SingletonInheritable <.. SingletonExtended : SingletonInheritable::register()
+
+note as nSingleton
+    <i>Singleton</i> pattern uses one instance 
+    but doesn't allow inheritance.
+    <i>SingletonInheritable</i> allows that.
+end note
+nSingleton . Singleton
+nSingleton . SingletonInheritable
+
+note as nSingletonInstance
+    return uniqueInstance;
+end note
+nSingletonInstance . Singleton::instance
+
+@enduml

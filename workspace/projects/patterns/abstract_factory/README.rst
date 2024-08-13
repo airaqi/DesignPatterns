@@ -2,7 +2,9 @@
 Abstract Factory
 ----------------
 
-
+This pattern uses the Maze game example described at the begining of chapter 3, which creates a maze
+game that creates several types of roomms and doors, and drops the player in starting room, then the task 
+of the player to reach the target room using provided doors, that sounds fun.
 
 Structure
 ---------
@@ -32,8 +34,7 @@ Motif and Presentation Manager.
 Sample Code
 -----------
 
-Maze creation factory used in th Maze game is mentioned in the Creational Pattern chapter
-introduction, which is creating a maze with several rooms and doors.
+The Maze game design.
 
 Class diagram
 *************

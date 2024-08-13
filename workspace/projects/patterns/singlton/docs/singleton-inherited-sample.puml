@@ -1,0 +1,77 @@
+@startuml
+
+title Singleton Sample Code
+
+allowmixing
+
+class AbstractMazeFactory
+class MazeFactory
+class BombMazeFactory
+rectangle Maze
+rectangle Room
+
+AbstractMazeFactory : -{static} uniqueInstance : MazeFactory
+AbstractMazeFactory : -{static} registery : NameSingletonPair[0..*]
+AbstractMazeFactory : #AbstractMazeFactory()
+AbstractMazeFactory : +{static} instance(name : String) : MazeFactory
+AbstractMazeFactory : +{static} register(name : String, AbstractMazeFactory)
+AbstractMazeFactory : +{static} lookup(name : String) : AbstractMazeFactory
+AbstractMazeFactory : +{abstract} makeMaze() : Maze
+AbstractMazeFactory : +{abstract} makeRoom() : Room
+AbstractMazeFactory : +{abstract} makeWall() : Wall
+AbstractMazeFactory : +{abstract} makeDoor() : Door
+
+
+MazeFactory : +{static} NAME : String
+MazeFactory : +MazeFactory()
+MazeFactory : +makeMaze() : Maze
+MazeFactory : +makeRoom(int) : Room
+MazeFactory : +makeWall() : Wall
+MazeFactory : +makeDoor(Room,Room) : Door
+
+BombMazeFactory : +{static} NAME : String
+BombMazeFactory : +BombMazeFactory()
+BombMazeFactory : +makeMaze() : Maze
+BombMazeFactory : +makeRoom(int) : RoomBomb
+BombMazeFactory : +makeWall() : Wall
+BombMazeFactory : +makeDoor(Room,Room) : Door
+
+AbstractMazeFactory <|-- MazeFactory
+AbstractMazeFactory <|-- BombMazeFactory
+
+MazeFactory ..> Maze : create
+BombMazeFactory ..> Maze : create
+MazeFactory ..> Room : create
+BombMazeFactory ..> Room : create
+
+note as nGeneral
+    <b>Note</b> that in this implementation
+    the <i>uniqueInstance</i> instance is in
+    the base class, and every subclass
+    Factory should be instanciated in
+    order to register itself in the registry,
+    which restores the problem that
+    <i>Singleton</i> are made to solve in the
+    first place.
+    
+    This might be resoved using a separate
+    static block that registers all subclass
+    factories.
+end note
+
+note as nConstructor
+    AbstractMazeFactory::register(NAME, this);
+end note
+nConstructor . MazeFactory::MazeFactory
+nConstructor . BombMazeFactory::BombMazeFactory
+
+note as nAbstractMazeSingletonInstance
+    if(uniqueInstance == 0) {
+        uniqueInstance = lookup(name);
+        // Lookip returns 0 if there's no such singleton
+    }
+    return uniqueInstance;
+end note
+nAbstractMazeSingletonInstance .. AbstractMazeFactory::instance
+
+@enduml

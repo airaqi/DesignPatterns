@@ -6,9 +6,12 @@
 
 class BombMazeFactory : public AbstractMazeFactory
 {
-    public:
+    protected:
         BombMazeFactory();
+
+    public:
         virtual ~BombMazeFactory();
+        static BombMazeFactory* instance();
 
         virtual Room* makeRoom(int) override;
         virtual Maze* makeMaze() const override;
@@ -16,6 +19,7 @@ class BombMazeFactory : public AbstractMazeFactory
         virtual Door* makeDoor(Room*, Room*) const override;
 
     private:
+        static BombMazeFactory* _instance;
         virtual Room* fillWalls(Room* room) override;
 };
 

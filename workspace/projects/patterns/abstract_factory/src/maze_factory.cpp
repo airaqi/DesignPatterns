@@ -7,6 +7,16 @@ MazeFactory::MazeFactory() { }
 
 MazeFactory::~MazeFactory() { }
 
+
+MazeFactory* MazeFactory::_instance = nullptr;
+
+MazeFactory* MazeFactory::instance()
+{
+    if (_instance == nullptr)
+        _instance = new MazeFactory();
+    return _instance;
+}
+
 Maze* MazeFactory::makeMaze() const
 {
     return new Maze();
