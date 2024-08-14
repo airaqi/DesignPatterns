@@ -8,6 +8,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_compile_options(-fPIC)
 
+enable_testing()
+
 add_subdirectory(patterns)
 add_subdirectory(lexi)
 add_subdirectory(common)

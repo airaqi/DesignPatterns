@@ -6,4 +6,5 @@ set(SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
 target_include_directories(test_common PUBLIC ${INCLUDE_DIR} ${SRC_DIR}) 
 target_link_libraries(test_common common)
 
+add_test(NAME run_test_common COMMAND test_common)
 
