@@ -1,8 +1,8 @@
 .. attention:: THIS IS A WORK IN PROGRESS PROJECT
 
-==================
-Text Editor (Lexi)
-==================
+===============
+Design Patterns
+===============
 
 .. sectnum::
 
@@ -75,40 +75,11 @@ All patterns structures has been documented and samples has been implemented.
     `Strategy <workspace/projects/patterns/strategy/README.rst>`_, "Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it."
     `Factory Method <workspace/projects/patterns/factory_method/README.rst>`_, "Define an interface for creating an object, but let subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses."
 
+Lexi Test Editor
+================
 
-Requirements analysis
-=====================
-
-.. figure:: workspace/projects/lexi/docs/lexi_page.svg
-    :width: 827
-    :height: 920
-    :scale: 60%
-    :figwidth: 90%
-
-    Figure 1.1: Lexi User interface
-
-
-Design
-======
-
------------
-Full Design
------------
-
-Below figure shows a full design of the Lexi Text editor according the book implementation.
-
-
-.. figure:: workspace/projects/lexi/docs/lexi_classes.svg
-    :width: 1408
-    :height: 1030
-    :scale: 40%
-    :figwidth: 90%
-    :alt: Combined Design
-    :align: left
-
-    Figure 1.0: Lexi Text Editor class diagram
-
-Figure 1.1, models the required Lexi user interface, as depected by the book.
+Lexi text editor case study provided in chapter two has been implemented in lexi project
+refer to lexi project in `here <workspace/projects/lexi>`_
 
 Implementation
 ==============
