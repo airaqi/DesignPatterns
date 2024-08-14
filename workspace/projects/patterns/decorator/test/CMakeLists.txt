@@ -8,4 +8,5 @@ target_include_directories(test_decorator PUBLIC ${INCLUDE_DIR} ${SRC_DIR})
 
 target_link_libraries(test_decorator doctest::doctest decorator)
 
+add_test(NAME run_test_decorator COMMAND test_decorator)
 
