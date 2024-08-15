@@ -21,8 +21,8 @@ Below figure shows a full design of the Lexi Text editor according the book impl
 
 
 .. figure:: docs/lexi_classes.svg
-    :width: 1408
-    :height: 1030
+    :width: 1396
+    :height: 1025
     :scale: 40%
     :figwidth: 90%
     :alt: Combined Design
@@ -32,4 +32,42 @@ Below figure shows a full design of the Lexi Text editor according the book impl
 
 Figure 1.1, models the required Lexi user interface, as depected by the book.
 
+Document Structure
+~~~~~~~~~~~~~~~~~~
+
+.. figure:: docs/lexi_classes_structure.svg
+    :width: 1130
+    :height: 1187
+    :scale: 40%
+    :figwidth: 90%
+    :alt: Combined Design
+    :align: left
+
+    Figure 1.0: Lexi Text Editor class diagram
+
+Formatting
+~~~~~~~~~~
+
+.. figure:: docs/lexi_classes_format.svg
+    :width: 1112
+    :height: 486
+    :scale: 40%
+    :figwidth: 90%
+    :alt: Combined Design
+    :align: left
+
+    Figure 1.0: Lexi Text Editor class diagram
+
+Interface Imbellishment
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. figure:: docs/lexi_classes_imbellishment.svg
+    :width: 700
+    :height: 347
+    :scale: 40%
+    :figwidth: 90%
+    :alt: Combined Design
+    :align: left
+
+    Figure 1.0: Lexi Text Editor class diagram
 

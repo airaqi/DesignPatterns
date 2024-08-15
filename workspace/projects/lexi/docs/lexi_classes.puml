@@ -1,8 +1,9 @@
 @startuml
 
-left to right direction
+title Lexi: Full Design
 
-title Lexi: Document Structure
+allowmixing
+left to right direction
 
 note as general
     <b>Design Patterns</b>
@@ -12,177 +13,36 @@ note as general
         <b>Patterns:</b> Composite
 end note
 
-class glyph.Glyph {
-        -parent: Glyph
-        -- apearance --
-        +draw(Window): void
-        +bounds(Rect) : void
-        -- hit detection --
-        +intersects(Point)
-        -- structure --
-        +insert(Glyph, int)
-        +remove(Glyph): void
-        +child(int): Glyph
-        +parent(): Glyph
-        #parent(Glyph) : void
-        +rect() : Rect
-        #rect(Rect) : void
-        +isLeaf() : Boolean
-        +isComposite(): Boolean
-    }
-    
-class glyph.GlyphComposite {
-        -children: Glyph[0..*]
-        -compositor : GlyphStrategyCompositor
-        +rect() : Rect
-        +isComposite(): Boolean
-    }
-        
-class glyph.GlyphLeaf {
-        -rect: Rect
-        +isLeaf() : Boolean
-    }
+rectangle lexi.glyph.Glyph
+rectangle lexi.glyph.GlyphComposite
+rectangle lexi.glyph.GlyphLeaf
+rectangle lexi.glyph.GlyphCharacter
+rectangle lexi.glyph.GlyphRectangle
+rectangle lexi.glyph.GlyphPolygon
+rectangle lexi.glyph.GlyphRow
+rectangle lexi.glyph.GlyphColumn
 
-note as nReturnTrue
-    return true
-end note
-
-note as nGlyphLeaf
-    GlyphLeaf class is added to implement
-    common methods in sub leafs.
-end note
-nGlyphLeaf .. GlyphLeaf
-
-nReturnTrue .. GlyphLeaf::isLeaf
-nReturnTrue .. GlyphComposite::isComposite
-
-note as nReturnFalse
-    return false
-end note
-
-nReturnFalse .. Glyph::isLeaf
-nReturnFalse .. Glyph::isComposite
-
-class glyph.GlyphCharacter {
-        -c : char
-        +draw(w: Window)
-        +intersects(p: Point)
-        }
-        
-note as nCharDraw
-    return true if point p 
-    intersects this character
-end note
-nCharDraw .. GlyphCharacter::draw
-        
-note as nCharIntersects 
-    w ->drawCharacter(c)
-end note
-nCharIntersects .. GlyphCharacter::intersects
-
-class glyph.GlyphRectangle {
-        +draw(Window)
-        +intersects(Point)
-    }
-
-class glyph.GlyphPolygon {
-        +draw(Window)
-        +intersects(Point)
-    }
-
-class glyph.GlyphRow {
-        +draw(w: Window): void
-        +intersects(p: Point) : bool
-        +insert(g: Glyph, i: int) : void
-    }
-        
-note  as nGlyphRowDraw 
-    for all c in children
-    ensure c is positioned
-    correctly;
-        c->draw(w)
-end note
-nGlyphRowDraw .. GlyphRow::draw
-    
-note as nGlypRowIntersects
-    for all c in children
-    if c->intersects(p) return true
-end note
-nGlypRowIntersects .. GlyphRow::intersects
-
-note as nGlypRowInsert
-    insert g into
-    children at position i
-end note
-nGlypRowInsert .. GlyphRow::insert
-
-class glyph.GlyphColumn {
-        +draw(w: Window) : void
-        +intersect(p: Point) : bool
-        +insert(g: Glyph, i: int) : void
-     }
-     
-Glyph <|-- GlyphComposite
-Glyph <|-- GlyphLeaf
-
-GlyphComposite <|-- GlyphRow
-GlyphComposite <|-- GlyphColumn
-
-GlyphLeaf <|-- GlyphCharacter
-GlyphLeaf <|-- GlyphRectangle
-GlyphLeaf <|-- GlyphPolygon
+!includesub lexi_classes_structure.puml!RELATIONS
 
 '-------------------------------------
 ' Formatting
 
-class glyph.strategy.GlyphStrategyCompositor <<strategy>>
-class glyph.strategy.GlyphStrategyArrayCompositor <<strategy>>
-class glyph.strategy.GlyphStrategyTeXCompositor <<strategy>>
-class glyph.strategy.GlyphStrategySimpleCompositor <<strategy>>
+rectangle lexi.strategy.GlyphStrategyCompositor
+rectangle lexi.strategy.GlyphStrategyArrayCompositor
+rectangle lexi.strategy.GlyphStrategyTeXCompositor
+rectangle lexi.strategy.GlyphStrategySimpleCompositor
 
-note as nGlyphStrategyCompositionInsert
-    Glyph::Insert(g, i)
-    compositor.compose()
-end note 
-nGlyphStrategyCompositionInsert .. GlyphComposite::insert
 
-GlyphStrategyCompositor : -composition : GlyphComposite
-GlyphStrategyCompositor : +compose()
-GlyphStrategyCompositor : +setComposition()
-
-GlyphStrategyArrayCompositor : +compose()
-GlyphStrategyTeXCompositor : +compose()
-GlyphStrategySimpleCompositor : +compose()
-
-GlyphStrategyCompositor <|-- GlyphStrategyArrayCompositor
-GlyphStrategyCompositor <|-- GlyphStrategyTeXCompositor
-GlyphStrategyCompositor <|-- GlyphStrategySimpleCompositor
-
-Glyph <--o "children" GlyphComposite
-GlyphComposite "compsitor" o--> GlyphStrategyCompositor
-GlyphComposite <-- "composition" GlyphStrategyCompositor
+!includesub lexi_classes_format.puml!RELATIONS
 
 '-------------------------------------------
 ' User interface imbellishment
 
-class glyph.decorator.GlyphDecorator <<decorator>>
-class glyph.decorator.GlyphDecoratorBorder <<decorator>>
-class glyph.decorator.GlyphDecoratorScroller <<decorator>>
+rectangle lexi.decorator.GlyphDecorator
+rectangle lexi.decorator.GlyphDecoratorBorder
+rectangle lexi.decorator.GlyphDecoratorScroller
 
-GlyphDecorator  : -component : Glyph
-GlyphDecorator  : +draw(Window) : void
+!includesub lexi_classes_imbellishment.puml!RELATIONS
 
-GlyphDecoratorBorder : draw(Window) : void
-GlyphDecoratorBorder : drawBorder(Window) : void
-
-GlyphDecoratorScroller : draw(Window) : void
-
-Glyph <|-- GlyphDecorator
-
-GlyphDecorator <|-- GlyphDecoratorBorder
-GlyphDecorator <|-- GlyphDecoratorScroller
-
-Glyph <--o "component" GlyphDecorator
 
 @enduml
-

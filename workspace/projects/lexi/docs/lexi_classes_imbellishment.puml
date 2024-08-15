@@ -1,0 +1,43 @@
+@startuml
+
+title Lexi: Interface Imbelishment
+
+allowmixing
+left to right direction
+
+rectangle lexi.glyph.Glyph
+
+!startsub CLASSES
+
+class lexi.decorator.GlyphDecorator
+class lexi.decorator.GlyphDecoratorBorder
+class lexi.decorator.GlyphDecoratorScroller
+
+!endsub
+'-------------------------------------
+
+!startsub MEMBERS
+
+GlyphDecorator  : -component : Glyph
+GlyphDecorator  : +draw(Window) : void
+
+GlyphDecoratorBorder : draw(Window) : void
+GlyphDecoratorBorder : drawBorder(Window) : void
+
+GlyphDecoratorScroller : draw(Window) : void
+
+!endsub
+'-------------------------------------
+
+!startsub RELATIONS
+
+Glyph <|-- GlyphDecorator
+
+GlyphDecorator <|-- GlyphDecoratorBorder
+GlyphDecorator <|-- GlyphDecoratorScroller
+
+Glyph <--o "component" GlyphDecorator
+
+!endsub
+
+@enduml
