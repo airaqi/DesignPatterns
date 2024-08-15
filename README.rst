@@ -68,7 +68,7 @@ All patterns structures has been documented and samples has been implemented.
     :align: center
 
     "Pattern","Description"
-    `Abstract Factory <workspace/projects/patterns/abstract_factory>`_, "Provide an interface for creating families of related or dependent objects without specifying their concrete classes."
+    `Abstract Factory <workspace/projects/patterns/abstract_factory/>`_, "Provide an interface for creating families of related or dependent objects without specifying their concrete classes."
     `Composite <workspace/projects/patterns/composite/README.rst>`_, "Compose objects into tree structures to represent part-whole hierarchies."
     `Decorator <workspace/projects/patterns/decorator/README.rst>`_, "Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality"
     `Singleton <workspace/projects/patterns/singlton/README.rst>`_, "Ensure a class only has one instance, and provide a global point of access to it."
