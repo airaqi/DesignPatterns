@@ -1,0 +1,136 @@
+@startuml
+
+left to right direction
+title Lexi : Document Structure
+
+'---------------------------
+!startsub CLASSES
+
+class lexi.glyph.Glyph
+class lexi.glyph.GlyphComposite
+class lexi.glyph.GlyphLeaf
+class lexi.glyph.GlyphCharacter
+class lexi.glyph.GlyphRectangle
+class lexi.glyph.GlyphPolygon
+class lexi.glyph.GlyphRow
+class lexi.glyph.GlyphColumn
+
+!endsub
+'---------------------------
+
+!startsub MEMBERS
+
+Glyph : -parent: Glyph
+Glyph : +draw(Window): void
+Glyph : +bounds(Rect) : void
+Glyph : +intersects(Point)
+Glyph : +insert(Glyph, int)
+Glyph : +remove(Glyph): void
+Glyph : +child(int): Glyph
+Glyph : +parent(): Glyph
+Glyph : #parent(Glyph) : void
+Glyph : +rect() : Rect
+Glyph : #rect(Rect) : void
+Glyph : +isLeaf() : Boolean
+Glyph : +isComposite(): Boolean
+
+
+GlyphComposite : -children: Glyph[0..*]
+GlyphComposite : -compositor : GlyphStrategyCompositor
+GlyphComposite : +rect() : Rect
+GlyphComposite : +isComposite(): Boolean
+    
+GlyphLeaf : -rect: Rect
+GlyphLeaf : +isLeaf() : Boolean
+
+GlyphCharacter : -c : char
+GlyphCharacter : +draw(w: Window)
+GlyphCharacter : +intersects(p: Point)
+
+GlyphRectangle : +draw(Window)
+GlyphRectangle : +intersects(Point)
+
+GlyphPolygon : +draw(Window)
+GlyphPolygon : +intersects(Point)
+
+GlyphRow : +draw(w: Window): void
+GlyphRow : +intersects(p: Point) : bool
+GlyphRow : +insert(g: Glyph, i: int) : void
+
+GlyphColumn : +draw(w: Window) : void
+GlyphColumn : +intersect(p: Point) : bool
+GlyphColumn : +insert(g: Glyph, i: int) : void
+
+!endsub
+'---------------------------
+
+!startsub RELATIONS
+
+Glyph <|-- GlyphComposite
+Glyph <|-- GlyphLeaf
+
+GlyphComposite <|-- GlyphRow
+GlyphComposite <|-- GlyphColumn
+
+GlyphLeaf <|-- GlyphCharacter
+GlyphLeaf <|-- GlyphRectangle
+GlyphLeaf <|-- GlyphPolygon
+
+!endsub
+'---------------------------
+
+!startsub NOTES
+
+note as nReturnTrue
+    return true
+end note
+nReturnTrue .. GlyphLeaf::isLeaf
+nReturnTrue .. GlyphComposite::isComposite
+
+note as nGlyphLeaf
+    GlyphLeaf class is added to implement
+    common methods in sub leafs.
+end note
+nGlyphLeaf .. GlyphLeaf
+
+note as nReturnFalse
+    return false
+end note
+nReturnFalse .. Glyph::isLeaf
+nReturnFalse .. Glyph::isComposite
+
+note as nCharDraw
+    return true if point p 
+    intersects this character
+end note
+nCharDraw .. GlyphCharacter::draw
+        
+note as nCharIntersects 
+    w ->drawCharacter(c)
+end note
+nCharIntersects .. GlyphCharacter::intersects
+        
+note  as nGlyphRowDraw 
+    for all c in children
+    ensure c is positioned
+    correctly;
+        c->draw(w)
+end note
+nGlyphRowDraw .. GlyphRow::draw
+    
+note as nGlypRowIntersects
+    for all c in children
+    if c->intersects(p) return true
+end note
+nGlypRowIntersects .. GlyphRow::intersects
+
+note as nGlypRowInsert
+    insert g into
+    children at position i
+end note
+nGlypRowInsert .. GlyphRow::insert
+
+!endsub
+'---------------------------
+
+@enduml

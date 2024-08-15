@@ -1,0 +1,59 @@
+@startuml
+
+title Lexi: Formatting
+
+allowmixing
+left to right direction
+
+rectangle lexi.glyph.Glyph
+rectangle lexi.glyph.GlyphComposite
+
+!startsub CLASSES
+
+class lexi.strategy.GlyphStrategyCompositor
+class lexi.strategy.GlyphStrategyArrayCompositor
+class lexi.strategy.GlyphStrategyTeXCompositor
+class lexi.strategy.GlyphStrategySimpleCompositor
+
+!endsub
+'-------------------------------------
+
+!startsub MEMBERS
+
+GlyphStrategyCompositor : -composition : GlyphComposite
+GlyphStrategyCompositor : +compose()
+GlyphStrategyCompositor : +setComposition()
+
+GlyphStrategyArrayCompositor : +compose()
+GlyphStrategyTeXCompositor : +compose()
+GlyphStrategySimpleCompositor : +compose()
+
+!endsub
+'-------------------------------------
+
+!startsub RELATIONS
+
+GlyphStrategyCompositor <|-- GlyphStrategyArrayCompositor
+GlyphStrategyCompositor <|-- GlyphStrategyTeXCompositor
+GlyphStrategyCompositor <|-- GlyphStrategySimpleCompositor
+
+Glyph <--o "children" GlyphComposite
+GlyphComposite "compsitor" o--> GlyphStrategyCompositor
+GlyphComposite <-- "composition" GlyphStrategyCompositor
+
+!endsub
+'-------------------------------------
+
+!startsub NOTES
+
+note as nGlyphStrategyCompositionInsert
+    Glyph::Insert(g, i)
+    compositor.compose()
+end note 
+nGlyphStrategyCompositionInsert .. GlyphComposite::insert
+
+!endsub 
+
+
+
+@enduml
