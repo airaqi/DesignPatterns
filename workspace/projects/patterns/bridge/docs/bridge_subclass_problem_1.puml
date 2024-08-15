@@ -1,0 +1,13 @@
+@startuml
+
+allowmixing
+skinparam linetype ortho
+
+rectangle Window
+rectangle XWindow
+rectangle PMWindow
+
+Window <|-- XWindow
+Window <|-- PMWindow
+
+@enduml

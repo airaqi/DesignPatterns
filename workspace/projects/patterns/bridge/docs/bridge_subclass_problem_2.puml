@@ -1,0 +1,23 @@
+@startuml
+
+allowmixing
+skinparam linetype polyline
+skinparam linetype ortho
+'left to right direction
+
+rectangle Window
+rectangle XWindow
+rectangle PMWindow
+rectangle IconWindow
+
+rectangle XIconWindow
+rectangle PMIconWindow
+
+Window <|-- XWindow
+Window <|-- PMWindow
+Window <|-- IconWindow
+
+IconWindow <|-- XIconWindow
+IconWindow <|-- PMIconWindow
+
+@enduml

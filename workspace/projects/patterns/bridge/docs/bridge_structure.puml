@@ -1,0 +1,33 @@
+@startuml
+
+allowmixing
+skinparam linetype ortho
+
+rectangle Client
+
+class Abstraction
+class Implementor
+class ConcreteImplementorA
+class ConcreteImplementorB
+
+rectangle RefinedAbstraction
+
+Abstraction : Operation()
+
+Implementor : OperationImp()
+ConcreteImplementorB : OperationImp()
+ConcreteImplementorA : OperationImp()
+
+Abstraction <|-- RefinedAbstraction
+Implementor <|-- ConcreteImplementorA
+Implementor <|-- ConcreteImplementorB
+
+Abstraction "imp" o.right.> Implementor
+Client ..> Abstraction
+
+note as nAbstractionOperation
+    imp->OperationImp()
+end note
+nAbstractionOperation . Abstraction::Operation
+
+@enduml
