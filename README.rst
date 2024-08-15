@@ -69,11 +69,13 @@ All patterns structures has been documented and samples has been implemented.
 
     "Pattern","Description"
     `Abstract Factory <workspace/projects/patterns/abstract_factory/>`_, "Provide an interface for creating families of related or dependent objects without specifying their concrete classes."
-    `Composite <workspace/projects/patterns/composite/README.rst>`_, "Compose objects into tree structures to represent part-whole hierarchies."
-    `Decorator <workspace/projects/patterns/decorator/README.rst>`_, "Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality"
-    `Singleton <workspace/projects/patterns/singlton/README.rst>`_, "Ensure a class only has one instance, and provide a global point of access to it."
-    `Strategy <workspace/projects/patterns/strategy/README.rst>`_, "Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it."
-    `Factory Method <workspace/projects/patterns/factory_method/README.rst>`_, "Define an interface for creating an object, but let subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses."
+    `Composite <workspace/projects/patterns/composite/>`_, "Compose objects into tree structures to represent part-whole hierarchies."
+    `Decorator <workspace/projects/patterns/decorator/>`_, "Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality"
+    `Singleton <workspace/projects/patterns/singlton/>`_, "Ensure a class only has one instance, and provide a global point of access to it."
+    `Strategy <workspace/projects/patterns/strategy/>`_, "Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it."
+    `Factory Method <workspace/projects/patterns/factory_method/>`_, "Define an interface for creating an object, but let subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses."
+    `Brige <workspace/projects/patterns/bridge/>`_, "Decouple an abstraction from its implementation so that the two can vary inde-
+pendently."
 
 Lexi Test Editor
 ================

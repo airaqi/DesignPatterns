@@ -1,0 +1,75 @@
+@startuml
+
+title Bridge Design
+
+allowmixing
+skinparam linetype ortho
+'skinparam linetype polyline
+left to right direction
+
+rectangle bridge {
+    class Window
+    class WindowImp
+    }
+    
+
+class IconWindow
+class TransientWindow
+
+class XWindowImp
+class PMWindowImp
+
+Window : DrawText()
+Window : DrawRect()
+
+WindowImp : DevDrawText()
+WindowImp : DevDrawLine()
+
+IconWindow : DrawBorder()
+
+TransientWindow : DrawCloseBox()
+
+XWindowImp : DevDrawText()
+XWindowImp : DevDrawLine()
+
+PMWindowImp : DevDrawLine()
+PMWindowImp : DevDrawText()
+
+Window <|-- IconWindow
+Window <|-- TransientWindow
+
+WindowImp <|-- XWindowImp
+WindowImp <|-- PMWindowImp
+
+Window "imp" o...> WindowImp
+
+note as nWindowDrawRect
+    imp->devDrawLine()
+    imp->devDrawLine()
+    imp->devDrawLine()
+    imp->devDrawLine()
+end note
+nWindowDrawRect .. Window::DrawRect
+
+note as nIconWindowDrawBorder
+    DrawRect()
+    DrawText()
+end note
+nIconWindowDrawBorder .. IconWindow::DrawBorder
+
+note as nTransientWindowDrawCloseBox
+    DrawRect()
+end note
+nTransientWindowDrawCloseBox .. TransientWindow::DrawCloseBox
+
+note as nXWindowImpDevDrawText
+    XDrawString()
+end note
+nXWindowImpDevDrawText .. XWindowImp::DevDrawText
+
+note as nXWindowImpDevDrawLine
+    XDrawString()
+end note
+nXWindowImpDevDrawLine .. XWindowImp::DevDrawLine
+
+@enduml
