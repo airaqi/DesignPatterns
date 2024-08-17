@@ -49,3 +49,24 @@ Examples
 
 Sample Code
 -----------
+
+
+.. figure:: docs/bridge_sample.svg
+   :width: 1267
+   :height: 1060
+   :figwidth: 90%
+   :scale: 48%
+   :align: center
+
+   Figure 4: Bridge sample code
+
+This sample code just constructs a window and display a rectangle with *Hello Bridge!* in it
+and it displays it using two **Window systems** (namely X11 and Qt5), using the bridge pattern.
+
+Window and WindowImp classes represent the Abstraction and Implementation classes of
+the structure respectively.
+
+Event loop implementation has been added to the window class for simplicity, which
+should be placed in its own class.
+
+Other patterns is used in this sample such as Abstract Factory, Composite and Singleton.

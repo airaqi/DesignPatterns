@@ -5,10 +5,11 @@
 #include "view.h"
 #include "window_imp.h"
 
-class Window
+class BWindow
 {
     public:
-        Window(View* contents);
+        BWindow(View* contents);
+        virtual ~BWindow();
 
         // requests handled by window
         virtual void drawContents();
@@ -24,10 +25,12 @@ class Window
         virtual void raise();
         virtual void lower();
 
-        virtual void drawLine(const Point&, const Point&);
-        virtual void drawRect(const Point&, const Point&);
-        virtual void drawPolygon(const Point[], int n);
-        virtual void drawText(const char*, const Point&);
+        virtual void drawLine(const Point&, const Point&) = 0;
+        virtual void drawRect(const Point&, const Point&) = 0;
+        virtual void drawPolygon(const Point[], int n) = 0;
+        virtual void drawText(const char*, const Point&) = 0;
+
+        virtual void run_loop() = 0;
 
     protected:
         WindowImp* getWindowImp();
