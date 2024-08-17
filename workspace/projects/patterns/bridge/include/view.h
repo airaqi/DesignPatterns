@@ -1,18 +1,15 @@
 #ifndef __VIEW_H__
 #define __VIEW_H__ 
 
+class BWindow;
+
 class View
 {
     public:
-        View();
+        View() {}
+        virtual ~View() {}
 
-        char* contents() { return _contents; }
-        void contents(char* contents) { _contents = contents; }
-
-        virtual void draw();
-
-    private:
-        char* _contents;
+        virtual void draw(BWindow*) = 0;
 };
 
 #endif /* ifndef __VIEW_H__ */

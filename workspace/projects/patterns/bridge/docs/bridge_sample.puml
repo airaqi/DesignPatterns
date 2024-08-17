@@ -1,0 +1,118 @@
+@startuml
+
+title Bridge Sample Code
+
+left to right direction
+skinparam linetype ortho
+
+abstract class Window
+class WindowApplication
+
+abstract class WindowImp
+class XWindowImp
+
+abstract class View
+class ViewComposite
+class ViewRectangle
+class ViewString
+
+class WindowSystemFactory <<singleton>>
+class XWindowSystemFactory
+
+Window : -implementation : WindowImp
+Window : -contents : View
+Window : +Window(View)
+Window : +drawContents() : void
+Window : +open() : void
+Window : +close() : void
+Window : +iconify() : void
+Window : +deiconify() : void
+Window : +setOrigin(Point) : void
+Window : +setExtent(Point) : void
+Window : +raise() : void
+Window : +lower() : void
+Window : +drawLine(Point,Point) : void
+Window : +drawRect(Point, Point) : void
+Window : +drawPolygon(Point[3..*], int) : void
+Window : +drawText(String, Point) : void
+Window : #getWindowImp() : WindowImp
+Window : #getView() : View
+
+WindowApplication : +WindowApplication(View)
+WindowApplication : +~WindowApplication()
+WindowApplication : +drawContents() : void
+
+WindowImp : #WindowImp()
+WindowImp : #~WindowImp()
+WindowImp : +impTop() : void
+WindowImp : +impBottom() : void
+WindowImp : +impSetOrigin(Point) : void
+WindowImp : +impSetExtent(Point) : void
+WindowImp : +deviceRect(Coord,Coord,Coord,Coord) : void
+WindowImp : +deviceText(String,Coord,Coord) : void
+WindowImp : +deviceBitmap(String,Coord,Coord) : void
+
+XWindowImp : +XWindowImp()
+XWindowImp : +~XWindowImp()
+XWindowImp : +impTop() : void
+XWindowImp : +impBottom() : void
+XWindowImp : +impSetOrigin(Point) : void
+XWindowImp : +impSetExtent(Point) : void
+XWindowImp : +deviceRect(Coord,Coord,Coord,Coord) : void
+XWindowImp : +deviceText(String,Coord,Coord) : void
+XWindowImp : +deviceBitmap(String,Coord,Coord) : void
+
+View : +View()
+View : +~View()
+View : +draw(Window) : void
+
+ViewComposite : -children
+ViewComposite : +ViewComposite()
+ViewComposite : +~ViewComposite()
+ViewComposite : +append(View) : void
+ViewComposite : +prepend(View) : void
+ViewComposite : +insert(View, int) : void
+ViewComposite : +getChild(int) : View
+
+ViewRectangle : -rect : Rect
+ViewRectangle : +ViewRectangle()
+ViewRectangle : +~ViewRectangle()
+ViewRectangle : +draw(Window) : void
+
+ViewString : -value : String
+ViewString : -location : Point
+ViewString : +ViewString()
+ViewString : +~ViewString()
+ViewString : +draw(Window) : void
+
+WindowSystemFactory : -{static} instance
+WindowSystemFactory : #WindowSystemFactory()
+WindowSystemFactory : #~WindowSystemFactory()
+WindowSystemFactory : +{static} instance() : WindowSystemFactory 
+WindowSystemFactory : +createWindow()
+
+XWindowSystemFactory : #XWindowSystemFactory()
+XWindowSystemFactory : #~XWindowSystemFactory()
+XWindowSystemFactory : +{static} instance() : WindowSystemFactory 
+XWindowSystemFactory : +createWindow()
+
+Window <|-- WindowApplication
+WindowImp <|-- XWindowImp
+
+View <|-- ViewComposite
+View <|-- ViewRectangle
+View <|-- ViewString
+
+WindowSystemFactory <|-- XWindowSystemFactory
+
+Window "implementation"  o..> WindowImp
+Window .> View : draw
+Window ..> WindowSystemFactory : uses
+
+note as nViewDraw
+    view->draw(this);
+end note
+nViewDraw .. Window::drawContents
+
+
+@enduml
