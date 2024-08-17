@@ -5,6 +5,8 @@ template<class Item>
 class Iterator 
 {
     public:
+        virtual ~Iterator() {}
+
         virtual void first() = 0;
         virtual void next() = 0;
         virtual bool is_done() const = 0;
