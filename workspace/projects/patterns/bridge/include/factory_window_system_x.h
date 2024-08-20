@@ -4,17 +4,22 @@
 #include "factory_window_system.h"
 #include "window_imp.h"
 
-class XWindowSystemFactory : public WindowSystemFactory
+class WindowSystemFactoryX : public WindowSystemFactory
 {
     public:
-        virtual ~XWindowSystemFactory() {}
+        static const char* NAME;
+
+        virtual ~WindowSystemFactoryX() {}
 
         static WindowSystemFactory* instance();
 
         virtual WindowImp* createWindow();
 
     protected:
-        XWindowSystemFactory() {}
+        WindowSystemFactoryX() {}
+
+    private:
+        static WindowSystemFactory* _instance;
 };
 
 #endif /* ifndef __X_WINDOW_SYSTEM_FACTORY_H__ */

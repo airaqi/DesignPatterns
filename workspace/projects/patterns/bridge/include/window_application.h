@@ -11,6 +11,14 @@ class WindowApplication : public BWindow
 
         virtual void drawContents() override;
 
+        virtual void open() override;
+        virtual void close() override;
+        virtual void iconify() override;
+        virtual void deiconify() override;
+
+        virtual void raise() override;
+        virtual void lower() override;
+
         virtual void drawLine(const Point&, const Point&) override;
         virtual void drawRect(const Point&, const Point&) override;
         virtual void drawPolygon(const Point[], int n) override;

@@ -9,6 +9,23 @@ void WindowApplication::drawContents()
     getView()->draw(this);
 }
 
+void WindowApplication::open() 
+{}
+
+void WindowApplication::close() 
+{}
+
+void WindowApplication::iconify() 
+{}
+
+void WindowApplication::deiconify() 
+{}
+
+void WindowApplication::raise() 
+{}
+
+void WindowApplication::lower() 
+{}
 
 void WindowApplication::drawLine(const Point& p1, const Point& p2) 
 {}
@@ -27,6 +44,6 @@ void WindowApplication::drawText(const char* str, const Point& p)
 
 void WindowApplication::run_loop()
 {
-    getWindowImp()->run_loop(this);
+    getWindowImp()->event_loop(this);
 }
 

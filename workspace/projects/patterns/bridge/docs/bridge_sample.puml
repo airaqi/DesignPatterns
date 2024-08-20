@@ -10,6 +10,7 @@ class WindowApplication
 
 abstract class WindowImp
 class XWindowImp
+class XcbWindowImp
 
 abstract class View
 class ViewComposite
@@ -18,6 +19,7 @@ class ViewString
 
 class WindowSystemFactory <<singleton>>
 class XWindowSystemFactory
+class XcbWindowSystemFactory
 
 Window : -implementation : WindowImp
 Window : -contents : View
@@ -51,6 +53,7 @@ WindowImp : +impSetExtent(Point) : void
 WindowImp : +deviceRect(Coord,Coord,Coord,Coord) : void
 WindowImp : +deviceText(String,Coord,Coord) : void
 WindowImp : +deviceBitmap(String,Coord,Coord) : void
+WindowImp : +event_loop(Window) : void
 
 XWindowImp : +XWindowImp()
 XWindowImp : +~XWindowImp()
@@ -61,6 +64,18 @@ XWindowImp : +impSetExtent(Point) : void
 XWindowImp : +deviceRect(Coord,Coord,Coord,Coord) : void
 XWindowImp : +deviceText(String,Coord,Coord) : void
 XWindowImp : +deviceBitmap(String,Coord,Coord) : void
+XWindowImp : +event_loop(Window) : void
+
+XcbWindowImp : +XcbWindowImp()
+XcbWindowImp : +~XcbWindowImp()
+XcbWindowImp : +impTop() : void
+XcbWindowImp : +impBottom() : void
+XcbWindowImp : +impSetOrigin(Point) : void
+XcbWindowImp : +impSetExtent(Point) : void
+XcbWindowImp : +deviceRect(Coord,Coord,Coord,Coord) : void
+XcbWindowImp : +deviceText(String,Coord,Coord) : void
+XcbWindowImp : +deviceBitmap(String,Coord,Coord) : void
+XcbWindowImp : +event_loop(Window) : void
 
 View : +View()
 View : +~View()
@@ -85,34 +100,57 @@ ViewString : +ViewString()
 ViewString : +~ViewString()
 ViewString : +draw(Window) : void
 
-WindowSystemFactory : -{static} instance
+WindowSystemFactory : -{static} instance : WindowSystemFactory
+WindowSystemFactory : -{static} registry : WindowSystemFactory[1..*]
 WindowSystemFactory : #WindowSystemFactory()
 WindowSystemFactory : #~WindowSystemFactory()
-WindowSystemFactory : +{static} instance() : WindowSystemFactory 
+WindowSystemFactory : +{static} instance(name: String) : WindowSystemFactory 
+WindowSystemFactory : +{static} register(name : String, factory : WindowSystemFactory) : void
+WindowSystemFactory : +{static} unregister(String) : void
 WindowSystemFactory : +createWindow()
 
+XWindowSystemFactory : +{static}NAME : String
 XWindowSystemFactory : #XWindowSystemFactory()
 XWindowSystemFactory : #~XWindowSystemFactory()
 XWindowSystemFactory : +{static} instance() : WindowSystemFactory 
 XWindowSystemFactory : +createWindow()
 
+XcbWindowSystemFactory : +{static}NAME : String
+XcbWindowSystemFactory : #XcbWindowSystemFactory()
+XcbWindowSystemFactory : #~XcbWindowSystemFactory()
+XcbWindowSystemFactory : +{static} instance() : WindowSystemFactory 
+XcbWindowSystemFactory : +createWindow()
+
 Window <|-- WindowApplication
 WindowImp <|-- XWindowImp
+WindowImp <|-- XcbWindowImp
 
 View <|-- ViewComposite
 View <|-- ViewRectangle
 View <|-- ViewString
 
 WindowSystemFactory <|-- XWindowSystemFactory
+WindowSystemFactory <|-- XcbWindowSystemFactory
 
 Window "implementation"  o..> WindowImp
 Window .> View : draw
 Window ..> WindowSystemFactory : uses
 
+note as nGeneral
+    X server interfaces has been used 
+    instead of window system for 
+    simplelicity.
+    
+    Application initialization registers 
+    all avaiable Factories, and then 
+    creates a new window, and run 
+    event_loop.
+end note
+
 note as nViewDraw
     view->draw(this);
 end note
-nViewDraw .. Window::drawContents
+nViewDraw .up. Window::drawContents : implementation
 
 
 @enduml
