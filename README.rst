@@ -74,8 +74,7 @@ All patterns structures has been documented and samples has been implemented.
     `Singleton <workspace/projects/patterns/singlton/>`_, "Ensure a class only has one instance, and provide a global point of access to it."
     `Strategy <workspace/projects/patterns/strategy/>`_, "Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it."
     `Factory Method <workspace/projects/patterns/factory_method/>`_, "Define an interface for creating an object, but let subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses."
-    `Brige <workspace/projects/patterns/bridge/>`_, "Decouple an abstraction from its implementation so that the two can vary inde-
-pendently."
+    `Bridge <workspace/projects/patterns/bridge/>`_, "Decouple an abstraction from its implementation so that the two can vary independently."
 
 Lexi Test Editor
 ================
