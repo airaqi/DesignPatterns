@@ -7,11 +7,11 @@
 #include "window.h"
 #include "window_imp.h"
 
-class XWindowImp : public WindowImp
+class WindowImpX : public WindowImp
 {
     public:
-        XWindowImp();
-        virtual ~XWindowImp();
+        WindowImpX();
+        virtual ~WindowImpX();
 
         virtual void impTop();
         virtual void impBottom();
@@ -22,7 +22,7 @@ class XWindowImp : public WindowImp
         virtual void deviceText(const char*, Coord, Coord);
         virtual void deviceBitMap(const char*, Coord, Coord);
 
-        virtual void run_loop(BWindow*);
+        virtual void event_loop(BWindow*);
 
     private:
         Display* _display;

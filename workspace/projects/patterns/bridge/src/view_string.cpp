@@ -7,7 +7,6 @@ ViewString::ViewString(const char* value, Point& location)
 
 ViewString::~ViewString()
 {
-    delete _location;
 }
 
 void ViewString::draw(BWindow *w)

@@ -1,4 +1,4 @@
-#include "x_window_imp.h"
+#include "window_imp_x.h"
 #include <X11/X.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
@@ -9,7 +9,7 @@
 #include <cstring>
 #include <iostream>
 
-XWindowImp::XWindowImp() : _running(true)
+WindowImpX::WindowImpX() : _running(true)
 {
     // open display 
     _display = XOpenDisplay(nullptr);
@@ -37,29 +37,28 @@ XWindowImp::XWindowImp() : _running(true)
     _gc = XDefaultGC(_display, _screenId);
 }
 
-XWindowImp::~XWindowImp()
+WindowImpX::~WindowImpX()
 {
     XDestroyWindow(_display, _window);
     XCloseDisplay(_display);
 }
 
-void XWindowImp::impTop()
+void WindowImpX::impTop()
 {
 }
 
-void XWindowImp::impBottom()
+void WindowImpX::impBottom()
 {
 }
 
-void XWindowImp::impSetExtent(const Point&)
+void WindowImpX::impSetExtent(const Point&)
+{}
+
+void WindowImpX::impSetOrigin(const Point&)
 {
 }
 
-void XWindowImp::impSetOrigin(const Point&)
-{
-}
-
-void XWindowImp::deviceRect(Coord x1, Coord y1, Coord x2, Coord y2)
+void WindowImpX::deviceRect(Coord x1, Coord y1, Coord x2, Coord y2)
 {
     int x = std::round(std::min(x1, x2));
     int y = std::round(std::min(y1, y2));
@@ -69,16 +68,16 @@ void XWindowImp::deviceRect(Coord x1, Coord y1, Coord x2, Coord y2)
     XDrawRectangle(_display, _window, _gc, x, y, w, h);
 }
 
-void XWindowImp::deviceText(const char* str, Coord x, Coord y)
+void WindowImpX::deviceText(const char* str, Coord x, Coord y)
 {
     XDrawString(_display, _window, _gc, x, y, str, std::strlen(str));
 }
 
-void XWindowImp::deviceBitMap(const char*, Coord, Coord)
+void WindowImpX::deviceBitMap(const char*, Coord, Coord)
 {
 }
 
-void XWindowImp::run_loop(BWindow* win)
+void WindowImpX::event_loop(BWindow* win)
 {
     XEvent event;
     char str[25];

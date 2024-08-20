@@ -19,7 +19,7 @@ class WindowImp
         virtual void deviceText(const char*, Coord, Coord) = 0;
         virtual void deviceBitMap(const char*, Coord, Coord) = 0;
         // any many more functions for drawing in windows ...
-        virtual void run_loop(BWindow*) = 0;
+        virtual void event_loop(BWindow*) = 0;
 
 
     protected:

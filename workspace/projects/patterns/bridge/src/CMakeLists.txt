@@ -4,11 +4,13 @@ add_library(bridge
     view_composite.cpp
     view_rectangle.cpp
     view_string.cpp
-    x_window_imp.cpp
+    window_imp_x.cpp
+    window_imp_xcb.cpp
     factory_window_system.cpp
-    x_factory_window_system.cpp
+    factory_window_system_x.cpp
+    factory_window_system_xcb.cpp
 )
 
 find_package(X11 REQUIRED)
 
-target_link_libraries(bridge common ${X11_LIBRARIES})
+target_link_libraries(bridge common ${X11_LIBRARIES} ${X11_xcb_LIB})

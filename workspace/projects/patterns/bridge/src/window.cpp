@@ -2,12 +2,16 @@
 #include "factory_window_system.h"
 #include "window_imp.h"
 
-BWindow::BWindow(View* contents) : _contents(contents), _imp(nullptr) {}
+BWindow::BWindow(View* contents) : 
+    _contents(contents), 
+    _imp(nullptr), 
+    _rect(0, 0, 320, 200) {}
 
 BWindow::~BWindow()
 {
     delete _contents;
     delete _imp;
+    WindowSystemFactory::reset();
 }
 
 void BWindow::drawContents()
@@ -15,21 +19,25 @@ void BWindow::drawContents()
     _contents->draw(this);
 }
 
-void BWindow::open() {}
+void BWindow::setOrigin(const Point& at) 
+{
+    _rect.origin(at);
+}
 
-void BWindow::close() {}
+void BWindow::setExtent(const Point& ext) 
+{
+    _rect.extent(ext);
+}
 
-void BWindow::iconify() {}
+Point& BWindow::getOrigin()
+{
+    return _rect.origin();
+}
 
-void BWindow::deiconify() {}
-
-void BWindow::setOrigin(const Point& at) {}
-
-void BWindow::setExtent(const Point& ext) {}
-
-void BWindow::raise() {}
-
-void BWindow::lower() {}
+Point& BWindow::getExtent()
+{
+    return _rect.extent();
+}
 
 WindowImp* BWindow::getWindowImp()
 {
