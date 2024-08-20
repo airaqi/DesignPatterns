@@ -1,6 +1,6 @@
 .. raw:: html
 
-    <style> td { border: 0px solid black; } </style>
+    <style> .markdown-body, td { border: 0px solid black; } </style>
 
 --------------
 Bridge Pattern
