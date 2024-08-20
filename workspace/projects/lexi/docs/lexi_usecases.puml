@@ -1,0 +1,53 @@
+@startuml
+
+title Lexi Usecases
+
+'allowmixing
+left to right direction
+
+:User: as USR
+':Admin: as ADM
+
+'USR <|- ADM
+
+DOCCRUD as  (Create, Open, Close, Save, or Delete Document) <<menu>>
+DOCPRN as (Print Document) <<menu>>
+
+CURMOV as (Move Cursor) <<WYSIWYG>>
+
+TXTSEL as (Select Text) <<WYSIWYG>>
+TXTCUTPASTE as (Copy, Cut, Paste Text)  <<WYSIWYG>> <<menu>>
+TXTFONT as (Update Font and Style) <<menu>>
+TXTFMT as (Update Alignment and justification) <<menu>>
+TXTTYP as (Type, delete Text)  <<WYSIWYG>>
+TXTHST as (Undo and Redo) <<WYSIWYG>><<menu>>
+
+APPEXT as (Exit Application) <<menu>>
+
+USR --> APPEXT
+
+USR --> DOCCRUD
+USR --> DOCPRN
+
+USR --> CURMOV
+
+USR --> TXTTYP
+USR --> TXTSEL
+USR --> TXTCUTPASTE
+USR --> TXTFONT
+USR --> TXTFMT
+USR --> TXTHST
+
+note as nTXTFMT
+    Selected text
+end note
+nTXTFMT .. TXTFMT
+
+note as nTXTHST
+    Operations list 
+    should be developed
+end note
+nTXTHST .. TXTHST
+
+
+@enduml

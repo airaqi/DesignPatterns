@@ -11,8 +11,15 @@ Rquirements Analysis
     :scale: 60%
     :figwidth: 90%
 
-    Figure 1.1: Lexi User interface
+    Figure 1: Lexi User interface
 
+.. figure:: docs/lexi_usecases.svg
+    :width: 581
+    :height: 902
+    :scale: 100%
+    :figwidth: 90%
+
+    Figure 2: Lexi Usecases
 
 Design
 ------
@@ -28,7 +35,7 @@ Below figure shows a full design of the Lexi Text editor according the book impl
     :alt: Combined Design
     :align: left
 
-    Figure 1.0: Lexi Text Editor class diagram
+    Figure 3: Lexi Text Editor class diagram
 
 Figure 1.1, models the required Lexi user interface, as depected by the book.
 
@@ -43,7 +50,7 @@ Document Structure
     :alt: Combined Design
     :align: left
 
-    Figure 1.0: Lexi Text Editor class diagram
+    Figure 4: Lexi Text Editor class diagram
 
 Formatting
 ~~~~~~~~~~
@@ -56,7 +63,7 @@ Formatting
     :alt: Combined Design
     :align: left
 
-    Figure 1.0: Lexi Text Editor class diagram
+    Figure 5: Lexi Text Editor class diagram
 
 Interface Imbellishment
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -69,5 +76,5 @@ Interface Imbellishment
     :alt: Combined Design
     :align: left
 
-    Figure 1.0: Lexi Text Editor class diagram
+    Figure 6: Lexi Text Editor class diagram
 
