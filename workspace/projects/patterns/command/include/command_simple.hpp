@@ -3,13 +3,13 @@
 
 #include "command.hpp"
 template <class Receiver>
-class SimpleCommand : public Command
+class CommandSimple : public Command
 {
     public:
         typedef void (Receiver::* Action)();
 
-        SimpleCommand(Receiver* r, Action a) : _receiver(r), _action(a) {}
-        virtual ~SimpleCommand() {}
+        CommandSimple(Receiver* r, Action a) : _receiver(r), _action(a) {}
+        virtual ~CommandSimple() {}
 
         void execute() override;
 

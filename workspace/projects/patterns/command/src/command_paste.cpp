@@ -1,11 +1,11 @@
 #include "command_paste.hpp"
 
 
-PasteCommand::PasteCommand(Document* doc) : _document(doc) {}
-PasteCommand::~PasteCommand() {}
+CommandPaste::CommandPaste(Document* doc) : _document(doc) {}
+CommandPaste::~CommandPaste() {}
 
 
-void PasteCommand::execute()
+void CommandPaste::execute()
 {
     _document->paste();
 }

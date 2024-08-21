@@ -4,11 +4,11 @@
 #include "command.hpp"
 #include "list.h"
 
-class MacroCommand : public Command
+class CommandMacro : public Command
 {
     public:
-        MacroCommand();
-        virtual ~MacroCommand();
+        CommandMacro();
+        virtual ~CommandMacro();
 
         virtual void add(Command*);
         virtual void remove(Command*);

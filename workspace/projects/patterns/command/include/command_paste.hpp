@@ -4,11 +4,11 @@
 #include "command.hpp"
 #include "document.hpp"
 
-class PasteCommand : public Command
+class CommandPaste : public Command
 {
     public:
-        PasteCommand(Document*);
-        virtual ~PasteCommand();
+        CommandPaste(Document*);
+        virtual ~CommandPaste();
 
         void execute() override;
 
