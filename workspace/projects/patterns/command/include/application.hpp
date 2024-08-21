@@ -11,6 +11,7 @@ class Application
 
         virtual void addDocument(Document*);
         virtual void removeDocument(Document*);
+        virtual Document* getDocument(int) const;
 
     private:
         List<Document*> _documents;
