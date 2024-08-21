@@ -10,6 +10,12 @@ add_compile_options(-fPIC)
 
 enable_testing()
 
+set(TEST_PKG doctest)
+set(TEST_FW "doctest::doctest")
+
+set(X11_PKG "X11")
+set(COMMON_LIB "common")
+
 add_subdirectory(patterns)
 add_subdirectory(lexi)
 add_subdirectory(common)
