@@ -4,23 +4,23 @@
 #include "list_iterator.h"
 
 
-MacroCommand::MacroCommand() : _cmds(new List<Command*>){}
-MacroCommand::~MacroCommand() { delete _cmds; }
+CommandMacro::CommandMacro() : _cmds(new List<Command*>){}
+CommandMacro::~CommandMacro() { delete _cmds; }
 
 
-void MacroCommand::add(Command* cmd)
+void CommandMacro::add(Command* cmd)
 {
     _cmds->append(cmd);
 }
 
 
-void MacroCommand::remove(Command* cmd)
+void CommandMacro::remove(Command* cmd)
 {
     _cmds->remove(cmd);
 }
 
 
-void MacroCommand::execute()
+void CommandMacro::execute()
 {
     ListIterator<Command*> i(_cmds);
     for (i.first(); !i.is_done(); i.next())
