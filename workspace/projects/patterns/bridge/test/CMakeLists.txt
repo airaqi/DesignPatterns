@@ -1,12 +1,15 @@
-add_executable(test_bridge test_all.cpp)
+set(TEST_LIBRARY "test_${LIBRARY_NAME}")
+SET(RUN_TEST "run_${TEST_LIBRARY}")
 
-find_package(doctest REQUIRED)
+add_executable(${TEST_LIBRARY} test_all.cpp)
+
+find_package(${TEST_PKG} REQUIRED)
 
 set(INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
 set(SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
-target_include_directories(test_decorator PUBLIC ${INCLUDE_DIR} ${SRC_DIR})
+target_include_directories(${TEST_LIBRARY} PUBLIC ${INCLUDE_DIR} ${SRC_DIR})
 
-target_link_libraries(test_bridge doctest::doctest bridge)
+target_link_libraries(${TEST_LIBRARY} ${TEST_FW} ${LIBRARY_NAME})
 
-add_test(NAME run_test_bridge COMMAND test_bridge)
+add_test(NAME ${RUN_TEST} COMMAND ${TEST_LIBRARY})
 

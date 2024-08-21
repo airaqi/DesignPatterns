@@ -1,4 +1,4 @@
-add_library(bridge
+add_library(${LIBRARY_NAME}
     window.cpp
     window_application.cpp
     view_composite.cpp
@@ -13,4 +13,4 @@ add_library(bridge
 
 find_package(X11 REQUIRED)
 
-target_link_libraries(bridge common ${X11_LIBRARIES} ${X11_xcb_LIB})
+target_link_libraries(${LIBRARY_NAME} ${COMMON_LIB} ${X11_LIBRARIES} ${X11_xcb_LIB})
