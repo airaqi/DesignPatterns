@@ -2,7 +2,6 @@
 #include "document.hpp"
 #include <cstring>
 #include <iostream>
-#include <string>
 
 CommandOpen::CommandOpen(Application* application) : _application(application)
 {
@@ -14,8 +13,9 @@ CommandOpen::~CommandOpen()
 
 void CommandOpen::execute()
 {
-    char name[20] = { 0 };
-    askUser(name, std::strlen(name));
+    int size = 256;
+    char* name = new char[size];
+    askUser(name, size);
 
     if (name[0] != 0) 
     {
@@ -23,14 +23,13 @@ void CommandOpen::execute()
         _application->addDocument(doc);
         doc->open();
     }
+    name = nullptr;
 }
 
 const char* CommandOpen::askUser(char* name, int size)
 {
-    std::string sname;
     std::cout << "Name: ";
-    std::getline(std::cin, sname);
-    std::strcpy(name, sname.c_str());
+    std::cin.getline(name, size);
     return name;
 }
 
