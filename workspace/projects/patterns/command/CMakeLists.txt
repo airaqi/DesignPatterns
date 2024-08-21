@@ -4,6 +4,7 @@ project(command_app VERSION 1.0)
 set(LIBRARY_NAME command)
 
 add_subdirectory(src)
+add_subdirectory(test)
 
 add_executable(${PROJECT_NAME} main.cpp)
 

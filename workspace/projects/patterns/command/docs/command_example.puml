@@ -1,0 +1,73 @@
+@startuml
+
+skinparam linetype ortho
+left to right direction
+
+title Command Pattern Example
+
+class Application
+class Document
+
+class Menu
+class MenuItem
+interface Command
+class MacroCommand
+class PasteCommand
+class OpenCommand
+
+Application : addDocument(Document)
+
+Document : open()
+Document : close()
+Document : cut()
+Document : copy()
+Document : paste()
+
+Menu : add(MenuItem)
+
+MenuItem : clicked()
+
+Command : execute()
+MacroCommand : execute()
+PasteCommand : execute()
+OpenCommand : execute()
+OpenCommand : askUser()
+
+Command <|-- MacroCommand
+Command <|-- PasteCommand
+Command <|-- OpenCommand
+
+MacroCommand "commands" o--> Command
+
+Application "document" o-> Document
+Application "menu" o--> Menu
+
+Menu "menuItems" o-> MenuItem
+MenuItem "command"  o-> Command
+OpenCommand "application" ->Application
+    
+note as nMenuItemClicked
+    <b>command->execute();
+end note
+nMenuItemClicked . MenuItem::clicked
+
+note as nPasteCommandExecute
+    <b>document->paste();
+end note
+nPasteCommandExecute . PasteCommand::execute
+
+note as nOpenCommandExecute
+    <b>name = askUser();
+    <b>doc = new Document(name);
+    <b>application.addDocument(doc);
+    <b>doc->open();
+end note
+nOpenCommandExecute . OpenCommand::execute
+
+note as nMacroCommandExecute
+    <b>for all c in commands
+    <b>    c->execute();
+end note
+nMacroCommandExecute . MacroCommand::execute
+
+@enduml

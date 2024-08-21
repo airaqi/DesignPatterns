@@ -3,7 +3,7 @@ SET(RUN_TEST "run_${TEST_LIBRARY}")
 
 add_executable(${TEST_LIBRARY} test_all.cpp)
 
-find_package(TEST_PKG REQUIRED)
+find_package(${TEST_PKG} REQUIRED)
 
 set(INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
 set(SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")

@@ -75,6 +75,7 @@ All patterns structures has been documented and samples has been implemented.
     `Strategy <workspace/projects/patterns/strategy/>`_, "Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it."
     `Factory Method <workspace/projects/patterns/factory_method/>`_, "Define an interface for creating an object, but let subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses."
     `Bridge <workspace/projects/patterns/bridge/>`_, "Decouple an abstraction from its implementation so that the two can vary independently."
+    `Command <workspace/projects/patterns/command/>`_, "Encapsulate a request as an object, thereby letting you parameterize clients with different requests, queue or log requests, and support undoable operations."
 
 Lexi Test Editor
 ================

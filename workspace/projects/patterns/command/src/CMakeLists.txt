@@ -1,4 +1,9 @@
 add_library(${LIBRARY_NAME}
+    application.cpp
+    command_macro.cpp
+    command_open.cpp
+    command_paste.cpp
+    document.cpp
 )
 
 find_package(${X11_PKG} REQUIRED)
