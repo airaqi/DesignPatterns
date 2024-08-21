@@ -13,34 +13,39 @@ note as general
         <b>Patterns:</b> Composite
 end note
 
-rectangle lexi.glyph.Glyph
-rectangle lexi.glyph.GlyphComposite
-rectangle lexi.glyph.GlyphLeaf
-rectangle lexi.glyph.GlyphCharacter
-rectangle lexi.glyph.GlyphRectangle
-rectangle lexi.glyph.GlyphPolygon
-rectangle lexi.glyph.GlyphRow
-rectangle lexi.glyph.GlyphColumn
+package lexi.glyph {
+    rectangle Glyph
+    rectangle GlyphComposite
+    rectangle GlyphLeaf
+    rectangle GlyphCharacter
+    rectangle GlyphRectangle
+    rectangle GlyphPolygon
+    rectangle GlyphRow
+    rectangle GlyphColumn
+    }
 
 !includesub lexi_classes_structure.puml!RELATIONS
 
 '-------------------------------------
 ' Formatting
 
-rectangle lexi.strategy.GlyphStrategyCompositor
-rectangle lexi.strategy.GlyphStrategyArrayCompositor
-rectangle lexi.strategy.GlyphStrategyTeXCompositor
-rectangle lexi.strategy.GlyphStrategySimpleCompositor
-
+package lexi.strategy {
+    rectangle GlyphStrategyCompositor
+    rectangle GlyphStrategyArrayCompositor
+    rectangle GlyphStrategyTeXCompositor
+    rectangle GlyphStrategySimpleCompositor
+    }
 
 !includesub lexi_classes_format.puml!RELATIONS
 
 '-------------------------------------------
 ' User interface imbellishment
 
-rectangle lexi.decorator.GlyphDecorator
-rectangle lexi.decorator.GlyphDecoratorBorder
-rectangle lexi.decorator.GlyphDecoratorScroller
+package lexi.decorator {
+    rectangle GlyphDecorator
+    rectangle GlyphDecoratorBorder
+    rectangle GlyphDecoratorScroller
+    }
 
 !includesub lexi_classes_imbellishment.puml!RELATIONS
 

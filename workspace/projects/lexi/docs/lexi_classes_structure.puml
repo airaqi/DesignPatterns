@@ -6,14 +6,16 @@ title Lexi : Document Structure
 '---------------------------
 !startsub CLASSES
 
-class lexi.glyph.Glyph
-class lexi.glyph.GlyphComposite
-class lexi.glyph.GlyphLeaf
-class lexi.glyph.GlyphCharacter
-class lexi.glyph.GlyphRectangle
-class lexi.glyph.GlyphPolygon
-class lexi.glyph.GlyphRow
-class lexi.glyph.GlyphColumn
+'package lexi.glyph {
+    class Glyph
+    class GlyphComposite
+    class GlyphLeaf
+    class GlyphCharacter
+    class GlyphRectangle
+    class GlyphPolygon
+    class GlyphRow
+    class GlyphColumn
+'    }
 
 !endsub
 '---------------------------
