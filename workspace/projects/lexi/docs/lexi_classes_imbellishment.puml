@@ -9,9 +9,11 @@ rectangle lexi.glyph.Glyph
 
 !startsub CLASSES
 
-class lexi.decorator.GlyphDecorator
-class lexi.decorator.GlyphDecoratorBorder
-class lexi.decorator.GlyphDecoratorScroller
+package lexi.decorator {
+    class GlyphDecorator
+    class GlyphDecoratorBorder
+    class GlyphDecoratorScroller
+    }
 
 !endsub
 '-------------------------------------

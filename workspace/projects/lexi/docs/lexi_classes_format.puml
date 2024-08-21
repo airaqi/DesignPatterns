@@ -5,15 +5,19 @@ title Lexi: Formatting
 allowmixing
 left to right direction
 
-rectangle lexi.glyph.Glyph
-rectangle lexi.glyph.GlyphComposite
-
+package lexi.glyph {
+    rectangle Glyph
+    rectangle GlyphComposite
+    }
+    
 !startsub CLASSES
 
-class lexi.strategy.GlyphStrategyCompositor
-class lexi.strategy.GlyphStrategyArrayCompositor
-class lexi.strategy.GlyphStrategyTeXCompositor
-class lexi.strategy.GlyphStrategySimpleCompositor
+package lexi.strategy {
+    class GlyphStrategyCompositor
+    class GlyphStrategyArrayCompositor
+    class GlyphStrategyTeXCompositor
+    class GlyphStrategySimpleCompositor
+    }
 
 !endsub
 '-------------------------------------
