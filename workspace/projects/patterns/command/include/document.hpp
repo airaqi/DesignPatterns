@@ -13,8 +13,10 @@ class Document
         virtual void copy();
         virtual void paste();
 
+        friend bool operator==(const Document&, const Document&);
+
     private:
-        const char* _name;
+        char _name[256];
 };
 
 #endif /* ifndef __DOCUMENT_H__ */

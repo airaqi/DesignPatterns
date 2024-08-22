@@ -21,12 +21,13 @@ Structure
    :scale: 100%
    :align: center
 
-   Figure 1: Formal Command Collaboration
+   Figure 2: Formal Command Collaboration
 
 
 
-Examples
---------
+Example
+-------
+
 .. figure:: docs/command_example.svg
    :width: 793
    :height: 589
@@ -34,9 +35,17 @@ Examples
    :scale: 70%
    :align: center
 
-   Figure 1: Formal Command Collaboration
-
+   Figure 3: Command Pattern Example
 
 
 Sample Code
------------
+------------
+
+.. figure:: docs/command_sample.svg
+   :width: 793
+   :height: 589
+   :figwidth: 90%
+   :scale: 70%
+   :align: center
+
+   Figure 3: Command Pattern Example

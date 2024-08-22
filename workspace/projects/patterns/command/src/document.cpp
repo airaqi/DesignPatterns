@@ -3,12 +3,11 @@
 #include <iostream>
 
 
-Document::Document(const char* name) : _name(name) {}
-Document::~Document() 
-{ 
-    delete[] _name; 
-    _name = nullptr;
+Document::Document(const char* name) 
+{
+    std::strcpy(_name, name);
 }
+Document::~Document() {}
 
 void Document::open()
 {
@@ -35,4 +34,7 @@ void Document::paste()
     std::cout << "document '" << _name << "' paste!\n";
 }
 
-
+bool operator==(const Document& lhs, const Document& rhs)
+{
+    return (std::strcmp(rhs._name, lhs._name) == 0);
+}

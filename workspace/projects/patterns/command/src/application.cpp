@@ -14,7 +14,7 @@ Application::~Application()
 
 void Application::addDocument(Document* doc)
 {
-    _documents.append(doc);
+    _documents.append(new Document(*doc));
 }
 
 
@@ -27,4 +27,14 @@ void Application::removeDocument(Document* doc)
 Document* Application::getDocument(int index) const
 {
     return _documents.get(index);
+}
+
+void Application::menu(BaseMenu* menu)
+{
+    _menu = menu;
+}
+
+BaseMenu* Application::menu()
+{
+    return _menu;
 }

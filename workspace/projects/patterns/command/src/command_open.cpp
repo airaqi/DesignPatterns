@@ -14,16 +14,15 @@ CommandOpen::~CommandOpen()
 void CommandOpen::execute()
 {
     int size = 256;
-    char* name = new char[size];
+    char name[size];
     askUser(name, size);
 
     if (name[0] != 0) 
     {
-        Document* doc = new Document(name);
-        _application->addDocument(doc);
-        doc->open();
+        Document doc(name);
+        _application->addDocument(&doc);
+        doc.open();
     }
-    name = nullptr;
 }
 
 const char* CommandOpen::askUser(char* name, int size)

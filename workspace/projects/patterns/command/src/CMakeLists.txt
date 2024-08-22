@@ -4,6 +4,8 @@ add_library(${LIBRARY_NAME}
     command_open.cpp
     command_paste.cpp
     document.cpp
+    application_menu.cpp
+    application_menu_item.cpp
 )
 
 find_package(${X11_PKG} REQUIRED)
