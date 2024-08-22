@@ -1,0 +1,104 @@
+@startuml
+
+skinparam linetype ortho
+left to right direction
+
+title Command Pattern Sample Code
+
+class Application
+class Document
+
+abstract class BaseMenu
+class Menu
+class MenuItem
+interface Command
+class MacroCommand
+class PasteCommand
+class OpenCommand
+class SimpleCommand<Receiver>
+
+Application : +addDocument(Document) : void
+Application : +removeDocument(Document) : void
+Application : +getDocument(int) : Document
+
+Document : +open()
+Document : +close()
+Document : +cut()
+Document : +copy()
+Document : +paste()
+
+BaseMenu : +add(BaseMenu)
+BaseMenu : +insert(Menu) : void
+BaseMenu : +remove(Menu) : void
+BaseMenu : +get(int) : Menu
+BaseMenu : +display() : void
+BaseMenu : +clicked() : void
+
+Menu : +add(Menu) : void
+Menu : +insert(Menu) : void
+Menu : +remove(Menu) : void
+Menu : +get(int) : Menu
+Menu : +display() : void
+Menu : +clicked() : void
+
+MenuItem : +clicked()
+MenuItem : +display() : void
+
+Command : +execute()
+
+MacroCommand : +execute()
+MacroCommand : +add(Command)
+MacroCommand : +remove(Command)
+
+PasteCommand : +execute()
+
+OpenCommand : +execute()
+OpenCommand : +askUser()
+
+SimpleCommand : -receiver : Receiver
+SimpleCommand :  -action: void <Receiver>::Action
+SimpleCommand : +execute()
+
+
+Command <|- MacroCommand
+Command <|-- PasteCommand
+Command <|- OpenCommand
+Command <|- SimpleCommand
+
+BaseMenu <|- MenuItem
+BaseMenu <|-- Menu
+
+MacroCommand "commands" o--> Command
+
+Application "documents" o--> Document
+Application "menu" o-> BaseMenu
+
+BaseMenu "children" o-> MenuItem
+MenuItem "command"  o--> Command
+OpenCommand "application" ->Application
+    
+note as nMenuItemClicked
+    <b>command->execute();
+end note
+nMenuItemClicked . MenuItem::clicked
+
+note as nPasteCommandExecute
+    <b>document->paste();
+end note
+nPasteCommandExecute . PasteCommand::execute
+
+note as nOpenCommandExecute
+    <b>name = askUser();
+    <b>doc = new Document(name);
+    <b>application.addDocument(doc);
+    <b>doc->open();
+end note
+nOpenCommandExecute . OpenCommand::execute
+
+note as nMacroCommandExecute
+    <b>for all c in commands
+    <b>    c->execute();
+end note
+nMacroCommandExecute . MacroCommand::execute
+
+@enduml

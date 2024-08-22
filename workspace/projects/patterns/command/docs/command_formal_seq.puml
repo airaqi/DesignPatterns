@@ -1,0 +1,37 @@
+@startuml
+
+'autoactivate on
+
+title Command Pattern Objects Interaction
+
+participant aReceiver
+participant aClient
+participant aCommand
+participant anInvoker
+
+activate aClient
+aClient -> aCommand ++ : new Command(aReceiver)
+deactivate aCommand
+
+aClient --> anInvoker ++ : StoreCommand(aCommand)
+deactivate aClient
+deactivate anInvoker
+deactivate anInvoker
+
+anInvoker ->x] !! : System Crash
+destroy anInvoker
+destroy aCommand
+destroy aClient
+destroy aReceiver
+anInvoker <-] ** : System Restore
+
+activate anInvoker
+anInvoker -> aCommand ++ : Execute()
+
+aCommand -> aReceiver ++ : Action()
+
+deactivate anInvoker
+deactivate aCommand
+deactivate aReceiver
+
+@enduml

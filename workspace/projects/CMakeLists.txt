@@ -7,8 +7,15 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_compile_options(-fPIC)
+add_compile_options(-g)
 
 enable_testing()
+
+set(TEST_PKG doctest)
+set(TEST_FW "doctest::doctest")
+
+set(X11_PKG "X11")
+set(COMMON_LIB "common")
 
 add_subdirectory(patterns)
 add_subdirectory(lexi)

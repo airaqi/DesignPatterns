@@ -1,0 +1,67 @@
+@startuml
+
+allowmixing
+skinparam linetype ortho
+
+title Command Pattern Structure
+
+rectangle Client
+rectangle Invoker
+
+class Command
+class ConcreteCommand
+class Receiver
+
+Receiver : Action()
+
+Command : Execute()
+
+ConcreteCommand : state
+ConcreteCommand : Execute()
+
+Command <|-- ConcreteCommand
+
+Client -> Receiver
+Client .> ConcreteCommand
+Invoker o-right-> Command
+ConcreteCommand "receiver" -> Receiver
+
+note as nConcreteCommandExecute
+    <b>receiver->Action();</b>
+end note
+nConcreteCommandExecute .. ConcreteCommand::Execute
+
+note as nCommand
+    <b>Command
+    interface for executing an operation.
+end note
+nCommand ... Command
+
+note as nConcreteCommand
+    <b>ConcreteCommand
+    - binding between reveicer and action
+    - execute invokes operations on Receiver.
+end note
+ConcreteCommand ... nConcreteCommand
+
+note as nClient
+    <b> Client
+    creates <i>ConcreteCommand</i> 
+    object and sets its receiver.
+end note
+nClient ... Client
+
+note as nInvoker
+    <b>Invoker
+    asks the command to carryout the request.
+end note
+nInvoker ... Invoker
+
+note as nReceiver
+    <b> Receiver
+    knows hoe to perform the operations 
+    associated with carrying out a request.
+end note
+nReceiver ... Receiver
+
+@enduml
