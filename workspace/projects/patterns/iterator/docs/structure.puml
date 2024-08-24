@@ -1,0 +1,62 @@
+@startuml
+
+allowmixing
+skinparam linetype ortho
+'left to right direction
+
+title Iterator Pattern Structure
+
+class Aggregate
+class Iterator
+class ConcreteAggregate
+rectangle ConcreteIterator
+rectangle Client
+
+Aggregate : CreateIterator()
+ConcreteAggregate : CreateIterator()
+
+Iterator : First()
+Iterator : Next()
+Iterator : IsDone()
+Iterator : CurrentItem()
+
+Aggregate <|-- ConcreteAggregate
+Iterator <|-- ConcreteIterator
+
+Client .left.> Aggregate
+Client .right.> Iterator
+
+ConcreteAggregate -> ConcreteIterator
+ConcreteAggregate <. ConcreteIterator
+
+note as nConcreteAggregateCreateIterator
+    return new ConcreteIterator(this);
+end note
+nConcreteAggregateCreateIterator .up. ConcreteAggregate::CreateIterator
+
+note as nIterator
+    <B>Iterator
+    Interface to access and tranverse elements.
+end note
+nIterator ... Iterator
+
+note as nConcreteIterator
+    <b>ConcreteIterator
+    - implements Iterator interface
+    - tracks the traversal position of aggregate.
+end note
+nConcreteIterator ... ConcreteIterator
+
+note as nAggregate
+    <b>Aggregate
+    interface for creating an Iterator.
+end note
+nAggregate ... Aggregate
+
+note as nConcreteAggregare
+    <b>ConcreteAggregate
+    implements the Iterator creation interface to 
+    return an instance of the proper ConcreteIterator
+end note
+nConcreteAggregare ... ConcreteAggregate
+@enduml

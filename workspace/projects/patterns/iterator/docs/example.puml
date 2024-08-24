@@ -1,0 +1,41 @@
+@startuml
+
+allowmixing
+skinparam linetype ortho
+
+class AbstractList
+class Iterator
+
+rectangle List
+rectangle SkipList
+
+rectangle ListIterator
+rectangle SkipListIterator
+
+AbstractList : CreateIterator()
+AbstractList : Count()
+AbstractList : Append(Item)
+AbstractList : Remove(Item)
+AbstractList : ..
+
+Iterator : First()
+Iterator : Next()
+Iterator : IsDone()
+Iterator : CurrentItem()
+
+AbstractList <|-- List
+AbstractList <|--- SkipList
+
+Iterator <|-- ListIterator
+Iterator <|-- SkipListIterator
+
+Client .left.> AbstractList
+Client .right.> Iterator
+
+List .> ListIterator
+List <- ListIterator
+
+SkipList .> SkipListIterator
+SkipList <- SkipListIterator
+
+@enduml

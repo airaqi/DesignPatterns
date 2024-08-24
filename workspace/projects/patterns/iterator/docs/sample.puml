@@ -1,0 +1,114 @@
+@startuml
+
+allowmixing
+skinparam linetype ortho
+left to right direction
+
+title Iterator Pattern Sample Code
+
+class List<Item>
+abstract class Iterator<Item>
+class NullIterator<Item>
+class ListIterator<Item>
+class ReverseListIterator<Item>
+
+class Employee
+class EmployeePrint
+class IteratorPtr<Item>
+
+abstract FilteredListtraversal<Item>
+class EmployeeFilteredTraverser<Employee>
+
+class ListTraverser<Item>
+
+List : -Items : Item
+List : -count : long
+List : -size : long
+List : +get(long) : Item
+List : +first() : Item
+List : +last() : Item
+List : +append(Item) : void
+List : +prepend(Item) : void
+List : +insert(Item, int) : void
+List : +remove_at(long) : void
+List : +remove{(Item) : void
+List : +remove_first() : void
+List : +remove_last() : void
+List : +remove_all() : void
+List : +includes(Item) : bool
+List : +find(Item) : long
+List : +top() : Item
+List : +push(Item) : void
+List : +pop() : Item
+
+Iterator : +first() : void
+Iterator : +next() : void
+Iterator : +is_done() : bool
+Iterator : +currentItem() : Item
+
+NullIterator : +first() : void
+NullIterator : +next() : void
+NullIterator : +is_done() : bool
+NullIterator : +currentItem() : Item
+
+ListIterator : -list : List<Item>
+ListIterator : -current : long
+ListIterator : +first() : void
+ListIterator : +next() : void
+ListIterator : +is_done() : bool
+ListIterator : +currentItem() : Item
+
+ReverseListIterator : -list : List<Item>
+ReverseListIterator : -current : long
+ReverseListIterator : +first() : void
+ReverseListIterator : +next() : void
+ReverseListIterator : +is_done() : bool
+ReverseListIterator : +currentItem() : Item
+
+IteratorPtr : -iterator : Iterator<Item>
+IteratorPtr : +first() : void
+IteratorPtr : +next() : void
+IteratorPtr : +is_done() : bool
+IteratorPtr : +currentItem() : Item
+IteratorPtr : +operator->() : IteratorPtr<Item>
+IteratorPtr : +operator&() : IteratorPtr<Item>
+
+FilteredListtraversal : -iterator<Item>
+FilteredListtraversal : +traverse() : bool
+FilteredListtraversal : #processItem(Item) : bool
+FilteredListtraversal : testItem(Item) : bool
+
+EmployeeFilteredTraverser : +processItem(Employee) : bool
+EmployeeFilteredTraverser : +testItem(Employee) : bool
+
+ListTraverser : -{field} action : bool(*)(Item)
+ListTraverser : -iterator : ListIterator<Item>
+ListTraverser : +traverse() : bool
+ListTraverser : +processItem(Item) : bool
+
+Employee : -name : String
+Employee : -age : int
+
+EmployeePrint : -total : int
+EmployeePrint : -count : int
+EmployeePrint : +processItem(Employee)
+
+Iterator <|-- ListIterator
+Iterator <|-- ReverseListIterator
+Iterator <|-- NullIterator
+Iterator <|-- IteratorPtr
+
+ListTraverser <|- EmployeePrint 
+
+ListIterator "list"  *--> List
+IteratorPtr "iterator" o--> Iterator
+
+FilteredListtraversal <|-- EmployeeFilteredTraverser
+
+FilteredListtraversal "iterator" *-> Iterator
+ListTraverser *--> Iterator
+
+EmployeePrint  .> Employee
+EmployeeFilteredTraverser .> Employee
+
+@enduml
