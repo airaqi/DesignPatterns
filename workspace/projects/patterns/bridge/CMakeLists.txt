@@ -1,12 +1,16 @@
 cmake_minimum_required(VERSION 3.30)
 
-project(bridge_app VERSION 1.0)
-set(LIBRARY_NAME bridge)
+set(PATTERN_NAME bridge)
+set(LIBRARY_NAME ${PATTERN_NAME})
+set(EXEC_NAME "${PATTERN_NAME}_app")
+
+project(${EXEC_NAME} VERSION 1.0)
 
 add_subdirectory(src)
 add_subdirectory(test)
 
 add_executable(${PROJECT_NAME} main.cpp)
+add_test(run_memtest_${PATTERN_NAME} ${EXEC_NAME})
 
 target_link_libraries(${PROJECT_NAME} ${LIBRARY_NAME})
 
