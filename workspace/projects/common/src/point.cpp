@@ -6,6 +6,8 @@
 #include <stdexcept>
 #include <string>
 
+const Point Point::Zero;
+
 Point::Point(Coord x, Coord y) : _x(x), _y(y) {}
 
 Coord Point::x() const { return _x; }
