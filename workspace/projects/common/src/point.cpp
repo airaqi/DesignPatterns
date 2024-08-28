@@ -1,5 +1,6 @@
 #include "point.h"
 #include "coord.h"
+#include <cmath>
 #include <istream>
 #include <ostream>
 #include <stdexcept>
@@ -12,6 +13,11 @@ void Point::x(Coord x) { _x = x; }
 
 Coord Point::y() const { return _y; }
 void Point::y(Coord y) { _y = y; }
+
+Coord Point::distance(const Point& p) const
+{
+    return std::sqrt(std::pow(x() - p.x(), 2) + std::pow(y() - p.y(), 2));
+}
 
 Point& Point::operator+=(const Point& p)
 {
@@ -42,6 +48,11 @@ Point& Point::operator/=(const Point& p)
     y(y() / p.y());
 
     return *this;
+}
+
+Point Point::operator-()
+{
+    return Point(-(x(), -y()));
 }
 
 std::string Point::to_string() const

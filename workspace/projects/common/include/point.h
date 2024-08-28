@@ -16,6 +16,8 @@ class Point
         Coord x() const; void x(Coord x);
         Coord y() const; void y(Coord y);
 
+        Coord distance(const Point&) const;
+
         friend Point operator+(const Point&, const Point&);
         friend Point operator-(const Point&, const Point&);
         friend Point operator*(const Point&, const Point&);
