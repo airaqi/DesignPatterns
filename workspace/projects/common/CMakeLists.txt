@@ -1,6 +1,6 @@
 add_subdirectory(test)
 
-set(TARGET_SOURCES currency.cpp watt.cpp point.cpp rect.cpp)
+set(TARGET_SOURCES currency.cpp watt.cpp point.cpp rect.cpp line.cpp)
 list(TRANSFORM TARGET_SOURCES PREPEND "src/")
 
 add_library(common ${TARGET_SOURCES})

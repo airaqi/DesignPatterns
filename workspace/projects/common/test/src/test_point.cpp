@@ -1,4 +1,5 @@
 #include "point.h"
+#include <cmath>
 #include <doctest/doctest.h>
 
 TEST_CASE("Test Point")

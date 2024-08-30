@@ -8,3 +8,4 @@
 #include "test_watt.cpp"
 #include "test_point.cpp"
 #include "test_rect.cpp"
+#include "test_line.cpp"
