@@ -1,7 +1,8 @@
 #ifndef __LIST_H__
 #define __LIST_H__  
 
-#include <stdexcept>
+#include "iterator.h"
+//#include "list_iterator.h"
 #include <string>
 
 #define DEFAULT_LIST_CAPACITY 200
@@ -39,13 +40,18 @@ class List
         Item& top() const;
         void push(const Item&);
         Item& pop();
+
+        Iterator<Item>& iterator();
+        
         std::string to_string();
 
     private:
         Item* _items;
+        Iterator<Item>* _iterator;
         long _size;
         long _count;
 };
 
 #include "list.cpp"
+
 #endif /* ifndef __LIST_H__ */

@@ -16,4 +16,6 @@ class Iterator
         Iterator() {}
 };
 
+#include "list_iterator.h"
+
 #endif /* ifndef __ITERATOR_H__ */

@@ -1,22 +1,19 @@
+//#include "list.h"
+//#include "list_iterator.h"
 #include <sstream>
 
 /* Initialize the list.
  * the size parameter is a hint for the initial number of elements.
  */
 template<class Item>
-List<Item>::List(long size) : _items(new Item[size]), _count(0), _size(size) {}
+List<Item>::List(long size) : _items(new Item[size]), _count(0), _size(size), _iterator(nullptr) {}
 
 /* Overrides the default copy constructor so that member data are
  * initilized properly.
  */
 template<class Item>
-List<Item>::List(List& other) 
+List<Item>::List(List& other) : _items(new Item[other._size]), _count(other._count), _size(other._size), _iterator(nullptr)
 {
-    _size = other._size;
-    _count = other._count;
-
-    _items = new Item[_size];
-
     for (long i = 0; i < _count; i++)
         _items[i] = other._items[i];
 }
@@ -26,7 +23,11 @@ List<Item>::List(List& other)
  * destructor is not virtual.
  */
 template<class Item>
-List<Item>::~List() { delete[] _items; }
+List<Item>::~List() 
+{ 
+    delete[] _items; 
+    delete _iterator;
+}
 
 /* implements the assignment operator to assign member data properly.
  */
@@ -238,6 +239,15 @@ Item& List<Item>::pop()
     Item& top = last();
     remove_last();
     return top;
+}
+
+template<class Item>
+Iterator<Item>& List<Item>::iterator()
+{
+    if (_iterator)
+        delete _iterator;
+    _iterator = new ListIterator<Item>(this);
+    return *_iterator;
 }
 
 template<class Item>

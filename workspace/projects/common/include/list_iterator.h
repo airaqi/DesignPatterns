@@ -6,8 +6,15 @@
  *
  *  Detailed description
  */
-#include "iterator.h"
-#include "list.h"
+//#include "iterator.h"
+//#include "list.h"
+#include <stdexcept>
+
+template<class Item>
+class Iterator;
+
+template<class Item>
+class List;
 
 template<class Item>
 class ListIterator : public Iterator<Item>
