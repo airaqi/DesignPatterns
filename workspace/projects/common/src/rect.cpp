@@ -26,6 +26,8 @@ void Rect::top(Coord y) { _origin.y(y); }
 Coord Rect::bottom() const { return _extent.y(); }
 void Rect::bottom(Coord y) { _extent.y(y); }
 
+Point Rect::center() { return Point((_origin.x() + _extent.x()) / 2.0, (_origin.y() + _extent.y()) / 2.0); }
+
 Point& Rect::origin() { return _origin; }
 void Rect::origin(const Point& o) { _origin = o; }
 

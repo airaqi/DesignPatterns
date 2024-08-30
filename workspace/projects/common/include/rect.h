@@ -25,6 +25,7 @@ class Rect
         Coord top() const;      void top(Coord);
         Coord bottom() const;   void bottom(Coord);
 
+        Point center();
         Point& origin();        void origin(const Point&);
         Point& extent();        void extent(const Point&);
 
