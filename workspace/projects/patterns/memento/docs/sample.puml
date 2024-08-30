@@ -1,0 +1,117 @@
+@startuml
+
+skinparam linetype ortho
+left to right direction
+
+title Memento Pattern Sample Code
+
+abstract class Graphic
+class GraphicCanvas
+class GraphicRectangle
+class GraphicLine
+class GraphicConnect
+class ConstraintSolver
+
+abstract class State
+class StateSolver
+
+abstract class Memento
+
+class ConstraintSolverMemento
+
+class Command
+class CommandCreateRectangle
+class CommandMove
+class CommandConnect
+
+Graphic : #center : Point
+Graphic : +move(Point) : void
+Graphic : +display() : void
+Graphic : -center() : Point
+
+GraphicCanvas : -children : Graphic[0..*]
+GraphicCanvas : +add(Graphic) : voidq
+GraphicCanvas : +remove(Graphic) : void
+GraphicCanvas : +move(Point) : void
+GraphicCanvas : +display() : void
+GraphicCanvas : +center() : Point
+
+GraphicRectangle : -rect : Rect
+GraphicRectangle : +move(Point) : void
+GraphicRectangle : +display() : void
+GraphicRectangle : +center() : Point
+
+GraphicLine : -start : Point
+GraphicLine : -end : Point
+GraphicLine : +move(Point) : void
+GraphicLine : +display() : void
+GraphicLine : -center() : Point
+
+GraphicConnect : -start : Graphic
+GraphicConnect : -end : Graphic
+GraphicConnect : - line : GraphicLine
+GraphicConnect : +move(Point) : void
+GraphicConnect : +display() : void
+GraphicConnect : -center() : Point
+
+Command : -canvas : Graphic
+Command : -target : Graphic
+Command : -state : ConstraintSolverMemento
+Command : +execute() : void
+Command : +unexecute() : void
+
+CommandCreateRectangle : -rect : Rect
+CommandCreateRectangle : -context : GraphicCanvas
+CommandCreateRectangle : -target : Graphic
+CommandCreateRectangle : -state : ConstraintSolverMemento
+CommandCreateRectangle : +execute() : void
+CommandCreateRectangle : +unexecute() : void
+
+CommandMove : -delta : Point
+CommandMove : -target : Graphic
+CommandMove : -state : ConstraintSolverMemento
+CommandMove : +execute() : void
+CommandMove : +unexecute() : void
+
+CommandConnect : +execute() : void
+CommandConnect : +unexecute() : void
+
+ConstraintSolver : -state : StateSolver
+ConstraintSolver : +{static} instance() : ConstraintSolver
+ConstraintSolver : +solve() : void
+ConstraintSolver : +addConstraint(Graphic) : void
+ConstraintSolver : +removeConstraint(Graphic) : void
+ConstraintSolver : +createMemento() : ConstraintSolverMemento
+ConstraintSolver : +setMemento(ConstraintSolverMemento) : void
+
+StateSolver : -constraints
+
+Memento : -state : State
+Memento : -Memento()
+Memento : +setState(State) : void
+Memento : +getState() : State
+
+ConstraintSolverMemento : -ConstraintSolverMemento()
+
+Graphic <|-- GraphicCanvas
+Graphic <|-- GraphicConnect
+Graphic <|-- GraphicRectangle
+Graphic <|-- GraphicLine
+
+State <|-- StateSolver
+
+Memento <|-- ConstraintSolverMemento
+
+Command <|-- CommandMove
+Command <|-- CommandCreateRectangle
+Command <|-- CommandConnect
+
+CommandMove "target" *-->Graphic
+CommandMove "state" *--> ConstraintSolverMemento
+CommandConnect "state" *--> ConstraintSolverMemento
+CommandCreateRectangle "state" *--> ConstraintSolverMemento
+ConstraintSolver .> ConstraintSolverMemento : friend
+
+GraphicCanvas "children" o--> Graphic
+
+@enduml

@@ -1,0 +1,34 @@
+@startuml
+
+skinparam linetype ortho
+allowmixing
+
+title Memento Pattern Structure
+
+class Originator
+class Memento
+rectangle Caretaker
+
+Originator : -state
+Originator : +createMemento()
+Originator : +setMemento(Memento m)
+
+Memento : -state
+Memento : +getState()
+Memento : +setState()
+
+Originator -right-> Memento 
+Caretaker o-left-> Memento
+
+note as nOriginatorSetMemento
+    <b>state = m->getState();
+end note
+nOriginatorSetMemento .up. Originator::setMemento
+
+note as nOriginatorCreateMemento
+    <b>return new Memento(state);
+end note
+nOriginatorCreateMemento .up. Originator::createMemento
+
+
+@enduml

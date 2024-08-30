@@ -77,6 +77,7 @@ All patterns structures has been documented and samples has been implemented.
     `Bridge <workspace/projects/patterns/bridge/>`_, "Decouple an abstraction from its implementation so that the two can vary independently."
     `Command <workspace/projects/patterns/command/>`_, "Encapsulate a request as an object, thereby letting you parameterize clients with different requests, queue or log requests, and support undoable operations."
     `Iterator <workspace/projects/patterns/iterator/>`_, "Provide a way to access the elements of an aggregate object sequentially without exposing its underlying representation."
+    `Memento <workspace/projects/patterns/memento>`_, "Without violating encapsulation, capture and externalize an object's internal state so that the object can be restored to this state later."
 
 Lexi Test Editor
 ================

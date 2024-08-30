@@ -1,0 +1,41 @@
+@startuml
+
+title Memento Pattern Collaboratin
+
+participant aCaretaker as CT
+participant anOriginator as OR
+participant aMemento as MM
+
+CT -> OR : createMemento()
+activate CT
+
+activate OR
+OR -> MM : new Memento()
+
+activate MM
+deactivate MM
+
+OR -> MM : setState()    
+activate MM
+deactivate MM
+
+deactivate OR
+deactivate CT
+
+'destroy CT
+'destroy OR
+'destroy MM
+
+CT -> OR : setMemento(aMemento)
+activate CT
+
+activate OR
+OR -> MM : getState()
+activate MM
+
+deactivate MM
+deactivate OR
+deactivate CT
+
+
+@enduml
