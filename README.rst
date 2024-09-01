@@ -67,18 +67,18 @@ All patterns structures has been documented and samples has been implemented.
     :width: 90%
     :align: center
 
-    "Pattern","Description"
-    `Abstract Factory <workspace/projects/patterns/abstract_factory/>`_, "Provide an interface for creating families of related or dependent objects without specifying their concrete classes."
-    `Composite <workspace/projects/patterns/composite/>`_, "Compose objects into tree structures to represent part-whole hierarchies."
-    `Decorator <workspace/projects/patterns/decorator/>`_, "Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality"
-    `Singleton <workspace/projects/patterns/singlton/>`_, "Ensure a class only has one instance, and provide a global point of access to it."
-    `Strategy <workspace/projects/patterns/strategy/>`_, "Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it."
-    `Factory Method <workspace/projects/patterns/factory_method/>`_, "Define an interface for creating an object, but let subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses."
-    `Bridge <workspace/projects/patterns/bridge/>`_, "Decouple an abstraction from its implementation so that the two can vary independently."
-    `Command <workspace/projects/patterns/command/>`_, "Encapsulate a request as an object, thereby letting you parameterize clients with different requests, queue or log requests, and support undoable operations."
-    `Iterator <workspace/projects/patterns/iterator/>`_, "Provide a way to access the elements of an aggregate object sequentially without exposing its underlying representation."
-    `Memento <workspace/projects/patterns/memento>`_, "Without violating encapsulation, capture and externalize an object's internal state so that the object can be restored to this state later."
-    `Prototype <workspace/projects/patterns/prototype/>`_, "Specify the kinds of objects to create using a prototypical instance, and create new objects by copying this prototype."
+    "Category", "Pattern","Description"
+    "Creational", `Abstract Factory <workspace/projects/patterns/abstract_factory/>`_, "Provide an interface for creating families of related or dependent objects without specifying their concrete classes."
+    "", `Factory Method <workspace/projects/patterns/factory_method/>`_, "Define an interface for creating an object, but let subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses."
+    "", `Prototype <workspace/projects/patterns/prototype/>`_, "Specify the kinds of objects to create using a prototypical instance, and create new objects by copying this prototype."
+    "", `Singleton <workspace/projects/patterns/singlton/>`_, "Ensure a class only has one instance, and provide a global point of access to it."
+    "Structural", `Bridge <workspace/projects/patterns/bridge/>`_, "Decouple an abstraction from its implementation so that the two can vary independently."
+    "", `Composite <workspace/projects/patterns/composite/>`_, "Compose objects into tree structures to represent part-whole hierarchies."
+    "", `Decorator <workspace/projects/patterns/decorator/>`_, "Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality"
+    "Behavioural", `Command <workspace/projects/patterns/command/>`_, "Encapsulate a request as an object, thereby letting you parameterize clients with different requests, queue or log requests, and support undoable operations."
+    "", `Iterator <workspace/projects/patterns/iterator/>`_, "Provide a way to access the elements of an aggregate object sequentially without exposing its underlying representation."
+    "", `Memento <workspace/projects/patterns/memento>`_, "Without violating encapsulation, capture and externalize an object's internal state so that the object can be restored to this state later."
+    "", `Strategy <workspace/projects/patterns/strategy/>`_, "Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it."
 
 Lexi Test Editor
 ================
@@ -86,8 +86,8 @@ Lexi Test Editor
 Lexi text editor case study provided in chapter two has been implemented in lexi project
 refer to lexi project in `here <workspace/projects/lexi>`_
 
-Implementation
-==============
+Strucure & Usage
+================
 
 Implementing the project has been organized into several libraries, as follows
 
@@ -97,10 +97,31 @@ Implementing the project has been organized into several libraries, as follows
 
     "module", "description"
     "common", "Common classes used in all projects, e.g. List, Iterator, Point ... etc."
-    "composite", "Composite pattern sample"
-    "compositeapp","Composite application executable"
-    "strategy", "Strategy Pattern sample"
-    "strategyapp", "Strategy application executable"
     "lexi", "Lexi Text Editor implementation"
-    "lexiapp", "Lexi Editor executable"
+    "patterns", "Pattern samples implementations"
 
+
+-----
+Usage
+-----
+
+To build the project run the following commands on the terminal window, starting from the
+project root:
+
+.. code-block:: bash
+
+    $ cd workspace/projects
+    $ cmake -B ../build -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+    $ cmake --build ../build/
+
+To run the tests:
+
+.. code-block:: bash
+
+    $ ctest -T memcheck --test-dir ../build/
+
+To run pattern applications
+
+.. code-block:: bash
+
+    $ ../build/patterns/<pattern_name>/<pattern_name>_app
