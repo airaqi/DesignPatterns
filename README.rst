@@ -108,20 +108,20 @@ Usage
 To build the project run the following commands on the terminal window, starting from the
 project root:
 
-.. code-block:: bash
+.. code-block:: shell
 
-    $ cd workspace/projects
-    $ cmake -B ../build -DCMAKE_EXPORT_COMPILE_COMMANDS=1
-    $ cmake --build ../build/
+    cd workspace/projects
+    cmake -B ../build -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+    cmake --build ../build/
 
 To run the tests:
 
-.. code-block:: bash
+.. code-block:: shell
 
-    $ ctest -T memcheck --test-dir ../build/
+    ctest -T memcheck --test-dir ../build/
 
 To run pattern applications
 
-.. code-block:: bash
+.. code-block:: shell
 
-    $ ../build/patterns/<pattern_name>/<pattern_name>_app
+    ../build/patterns/<pattern_name>/<pattern_name>_app
