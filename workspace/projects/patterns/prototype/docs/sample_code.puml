@@ -1,0 +1,79 @@
+@startuml
+
+allowmixing
+skinparam linetype ortho
+left to right direction
+
+title Prototype Pattern Sample Code
+
+rectangle AbstractMazeFactory
+rectangle MazeFactory
+rectangle BombMazeFactory
+class MazePrototypeFactory
+
+class MapSite
+class Maze
+class Room
+rectangle Wall
+class Door
+rectangle RoomBomb
+rectangle WallBlown
+
+MazePrototypeFactory : -prototypeMaze : Maze
+MazePrototypeFactory : -prototypeRoom : Room
+MazePrototypeFactory : -prototypeWall : Wall
+MazePrototypeFactory : -prototypeDoor : Door
+MazePrototypeFactory : +makeMaze() : Maze
+MazePrototypeFactory : +makeRoom() : Room
+MazePrototypeFactory : +makeWall() : Wall
+MazePrototypeFactory : +makeDoor() : Door
+
+MapSite : +clone() : Maze
+Maze : +clone() : Maze
+Room : +clone() : Maze
+Door : +clone() : Maze
+Door : +initialize(Room, Room) : void
+
+AbstractMazeFactory <|-- MazeFactory
+AbstractMazeFactory <|-- BombMazeFactory
+AbstractMazeFactory <|-- MazePrototypeFactory
+
+MapSite <|-- Maze
+MapSite <|-- Room
+MapSite <|-- Wall
+MapSite <|-- Door
+
+Room <|-- RoomBomb
+Wall <|-- WallBlown
+
+MazePrototypeFactory .> Maze : clone
+MazePrototypeFactory .> Room : clone
+MazePrototypeFactory .> Door : clone
+MazePrototypeFactory .> Wall : clone
+
+object aPrototypeMaze
+object aPrototypeRoom
+
+aPrototypeMaze : rooms = [room1, room2]
+aPrototypeMaze : start = room1
+aPrototypeMaze : target = room2
+aPrototypeMaze : current = room1
+
+aPrototypeRoom : roomNumber = 1
+aPrototypeRoom : sides = [wall, wall, wall, wall]
+
+MazePrototypeFactory ...> aPrototypeMaze
+MazePrototypeFactory ...> aPrototypeRoom
+
+note as nMazePrototypeFactoryMakeWall
+    return prototypeWall->clone();
+end note
+nMazePrototypeFactoryMakeWall .up. MazePrototypeFactory::makeWall
+
+note as nMazePrototypeFactoryMakeDoor
+    Door door = prototypeDoor->clone();
+    door->initialize(room1, room2)l
+    return door;
+end note
+nMazePrototypeFactoryMakeDoor .left. MazePrototypeFactory::makeDoor
+@enduml

@@ -78,6 +78,7 @@ All patterns structures has been documented and samples has been implemented.
     `Command <workspace/projects/patterns/command/>`_, "Encapsulate a request as an object, thereby letting you parameterize clients with different requests, queue or log requests, and support undoable operations."
     `Iterator <workspace/projects/patterns/iterator/>`_, "Provide a way to access the elements of an aggregate object sequentially without exposing its underlying representation."
     `Memento <workspace/projects/patterns/memento>`_, "Without violating encapsulation, capture and externalize an object's internal state so that the object can be restored to this state later."
+    `Prototype <workspace/projects/patterns/prototype/>`_, "Specify the kinds of objects to create using a prototypical instance, and create new objects by copying this prototype."
 
 Lexi Test Editor
 ================

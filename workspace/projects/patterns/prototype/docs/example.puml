@@ -1,0 +1,60 @@
+@startuml
+
+allowmixing
+skinparam linetype ortho
+
+title Prototype Pattern Music Score Editor
+
+class Graphic
+class Staff
+rectangle MusicalNote
+class WholeNote
+class HalfNote
+
+class Tool
+class RotateTool
+class GraphicTool
+
+Graphic : Draw(Position)
+Graphic : Clone()
+
+Staff : Draw(Position)
+Staff : Clone()
+
+WholeNote : Draw(Position)
+WholeNote : Clone()
+
+HalfNote : Draw(Position)
+HalfNote : Clone()
+
+Tool : Manipulate()
+GraphicTool : Manipulate()
+RotateTool : Manipulate()
+
+Graphic <|-- MusicalNote
+Graphic <|-- Staff
+
+MusicalNote <|-- WholeNote
+MusicalNote <|-- HalfNote
+
+Tool <|-- GraphicTool
+Tool <|-- RotateTool
+
+GraphicTool "prototype" o--> Graphic
+
+note as nWholeNoteClone
+    return copy of self
+end note
+nWholeNoteClone .up. WholeNote::Clone
+nWholeNoteClone .up. HalfNote::Clone
+
+note as nGraphicToolManipulate
+    p = prototype->Clone()
+    while(user drags mouse)
+        p->Draw(new Position)
+    insert p into drawing
+end note
+nGraphicToolManipulate .up. GraphicTool::Manipulate
+
+
+@enduml

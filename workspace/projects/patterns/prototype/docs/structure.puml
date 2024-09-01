@@ -1,0 +1,36 @@
+@startuml
+
+allowmixing
+skinparam linetype ortho
+
+title Prototype Pattern Formal Structure
+
+class Prototype
+class ConcretePrototypeA
+class ConcretePrototypeB
+class Client
+
+Prototype : Clone()
+ConcretePrototypeA : Clone()
+ConcretePrototypeB : Clone()
+
+Client : Operation()
+
+Prototype <|-- ConcretePrototypeA
+Prototype <|-- ConcretePrototypeB
+
+Client "prototype" -right-> Prototype
+
+note as nConcretePrototypeAClone
+    return copy of self
+end note
+nConcretePrototypeAClone .up. ConcretePrototypeA::Clone
+nConcretePrototypeAClone .up. ConcretePrototypeB::Clone
+
+note as nClientOperation
+    p = prototype->Clone();
+end note
+nClientOperation .up. Client::Operation
+
+
+@enduml
