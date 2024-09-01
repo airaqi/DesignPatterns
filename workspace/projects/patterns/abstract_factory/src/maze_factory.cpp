@@ -17,12 +17,19 @@ MazeFactory* MazeFactory::instance()
     return _instance;
 }
 
+void MazeFactory::destroy()
+{
+    if (_instance)
+        delete _instance;
+    _instance = nullptr;
+}
+
 Maze* MazeFactory::makeMaze() const
 {
     return new Maze();
 }
 
-Room* MazeFactory::makeRoom(int roomNo)
+Room* MazeFactory::makeRoom(int roomNo) 
 {
     return fillWalls(new Room(roomNo));
 }

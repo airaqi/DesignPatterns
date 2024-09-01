@@ -8,7 +8,12 @@ class Door : public MapSite
 {
     public:
         Door(Room* = 0, Room* = 0, bool = true);
+        Door(const Door *);
         virtual ~Door();
+
+        // Part of prototype pattern implementation
+        virtual Door* clone() override;
+        virtual void initialize(Room *r1, Room *r2);
 
         void enter() override;
         Room* otherSideFrom(Room*);

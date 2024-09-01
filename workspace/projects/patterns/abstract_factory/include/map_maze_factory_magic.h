@@ -12,6 +12,7 @@ class BombMazeFactory : public AbstractMazeFactory
     public:
         virtual ~BombMazeFactory();
         static BombMazeFactory* instance();
+        static void destroy();
 
         virtual Room* makeRoom(int) override;
         virtual Maze* makeMaze() const override;

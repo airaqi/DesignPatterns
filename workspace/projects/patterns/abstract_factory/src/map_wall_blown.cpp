@@ -5,6 +5,12 @@ WallBlown::WallBlown() : _is_blown(false) {}
 
 WallBlown::~WallBlown() {}
 
+// Part of prototype pattern implementation
+WallBlown* WallBlown::clone()
+{
+    return new WallBlown(*this);
+}
+
 void WallBlown::enter()
 {
     if (_is_blown)

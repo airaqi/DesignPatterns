@@ -9,6 +9,9 @@ class MapSite
         MapSite() {}
         virtual ~MapSite() {}
 
+        // Part of prototype pattern implementation
+        virtual MapSite* clone() = 0;
+
         virtual void enter() = 0;
         virtual bool isDoor() const { return false; };
 

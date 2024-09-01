@@ -9,6 +9,9 @@ class Wall : public MapSite
         Wall();
         virtual ~Wall();
 
+        // Part of prototype pattern implementation
+        virtual Wall* clone() override;
+
         void enter() override;
         virtual std::string to_string() override;
 };

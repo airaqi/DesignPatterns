@@ -10,6 +10,7 @@
 class MazeFactory : public AbstractMazeFactory {
 public:
     static MazeFactory* instance();
+    static void destroy();
 
     virtual ~MazeFactory();
 

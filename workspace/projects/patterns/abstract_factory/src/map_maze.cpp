@@ -14,6 +14,21 @@ Maze::~Maze()
     _rooms.clear();
 }
 
+Maze::Maze(const Maze* that)
+{
+    _start = that->_start;
+    _target = that->_target;
+    _current = that->_current;
+       
+    for (auto it : that->_rooms)
+        _rooms.insert_or_assign(it.first, it.second);
+}
+
+Maze* Maze::clone()
+{
+    return new Maze(*this);
+}
+
 void Maze::addRoom(Room* room) 
 {
     _rooms.insert_or_assign(room->roomNumber(), room);

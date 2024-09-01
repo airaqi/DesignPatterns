@@ -15,6 +15,13 @@ BombMazeFactory* BombMazeFactory::instance()
     return _instance;
 }
 
+void BombMazeFactory::destroy()
+{
+    if (_instance)
+        delete _instance;
+    _instance = nullptr;
+}
+
 Room* BombMazeFactory::makeRoom(int roomNo)
 {
     return fillWalls(new RoomBomb(roomNo));

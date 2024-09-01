@@ -9,4 +9,5 @@ add_library(abstract_factory
     map_maze_factory_magic.cpp
     map_room_bomb.cpp
     map_wall_blown.cpp
+    map_maze_player.cpp
 )

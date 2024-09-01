@@ -10,7 +10,11 @@ class Maze
 {
     public:
         Maze();
+        Maze(const Maze* that);
         virtual ~Maze();
+       
+        // part of prototype pattern implementation
+        virtual Maze* clone();
 
         void addRoom(Room*);
         void addStart(Room*);

@@ -7,8 +7,11 @@
 class RoomBomb : public Room
 {
     public:
-        RoomBomb(int);
+        RoomBomb(int=0);
         ~RoomBomb();
+
+        // Part of prototype pattern implementation
+        virtual RoomBomb* clone() override;
 
         virtual void enter() override;
         virtual void blow();

@@ -7,10 +7,21 @@ RoomBomb::RoomBomb(int roomNo) : Room(roomNo), _is_blowed(false) {}
 
 RoomBomb::~RoomBomb() {}
 
+// Part of prototype pattern implementation
+RoomBomb* RoomBomb::clone()
+{
+    return new RoomBomb(*this);
+}
+
 void RoomBomb::enter()
 {
-    blow();
-    std::cout << "You've just entered room " << roomNumber() << " and you have been bombed\n";
+    if(!_is_blowed) 
+        blow();
+    std::cout << "You've just entered room " << roomNumber();
+    if (_is_blowed)
+        std::cout << " and you have just been bombed";
+    std::cout << "\n";
+
 }
 
 void RoomBomb::blow()

@@ -8,8 +8,12 @@
 class Room : public MapSite
 {
     public:
-        Room(int);
+        Room(int = 0);
         ~Room();
+
+        // Part of prototype pattern implementation
+        virtual Room* clone() override;
+        virtual void initialize(int);
 
         MapSite* getSide(Direction) const;
         void setSide(Direction, MapSite*);

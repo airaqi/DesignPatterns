@@ -9,6 +9,9 @@ class WallBlown : public Wall
         WallBlown();
         virtual ~WallBlown();
 
+        // Part of prototype pattern implementation
+        virtual WallBlown* clone() override;
+
         virtual void blow();
         virtual void enter() override;
         virtual std::string to_string() override;

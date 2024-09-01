@@ -17,13 +17,27 @@ Room::Room(int roomNo) : _roomNumber(roomNo)
 Room::~Room()
 {
     for (Direction d(North); d <= West; d = static_cast<Direction>(d+1))
-        if (!_sides[d]->isDoor())
-            delete _sides[d];
-        else
-            if (_sides[d]->marked())
+        if (_sides[d])
+        {
+            if (!_sides[d]->isDoor())
                 delete _sides[d];
             else
-                _sides[d]->mark();
+                if (_sides[d]->marked())
+                    delete _sides[d];
+                else
+                    _sides[d]->mark();
+        }
+}
+
+// Part of prototype pattern implementation
+Room* Room::clone()
+{
+    return new Room(*this);
+}
+
+void Room::initialize(int number)
+{
+    _roomNumber = number;
 }
 
 MapSite* Room::getSide(Direction direction) const
