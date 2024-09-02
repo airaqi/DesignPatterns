@@ -29,7 +29,7 @@ class Currency
         //friend Currency operator*(Currency c1, Currency c2);
         //friend Currency operator/(Currency c1, Currency c2);
 
-        std::string to_string();
+        std::string to_string(std::string prefix = "");
 
     private:
         std::string _name;

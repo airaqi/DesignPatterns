@@ -57,7 +57,8 @@ TEST_CASE("Currency") {
     }
 
     SUBCASE("to_string") {
-        CHECK_EQ("EGP 100.00", c2.to_string());
+        CHECK_EQ("100.00", c2.to_string());
+        CHECK_EQ("EGP 100.00", c2.to_string(c2.iso_code()));
     }
 
 }

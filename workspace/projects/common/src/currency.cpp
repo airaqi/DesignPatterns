@@ -11,10 +11,11 @@ bool Currency::compatible(Currency other)
 }
 
 
-std::string Currency::to_string()
+std::string Currency::to_string(std::string prefix)
 {
     std::stringstream sout;
-    sout << iso_code() << " ";
+    if (prefix.length() > 0)
+        sout << prefix << " ";
     sout << std::fixed << std::setprecision(2) << value();
     return sout.str();
 }
