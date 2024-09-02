@@ -49,3 +49,23 @@ Currency operator/(Currency c, double d)
 {
     return (d != 0 ? Currency(c.value() / d, c.name(), c.iso_code()) : throw std::runtime_error("Division by zero"));
 }
+
+Currency operator+=(Currency c1, Currency c2)
+{
+    return c1 + c2;
+}
+
+Currency operator-=(Currency c1, Currency c2)
+{
+    return c1 - c2;
+}
+
+Currency operator*=(Currency c1, double d)
+{
+    return c1 * d;
+}
+
+Currency operator/=(Currency c1, double d)
+{
+    return c1 / d;
+}

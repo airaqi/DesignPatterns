@@ -25,6 +25,11 @@ class Currency
         friend Currency operator*(Currency c, double d);
         friend Currency operator/(Currency c, double d);
 
+        friend Currency operator+=(Currency, Currency);
+        friend Currency operator-=(Currency, Currency);
+        friend Currency operator*=(Currency, double);
+        friend Currency operator/=(Currency, double);
+
         // Exchange rate implementation
         //friend Currency operator*(Currency c1, Currency c2);
         //friend Currency operator/(Currency c1, Currency c2);
