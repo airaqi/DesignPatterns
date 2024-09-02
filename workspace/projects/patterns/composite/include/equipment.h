@@ -4,6 +4,7 @@
 #include "iterator.h"
 #include "currency.h"
 #include "watt.h"
+#include <ostream>
 #include <string>
 
 class Equipment 
@@ -27,7 +28,9 @@ class Equipment
         virtual bool isComposite() { return false; }
         virtual bool isLeaf() { return false; }
 
-        virtual std::string to_string() = 0;
+        virtual std::string to_string(std::string = "") = 0;
+        
+        friend std::ostream& operator<<(std::ostream& sout, Equipment* e) { sout << e->to_string("\n\t"); return sout; }
 
     protected:
         Equipment(const char* name);

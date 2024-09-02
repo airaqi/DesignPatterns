@@ -25,7 +25,7 @@ Iterator<Equipment*>* LeafEquipment::createIterator()
 }
 
 
-std::string LeafEquipment::to_string()
+std::string LeafEquipment::to_string(std::string prefix)
 {
     std::stringstream sout;
     sout << "[" << name() << "(" << power().value() << "): " << netPrice().to_string() << "]";

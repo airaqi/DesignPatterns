@@ -1,5 +1,9 @@
 @startuml
 
+skinparam linetype ortho
+
+title Composite Pattern Graphics Example
+
 abstract Graphic {
         Draw()
         Add(Graphic)

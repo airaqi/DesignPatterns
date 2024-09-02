@@ -27,10 +27,12 @@ int main(int argc, char *argv[])
     chassis->add(bus);
     chassis->add(new FloppyDisk("3.5in Flobby", 200, 10));
 
-    std::cout << "Cabinet components is : " << cabinet->to_string() << "\n";
+    std::cout << "Cabinet components is : \n" << cabinet << "\n";
     std::cout << "The net price is " << chassis->netPrice().to_string() << "\n";
     std::cout << "The discounted price is " << chassis->discountPrice(0.9).to_string() << "\n";
     std::cout << "The total power is " << chassis->power().value() << "\n";
+
+    delete cabinet;
 
     return 0;
 }

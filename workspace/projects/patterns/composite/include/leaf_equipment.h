@@ -18,7 +18,7 @@ public:
     virtual void remove(Equipment*);
     virtual Iterator<Equipment*>* createIterator();
 
-    virtual std::string to_string();
+    virtual std::string to_string(std::string = "");
 
 protected:
     LeafEquipment(const char* name)
