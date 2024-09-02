@@ -1,5 +1,6 @@
 #include "currency.h"
 #include <iomanip>
+#include <iostream>
 #include <ostream>
 #include <sstream>
 #include <stdexcept>
@@ -21,54 +22,65 @@ std::string Currency::to_string(std::string prefix)
     return sout.str();
 }
 
-bool operator==(Currency c1, Currency c2)
+bool operator==(Currency lhs, Currency rhs)
 {
-    return (c1.compatible(c2) &&
-            c1.value() == c2.value());
+    return (lhs.compatible(rhs) &&
+            lhs.value() == rhs.value());
 }
 
-Currency operator+(Currency c1, Currency c2)
+Currency operator+(Currency lhs, const Currency &rhs)
 {
-    if (!c1.compatible(c2))
-        throw std::runtime_error("Incompatible currencies, exchange rates is not available!");
-    return Currency(c1.value() + c2.value(), c1.name(), c1.iso_code());
+    lhs += rhs;
+    return lhs;
 }
 
-Currency operator-(Currency c1, Currency c2)
+Currency operator-(Currency lhs, const Currency &rhs)
 {
-    if (!c1.compatible(c2))
-        throw std::runtime_error("Incompatible currencies, exchange rates no avaiable yet!");
-    return Currency(c1.value() - c2.value(), c1.name(), c1.iso_code());
+    lhs -= rhs;
+    return lhs;
 }
 
-Currency operator*(Currency c, double d)
+Currency operator*(Currency lhs, double rhs)
 {
-    return Currency(c.value() * d, c.name(), c.iso_code());
+    lhs *= rhs;
+    return lhs;
 }
 
-Currency operator/(Currency c, double d) 
+Currency operator/(Currency lhs, double rhs) 
 {
-    return (d != 0 ? Currency(c.value() / d, c.name(), c.iso_code()) : throw std::runtime_error("Division by zero"));
+    lhs /= rhs;
+    return lhs;
 }
 
-Currency operator+=(Currency c1, Currency c2)
+Currency& Currency::operator+=(const Currency &rhs)
 {
-    return c1 + c2;
+    if (!compatible(rhs))
+        throw std::runtime_error("ERROR: Incompatible currencies, exchange rates non available yet!");
+    _value += rhs._value;
+    return *this;
 }
 
-Currency operator-=(Currency c1, Currency c2)
+Currency& Currency::operator-=(const Currency& rhs)
 {
-    return c1 - c2;
+    if (!compatible(rhs))
+        throw std::runtime_error("ERROR: Incompatible currencies, exchange rates not avaiable yet!");
+    _value -= rhs._value;
+    return *this;
 }
 
-Currency operator*=(Currency c1, double d)
+Currency& Currency::operator*=(const double rhs)
 {
-    return c1 * d;
+    _value *= rhs;
+    return *this;
 }
 
-Currency operator/=(Currency c1, double d)
+Currency& Currency::operator/=(const double rhs)
 {
-    return c1 / d;
+    if (!rhs)
+        throw std::runtime_error("ERROR: Devision by zero!");
+
+    _value /= rhs;
+    return *this;
 }
 
 std::ostream& operator<<(std::ostream& sout, Currency& that)

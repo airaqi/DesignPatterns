@@ -1,4 +1,5 @@
 #include <doctest/doctest.h>
+#include <iostream>
 #include <stdexcept>
 #include "currency.h"
 
@@ -56,6 +57,24 @@ TEST_CASE("Currency") {
         CHECK_THROWS_AS((c2 / 0), std::runtime_error);
     }
 
+    SUBCASE("operator+=") {
+        c2 += c5;
+        CHECK_EQ(Currency(150), c2);
+    }
+
+    SUBCASE("operator-=") {
+        c2 -= c5;
+        CHECK_EQ(Currency(50), c2);
+    }
+    SUBCASE("operator*=") {
+        c2 *= 2;
+        CHECK_EQ(Currency(200), c2);
+    }
+    SUBCASE("operator/=") {
+        c2 /= 2;
+        CHECK_EQ(Currency(50), c2);
+    }
+    
     SUBCASE("to_string") {
         CHECK_EQ("100.00", c2.to_string());
         CHECK_EQ("EGP 100.00", c2.to_string(c2.iso_code()));

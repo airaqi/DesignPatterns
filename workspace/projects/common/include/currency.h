@@ -21,15 +21,16 @@ class Currency
         bool compatible(Currency other);
         
         friend bool operator==(Currency c1, Currency c2);
-        friend Currency operator+(Currency c1, Currency c2);
-        friend Currency operator-(Currency c1, Currency c2);
+        friend Currency operator+(Currency c1, const Currency &c2);
+        friend Currency operator-(Currency c1, const Currency &c2);
         friend Currency operator*(Currency c, double d);
         friend Currency operator/(Currency c, double d);
 
-        friend Currency operator+=(Currency, Currency);
-        friend Currency operator-=(Currency, Currency);
-        friend Currency operator*=(Currency, double);
-        friend Currency operator/=(Currency, double);
+        //friend Currency operator+=(Currency, Currency);
+        Currency& operator+=(const Currency&);
+        Currency& operator-=(const Currency&);
+        Currency& operator*=(const double);
+        Currency& operator/=(const double);
 
         friend std::ostream& operator<<(std::ostream&, Currency&);
 
