@@ -1,5 +1,6 @@
 #include "currency.h"
 #include <iomanip>
+#include <ostream>
 #include <sstream>
 #include <stdexcept>
 #include <string>
@@ -68,4 +69,10 @@ Currency operator*=(Currency c1, double d)
 Currency operator/=(Currency c1, double d)
 {
     return c1 / d;
+}
+
+std::ostream& operator<<(std::ostream& sout, Currency& that)
+{
+    sout << that.to_string();
+    return sout;
 }

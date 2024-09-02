@@ -1,6 +1,7 @@
 #ifndef __CURRENCY_H__
 #define __CURRENCY_H__ 
 
+#include <ostream>
 #include <string>
 
 class Currency
@@ -29,6 +30,8 @@ class Currency
         friend Currency operator-=(Currency, Currency);
         friend Currency operator*=(Currency, double);
         friend Currency operator/=(Currency, double);
+
+        friend std::ostream& operator<<(std::ostream&, Currency&);
 
         // Exchange rate implementation
         //friend Currency operator*(Currency c1, Currency c2);
