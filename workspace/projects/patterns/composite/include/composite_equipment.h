@@ -11,6 +11,7 @@
 #include "iterator.h"
 #include "list.h"
 #include "watt.h"
+#include <string>
 
 class CompositeEquipment : public Equipment
 {
@@ -27,14 +28,11 @@ public:
     virtual void remove(Equipment*);
     virtual Iterator<Equipment*>* createIterator();
 
-    virtual std::string to_string();
+    virtual std::string to_string(std::string = "");
 
 protected:
-    CompositeEquipment(const char* name): 
-        CompositeEquipment(name, 0, 0) {}
-    CompositeEquipment(const char* name, double price, int power) : 
-        Equipment(name, price, power), _children(new List<Equipment*>()) {}
-
+    CompositeEquipment(const char* name);
+    CompositeEquipment(const char* name, double price, int power);
 private:
     List<Equipment*>* _children;
 };  
