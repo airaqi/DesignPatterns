@@ -10,6 +10,8 @@ class Chassis : public CompositeEquipment
         Chassis(const char* name, double price, int power);
         virtual ~Chassis();
 
+        virtual const std::string& getClassId() const;
+
         virtual void accept(EquipmentVisitor&);
 };
 

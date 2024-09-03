@@ -13,6 +13,7 @@ class EquipmentInventoryVisitor : public EquipmentVisitor
         virtual ~EquipmentInventoryVisitor();
 
         Inventory& getInventory();
+        void reset();
 
         virtual void visit(CompositeEquipment*);
         virtual void visit(LeafEquipment*);

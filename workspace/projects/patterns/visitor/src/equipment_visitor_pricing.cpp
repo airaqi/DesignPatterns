@@ -16,6 +16,11 @@ Currency& EquipmentPricingVisitor::getTotalPrice()
     return _total;
 }
 
+void EquipmentPricingVisitor::reset()
+{
+    _total = 0;
+}
+
 void EquipmentPricingVisitor::visit(Bus* equipment)
 {
     _total += equipment->get_price();

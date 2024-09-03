@@ -6,6 +6,7 @@
 #include "list_iterator.h"
 #include "watt.h"
 #include <sstream>
+#include <string>
 
 
 CompositeEquipment::CompositeEquipment(const char* name) 
@@ -21,6 +22,13 @@ CompositeEquipment::~CompositeEquipment()
         delete i->currentItem();
     delete _children; 
     delete i;
+}
+
+
+const std::string& CompositeEquipment::getClassId() const
+{
+    static const std::string name("EquipmentComposite");
+    return name;
 }
 
 void CompositeEquipment::add(Equipment* child) 

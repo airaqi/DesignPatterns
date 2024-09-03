@@ -10,6 +10,8 @@ class Card : public LeafEquipment
         Card(const char* name, double price, int power);
         virtual ~Card();
 
+        virtual const std::string& getClassId() const;
+
         virtual void accept(EquipmentVisitor&);
 };
 

@@ -6,6 +6,12 @@ Bus::Bus(const char* name, double price, int power) : CompositeEquipment(name, p
 Bus::~Bus() {}
 
 
+const std::string& Bus::getClassId() const
+{
+    static const std::string name("Bus");
+    return name;
+}
+
 void Bus::accept(EquipmentVisitor& visitor)
 {
     for (ListIterator<Equipment*> i(_children); !i.is_done(); i.next() )

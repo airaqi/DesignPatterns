@@ -5,6 +5,11 @@ Chassis::Chassis(const char* name) : CompositeEquipment(name) {}
 Chassis::Chassis(const char* name, double price, int power) : CompositeEquipment(name, price, power) {}
 Chassis::~Chassis() {}
 
+const std::string& Chassis::getClassId() const
+{
+    static const std::string name("Chassis");
+    return name;
+}
 
 void Chassis::accept(EquipmentVisitor& visitor)
 {

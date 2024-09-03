@@ -13,6 +13,8 @@ class Equipment
     public:
         virtual ~Equipment() {}
 
+        virtual const std::string& getClassId() const = 0;
+
         virtual const char* name() { return _name; }
 
         virtual void set_price(double price) { _price = Currency(price); }

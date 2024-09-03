@@ -13,6 +13,7 @@ class EquipmentPricingVisitor : public EquipmentVisitor
         virtual ~EquipmentPricingVisitor();
 
         Currency& getTotalPrice();
+        void reset();
 
         virtual void visit(Bus*);
         virtual void visit(Cabinet*);

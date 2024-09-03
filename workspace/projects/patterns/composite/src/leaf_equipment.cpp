@@ -5,6 +5,15 @@
 #include <sstream>
 #include <string>
 
+LeafEquipment::LeafEquipment(const char* name) : Equipment(name) {}
+LeafEquipment::LeafEquipment(const char* name, double price, int power) : Equipment(name, price, power) {}
+LeafEquipment::~LeafEquipment() {}
+
+const std::string& LeafEquipment::getClassId() const
+{
+    static const std::string name("LeafEquipment");
+    return name;
+}
 
 bool LeafEquipment::isLeaf() { return true; }
 

@@ -17,7 +17,15 @@ void Inventory::accumulate(const std::string name)
         _inventory[name] = 1;
 }
 
-std::pmr::unordered_map<std::string, double> Inventory::getInventory()
+double Inventory::get(const std::string name)
+{
+    if (_inventory.find(name) != _inventory.end())
+        return _inventory[name];
+    else
+        return 0;
+}
+
+std::pmr::unordered_map<std::string, double>& Inventory::getInventory()
 {
     return _inventory;
 }

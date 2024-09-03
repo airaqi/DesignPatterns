@@ -7,7 +7,9 @@
 
 class LeafEquipment : public Equipment {
 public:
-    virtual ~LeafEquipment() {}
+    virtual ~LeafEquipment();
+
+    virtual const std::string& getClassId() const;
 
     virtual bool isLeaf();
 
@@ -24,10 +26,8 @@ public:
     virtual std::string to_string(std::string = "");
 
 protected:
-    LeafEquipment(const char* name)
-        : Equipment(name) {}
-    LeafEquipment(const char* name, double price, int power)
-        : Equipment(name, price, power) {}
+    LeafEquipment(const char* name);
+    LeafEquipment(const char* name, double price, int power);
 };
 
 #endif /* ifndef __LEAF_EQUIPMENT_H__ */

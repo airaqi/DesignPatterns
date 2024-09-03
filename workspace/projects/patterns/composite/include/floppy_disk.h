@@ -10,6 +10,8 @@ class FloppyDisk : public LeafEquipment
         FloppyDisk(const char* name, double price, int power);
         virtual ~FloppyDisk();
 
+        virtual const std::string& getClassId() const;
+
         virtual void accept(EquipmentVisitor&);
 };
 

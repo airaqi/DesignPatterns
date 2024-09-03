@@ -9,6 +9,8 @@ class Cabinet : public CompositeEquipment
         Cabinet(const char* name);
         Cabinet(const char* name, double price, int power);
         virtual ~Cabinet();
+        
+        virtual const std::string& getClassId() const;
 
         virtual void accept(EquipmentVisitor&);
 };

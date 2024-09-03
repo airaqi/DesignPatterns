@@ -12,9 +12,10 @@ class Inventory
         virtual ~Inventory();
 
         virtual void accumulate(std::string name);
-        virtual std::pmr::unordered_map<std::string, double> getInventory();
+        virtual double get(std::string name);
+        virtual std::pmr::unordered_map<std::string, double>& getInventory();
         
-        std::string to_string(std::string prefix);
+        std::string to_string(std::string prefix = "");
 
         friend std::ostream& operator<<(std::ostream&,Inventory&);
 

@@ -18,6 +18,8 @@ class CompositeEquipment : public Equipment
 public:
     virtual ~CompositeEquipment();
 
+    virtual const std::string& getClassId() const;
+
     virtual bool isComposite() { return true; }
 
     virtual Watt power();
