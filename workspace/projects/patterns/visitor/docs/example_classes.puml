@@ -1,0 +1,82 @@
+@startuml
+
+allowmixing
+skinparam linetype ortho
+left to right direction
+
+title Visitor Pattern Compiler Example with visitors
+
+class NodeVisitor <<Visitor>>
+class TypeCheckingVisitor <<ConcreteVisitor>>
+class CodeGeneratingVisitor <<ConcreteVisitor>>
+class PrettyPrintingVisitor <<ConcreteVisitor>>
+
+class Node <<Element>>
+class AssignmentNode <<ConcreteElement>>
+class VariableRefNode <<ConcreteElement>>
+
+rectangle Program
+
+NodeVisitor : VisitAssignment(AssignmentNode)
+NodeVisitor : VisitVariableRefNode(VeriableRefNode)
+
+TypeCheckingVisitor : VisitAssignment(AssignmentNode)
+TypeCheckingVisitor : VisitVariableRefNode(VeriableRefNode)
+
+CodeGeneratingVisitor : VisitAssignment(AssignmentNode)
+CodeGeneratingVisitor : VisitVariableRefNode(VeriableRefNode)
+
+PrettyPrintingVisitor : VisitAssignment(AssignmentNode)
+PrettyPrintingVisitor : VisitVariableRefNode(VeriableRefNode)
+
+Node : Accept(NodeVisitor)
+AssignmentNode : Accept(NodeVisitor)
+VariableRefNode : Accept(NodeVisitor)
+
+NodeVisitor <|-- TypeCheckingVisitor
+NodeVisitor <|-- CodeGeneratingVisitor
+NodeVisitor <|-- PrettyPrintingVisitor
+
+Node <|-- AssignmentNode
+Node <|-- VariableRefNode
+
+Program o--> Node
+Program -> NodeVisitor
+
+note as nProgram
+    <b>(1) 
+    node->Accept(TypeCheckingVisitor);
+    node->Accept(CodeGeneratingVisitor);
+end note
+nProgram .right. Program
+
+note as nAssignmentNodeAccept
+    <b>(2)
+    v->visitAssignment(this);
+end note
+nAssignmentNodeAccept .up. AssignmentNode::Accept
+
+note as nVariableRefNodeAccept
+    <b>(2)
+    v->visitVariableRef(this);
+end note
+nVariableRefNodeAccept .up. VariableRefNode::Accept
+
+note as nConcreteVisitor
+    A <b>ConcreteVisitor</b> class 
+    replaces each inherited operation 
+    in class heirarchy.
+    Which is sent to the <b>Node::Accept
+    operation as an argument.
+end note
+nConcreteVisitor .up. TypeCheckingVisitor
+nConcreteVisitor .up. CodeGeneratingVisitor
+nConcreteVisitor .up. PrettyPrintingVisitor
+
+note as nTypeCheckingVisitorAccept
+    <b>(3)
+    TypeCheck(node->getData());
+end note
+nTypeCheckingVisitorAccept .up. TypeCheckingVisitor::VisitAssignment
+
+@enduml

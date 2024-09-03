@@ -1,0 +1,34 @@
+@startuml
+
+skinparam linetype ortho
+
+title Compiler implementation without visitors
+
+class Node
+class VariableRefNode
+class AssignmentNode
+
+Node <|-- VariableRefNode
+Node <|-- AssignmentNode
+
+Node : TypeCheck()
+Node : GenerateCode()
+Node : PrettyPrint()
+
+VariableRefNode : TypeCheck()
+VariableRefNode : GenerateCode()
+VariableRefNode : PrettyPrint()
+
+AssignmentNode : TypeCheck()
+AssignmentNode : GenerateCode()
+AssignmentNode : PrettyPrint()
+
+note as nOperations
+    Operations are implemented in each 
+    class of the class heirarchy.
+end note
+nOperations .. Node
+nOperations .. AssignmentNode
+nOperations .. VariableRefNode
+
+@enduml

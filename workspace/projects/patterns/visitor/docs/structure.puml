@@ -1,0 +1,97 @@
+@startuml
+
+allowmixing
+skinparam linetype ortho
+'left to right direction
+
+title Visitor Pattern Formal Structure
+
+class Visitor
+class ConcreteVisitorA
+class ConcreteVisitorB
+
+class Element
+class ConcreteElementA
+class ConcreteElementB
+
+rectangle Client
+rectangle ObjectStructure
+
+Visitor : VisitConcreteElementA(ConcreteElementA)
+Visitor : VisitConcreteElementB(ConcreteElementB)
+
+ConcreteVisitorA : VisitConcreteElementA(ConcreteElementA)
+ConcreteVisitorA : VisitConcreteElementB(ConcreteElementB)
+
+ConcreteVisitorB : VisitConcreteElementA(ConcreteElementA)
+ConcreteVisitorB : VisitConcreteElementB(ConcreteElementB)
+
+Element : Accept(Visitor)
+
+ConcreteElementA : Accept(Visitor v)
+ConcreteElementA : OperationA()
+
+ConcreteElementB : Accept(Visitor v)
+ConcreteElementB : OperationB()
+
+
+Visitor <|-- ConcreteVisitorA
+Visitor <|-- ConcreteVisitorB
+
+Element <|-- ConcreteElementA
+Element <|-- ConcreteElementB
+
+Client .> Visitor
+Client ..> ObjectStructure
+
+ObjectStructure --> Element
+
+note as nConcreteElementAAccept
+    v->VisitConcreteElementA(this);
+end note
+nConcreteElementAAccept .up. ConcreteElementA::Accept
+
+note as nConcreteElementBAccept
+    v->VisitConcreteElementB(this);
+end note
+nConcreteElementBAccept .up. ConcreteElementB::Accept
+
+note as nVisitor
+    <b>Visitor
+        Declares a Visit operation for each 
+        class of <b>ConcreteElement</b> in 
+        the object strauture
+end note
+nVisitor .. Visitor
+    
+note as nConcreteVisitor
+    <b>ConcreteVisitor
+        Implements each operation declared
+        by <b>Visitor.
+end note
+nConcreteVisitor .... ConcreteVisitorA
+nConcreteVisitor .... ConcreteVisitorB
+
+note as nElement
+    <b>Element    
+        defines an Accept operation that takes 
+        a visitor as an argument.
+end note
+nElement ... Element
+
+note as nConcreteElement
+    <b>ConcreteElement
+        Implements an Accept operation 
+        that takes a Visitor as an argument.
+end note
+nConcreteElement . ConcreteElementA
+nConcreteElement . ConcreteElementB
+
+note as nObjectStructure
+    <b>ObjectStructure
+        Implements an Accept operation 
+        that takes a Visitor as an argument.
+end note
+nObjectStructure ... ObjectStructure
+
+@enduml

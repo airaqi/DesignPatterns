@@ -1,0 +1,34 @@
+@startuml
+
+participant anObjectStructure as OS 
+participant aConcreteElementA as CEA
+participant aConcreteElementB as CEB 
+participant aConcreteVisitor as CV
+
+activate OS
+OS -> CEA : Accept(Visitor)
+activate CEA
+
+CEA -> CV : VisitConcreteElementA((aConcreteElementA)
+activate CV
+deactivate CEA
+
+CEA <- CV : Operation()
+activate CEA
+deactivate CV
+deactivate CEA
+
+OS -> CEB : Accept(aVisitor)
+activate CEB
+
+CEB -> CV : VisitConcreteElementB(aConcreteElementB)
+activate CV
+deactivate CEB
+
+CEB <- CV : Operation()
+activate CEB
+deactivate CV
+deactivate CEB
+
+
+@enduml
