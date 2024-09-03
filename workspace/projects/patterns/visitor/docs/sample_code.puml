@@ -1,3 +1,127 @@
 @startuml
 
+allowmixing
+skinparam linetype ortho
+left to right direction
+
+title Visitor Pattern Equipment Sample Code
+
+together {
+    abstract class Equipment<<Element>>
+    abstract class EquipmentComposite<<Element>>
+    abstract class EquipmentLeaf<<Element>>
+    class Cabinet<<ConcreteElement>>
+    class Chassis<<ConcreteElement>>
+    class Bus<<ConcreteElement>>
+    class Card<<ConcreteElement>>
+    class FloppyDisk<<ConcreteElement>>
+    }
+
+together {
+        abstract class EquipmentVisitor<<Visitor>>
+        class EquipmentInventoryVisitor<<ConcreteVisitor>>
+        class EquipmentPricingVisitor<<ConcreteVisitor>>
+
+        class Inventory
+    }
+    
+rectangle Client<<main>>
+
+Equipment : -name : String
+Equipment : -power : Watt
+Equipment : -price : Currency
+Equipment : +power() : Watt
+Equipment : +price() : Currency
+Equipment : +netPrice() : Currency
+Equipment : +accept(EquipmentVisitor) : void
+
+EquipmentComposite : -children
+EquipmentComposite : +accept(EquipmentVisitor) : void
+EquipmentLeaf : +accept(EquipmentVisitor) : void
+Cabinet : +accept(EquipmentVisitor) : void
+Chassis : +accept(EquipmentVisitor) : void
+Bus : +accept(EquipmentVisitor) : void
+Card : +accept(EquipmentVisitor) : void
+FloppyDisk : +accept(EquipmentVisitor) : void
+
+EquipmentVisitor : +visit(FloppyDisk) : void
+EquipmentVisitor : +visit(Card) : void
+EquipmentVisitor : +visit(Chassis) : void
+EquipmentVisitor : +visit(Cabinet) : void
+EquipmentVisitor : +visit(CompositeEquipment) : void
+EquipmentVisitor : +visit(LeafEquipment) : void
+
+EquipmentPricingVisitor : -total : Currency
+EquipmentPricingVisitor : +getTotalPrice() : Currency
+
+EquipmentInventoryVisitor : -inventory : Inventory
+EquipmentInventoryVisitor : +getInventory() : Inventory
+
+Inventory : -inventory<string, int>[0..*]
+Inventory : +accumulate(String) : void
+Inventory : +getInventory() : Inventory<String,int>[0..*]
+
+Equipment <|-- EquipmentComposite
+Equipment <|-- EquipmentLeaf
+
+EquipmentComposite <|-- Cabinet
+EquipmentComposite <|-- Chassis
+EquipmentComposite <|-- Bus
+EquipmentLeaf <|-- Card
+EquipmentLeaf <|-- FloppyDisk
+
+EquipmentVisitor <|-- EquipmentPricingVisitor
+EquipmentVisitor <|-- EquipmentInventoryVisitor
+
+EquipmentInventoryVisitor "inventory" o--> Inventory
+
+Client --> Equipment
+Client --> EquipmentVisitor
+
+note as nEquipmentVisitorVisit
+    <b>Note that:
+    overloading is used instead of 
+    subclass based operations.
+end note
+nEquipmentVisitorVisit . EquipmentVisitor::visit
+
+note as nComposite
+    <b>Note that:
+    EquipmentLeaf class has been used
+    to identify leaf classes which is used
+    in some operations.
+end note
+nComposite . EquipmentComposite
+nComposite . EquipmentLeaf
+
+note as nClient
+    <b>(1)
+        EquipmentPricingVisitor pricing;
+        EquipmentInventoryVisitor inventory;
+        equipment->accept(pricing);
+        equipment->accept(inventory);
+end note
+nClient .up. Client
+
+note as nCabinetAccept
+    <b> (2)
+        for (Iterator<Equipment> i(children); !i.is_done(); i.next) 
+            i.currentItem().accept(visitor);
+        visitor.visit(this);
+end note
+nCabinetAccept . Cabinet::accept
+
+note as nCardAccept
+    <b>(3)
+        visitor.visit(this);
+end note
+nCardAccept . Card::accept
+
+note as nClient2
+    <b>(4)
+        pricing.getTotalPrice();
+        inventory.getInventory();
+end note
+nClient2 .up. Client
+
 @enduml

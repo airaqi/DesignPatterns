@@ -57,13 +57,13 @@ Sample Code
 This sample is implemented using both function overloading.
 
 .. figure:: docs/sample_code.svg
-   :width: 475
-   :height: 300
+   :width: 1236
+   :height: 1137
    :figwidth: 90%
-   :scale: 100%
+   :scale: 50%
    :align: center
    :alt: Sample Code Implementation
 
-   Figure 5: Visitor Pattern Sample Code Implementation
+   Figure 5: Visitor Pattern Equipment Sample Code Implementation
 
 
