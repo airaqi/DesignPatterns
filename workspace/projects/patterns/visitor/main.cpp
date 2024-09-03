@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     std::cout << "Cabinet components is : \n" << cabinet << "\n";
     std::cout << "The net price is " << cabinet->netPrice() << "\n";
 
-    PricingEquipmentVisitor pricingVisitor;
+    EquipmentPricingVisitor pricingVisitor;
     cabinet->accept(pricingVisitor);
 
     std::cout << cabinet->name() << " " << pricingVisitor.getTotalPrice() << "\n";

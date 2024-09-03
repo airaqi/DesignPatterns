@@ -6,47 +6,47 @@
 #include "floppy_disk.h"
 
 
-PricingEquipmentVisitor::PricingEquipmentVisitor() : _total(0) {}
+EquipmentPricingVisitor::EquipmentPricingVisitor() : _total(0) {}
 
-PricingEquipmentVisitor::~PricingEquipmentVisitor() {}
+EquipmentPricingVisitor::~EquipmentPricingVisitor() {}
 
 
-Currency& PricingEquipmentVisitor::getTotalPrice()
+Currency& EquipmentPricingVisitor::getTotalPrice()
 {
     return _total;
 }
 
-void PricingEquipmentVisitor::visit(Bus* equipment)
+void EquipmentPricingVisitor::visit(Bus* equipment)
 {
     _total += equipment->get_price();
 }
 
-void PricingEquipmentVisitor::visit(Cabinet* equipment)
+void EquipmentPricingVisitor::visit(Cabinet* equipment)
 {
     _total += equipment->get_price();
 }
 
-void PricingEquipmentVisitor::visit(Chassis* equipment)
+void EquipmentPricingVisitor::visit(Chassis* equipment)
 {
     _total += equipment->get_price();
 }
 
-void PricingEquipmentVisitor::visit(FloppyDisk* equipment)
+void EquipmentPricingVisitor::visit(FloppyDisk* equipment)
 {
     _total += equipment->get_price();
 }
 
-void PricingEquipmentVisitor::visit(Card* equipment)
+void EquipmentPricingVisitor::visit(Card* equipment)
 {
     _total += equipment->get_price();
 }
 
-void PricingEquipmentVisitor::visit(LeafEquipment* equipment)
+void EquipmentPricingVisitor::visit(LeafEquipment* equipment)
 {
     //_total += equipment->netPrice();
 }
 
-void PricingEquipmentVisitor::visit(CompositeEquipment* equipment)
+void EquipmentPricingVisitor::visit(CompositeEquipment* equipment)
 {
     //_total += equipment->netPrice();
 }

@@ -6,11 +6,11 @@
 #include "equipment_visitor.hpp"
 #include "leaf_equipment.h"
 
-class PricingEquipmentVisitor : public EquipmentVisitor
+class EquipmentPricingVisitor : public EquipmentVisitor
 {
     public:
-        PricingEquipmentVisitor();
-        virtual ~PricingEquipmentVisitor();
+        EquipmentPricingVisitor();
+        virtual ~EquipmentPricingVisitor();
 
         Currency& getTotalPrice();
 
