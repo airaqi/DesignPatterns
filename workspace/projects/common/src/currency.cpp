@@ -13,7 +13,7 @@ bool Currency::compatible(Currency other)
 }
 
 
-std::string Currency::to_string(std::string prefix)
+std::string Currency::to_string(std::string prefix) const
 {
     std::stringstream sout;
     if (prefix.length() > 0)
@@ -83,7 +83,7 @@ Currency& Currency::operator/=(const double rhs)
     return *this;
 }
 
-std::ostream& operator<<(std::ostream& sout, Currency& that)
+std::ostream& operator<<(std::ostream& sout, const Currency& that)
 {
     sout << that.to_string();
     return sout;

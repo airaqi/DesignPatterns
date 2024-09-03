@@ -14,7 +14,7 @@ class Currency
         Currency(double value, std::string name, std::string isocode) : 
             _value(value), _name(name), _isocode(isocode) {}
 
-        double value() { return _value; }
+        double value() const { return _value; }
         std::string name() { return _name; }
         std::string iso_code() { return _isocode; }
 
@@ -32,13 +32,13 @@ class Currency
         Currency& operator*=(const double);
         Currency& operator/=(const double);
 
-        friend std::ostream& operator<<(std::ostream&, Currency&);
+        friend std::ostream& operator<<(std::ostream&, const Currency&);
 
         // Exchange rate implementation
         //friend Currency operator*(Currency c1, Currency c2);
         //friend Currency operator/(Currency c1, Currency c2);
 
-        std::string to_string(std::string prefix = "");
+        std::string to_string(std::string prefix = "") const;
 
     private:
         std::string _name;
