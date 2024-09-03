@@ -79,6 +79,7 @@ All patterns structures has been documented and samples has been implemented.
     "", `Iterator <workspace/projects/patterns/iterator/>`_, "Provide a way to access the elements of an aggregate object sequentially without exposing its underlying representation."
     "", `Memento <workspace/projects/patterns/memento>`_, "Without violating encapsulation, capture and externalize an object's internal state so that the object can be restored to this state later."
     "", `Strategy <workspace/projects/patterns/strategy/>`_, "Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it."
+    "", `Visitor <workspace/projects/patterns/visitor/>`_, "Represent an operation to be performed on the elements of an object structure"
 
 Lexi Test Editor
 ================
