@@ -6,9 +6,11 @@
 class Chassis : public CompositeEquipment
 {
     public:
-        Chassis(const char* name) : CompositeEquipment(name) {}
-        Chassis(const char* name, double price, int power) : CompositeEquipment(name, price, power) {}
-        virtual ~Chassis() {}
+        Chassis(const char* name);
+        Chassis(const char* name, double price, int power);
+        virtual ~Chassis();
+
+        virtual void accept(EquipmentVisitor&);
 };
 
 #endif /* ifndef __CHASSIS_H__ */

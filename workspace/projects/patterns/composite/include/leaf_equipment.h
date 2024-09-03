@@ -2,6 +2,7 @@
 #define __LEAF_EQUIPMENT_H__
 
 #include "equipment.h"
+#include "equipment_visitor.hpp"
 #include <string>
 
 class LeafEquipment : public Equipment {
@@ -17,6 +18,8 @@ public:
     virtual void add(Equipment*);
     virtual void remove(Equipment*);
     virtual Iterator<Equipment*>* createIterator();
+
+    virtual void accept(EquipmentVisitor&);
 
     virtual std::string to_string(std::string = "");
 

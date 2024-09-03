@@ -6,10 +6,11 @@
 class FloppyDisk : public LeafEquipment
 {
     public:
-        FloppyDisk(const char* name) : LeafEquipment(name) {}
-        FloppyDisk(const char* name, double price, int power) : LeafEquipment(name, price, power) {}
-        virtual ~FloppyDisk() {}
+        FloppyDisk(const char* name);
+        FloppyDisk(const char* name, double price, int power);
+        virtual ~FloppyDisk();
 
+        virtual void accept(EquipmentVisitor&);
 };
 
 #endif /* ifndef __FLOPPY_DISK_H__ */

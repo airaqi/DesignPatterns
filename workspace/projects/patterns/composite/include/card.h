@@ -6,9 +6,11 @@
 class Card : public LeafEquipment
 {
     public: 
-        Card(const char* name) : LeafEquipment(name) {}
-        Card(const char* name, double price, int power) : LeafEquipment(name, price, power) {}
-        virtual ~Card() {}
+        Card(const char* name);
+        Card(const char* name, double price, int power);
+        virtual ~Card();
+
+        virtual void accept(EquipmentVisitor&);
 };
 
 #endif /* ifndef __CARD_H__ */

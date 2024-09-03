@@ -6,9 +6,11 @@
 class Cabinet : public CompositeEquipment
 {
     public:
-        Cabinet(const char* name) : CompositeEquipment(name) {}
-        Cabinet(const char* name, double price, int power) : CompositeEquipment(name, price, power) {}
-        virtual ~Cabinet() {}
+        Cabinet(const char* name);
+        Cabinet(const char* name, double price, int power);
+        virtual ~Cabinet();
+
+        virtual void accept(EquipmentVisitor&);
 };
 
 #endif /* ifndef __CABINET_H__ */

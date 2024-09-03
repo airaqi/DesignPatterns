@@ -28,12 +28,14 @@ public:
     virtual void remove(Equipment*);
     virtual Iterator<Equipment*>* createIterator();
 
+    virtual void accept(EquipmentVisitor&);
+
     virtual std::string to_string(std::string = "");
 
 protected:
     CompositeEquipment(const char* name);
     CompositeEquipment(const char* name, double price, int power);
-private:
+protected:
     List<Equipment*>* _children;
 };  
 

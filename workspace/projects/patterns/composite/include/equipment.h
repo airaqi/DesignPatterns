@@ -1,6 +1,7 @@
 #ifndef __EQUIPMENT_H__
 #define __EQUIPMENT_H__
 
+#include "equipment_visitor.hpp"
 #include "iterator.h"
 #include "currency.h"
 #include "watt.h"
@@ -16,6 +17,7 @@ class Equipment
 
         virtual void set_price(double price) { _price = Currency(price); }
         virtual void set_power(int power) { _power = Watt(power); }
+        virtual Currency get_price() const { return _price; }
 
         virtual Watt power() = 0;
         virtual Currency netPrice() = 0;
@@ -27,6 +29,9 @@ class Equipment
 
         virtual bool isComposite() { return false; }
         virtual bool isLeaf() { return false; }
+
+        // Required by visitor pattern implementation
+        virtual void accept(EquipmentVisitor&) = 0;
 
         virtual std::string to_string(std::string = "") = 0;
         

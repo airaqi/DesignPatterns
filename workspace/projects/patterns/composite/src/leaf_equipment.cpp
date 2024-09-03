@@ -24,6 +24,10 @@ Iterator<Equipment*>* LeafEquipment::createIterator()
     return new NullIterator<Equipment*>();
 }
 
+void LeafEquipment::accept(EquipmentVisitor& visitor)
+{
+    visitor.visit(this);
+}
 
 std::string LeafEquipment::to_string(std::string prefix)
 {
