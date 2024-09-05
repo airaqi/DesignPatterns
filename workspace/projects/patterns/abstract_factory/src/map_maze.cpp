@@ -37,7 +37,9 @@ void Maze::addRoom(Room* room)
 
 Room* Maze::roomNo(int roomNo) const
 {
-    return _rooms.at(roomNo);
+    if (_rooms.find(roomNo) != _rooms.end())
+        return _rooms.at(roomNo);
+    return nullptr;
 }
 
 bool Maze::isTarget(Room* room) const
