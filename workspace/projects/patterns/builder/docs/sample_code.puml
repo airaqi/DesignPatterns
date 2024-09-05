@@ -1,0 +1,109 @@
+@startuml
+
+allowmixing
+skinparam linetype ortho
+'left to right direction
+
+title Builder Pattern Maze Builder Factory Example
+
+together{
+    class MazeBuilder <<Builder>>
+    class StandardMazeBuilder <<ConcreteBuilder>>
+    class CountingMazeBuilder <<ConcreteBuilder>>
+    }
+
+class MazeGame <<Director>>
+
+rectangle Client
+
+together {
+    rectangle Maze <<Product>>
+    rectangle Room <<Product>>
+    rectangle Door <<Product>>
+    rectangle Wall <<Product>>
+    }
+
+MazeBuilder : #MazeBuilder()
+MazeBuilder : +buildMaze() : void
+MazeBuilder : +buildRoom(num: int) : void
+MazeBuilder : +buildDoor(from : int, to : int) : void
+MazeBuilder : +getMaze() : Maze
+
+StandardMazeBuilder : -current : Maze
+StandardMazeBuilder : +StandardMazeBuilder()
+StandardMazeBuilder : +buildMaze() : void
+StandardMazeBuilder : +buildRoom() : void
+StandardMazeBuilder : +buildDoor() : void
+StandardMazeBuilder : +getMaze() : Maze
+StandardMazeBuilder : -commonWall(Room, Room) : Direction
+
+CountingMazeBuilder : -doors : int
+CountingMazeBuilder : -rooms : int
+CountingMazeBuilder : +CountingMazeBuilder()
+CountingMazeBuilder : +buildMaze() : void
+CountingMazeBuilder : +buildRoom() : void
+CountingMazeBuilder : +buildDoor() : void
+CountingMazeBuilder : +addWall(int, Direction) : void
+CountingMazeBuilder : +getCounts(int, int) : void
+
+MazeGame : +createMaze(MazeBuilder)
+MazeGame : +createComplexMaze(MazeBuilder)
+
+MazeBuilder <|-- StandardMazeBuilder
+MazeBuilder <|-- CountingMazeBuilder
+
+MazeGame -> MazeBuilder : use
+MazeBuilder o-> Maze
+
+Client .-> MazeGame
+
+Maze o-->Room
+Maze o--> Door
+Maze o--> Wall
+
+note as nClient
+<b>(1)
+    Maze *maze;
+    MazeGame game;
+    StandardMazeBuilder builder;
+    
+     game.createMaze(builder);
+     maze = builder.getMaze();
+end note
+nClient .. Client
+
+note as nMazeGameCreateMaze
+<b>(2)
+    builder.buildMaze();
+    builder.buildRoom(1);
+    builder.buildroom(1);
+    builder.buildDoor(1, 2);
+    return builder.getMaze();
+end note
+nMazeGameCreateMaze .. MazeGame::createMaze
+
+note as nStandardMazeBuilderBuildRoom
+<b>(3)
+        if(!currentMaze->RoomNo(n)) {
+            Room *room = new Room(n);
+            currentMaze->addRoom(room);
+            
+            room->setSide(North, new Wall);
+            room->setSide(South, new Wall);
+            room->setSide(East, new Wall);
+            room->setSide(West, new Wall);
+        }
+end note 
+nStandardMazeBuilderBuildRoom ... StandardMazeBuilder::buildRoom
+
+note as nStandardMazeBuilderBuildDoor
+<b>(4)
+    Room *r1 = currentMaze->roomNo(n1);
+    Room *r2 = currentMaze->roomNo(n2);
+    Door *d = new Door(r1, r2);
+    r1->setSide(commonWall(r1, r2), d);
+    r2->setSide(commonWall(r1, r2), d); 
+end note 
+nStandardMazeBuilderBuildDoor ... StandardMazeBuilder::buildDoor
+
+@enduml

@@ -1,0 +1,41 @@
+@startuml
+
+title Builder Pattern Structure Collaboration
+
+participant aClient as CLI
+participant aDirector as DIR
+participant aConcereteBuilder as CB
+
+activate CLI
+CLI -> CB : new ConcreteBuilder
+activate CB
+deactivate CB
+
+CLI -> DIR : new Director(aConcereteBuilder)
+activate DIR
+deactivate DIR
+
+CLI -> DIR : Construct()
+activate DIR
+
+DIR -> CB : BuildPartA()
+activate CB
+deactivate CB
+
+DIR -> CB : BuildPartB()
+activate CB
+deactivate CB
+
+DIR -> CB : BuildPartC()
+activate CB
+deactivate CB
+
+deactivate DIR
+
+CLI -> CB : GetResult()
+activate CB
+deactivate CB
+
+deactivate CLI
+
+@enduml

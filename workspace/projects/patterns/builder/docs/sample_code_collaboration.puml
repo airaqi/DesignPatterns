@@ -1,0 +1,43 @@
+@startuml
+
+participant aClient as CLI
+participant aGame as GM <<Director>>
+participant aStandardMazeBuilder as MB <<ConcreteBuilder>>
+
+activate CLI
+CLI -> MB : new StandardMazeBuilder
+activate MB
+deactivate MB
+
+CLI -> GM : new MazeGame
+activate GM
+deactivate GM
+
+CLI -> GM : createMaze(MazeBuilder)
+activate GM
+
+GM -> MB : buildMaze()
+activate MB
+deactivate MB
+
+GM -> MB : buildRoom(1)
+activate MB
+deactivate MB
+
+GM -> MB : buildroom(2)
+activate MB
+deactivate MB
+
+GM -> MB : buildDoor(1, 2)
+activate MB
+deactivate MB
+
+deactivate GM
+
+CLI -> MB : getMaze()
+activate MB
+deactivate MB
+
+deactivate CLI
+
+@enduml

@@ -1,0 +1,72 @@
+@startuml
+
+allowmixing
+skinparam linetype ortho
+
+title Builder Pattern Formal Structure
+
+class Director
+together {
+    class Builder
+    class ConcreteBuilder
+    }
+rectangle Product
+
+Director : Construct()
+
+Builder : BuildPart()
+
+ConcreteBuilder : BuildPart()
+ConcreteBuilder : GetResult()
+
+Builder <|-- ConcreteBuilder
+
+Director "builder" o-> Builder
+
+ConcreteBuilder .> Product
+
+note as nDirectorConstruct
+    for all objects in structure
+        builder->BuildPart();
+end note
+nDirectorConstruct .up. Director::Construct
+
+note as nDirector
+    <b>Director
+    constructs an object using 
+    the Builder interface.
+end note
+nDirector ... Director
+
+note as nBuilder
+    <b>Builder
+    specifies an abstract interface 
+    for creating parts of a Product 
+    object
+end note
+nBuilder ... Builder
+
+note as nConcreteBuilder
+    <b>ConcreteBuilder
+    - constructs and assembles parts 
+      of the product by implementing 
+      the Builder interface.
+    - defines and keeps track of the 
+      representation it creates.
+    - provides an interface for retrieving 
+      the product
+end note
+nConcreteBuilder .... ConcreteBuilder
+
+note as nProduct
+    <b>Product
+    - Represents the complex object 
+      under construction.
+    - includes classes that define the 
+      constituent parts, including 
+      interfaces for assembling the parts 
+      into the final result.
+end note
+nProduct .... Product
+
+@enduml

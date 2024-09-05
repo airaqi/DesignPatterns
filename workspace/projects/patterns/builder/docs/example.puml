@@ -1,0 +1,65 @@
+@startuml
+
+allowmixing
+skinparam linetype ortho
+
+title Builder Pattern RTF Text Parser Example
+
+class RTFReader <<Director>>
+
+together {
+        class TextConverter <<Builder>>
+        class ASCIIConverter <<ConcreteBuilder>>
+        class TeXConverter <<ConcreteBuilder>>
+        class TextWidgetConverter <<ConcreteBuilder>>
+
+        rectangle ASCIIText <<Product>>
+        rectangle TeXText <<Product>>
+        rectangle TextWidget <<Product>>
+    }
+    
+RTFReader : ParseRtf()
+
+TextConverter : ConvertCharacter(char)
+TextConverter : ConvertFontChange(Font)
+TextConverter : ConvertParagraph()
+
+ASCIIConverter : ConvertCharacter(char)
+ASCIIConverter : GetASCIIText()
+
+TeXConverter : ConvertCharacter(char)
+TeXConverter : ConvertFontChange(Font)
+TeXConverter : ConvertParagraph()
+TeXConverter : GetTeXText()
+
+TextWidgetConverter : ConvertCharacter(char)
+TextWidgetConverter : ConvertFontChange(Font)
+TextWidgetConverter : ConvertParagraph()
+TextWidgetConverter : GetTextWidget()
+
+TextConverter <|-- ASCIIConverter
+TextConverter <|-- TeXConverter
+TextConverter <|-- TextWidgetConverter
+
+RTFReader "builder" o-> TextConverter
+
+ASCIIConverter ..> ASCIIText
+TeXConverter ..> TeXText
+TextWidgetConverter ..> TextWidget
+
+note as nRTFReaderParseRTF
+    while (t = get the next token) {
+        switch t.Type {
+            CHAR:
+                builder->ConvertCharacter(t.Char)
+            FONT:
+                builder->ConvertFontChange(t.Font)
+            PARA:
+                builder->ConvertParagraph()
+        }
+    }
+end note
+nRTFReaderParseRTF .up. RTFReader::ParseRtf
+
+
+@enduml
