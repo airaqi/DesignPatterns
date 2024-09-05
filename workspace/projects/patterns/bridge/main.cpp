@@ -50,6 +50,15 @@ int main(int argc, char *argv[])
     window.run_loop();
 
     //WindowImp* imp = WindowSystemFactory::instance().createWindow();
+    std::cout << "main end\n";
+
+    //WindowSystemFactory::destroy();
+    WindowSystemFactoryX::destroy();
+    WindowSystemFactoryXcb::destroy();
+
+    //WindowSystemFactory::unsubstribe(WindowSystemFactoryX::NAME);
+    //WindowSystemFactory::unsubstribe(WindowSystemFactoryXcb::NAME);
+
 
     return 0;
 }

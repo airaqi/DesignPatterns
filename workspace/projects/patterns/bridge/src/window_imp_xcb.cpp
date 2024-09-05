@@ -183,16 +183,18 @@ void WindowImpXcb::event_loop(BWindow* win)
             switch(evt->detail)
             {
                 case 9:
-                    free(event);
-                    xcb_disconnect(_c);
-                    exit(0);
+                    //free(event);
+                    //xcb_disconnect(_c);
+                    // exit(0);
+                    _running = false;
                     break;
             }
             break;
         }
+        free(event);
     }
 
-    free(event);
+    //free(event);
 }
 
 

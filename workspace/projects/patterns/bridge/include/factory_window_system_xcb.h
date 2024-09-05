@@ -9,14 +9,15 @@ class WindowSystemFactoryXcb : public WindowSystemFactory
     public:
         static const char* NAME;
 
-        virtual ~WindowSystemFactoryXcb() {}
+        virtual ~WindowSystemFactoryXcb();
 
         static WindowSystemFactory* instance();
+        static void destroy();
 
         virtual WindowImp* createWindow();
 
     protected:
-        WindowSystemFactoryXcb() {}
+        WindowSystemFactoryXcb();
 
     private:
         static WindowSystemFactory* _instance;

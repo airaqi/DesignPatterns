@@ -9,9 +9,8 @@ BWindow::BWindow(View* contents) :
 
 BWindow::~BWindow()
 {
-    delete _contents;
+    //delete _contents;
     delete _imp;
-    WindowSystemFactory::reset();
 }
 
 void BWindow::drawContents()

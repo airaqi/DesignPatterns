@@ -8,13 +8,13 @@
 class WindowSystemFactory 
 {
     public:
-        virtual ~WindowSystemFactory() {}
+        virtual ~WindowSystemFactory();
 
         static WindowSystemFactory& instance(const char* name = nullptr);
-        static void reset();
+        static void destroy();
 
         static void subscribe(const char* name, WindowSystemFactory* fatory);
-        static void unsubstribe(const char* name);
+        static void unsubscribe(const char* name);
 
         static const char* defaultFactory();
         static void defaultFactory(const char* name);
@@ -22,10 +22,12 @@ class WindowSystemFactory
         virtual WindowImp* createWindow() = 0;
 
     protected:
-        WindowSystemFactory() {}
+        WindowSystemFactory();
+
+    protected:
+        static WindowSystemFactory* _instance;
 
     private:
-        static WindowSystemFactory* _instance;
         static std::unordered_map<const char*, WindowSystemFactory*> _registry;
         static const char* _default_factory;
 };

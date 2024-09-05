@@ -26,12 +26,13 @@ WindowImpX::WindowImpX() : _running(true)
             0, 0, 320, 200, 1, 
             BlackPixel(_display, _screenId), 
             WhitePixel(_display, _screenId));
-    XSelectInput(_display, _window, KeyPressMask | ExposureMask);
+    XSelectInput(_display, _window, KeyPressMask | KeyReleaseMask | ExposureMask);
     XStoreName(_display, _window, "Hello Bridge!");
 
     // show window
     XClearWindow(_display, _window);
     XMapRaised(_display, _window);
+    XSync(_display, false);
 
     // initialize graphics context
     _gc = XDefaultGC(_display, _screenId);
@@ -84,10 +85,12 @@ void WindowImpX::event_loop(BWindow* win)
     str[0] = 0;
     int len = 0;
     KeySym keysym = 0;
-    while(_running) {
+    while(_running) 
+    {
         XNextEvent(_display, &event);
-        switch (event.type) {
-            case KeyPress:
+        switch (event.type) 
+        {
+            case KeyRelease:
                 len = XLookupString(&event.xkey, str, 25, &keysym, nullptr);
                 if(keysym == XK_Escape)
                     _running = false;
