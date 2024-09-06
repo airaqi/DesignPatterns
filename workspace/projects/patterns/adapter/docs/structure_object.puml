@@ -1,0 +1,28 @@
+@startuml
+
+allowmixing
+skinparam linetype ortho
+
+title Object Adapter Pattern Formal Structure
+
+rectangle Client
+
+class Target
+class Adapter
+class Adaptee
+
+Target : Request()
+Adapter : Request()
+Adaptee : SpecificRequest()
+
+Target <|-- Adapter
+
+Adapter "adaptee" -> Adaptee
+Client -> Target
+
+note as nAdapterRequest
+    adaptee->SpecificRequest()
+end note
+nAdapterRequest . Adapter::Request
+
+@enduml

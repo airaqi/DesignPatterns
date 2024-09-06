@@ -1,5 +1,7 @@
 add_library(${LIBRARY_NAME}
-    dummy.cpp
+    shape_text.cpp
+    shape_text_object.cpp
+    manipulator_text.cpp
 )
 
 find_package(${X11_PKG} REQUIRED)

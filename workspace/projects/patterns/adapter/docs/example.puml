@@ -1,5 +1,46 @@
 @startuml
 
+allowmixing
 skinparam linetype ortho
+
+title Adapter Pattern Shape Example
+
+rectangle DrawingEditor
+
+together {
+    abstract class Shape
+    class Line
+    class TextShape
+}
+
+class TextView
+
+Shape : BoundingBox()
+Shape : CreateManipulator()
+
+Line : BoundingBox()
+Line : CreateManipulator()
+
+TextShape : BoundingBox()
+TextShape : CreateManipulator()
+
+TextView : GetExtent()
+
+Shape <|-- Line
+Shape <|-- TextShape
+
+DrawingEditor -> Shape
+
+TextShape "text" -> TextView
+
+note as nTextShapeBoundingBox
+    return text->GetExtent()
+end note
+nTextShapeBoundingBox .up. TextShape::BoundingBox
+
+note as nTextShapeCreateManipulator
+    return new TextManipulator;
+end note
+nTextShapeCreateManipulator .up. TextShape::CreateManipulator
 
 @enduml

@@ -1,0 +1,28 @@
+@startuml
+
+skinparam linetype ortho
+
+title Object Adapter Pattern Drawing Editor Example
+
+abstract class Shape
+class TextShapeObject
+class TextView
+
+Shape : +boundingBox(Point, Point) : void
+Shape : +createManipulator() : Manipulator
+
+TextShapeObject : -text : TextView
+TextShapeObject : +boundingBox(Point, Point) : void
+TextShapeObject : +createManipulator() : Manipulator
+TextShapeObject : +isEmpty() : bool
+
+TextView : +getOrigin(Coord,Coord) : void
+TextView : +getExtent(Coord,Coord) : void
+TextView : +isEmpty() : bool
+
+Shape <|-- TextShapeObject
+TextShapeObject "text" -> TextView
+
+
+
+@enduml
