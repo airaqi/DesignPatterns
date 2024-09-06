@@ -7,6 +7,7 @@ class TextManipulator : public Manipulator
 {
     public:
         TextManipulator(Shape* shape);
+        virtual ~TextManipulator() {}
 
         void move(const Point &) override;
 };

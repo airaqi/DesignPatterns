@@ -8,6 +8,7 @@ class Manipulator
 {
     public:
         Manipulator(Shape* shape = nullptr) : _shape(shape) {}
+        virtual ~Manipulator() {}
 
         virtual void move(const Point&) = 0;
 

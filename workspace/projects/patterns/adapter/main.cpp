@@ -36,6 +36,8 @@ void classAdapter()
         << "We get TextShape: "
         << text << "\n\n\n";
 
+    delete manipulator;
+
 }
 
 void objectAdapter()
@@ -71,6 +73,7 @@ void objectAdapter()
         << "We get TextShape: "
         << text << "\n\n\n";
 
+    delete manipulator;
 }
 
 int main(int argc, char *argv[])
