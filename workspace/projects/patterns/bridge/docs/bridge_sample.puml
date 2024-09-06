@@ -5,22 +5,29 @@ title Bridge Sample Code
 left to right direction
 skinparam linetype ortho
 
-abstract class Window
-class WindowApplication
+together{
+    abstract class Window
+    class WindowApplication
+}
 
-abstract class WindowImp
-class XWindowImp
-class XcbWindowImp
+together {
+    abstract class WindowImp
+    class XWindowImp
+    class XcbWindowImp
+}
 
-abstract class View
-class ViewComposite
-class ViewRectangle
-class ViewString
+together {
+    abstract class View
+    class ViewComposite
+    class ViewRectangle
+    class ViewString
+}
 
-class WindowSystemFactory <<singleton>>
-class XWindowSystemFactory
-class XcbWindowSystemFactory
-
+together {
+    class WindowSystemFactory <<singleton>>
+    class XWindowSystemFactory
+    class XcbWindowSystemFactory
+}
 Window : -implementation : WindowImp
 Window : -contents : View
 Window : +Window(View)
@@ -150,7 +157,7 @@ end note
 note as nViewDraw
     view->draw(this);
 end note
-nViewDraw .up. Window::drawContents : implementation
+nViewDraw .left. Window::drawContents : implementation
 
 
 @enduml

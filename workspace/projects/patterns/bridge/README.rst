@@ -47,21 +47,13 @@ Examples
 
    Figure 3: Bridge Design helps isolating abstractions from implementations
 
+
 Sample Code
 -----------
 
-
-.. figure:: docs/bridge_sample.svg
-   :width: 1267
-   :height: 1060
-   :figwidth: 90%
-   :scale: 48%
-   :align: center
-
-   Figure 4: Bridge sample code
-
 This sample code just constructs a window and display a rectangle with *Hello Bridge!* in it
-and it displays it using two **Window systems** (namely X11 and Qt5), using the bridge pattern.
+and it displays it using two **Window systems** (namely Xlib and XCB interfaces to X11 Server), 
+using the bridge pattern.
 
 Window and WindowImp classes represent the Abstraction and Implementation classes of
 the structure respectively.
@@ -70,3 +62,14 @@ Event loop implementation has been added to the window class for simplicity, whi
 should be placed in its own class.
 
 Other patterns is used in this sample such as Abstract Factory, Composite and Singleton.
+
+.. figure:: docs/bridge_sample.svg
+   :width: 1210
+   :height: 1612
+   :figwidth: 90%
+   :scale: 50%
+   :align: center
+
+   Figure 4: Bridge sample code
+
+
