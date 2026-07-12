@@ -1,0 +1,210 @@
+Hello, Facade!
+1 [./build/projects/patterns/facade/facade_app]
+
+current dir: "/home/airaqi/Documents/learn/courses/ossu/011-Design_Patterns/workspace"
+increment 1 (0, 1)
+->> [Word: {] 
+increment 2 (1, 0)
+increment 3 (1, 1)
+increment 4 (1, 2)
+increment 5 (1, 3)
+increment 6 (1, 4)
+increment 7 (1, 5)
+increment 8 (1, 6)
+increment 9 (1, 7)
+increment 10 (1, 8)
+find() s: int word: [Type: int]
+->> [Type: int] 
+move() _look : [Type: int]
+type() _look: [Type: int] p: [Type: int]
+increment 10 (1, 8)
+increment 11 (1, 9)
+increment 12 (1, 10)
+find() s: i word: [Type: null]
+->> [Word: i] 
+move() _look : [Word: i]
+increment 12 (1, 10)
+->> [Word: ;] 
+move() _look : [Word: ;]
+increment 13 (2, 0)
+increment 14 (2, 1)
+increment 15 (2, 2)
+increment 16 (2, 3)
+increment 17 (2, 4)
+increment 18 (2, 5)
+increment 19 (2, 6)
+increment 20 (2, 7)
+increment 21 (2, 8)
+find() s: int word: [Type: int]
+->> [Type: int] 
+move() _look : [Type: int]
+decls() type: [Type: int] token: [Word: i] _used: 0
+<<<
+type() _look: [Type: int] p: [Type: int]
+increment 21 (2, 8)
+increment 22 (2, 9)
+increment 23 (2, 10)
+find() s: j word: [Type: null]
+->> [Word: j] 
+move() _look : [Word: j]
+increment 23 (2, 10)
+->> [Word: ;] 
+move() _look : [Word: ;]
+increment 24 (3, 0)
+increment 25 (3, 1)
+increment 26 (3, 2)
+increment 27 (3, 3)
+increment 28 (3, 4)
+increment 29 (3, 5)
+increment 30 (3, 6)
+increment 31 (3, 7)
+increment 32 (3, 8)
+increment 33 (3, 9)
+increment 34 (3, 10)
+find() s: float word: [Type: float]
+->> [Type: float] 
+move() _look : [Type: float]
+decls() type: [Type: int] token: [Word: j] _used: 4
+<<<
+type() _look: [Type: float] p: [Type: float]
+increment 34 (3, 10)
+increment 35 (3, 11)
+increment 36 (3, 12)
+find() s: v word: [Type: null]
+->> [Word: v] 
+move() _look : [Word: v]
+increment 36 (3, 12)
+->> [Word: ;] 
+move() _look : [Word: ;]
+increment 37 (4, 0)
+increment 38 (4, 1)
+increment 39 (4, 2)
+increment 40 (4, 3)
+increment 41 (4, 4)
+increment 42 (4, 5)
+increment 43 (4, 6)
+increment 44 (4, 7)
+increment 45 (4, 8)
+increment 46 (4, 9)
+increment 47 (4, 10)
+find() s: float word: [Type: float]
+->> [Type: float] 
+move() _look : [Type: float]
+decls() type: [Type: float] token: [Word: v] _used: 8
+<<<
+type() _look: [Type: float] p: [Type: float]
+increment 47 (4, 10)
+increment 48 (4, 11)
+increment 49 (4, 12)
+find() s: x word: [Type: null]
+->> [Word: x] 
+move() _look : [Word: x]
+increment 49 (4, 12)
+->> [Word: ;] 
+move() _look : [Word: ;]
+increment 50 (5, 0)
+increment 51 (5, 1)
+increment 52 (5, 2)
+increment 53 (5, 3)
+increment 54 (5, 4)
+increment 55 (5, 5)
+increment 56 (5, 6)
+increment 57 (5, 7)
+increment 58 (5, 8)
+increment 59 (5, 9)
+increment 60 (5, 10)
+find() s: float word: [Type: float]
+->> [Type: float] 
+move() _look : [Type: float]
+decls() type: [Type: float] token: [Word: x] _used: 16
+<<<
+type() _look: [Type: float] p: [Type: float]
+increment 60 (5, 10)
+->> [Word: [] 
+move() _look : [Word: []
+increment 61 (5, 11)
+increment 62 (5, 12)
+increment 63 (5, 13)
+increment 64 (5, 14)
+->> [Num: 100] 
+move() _look : [Num: 100]
+increment 64 (5, 14)
+->> [Word: ]] 
+move() _look : [Word: ]]
+increment 65 (5, 15)
+increment 66 (5, 16)
+increment 67 (5, 17)
+find() s: a word: [Type: null]
+->> [Word: a] 
+move() _look : [Word: a]
+dims() - p: [Type: float]
+dims() <<<
+increment 67 (5, 17)
+->> [Word: ;] 
+move() _look : [Word: ;]
+increment 68 (6, 0)
+increment 69 (6, 1)
+increment 70 (6, 2)
+increment 71 (6, 3)
+increment 72 (6, 4)
+increment 73 (6, 5)
+increment 74 (6, 6)
+increment 75 (6, 7)
+increment 76 (6, 8)
+increment 77 (6, 9)
+increment 78 (6, 10)
+find() s: while word: [Word: while]
+->> [Word: while] 
+move() _look : [Word: while]
+decls() type: [Array: 100 [Type: float]] token: [Word: a] _used: 24
+<<<
+stmts() - look: [Word: while]
+stmt() - look: [Word: while]
+increment 78 (6, 10)
+->> [Word: (] 
+move() _look : [Word: (]
+increment 79 (6, 11)
+increment 80 (6, 12)
+increment 81 (6, 13)
+increment 82 (6, 14)
+increment 83 (6, 15)
+find() s: true word: [Word: true]
+->> [Word: true] 
+move() _look : [Word: true]
+increment 83 (6, 15)
+->> [Word: )] 
+move() _look : [Word: )]
+increment 84 (6, 16)
+increment 85 (6, 17)
+->> [Word: {] 
+move() _look : [Word: {]
+stmt() - look: [Word: {]
+increment 86 (7, 0)
+increment 87 (7, 1)
+increment 88 (7, 2)
+increment 89 (7, 3)
+increment 90 (7, 4)
+increment 91 (7, 5)
+increment 92 (7, 6)
+increment 93 (7, 7)
+increment 94 (7, 8)
+increment 95 (7, 9)
+increment 96 (7, 10)
+increment 97 (7, 11)
+find() s: do word: [Word: do]
+->> [Word: do] 
+move() _look : [Word: do]
+stmts() - look: [Word: do]
+stmt() - look: [Word: do]
+increment 97 (7, 11)
+increment 98 (7, 12)
+increment 99 (7, 13)
+find() s: i word: [Word: i]
+->> [Word: i] 
+move() _look : [Word: i]
+stmt() - look: [Word: i]
+increment 99 (7, 13)
+increment 100 (7, 14)
+increment 101 (7, 15)
+->> [Word: =] 
+move() _look : [Word: =]

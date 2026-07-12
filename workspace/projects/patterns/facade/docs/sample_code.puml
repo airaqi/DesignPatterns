@@ -1,0 +1,392 @@
+@startuml
+
+skinparam linetype ortho
+'left to right direction
+
+title Facade Pattern Example Strucure
+
+class Compiler <<Facade>>
+
+together {
+    together {
+        together {
+            class Scanner <<Subsystem>>
+            class CodeGenerator <<Subsystem>>
+            
+            class Token
+            class Num
+            class Word
+            class Real
+            class Type
+            class Array
+        
+            together {    
+                class Tag        
+                enum Kind
+            }
+        }
+        
+        class Parser <<Subsystem>>
+        class Env
+        
+    }
+    
+    together {
+        class ProgNodeBuilder <<Subsystem>>
+        
+        abstract class ProgNode
+        abstract class ExprNode
+
+   
+        class VarNode
+        class TempNode
+        class ConstantNode
+        
+        class OpNode
+        class ArithNode
+        class UnaryNode
+        class AccessNode
+        
+        class LogicalNode
+        class AndNode
+        class OrNode
+        class NotNode
+        class RelNode
+        
+    
+        together {
+            class StmtNode
+            class ReturnNode <<Not Implemented>>
+            class IfNode
+            class ElseNode
+            class SeqNode
+            class WhileNode
+            class DoNode 
+            class SetNode
+            class SetArrayNode
+            class BreakNode
+        }
+        
+    }
+}
+
+ProgNode <|-- ExprNode
+ProgNode <|--------- StmtNode
+
+ExprNode <|-- ConstantNode
+ExprNode <|-- VarNode
+ExprNode <|------ OpNode
+ExprNode <|---- LogicalNode
+ExprNode <|-- TempNode
+
+OpNode <|-- ArithNode
+OpNode <|-- UnaryNode
+OpNode <|-- AccessNode
+
+LogicalNode <|-- AndNode
+LogicalNode <|-- OrNode
+LogicalNode <|-- NotNode
+LogicalNode <|-- RelNode
+
+StmtNode <|-- ReturnNode
+StmtNode <|--- IfNode
+StmtNode <|--- ElseNode
+StmtNode <|--- SetNode
+StmtNode <|-- SeqNode
+StmtNode <|--- WhileNode
+StmtNode <|-- DoNode
+StmtNode <|-- SetArrayNode
+StmtNode <|--- BreakNode
+
+Token <|-- Num
+Token <|-- Real
+Token <|-- Word
+Word <|-- Type
+Type <|-- Array
+
+Scanner --> Token
+
+Token -> Tag
+Tag o- Kind
+
+Parser -> Scanner
+Parser ------> ProgNodeBuilder
+Parser -> Tag
+
+Compiler --> Scanner
+Compiler --> Parser
+Compiler --> CodeGenerator
+
+ProgNodeBuilder *--> ProgNode
+
+Parser .> Env
+
+
+Compiler : +Compiler()
+Compiler : +compile(Stream, ByteCodeStream) : void
+
+CodeGenerator : #output : ByteCodeStream
+CodeGenerator : #CodeGenerator(ByteCodeStream)
+CodeGenerator : +visit(StmtNode) : void
+CodeGenerator : +visit(ExprNode) : void
+
+Scanner : -full : Boolean
+Scanner : -buffer : Token
+Scanner : -index : int
+Scanner : -line : int
+Scanner : -column : int
+Scanner : -stream : iostream
+Scanner : -tokenstream : TokenStream
+Scanner : + Scanner(iostream)
+Scanner : +scan() : Token&
+Scanner : +reserve(Word) : void
+Scanner : +putback() : void
+
+Token : -tag : Tag
+Token : -line : int
+Token : -index : int
+Token : +Token(Tag)
+Token : +toString() : String
+
+Num : -value : int
+Num : +Num(int)
+Num : +toString() : String
+
+Real : -value : float
+Real : +Real(float)
+Real : +toString() : String
+
+Word : -value : String
+Word : +{field} and : Word = Word("&&", Tag.AND)
+Word : +{field} or : Word = Word("||", Tag.OR)
+Word : +{field} eq : Word = Word("==", Tag.EQ)
+Word : +{field} ne : Word = Word("!=", Tag.NE)
+Word : +{field} le : Word = Word("<=", Tag.LE)
+Word : +{field} ge : Word = Word(">=", Tag.GE)
+Word : +{field} minus : Word = Word("minus", Tag.MINUS)
+Word : +{field} True : Word = Word("true", Tag.TRUE)
+Word : +{field} FALSE : Word = Word("false", Tag.FALSE)
+Word : +{field} temp : Word = Word("t", Tag.TEMP)
+Word : +Word(String, int)
+Word : +toString() : String
+
+Type : -width : int    
+Type : +{field} Int : Type("int", Tag.BASIC, 4) 
+Type : +{field} Float : Type("float", Tag.BASIC, 8) 
+Type : +{field} Char : Type("char", Tag.BASIC, 1) 
+Type : +{field} Bool : Type("bool", Tag.BASIC, 1) 
+Type : +Type(String, Kind, int)
+Type : +{static} numeric(Type) : bool
+Type : +{static} max(Type, Type) : Type
+
+Array : -of : Type
+Array : -size : int
+Array : +Array(int, Type)
+Array : +toString() : String
+
+Tag : +kind : Kind
+Tag : +toString() : String
+
+Kind : +AND : int = 256
+Kind : +BASIC : int = 257
+Kind : +BREAK : int = 258
+Kind : +DO : int = 259
+Kind : +ELSE : int = 260
+Kind : +EQ : int = 261
+Kind : +FALSE : int = 262
+Kind : +GE : int = 263
+Kind : +ID : int = 264
+Kind : +IF : int = 265
+Kind : +INDEX : int = 266
+Kind : +LE : int = 267
+Kind : +MINUS : int = 268
+Kind : +NE : int = 269
+Kind : +NUM : int = 270
+Kind : +OR : int = 271
+Kind : +REAL : int = 272 
+Kind : +TEMP : int = 273
+Kind : +TRUE : int = 274
+Kind : +WHILE : int = 275
+
+Parser : -look : Token
+Parser : -top : Env
+Parser : -used : int
+Parser : -scanner : Scanner
+Parser : -builder : ProgNodeBuilder
+Parser : +parse(Scanner&, ProgNodeBuilder&)
+Parser : -move() : void
+Parser : -error(String) : void
+Parser : -match(int) : void
+Parser : +program() : void
+Parser : -block() : Stmt
+Parser : -decls() : void
+Parser : -type() : Type
+Parser : -dims(Type) : Type
+Parser : -stmts() : Stmt
+Parser : -stmt() : Stmt
+Parser : -assign() : Stmt
+Parser : -bool() : Expr
+Parser : -join() : Expr
+Parser : -equality() : Expr
+Parser : -rel() : Expr
+Parser : -expr() : Expr
+Parser : -term() : Expr
+Parser : -unary() : Expr
+Parser : -factor() : Expr
+Parser : -offset(Id) : Access
+
+Env : -bindings[0..*]
+Env : +exists(String) : void
+Env : +get(String) : ProgNode
+Env : +bind(String, ProgNode) : void
+Env : +unbind(String) : void
+
+ProgNodeBuilder : -node : ProgNode
+ProgNodeBuilder : +createVariable(String) : ProgNode
+ProgNodeBuilder : +createAssignment(var : ProgNode, expr : ProgNode) : ProgNode
+ProgNodeBuilder : +createReturnStatement(ProgNode) : ProgNode
+ProgNodeBuilder : +createCondition(cond: ProgNode, true : ProgNode, false : ProgNode) : ProgNode
+ProgNodeBuilder : +getRootNode() : ProgNode
+
+ProgNode : -index : int
+ProgNode : -line : int
+ProgNode : -column : int
+ProgNode : #ProgNode()
+ProgNode : +getSourcePosition(line : int, index : int)
+ProgNode : +add(ProgNode) : void
+ProgNode : +remove(ProgNode) : void
+ProgNode : +traverse(CodeGenerator) : void
+ProgNode : +isExpression() : bool
+ProgNode : +isStatement() : bool
+
+ExprNode : -children : ProgNode
+ExprNode : #ExprNode(Token, Type)
+ExprNode : +add(ProgNode) : void
+ExprNode : +remove(ProgNode) : void
+ExprNode : +isExpression() : bool
+ExprNode : +isValue() : bool
+ExprNode : +isVariable() : bool
+ExprNode : +isBlock() : bool
+
+VarNode : -offset : int
+VarNode : +VarNode(Word, Type, int)
+VarNode : +isVariable() : bool
+
+ConstantNode : +{field}{static} True : Constant = Constant(Word.True, Type.Bool)
+ConstantNode : +{field}{static} False : Constant = Constant(Word.False, Type.Bool)
+ConstantNode : +ConstantNode(int)
+ConstantNode : +ConstantNode(Token, Type)
+ConstantNode : +isValue() : bool
+ConstantNode : +strValue() : String
+
+TempNode : -{static} count : int = 0
+TempNode : -number : int = 0
+TempNode : +Temp(Type)
+TempNode : +toString() : String
+
+LogicalNode : -lhs : ExprNode
+LogicalNode : -rhs : ExprNode
+LogicalNode : +LogicalNode(Token, ExprNode, ExprNode)
+
+AndNode : +NotNode(Token, ExprNode, ExprNode)
+
+OrNode : +OrNode(Token, ExprNode, ExprNode)
+
+NotNode : +NotNode(Token, ExprNode)
+
+RelNode : +RelNode(Token, ExprNode, ExprNode)
+
+
+
+OpNode : +OpNode(Token, Type)
+OpNode : +reduce() : ExprNode
+
+ArithNode : -lhs : ExprNode
+ArithNode : -rhs : ExprNode
+ArithNode : +ArithNode(Token, ExprNode, ExprNode)
+ArithNode : +toString() : String
+
+UnaryNode : -expr : ExprNode
+UnaryNode : +UnaryNode(Token, ExprNode)
+UnaryNode : +toString() : String
+
+AccessNode : -var : VarNode
+AccessNode : -index : ExprNode
+AccessNode : +AccessNode(Id, ExprNode, Type)
+AccessNode : +toString() : String
+
+
+StmtNode : +{static}{field}Null : StmtNode()
+StmtNode : #{static}{field}EnclosingStmt : StmtNode
+StmtNode : #{static}{field}EnclosingFunc : VarNode
+StmtNode : #StmtNode()
+StmtNode : +isStatement() : bool
+
+ReturnNode : -expr : ExprNode
+ReturnNode : +ReturnNode()
+
+SetNode : -variable : ProgNode
+SetNode : -expression : ProgNode
+SetNode : +SetNode(AccessNode, ExprNode)
+
+SetArrayNode : -array : VarNode
+SetArrayNode : -index : ExprNode
+SetArrayNode : -expr : ExprNode
+SetArrayNode : +SetArrayNode(Access, ExprNode)
+
+IfNode : -condition : ProgNode
+IfNode : -truePart : ProgNode
+IfNode : -falsePart : ProgNode 
+
+ElseNode : -expr : ExprNode
+ElseNode : -stmt1 : StmtNode
+ElseNode : -stmt2 : StmtNode
+ElseNode : -ElseNode(ExprNode, StmtNode, StmtNode)
+
+SeqNode : -stmt1 : StmtNode
+SeqNode : -stmt2 : StmtNode
+SeqNode : +SeqNode(StmtNode, StmtNode)
+
+DoNode : -expr : ExprNode
+DoNode : -stmt : StmtNode
+DoNode : +DoNode()
+DoNode : +init(StmtNode, ExprNode)
+
+WhileNode : -expr : ExprNode
+WhileNode : -stmt : StmtNode
+WhileNode : +WhileNode()
+WhileNode : +init(ExprNode, StmtNode)
+
+BreakNode : -stmt : StmtNode
+BreakNode : +BreakNode()
+
+
+
+note as nGeneral
+    <b>convert sample python 
+    <b>code  to C++ and vice-
+    <b>versa:
+    <b>from:
+    
+    def test:
+        x = 10
+        if x < 10
+            print(x)
+
+    <b>to:
+            
+     void test()
+     {
+         int x = 10;
+         if (x < 10)
+             cout << x << "\n";
+     }
+end note
+
+note as nScanner
+    Parse character stream for tokens
+end note
+nScanner .. Scanner
+
+
+@enduml

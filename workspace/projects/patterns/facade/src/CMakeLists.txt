@@ -1,0 +1,47 @@
+add_library(${LIBRARY_NAME}
+    dummy.cpp
+    #compiler_compiler.cpp
+    compiler_scanner.cpp
+    #compiler_parser.cpp
+    compiler_token.cpp
+    compiler_token_num.cpp
+    compiler_token_real.cpp
+    compiler_token_word.cpp
+    compiler_token_word_type.cpp
+    compiler_token_word_type_array.cpp
+    compiler_env.cpp
+    compiler_parser.cpp
+    program_node_builder.cpp
+    program_node.cpp
+    program_node_expr.cpp
+    program_node_expr_id.cpp
+    program_node_expr_const.cpp
+    program_node_expr_op.cpp
+    program_node_expr_op_arith.cpp
+    program_node_expr_op_unary.cpp
+    program_node_expr_op_access.cpp
+    program_node_expr_logical.cpp
+    program_node_expr_logical_or.cpp
+    program_node_expr_logical_and.cpp
+    program_node_expr_logical_not.cpp
+    program_node_expr_logical_rel.cpp
+    program_node_expr_variable.cpp
+    #program_node_expr_addition.cpp
+    program_node_expr_block.cpp
+    program_node_expr_multiply.cpp
+    program_node_stmt.cpp
+    #program_node_stmt_assignment.cpp
+    program_node_stmt_if.cpp
+    program_node_stmt_seq.cpp
+    program_node_stmt_else.cpp
+    program_node_stmt_do.cpp
+    program_node_stmt_set.cpp
+    program_node_stmt_else.cpp
+    program_node_stmt_while.cpp
+    program_node_stmt_setelem.cpp
+    #program_node_expr_block.cpp
+)
+
+find_package(${X11_PKG} REQUIRED)
+
+target_link_libraries(${LIBRARY_NAME} ${COMMON_LIB} ${X11_LIBRARIES} ${EXTRA_LINK_LIBS})
