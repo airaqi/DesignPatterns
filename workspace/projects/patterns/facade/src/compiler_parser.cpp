@@ -1,0 +1,456 @@
+#include "compiler_parser.hpp"
+#include "compiler_env.hpp"
+#include "compiler_token.hpp"
+#include "compiler_token_num.hpp"
+#include "compiler_token_word_type_array.hpp"
+#include "program_node_expr_const.hpp"
+#include "program_node_expr_id.hpp"
+#include "program_node_expr_logical_and.hpp"
+#include "program_node_expr_logical_not.hpp"
+#include "program_node_expr_logical_or.hpp"
+#include "program_node_expr_logical_rel.hpp"
+#include "program_node_expr_op_access.hpp"
+#include "program_node_expr_op_arith.hpp"
+#include "program_node_expr_op_unary.hpp"
+#include "program_node_stmt_break.hpp"
+#include "program_node_stmt_do.hpp"
+#include "program_node_stmt_else.hpp"
+#include "program_node_stmt_seq.hpp"
+#include "program_node_stmt_set.hpp"
+#include "program_node_stmt_setelem.hpp"
+#include "program_node_stmt_while.hpp"
+#include <format>
+#include <iostream>
+#include <memory>
+#include <ostream>
+#include <sstream>
+
+
+Parser::Parser(Scanner& scanner, ProgramNodeBuilder& builder) : 
+    _scanner(scanner), 
+    _builder(builder), 
+    _look(_scanner.scan()), 
+    _top(Env::Null),
+    _used(0) {}
+
+
+Parser::~Parser() {}
+
+void Parser::move() {
+    _look = _scanner.scan();
+    std::cout << "Parser::move() _look : " << _look->print() << std::endl;
+}
+
+void Parser::error(std::string s) {
+    throw std::runtime_error("ERROR: " + s + " (" + std::to_string(Scanner::line()) + ", " + std::to_string(Scanner::index()) + ")");
+}
+
+void Parser::match(Tag::Kind t) {
+    std::cout << "Parser::match(" << Tag::to_string(t) << ") _look.tag: " << _look->print() << std::endl;
+    if (_look->tag() == t) {
+        move(); 
+    } else {
+        error("ERROR: Syntax error!");
+    }
+}
+
+
+StmtNode::Ptr Parser::parse()
+{
+    std::cout << "Parser::parse() look: " << _look->print() << std::endl;
+
+    StmtNode::Ptr s = block();
+    int begin = s->newlabel();
+    int after = s->newlabel();
+    s->emitlabel(begin);
+    s->gen(begin, after);
+    s->emitlabel(after);
+    std::cout << "\n\n" << "Parser::parse() s : " << s->print() << std::endl;
+    return s;
+}
+
+StmtNode::Ptr Parser::block() 
+{
+    std::cout << "block()" << std::endl;
+
+    match(Tag::CUBO);
+    Env::Ptr savedEnv = _top;
+    _top = Env::create(_top);
+    decls();
+    StmtNode::Ptr s = stmts();
+    match(Tag::CUBC);
+    _top = savedEnv;
+    std::cout << "Parser::block() s: " << s->print() << std::endl;
+    return s;
+}
+
+void Parser::decls()
+{
+    while(_look->tag() == Tag::BASIC)
+    {
+        Type::Ptr typ = type();
+        Token::Ptr tok = _look;
+        match(Tag::ID); 
+        match(Tag::SCLN);
+        Id::Ptr id = Id::create(std::static_pointer_cast<Word>(tok), typ, _used);
+        _top->put(tok, id);
+        std::cout << "Parser::decls() type: " << typ->print() << " token: " << tok->print() << " _used: " << _used << std::endl;
+        std::cout << "Parser::decls() - top: " << _top << std::endl;
+        _used = _used + typ->width();
+        std::cout << "<<<" << std::endl;
+    }
+}
+
+Type::Ptr Parser::type()
+{
+    // TODO find a way to eleminate this cast
+    Type::Ptr p = std::static_pointer_cast<Type>(_look);
+    std::cout << "Parser::type() _look: " << _look->print() << " p: " << p << std::endl;
+    match(Tag::BASIC);
+    if (_look->tag() != Tag::SQBO)
+        return p;
+    else
+        return dims(p);
+}
+
+Type::Ptr Parser::dims(Type::Ptr p) 
+{
+    match(Tag::SQBO);
+    Token::Ptr tok = _look;
+    match(Tag::NUM);
+    match(Tag::SQBC);
+    if (_look->tag() == Tag::SQBO)
+        p = dims(p);
+    std::cout << "Parser::dims() - p: " << p << std::endl;
+    Array::Ptr arr = Array::create(std::static_pointer_cast<Num>(tok)->value(), p); 
+    std::cout << "Parser::dims() <<<" << std::endl;
+    return arr;
+}
+
+StmtNode::Ptr Parser::stmts()
+{
+    std::cout << "Parser::stmts() - look: " << _look->print() << std::endl;
+    if (_look->tag() == Tag::CUBC)
+        return StmtNode::Null;
+    else 
+    {
+        StmtNode::Ptr st = stmt(), sts = stmts();
+        std::cout << "Parser::stmts() - stmt: " << st->print() << " stmts: " << sts->print() << std::endl;
+        return SeqNode::create(st, sts);
+    }
+}
+
+StmtNode::Ptr Parser::stmt()    
+{
+    ExprNode::Ptr x;
+    StmtNode::Ptr s, s1, s2;
+    StmtNode::Ptr savedStmt;        // Save enclosing loops for breaks
+
+    std::cout << "Parser::stmt() - look: " << _look->print() << std::endl;
+
+    switch(_look->tag())
+    {
+        case Tag::SCLN:
+            move();
+            return StmtNode::Null;
+
+        case Tag::IF:
+            match(Tag::IF);
+            match(Tag::PARO);
+            x = boolean();
+            match(Tag::PARC);
+            s1 = stmt();
+            if (_look->tag() != Tag::ELSE)
+                return IfNode::create(x, s1);
+            match(Tag::ELSE);
+            s2 = stmt();
+            return ElseNode::create(x, s1, s2);
+        
+        case Tag::WHILE:
+            {
+                std::cout << "Parser::stmt() while : look: " << _look->print() << std::endl;
+                WhileNode::Ptr  whileNode = WhileNode::create();
+                std::cout << "Parser::stmt() while : \n";
+                savedStmt = StmtNode::Enclosing;
+                StmtNode::Enclosing = whileNode;
+                
+                match(Tag::WHILE);
+                match(Tag::PARO);
+                x = boolean();
+                match(Tag::PARC);
+                s1 = stmt();
+                whileNode->init(x, s1);
+                StmtNode::Enclosing = savedStmt;        // reset enclosing statement
+                return whileNode;
+            }
+        case Tag::DO:
+            {
+                DoNode::Ptr donode = DoNode::create();
+                savedStmt = StmtNode::Enclosing;
+                StmtNode::Enclosing = donode;
+
+                match(Tag::DO);
+                s1 = stmt();
+                
+                match(Tag::WHILE);
+                match(Tag::PARO);
+                x = boolean();
+                match(Tag::PARC);
+                match(Tag::SCLN);
+                donode->init(s1, x);
+                StmtNode::Enclosing = savedStmt;
+                return donode;
+
+            }
+        case Tag::BREAK:
+            match(Tag::BREAK);
+            match(Tag::SCLN);
+            return BreakNode::create();
+
+        case Tag::CUBO:
+            return block();
+
+        default:
+            return assign();
+    }
+}
+
+StmtNode::Ptr Parser::assign()    
+{
+    std::cout << "Parser::assign() _look: " << _look->print() << std::endl;
+
+    StmtNode::Ptr st;
+    Token::Ptr t = _look;
+    match(Tag::ID);
+
+    std::cout << "Parser::assign() - top: " << _top << std::endl;
+    //if (_top->prev() != nullptr)    std::cout << "Parser::assign() - _top->prev(): " << _top->prev() << std::endl;    
+
+    Id::Ptr id = _top->get(t);
+
+    if (id != nullptr) std::cout << "Parser::assign() - id: " << id->print() << std::endl;
+    if (id == nullptr) error(std::format("{} {}", t->to_string(), "undeclaired"));
+
+    if (_look->tag() == Tag::ASGN)
+    {
+        std::cout << "Parser::assign() =\n";
+        move();
+        st = SetNode::create(id, boolean());
+        std::cout << "Parser::assign() = st: " << st->print() << std::endl;
+    }
+    else 
+    {
+        std::cout << "Parser::assign() accessNode\n";
+        AccessNode::Ptr x = offset(id);
+        match(Tag::ASGN);
+        ExprNode::Ptr b = boolean();
+        st = SetElemNode::create(x, b);
+        std::cout << "Parser::assign() accessNode st = " << st << std::endl;
+    }
+    match(Tag::SCLN);
+
+    std::cout << "Parser::assign() - stmt: " << st->print() << std::endl;
+    return st; 
+}
+
+ExprNode::Ptr Parser::boolean() 
+{
+    std::cout << "Parser::boolean() I _look: " << _look->print() << std::endl;
+
+    ExprNode::Ptr x = join();
+    std::cout << "Parser::boolean() II _look: " <<_look->print() << std::endl;
+
+    while(_look->tag() == Tag::OR)
+    {
+        Token::Ptr tok = _look;
+        move();
+        x = OrNode::create(tok, x, join());
+    }
+    return x; 
+}
+
+ExprNode::Ptr Parser::join()   
+{
+    std::cout << "Parser::join() _look: " << _look->print() << std::endl;
+
+    ExprNode::Ptr x = equality();
+    while(_look->tag() == Tag::AND)
+    {
+        Token::Ptr tok = _look;
+        move();
+        x = AndNode::create(tok, x, equality());
+    }
+    return x; 
+}
+
+ExprNode::Ptr Parser::equality()   
+{
+    std::cout << "Parser::equality() _look: " << _look->print() << std::endl;
+
+    ExprNode::Ptr x = rel();
+    while (_look->tag() == Tag::EQ || _look->tag() == Tag::NE)
+    {
+        Token::Ptr tok = _look;
+        move();
+        x = RelNode::create(tok, x, rel());
+    }
+    return x; 
+}
+
+ExprNode::Ptr Parser::rel() 
+{
+    std::cout << "Parser::rel() I _look: " << _look->print() << std::endl;
+
+    ExprNode::Ptr x = expr();
+    std::cout << "Parser::rel() II look: " << _look->print() << std::endl;
+    switch(_look->tag())
+    {
+        case Tag::LT:
+        case Tag::LE:
+        case Tag::GT:
+        case Tag::GE:
+            {
+                std::cout << "Parser::rel() III look: " << _look->print() << " x: " << x->print() << std::endl;
+                Token::Ptr tok = _look;
+                move();
+                return RelNode::create(tok, x, expr());
+            }
+        default:
+            return x;
+    }
+}
+
+ExprNode::Ptr Parser::expr()
+{
+    std::cout << "Parser::expr() I _look: " << _look->print() << std::endl;
+
+    ExprNode::Ptr x = term();
+    std::cout << "Parser::expr() II _look: " << _look->print() << " plus: " << Tag::to_string(Tag::PLUS) << " x: " << x->print() << std::endl;
+    while (_look->tag() == Tag::PLUS || _look->tag() == Tag::HYPH)
+    {
+        std::cout << "Parser::expr() III _look: " << _look->print() << std::endl;
+        Token::Ptr tok = _look;
+        move();
+        x = ArithNode::create(tok, x, term());
+    }
+    std::cout << "Parser::expr() IV x: " << x->print() << std::endl;
+    return x; 
+}
+
+ExprNode::Ptr Parser::term()   
+{
+    std::cout << "Parser::term() _look: " << _look->print() << std::endl;
+
+    ExprNode::Ptr x = unary();
+    while (_look->tag() == Tag::MULT || _look->tag() == Tag::SLSH)
+    {
+        Token::Ptr tok = _look;
+        move();
+        x = ArithNode::create(tok, x, unary());
+    }
+    return x; 
+}
+
+ExprNode::Ptr Parser::unary()   
+{
+    std::cout << "Parser::unary() _look: " << _look->print() << std::endl;
+
+    if (_look->tag() == Tag::MINUS)
+    {
+        move();
+        return UnaryNode::create(Word::minus, unary());
+    }
+    else if (_look->tag() == Tag::NOT) 
+    {
+        Token::Ptr tok = _look;
+        move();
+        return NotNode::create(tok, unary());
+    } 
+    return factor();
+}
+
+ExprNode::Ptr Parser::factor()   
+{
+    std::cout << "Parser::factor() _look: " << _look->print() << std::endl;
+
+    ExprNode::Ptr x = ExprNode::Null;
+    switch (_look->tag()) 
+    {
+        case Tag::PARO:
+            move();
+            x = boolean();
+            match(Tag::PARC);
+            return x;
+
+        case Tag::NUM:
+            x = ConstNode::create(_look, Type::Int);
+            move();
+            return x;
+
+        case Tag::REAL:
+            x = ConstNode::create(_look, Type::Float);
+            move();
+            return x;
+
+        case Tag::TRUE:
+            x = ConstNode::True;
+            move();
+            return x;
+
+        case Tag::FALSE:
+            x = ConstNode::False;
+            move();
+            return x;
+
+        case Tag::ID:
+            {
+                std::string s = _look->to_string();
+                Id::Ptr id = _top->get(_look);
+                if (id == nullptr) 
+                    error(static_cast<std::ostringstream>(std::ostringstream() << s << " undeclared").str());
+                move();
+                if (_look->tag() != Tag::SQBO)
+                    return id;
+                else
+                    return offset(id);
+            }
+
+        default:
+            error("syntax error");
+            return x;
+
+    }
+    return ExprNode::Null; 
+}
+
+AccessNode::Ptr Parser::offset(Id::Ptr a) 
+{
+    std::cout << "Parser::offset(" << a << ") _look: " << _look->print() << std::endl;
+
+    ExprNode::Ptr i, w, t1, t2, loc;
+    Type::Ptr typ = a->type();
+
+    match(Tag::SQBO);
+    i = boolean();
+    match(Tag::SQBC);
+    
+    typ = std::static_pointer_cast<Array>(typ)->of();
+    w = ConstNode::create(typ->width());
+    t1 = ArithNode::create(Word::mult, i, w);
+    loc = t1;
+
+    while (_look->tag() == Tag::SQBO)
+    {
+        match(Tag::SQBO);
+        i = boolean();
+        match(Tag::SQBC);
+
+        typ = std::static_pointer_cast<Array>(typ)->of();
+        w = ConstNode::create(typ->width());
+        t1 = ArithNode::create(Word::mult, i, w);
+        t2 = ArithNode::create(Word::plus, loc, t1);
+        loc = t2;
+    }
+
+    return AccessNode::create(a, loc, typ); 
+}

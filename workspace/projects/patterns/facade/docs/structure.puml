@@ -1,0 +1,65 @@
+@startuml
+
+skinparam linetype ortho
+'left to right direction
+
+title Facade Pattern Example Strucure
+
+class Compiler <<Facade>>
+
+together {
+    together {
+        class Scanner <<Subsystem>>
+        class Parser <<Subsystem>>
+        class CodeGenerator <<Subsystem>>
+    }
+    
+    together {
+        class ProgramNodeBuilder <<Subsystem>>
+        abstract class ProgramNode <<Subsystem>>
+        
+        class VariableNode <<Subsystem>>
+        class AssignmentNode <<Subsystem>>
+        class ReturnStatementNode <<Subsystem>>
+        class ConditionNode <<Subsystem>>
+    }
+}
+
+Scanner : -inputstream : Stream
+Scanner : +scan() : Token
+
+Parser : +parse(Scanner, ProgramNodeBuilder)
+
+
+CodeGenerator : #output : ByteCodeStream
+CodeGenerator : #CodeGenerator(ByteCodeStream)
+CodeGenerator : +visit(StatementNode) : void
+CodeGenerator : +visit(ExpressionNode) : void
+
+ProgramNode <|-- VariableNode
+ProgramNode <|-- AssignmentNode
+ProgramNode <|-- ReturnStatementNode
+ProgramNode <|-- ConditionNode
+
+Compiler : +Compiler()
+Compiler : +compile(Stream, ByteCodeStream) : void
+
+Parser -> Scanner
+Parser ---> ProgramNodeBuilder
+
+Compiler --> Scanner
+Compiler --> Parser
+Compiler -> CodeGenerator
+
+ProgramNodeBuilder *--> ProgramNode
+
+note as nFacade
+    <b>Facade
+    Facade class is a high-level unified 
+    interface to a set of system public 
+    interfaces
+end note
+nFacade . Compiler
+
+
+@enduml
