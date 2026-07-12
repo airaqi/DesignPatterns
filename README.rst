@@ -77,6 +77,7 @@ All patterns structures has been documented and samples has been implemented.
     "", `Bridge <workspace/projects/patterns/bridge/>`_, "Decouple an abstraction from its implementation so that the two can vary independently."
     "", `Composite <workspace/projects/patterns/composite/>`_, "Compose objects into tree structures to represent part-whole hierarchies."
     "", `Decorator <workspace/projects/patterns/decorator/>`_, "Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality"
+    "", `Facade <workspace/projects/patterns/facade/>`_, "Provide a unified interface to a set of interfaces in a subsystem"
     "Behavioural", `Command <workspace/projects/patterns/command/>`_, "Encapsulate a request as an object, thereby letting you parameterize clients with different requests, queue or log requests, and support undoable operations."
     "", `Iterator <workspace/projects/patterns/iterator/>`_, "Provide a way to access the elements of an aggregate object sequentially without exposing its underlying representation."
     "", `Memento <workspace/projects/patterns/memento>`_, "Without violating encapsulation, capture and externalize an object's internal state so that the object can be restored to this state later."
@@ -92,7 +93,11 @@ refer to lexi project in `here <workspace/projects/lexi>`_
 Strucure & Usage
 ================
 
-Implementing the project has been organized into several libraries, as follows
+---------
+Structure
+---------
+
+Implementing the project has been organized into several directories, as follows
 
 .. csv-table::
     :header-rows: 1
@@ -108,23 +113,71 @@ Implementing the project has been organized into several libraries, as follows
 Usage
 -----
 
+Clone
+-----
+
+to get the project, replace */path/to/your/folder* with a path of your choise.
+
+.. code-block:: console
+
+    cd /path/to/your/folder
+    git clone https://github.com/airaqi/DesignPatterns.gitw
+
+Dependencies
+------------
+
+This project depends on the following libraries, so make sure to install them before building
+the project, most propaply you will have a pre-installed c++ compiler (if you are using any 
+destro of linux):
+
+1. CMake 3.30
+2. XLib Xll Library
+3. XCB X11 Library
+
+for Arch Linux use:
+
+.. code-block:: console
+
+    sudo pacman -Syu cmake
+
+for Ubuntu:
+
+.. code-block:: console
+
+    sudo apt-get update
+    sudo apt-get install build-essential gdb
+    sudo apt-get install cmake
+
+Build
+-----
+
 To build the project run the following commands on the terminal window, starting from the
 project root:
 
-.. code-block:: shell
+.. code-block:: console
 
-    cd workspace/projects
-    cmake -B ../build -DCMAKE_EXPORT_COMPILE_COMMANDS=1
-    cmake --build ../build/
+    cd workspace/
+    cmake -B ./build -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+    cmake --build ./build/
+
+Run
+---
 
 To run the tests:
 
-.. code-block:: shell
+.. code-block:: console
 
-    ctest -T memcheck --test-dir ../build/
+    ctest -T memcheck --test-dir ./build/
 
-To run pattern applications
+To run pattern application, use this command format ./build/patterns/<pattern_name>/<pattern_name>_app, such that:
 
-.. code-block:: shell
+.. code-block:: console
 
-    ../build/patterns/<pattern_name>/<pattern_name>_app
+    ./build/patterns/adapter/adapter_app
+
+To run pattern test, use this command format *./build/patterns/<pattern_name>/test/test_<pattern_name>*, such that:
+
+.. code-block:: console
+
+   ./build/patterns/adapter/test/test_adapter
+
