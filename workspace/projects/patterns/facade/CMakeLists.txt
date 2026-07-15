@@ -1,8 +1,8 @@
-cmake_minimum_required(VERSION 3.30)
+cmake_minimum_required(VERSION 3.5)
 
 # TODO replace module_name with the new pattern
 set(PATTERN_NAME facade)
-set(EXTRA_LINK_LIBS )
+set(EXTRA_LINK_LIBS "plog::plog")
 
 set(LIBRARY_NAME ${PATTERN_NAME})
 set(EXEC_NAME "${PATTERN_NAME}_app")
