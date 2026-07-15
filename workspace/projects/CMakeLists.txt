@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.30)
+cmake_minimum_required(VERSION 3.5)
 
 project(patterns VERSION 1.0)
 
@@ -12,6 +12,16 @@ project(patterns VERSION 1.0)
 #add_compile_options(-g)
 
 include(CTest)
+include(FetchContent)
+
+set(CMAKE_POLICY_VERSION_MINIMUM 3.5)
+FetchContent_Declare(
+    plog
+    GIT_REPOSITORY https://github.com/SergiusTheBest/plog
+    GIT_TAG        1.1.10
+    GIT_SHALLOW    true
+)
+FetchContent_MakeAvailable(plog) # Downloads and adds plog to your CMake project
 
 #set(TEST_PKG doctest)
 #set(TEST_FW "doctest::doctest")

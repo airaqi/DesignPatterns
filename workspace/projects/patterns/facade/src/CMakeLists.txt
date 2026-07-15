@@ -34,6 +34,7 @@ add_library(${LIBRARY_NAME}
     program_node_stmt_if.cpp
     program_node_stmt_seq.cpp
     program_node_stmt_else.cpp
+    program_node_stmt_equal.cpp
     program_node_stmt_do.cpp
     program_node_stmt_set.cpp
     program_node_stmt_else.cpp
