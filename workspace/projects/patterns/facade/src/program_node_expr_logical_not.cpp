@@ -1,12 +1,13 @@
 #include "program_node_expr_logical_not.hpp"
 #include <format>
+#include <memory>
 #include <string>
 
 NotNode::NotNode(Token::Ptr token, ExprNode::Ptr e) : LogicalNode(token, e, e) {}
 
 NotNode::Ptr NotNode::create(Token::Ptr token, ExprNode::Ptr e)
 {
-    return NotNode::Ptr(new NotNode(token, e));
+    return std::make_shared<NotNode>(token, e);
 }
 
 void NotNode::jumping(int t, int f) 

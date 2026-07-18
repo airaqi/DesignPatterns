@@ -1,5 +1,6 @@
 #include "program_node_expr_op_unary.hpp"
 #include <format>
+#include <memory>
 #include <string>
 
 UnaryNode::UnaryNode(Token::Ptr token, ExprNode::Ptr e) : OpNode(token, Type::Null), _expr(e) 
@@ -11,7 +12,7 @@ UnaryNode::UnaryNode(Token::Ptr token, ExprNode::Ptr e) : OpNode(token, Type::Nu
 
 UnaryNode::Ptr UnaryNode::create(Token::Ptr token, ExprNode::Ptr expr)
 {
-    return UnaryNode::Ptr(new UnaryNode(token, expr));
+    return std::make_shared<UnaryNode>(token, expr);
 }
 
 void UnaryNode::expr(ExprNode::Ptr e) { _expr = e; }

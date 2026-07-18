@@ -11,7 +11,6 @@ class ElseNode : public StmtNode
     public:
         typedef std::shared_ptr<ElseNode> Ptr;
 
-    protected:
         ElseNode(ExprNode::Ptr, StmtNode::Ptr, StmtNode::Ptr);
 
     public:

@@ -2,6 +2,7 @@
 #include "compiler_token_num.hpp"
 #include "compiler_token_word_type.hpp"
 #include <format>
+#include <memory>
 #include <sstream>
 
 ConstNode::Ptr ConstNode::True = ConstNode::create(Word::True, Type::Bool);
@@ -12,12 +13,12 @@ ConstNode::ConstNode(int i) : ExprNode(Num::create(i), Type::Int) {}
 
 ConstNode::Ptr ConstNode::create(Token::Ptr token, Type::Ptr type) 
 {
-    return ConstNode::Ptr(new ConstNode(token, type));
+    return std::make_shared<ConstNode>(token, type);
 }
 
 ConstNode::Ptr ConstNode::create(int i)
 {
-    return ConstNode::Ptr(new ConstNode(i));
+    return std::make_shared<ConstNode>(i);
 }
 
 void ConstNode::jumping(int t, int f)
@@ -30,5 +31,6 @@ void ConstNode::jumping(int t, int f)
 
 std::string ConstNode::print(std::string prefix) const
 {
-    return std::format("{}[Const({})]", prefix, ExprNode::print());
+    std::string attribs = std::format("id:{}, op:{}, typ:{}", id(), op()->to_string(), type()->to_string());
+    return std::format("{}[Const({})]", prefix, attribs);
 }

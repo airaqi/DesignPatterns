@@ -1,13 +1,14 @@
 #include "compiler_token_word_type.hpp"
 #include "compiler_tag.hpp"
 #include <format>
+#include <memory>
 #include <ostream>
 
-Type::Ptr Type::Int = Type::Ptr(new Type("int", Tag::BASIC, 4));
-Type::Ptr Type::Float = Type::Ptr(new Type("float", Tag::BASIC, 8));
-Type::Ptr Type::Char = Type::Ptr(new Type("char", Tag::BASIC, 1));
-Type::Ptr Type::Bool = Type::Ptr(new Type("bool", Tag::BASIC, 1));
-Type::Ptr Type::Null = Type::Ptr(new Type("null", Tag::BASIC, 0));
+Type::Ptr Type::Int = Type::create("int", Tag::BASIC, 4);
+Type::Ptr Type::Float = Type::create("float", Tag::BASIC, 8);
+Type::Ptr Type::Char = Type::create("char", Tag::BASIC, 1);
+Type::Ptr Type::Bool = Type::create("bool", Tag::BASIC, 1);
+Type::Ptr Type::Null = Type::create("null", Tag::BASIC, 0);
 
 Type::Type(std::string s, Tag::Kind tag, int w) : 
     Word(s, tag), _width(w), _name(s) {}
@@ -15,12 +16,12 @@ Type::Type(std::string s, Tag::Kind tag, int w) :
 
 Type::Ptr Type::create(std::string s, Tag::Kind tag, int w)
 {
-    return Type::Ptr(new Type(s, tag, w));
+    return std::make_shared<Type>(s, tag, w);
 }
 
 Token::Ptr Type::clone()
 {
-    return Type::Ptr(new Type(_name, tag(), _width));
+    return std::make_shared<Type>(_name, tag(), _width);
 }
 
 int Type::width() const
@@ -41,7 +42,7 @@ bool Type::numeric(Type::Ptr t)
 
 Type::Ptr Type::max(const Type::Ptr p1, const Type::Ptr p2)
 {
-    if (!numeric(p1) || !numeric(Type::Ptr(p2))) 
+    if (!numeric(p1) || !numeric(p2)) 
         return Type::Null;
     else if (*p1 == *Type::Float || *p2 == *Type::Float) 
         return Type::Float;

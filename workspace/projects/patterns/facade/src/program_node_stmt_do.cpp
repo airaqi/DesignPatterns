@@ -1,4 +1,5 @@
 #include "program_node_stmt_do.hpp"
+#include "plog/Log.h"
 #include <format>
 #include <memory>
 #include <ostream>
@@ -8,7 +9,7 @@ DoNode::DoNode() : _expr(nullptr), _stmt(nullptr) {}
 
 DoNode::Ptr DoNode::create() 
 {
-    return DoNode::Ptr(new DoNode());
+    return std::make_shared<DoNode>();
 }
 
 ExprNode::Ptr DoNode::expr() const { return _expr; }
@@ -19,7 +20,7 @@ void DoNode::stmt(StmtNode::Ptr s) { _stmt = s; }
 
 void DoNode::init(StmtNode::Ptr s, ExprNode::Ptr e) 
 {
-    std::cout << "DoNode::init(" << s << ", " << e << ") e.type: " << e->type() << std::endl;
+    PLOGD << "(" << s << ", " << e << ") e.type: " << e->type();
 
     _expr = e;
     _stmt = s;

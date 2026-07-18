@@ -1,7 +1,9 @@
 #include "program_node_stmt_set.hpp"
+#include "plog/Log.h"
 #include "program_node_expr.hpp"
 #include "program_node_stmt.hpp"
 #include <format>
+#include <memory>
 #include <ostream>
 #include <sstream>
 
@@ -13,7 +15,7 @@ SetNode::SetNode(Id::Ptr id, ExprNode::Ptr e) : _id(id), _expr(e)
 
 SetNode::Ptr SetNode::create(Id::Ptr id, ExprNode::Ptr e) 
 {
-    return SetNode::Ptr(new SetNode(id, e));
+    return std::make_shared<SetNode>(id, e);
 }
 
 Id::Ptr SetNode::tid() const { return _id; }
@@ -33,9 +35,10 @@ Type::Ptr SetNode::check(Type::Ptr p1, Type::Ptr p2)
 
 void SetNode::gen(int b, int a)
 {
+    PLOGD << "id: " << tid()->print() << ", expr: " << expr()->print(); 
     emit(static_cast<std::ostringstream>(std::ostringstream() 
-                << _id->to_string() << " = "
-                << _expr->gen()->to_string()).str());
+                << tid()->to_string() << " = "
+                << expr()->gen()->to_string()).str());
 }
 
 bool SetNode::equals(const ProgNode & that) const 
@@ -46,7 +49,7 @@ bool SetNode::equals(const ProgNode & that) const
 
 std::string SetNode::print(std::string prefix) const
 {
-    return std::format("{}[Set({}, {}, {}): {}]", prefix, id(), tid()->print(), _expr->print(), StmtNode::print());
+    return std::format("{}[Set({}, {}, {})]", prefix, id(), tid()->print(), _expr->print());
 }
 
 bool SetNode::operator==(const ProgNode & that) const { return equals(that); }

@@ -22,7 +22,6 @@ class StmtNode : public ProgNode
         static const StmtNode::Ptr Null;
         static StmtNode::Ptr Enclosing;
 
-    protected:
         StmtNode();
 
     public:

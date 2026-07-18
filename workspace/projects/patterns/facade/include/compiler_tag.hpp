@@ -100,6 +100,8 @@ inline std::string Tag::to_string(const Tag::Kind &k, std::string prefix)
         case Tag::NONE:     return "NONE";     break;
         case Tag::SQBO:     return "SQBO";     break;
         case Tag::SQBC:     return "SQBC";     break;
+        case Tag::CUBO:     return "CUBO";     break;
+        case Tag::CUBC:     return "CUBC";     break;
         default:            return "";
     }
 }

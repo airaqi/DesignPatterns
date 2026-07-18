@@ -11,7 +11,7 @@ class SetElemNode : public StmtNode
     public:
         typedef std::shared_ptr<SetElemNode> Ptr;
 
-    protected:
+    public:
         SetElemNode(AccessNode::Ptr, ExprNode::Ptr);
 
     public:
@@ -19,6 +19,8 @@ class SetElemNode : public StmtNode
 
         Type::Ptr check(Type::Ptr, Type::Ptr);
         void gen(int, int);
+
+        virtual std::string print(std::string = "") const override;
 
     private:
         Id::Ptr         _array;

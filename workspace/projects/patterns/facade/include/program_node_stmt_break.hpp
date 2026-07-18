@@ -10,7 +10,7 @@ class BreakNode : public StmtNode
     public:
         typedef std::shared_ptr<BreakNode> Ptr;
 
-    protected:
+    public:
         BreakNode() 
         {
             if (_stmt->Enclosing == StmtNode::Null)
@@ -19,12 +19,16 @@ class BreakNode : public StmtNode
         }
 
     public:
-        static Ptr create() { return Ptr(new BreakNode()); }
+        static Ptr create() { return std::make_shared<BreakNode>(); }
 
-        void gen(int b, int a)
+        void gen(int b, int a) override
         {
             emit(std::format("{}{}", "goto L", _stmt->after()));
         }
+
+        StmtNode::Ptr stmt() const { return _stmt; }
+
+        virtual bool equals(const ProgNode & other) const override { return stmt() == static_cast<const BreakNode&>(other).stmt(); }
 
     private:
         StmtNode::Ptr   _stmt;

@@ -1,6 +1,6 @@
 add_library(${LIBRARY_NAME}
     dummy.cpp
-    #compiler_compiler.cpp
+    compiler_compiler.cpp
     compiler_scanner.cpp
     #compiler_parser.cpp
     compiler_token.cpp
@@ -20,6 +20,7 @@ add_library(${LIBRARY_NAME}
     program_node_expr_op_arith.cpp
     program_node_expr_op_unary.cpp
     program_node_expr_op_access.cpp
+    program_node_expr_temp.cpp
     program_node_expr_logical.cpp
     program_node_expr_logical_or.cpp
     program_node_expr_logical_and.cpp

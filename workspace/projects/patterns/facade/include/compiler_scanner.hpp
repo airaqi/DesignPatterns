@@ -8,6 +8,9 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <plog/Log.h>
+#include <plog/Formatters/TxtFormatter.h>
+#include <plog/Initializers/ConsoleInitializer.h>
 
 class Scanner
 {

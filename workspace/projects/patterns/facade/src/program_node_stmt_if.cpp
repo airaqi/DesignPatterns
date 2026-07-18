@@ -1,5 +1,6 @@
 #include "program_node_stmt_if.hpp"
 #include "program_node.hpp"
+#include <memory>
 #include <ostream>
 #include <sstream>
 #include <string>
@@ -13,7 +14,7 @@ IfNode::IfNode(ExprNode::Ptr e, StmtNode::Ptr s) : _expr(e), _stmt(s)
 
 IfNode::Ptr IfNode::create(ExprNode::Ptr e, StmtNode::Ptr s) 
 {
-    return IfNode::Ptr(new IfNode(e, s));
+    return std::make_shared<IfNode>(e, s);
 }
 
 ExprNode::Ptr IfNode::expr() const
@@ -57,9 +58,9 @@ std::string IfNode::print(std::string prefix) const
 {
     std::stringstream sout;
     std::string subfix = prefix + "  ";
-    sout << prefix << "[If (" << id() << "): \n" 
-        << expr()->to_string(subfix) << "\n" << subfix << "?\n"
-        << stmt()->to_string(subfix) << "]";
+    sout << prefix << "[If (" << id() << "): " 
+        << expr()->print()  << "?"
+        << stmt()->to_string() << "]";
     return sout.str();
 }
 

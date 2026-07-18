@@ -1,5 +1,6 @@
 #include "compiler_token_word_type_array.hpp"
 #include <format>
+#include <memory>
 #include <sstream>
 #include <string>
 
@@ -9,7 +10,7 @@ Array::Array(int sz, Type::Ptr t) : Type("[]", Tag::INDEX, sz * t->width()), _si
 
 Array::Ptr Array::create(int sz, Type::Ptr t)
 {
-    return Array::Ptr(new Array(sz, t));
+    return std::make_shared<Array>(sz, t);
 }
 
 Type::Ptr Array::of() const                 { return _of; }

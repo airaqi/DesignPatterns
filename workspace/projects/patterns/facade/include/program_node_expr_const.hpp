@@ -11,7 +11,6 @@ class ConstNode : public ExprNode
 
         static Ptr True, False;
 
-    protected:
         ConstNode(Token::Ptr, Type::Ptr);
         ConstNode(int i);
 

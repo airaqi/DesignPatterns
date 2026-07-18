@@ -11,7 +11,6 @@ class Word : public Token
 {
     public:
         typedef std::shared_ptr<Word> Ptr;
-    protected:
         Word(std::string s, Tag::Kind kind);
 
     public:

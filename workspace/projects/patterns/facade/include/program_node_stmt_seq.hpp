@@ -10,7 +10,7 @@ class SeqNode : public StmtNode
     public:
         typedef std::shared_ptr<SeqNode> Ptr;
 
-    protected:
+    public:
         SeqNode(StmtNode::Ptr, StmtNode::Ptr);
 
     public:

@@ -9,7 +9,6 @@ class AndNode : public LogicalNode
     public:
         typedef std::shared_ptr<AndNode> Ptr;
 
-    protected:
         AndNode(Token::Ptr, ExprNode::Ptr, ExprNode::Ptr);
 
     public:

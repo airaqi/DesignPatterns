@@ -11,7 +11,7 @@ Token::Token(Tag::Kind kind) : _tag(kind), _line(Scanner::line()), _index(Scanne
 
 Token::Ptr Token::create(Tag::Kind kind)
 {
-    return std::shared_ptr<Token>(new Token(kind));
+    return std::make_shared<Token>(kind);
 }
 
 Token::Ptr Token::clone()

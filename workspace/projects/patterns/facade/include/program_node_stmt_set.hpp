@@ -12,7 +12,6 @@ class SetNode : public StmtNode
     public:
         typedef std::shared_ptr<SetNode> Ptr;
 
-    protected:
         SetNode(Id::Ptr, ExprNode::Ptr);
 
     public:

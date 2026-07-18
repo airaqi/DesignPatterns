@@ -8,7 +8,6 @@ class RelNode : public LogicalNode
     public:
         typedef std::shared_ptr<RelNode> Ptr;
 
-    protected:
         RelNode(Token::Ptr, ExprNode::Ptr, ExprNode::Ptr);
 
     public:

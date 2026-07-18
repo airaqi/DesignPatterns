@@ -12,7 +12,6 @@ class WhileNode : public StmtNode
     public:
         typedef std::shared_ptr<WhileNode> Ptr;
 
-    protected:
         WhileNode();
 
     public:

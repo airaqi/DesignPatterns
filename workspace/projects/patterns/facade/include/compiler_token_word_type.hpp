@@ -12,7 +12,7 @@ class Type : public Word
     public: 
         typedef std::shared_ptr<Type> Ptr;
 
-    protected:
+    public:
         Type(std::string s, Tag::Kind tag, int w);
 
     public:

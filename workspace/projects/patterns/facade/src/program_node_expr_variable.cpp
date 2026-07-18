@@ -1,4 +1,5 @@
 #include "program_node_expr_variable.hpp"
+#include <memory>
 #include <sstream>
 #include <string>
 
@@ -6,7 +7,7 @@ VariableNode::VariableNode(std::string n, Type::Ptr t) : ExprNode(nullptr, t), _
 VariableNode::~VariableNode() {}
 
 VariableNode::Ptr VariableNode::create(std::string name, Type::Ptr t) {
-    return VariableNode::Ptr(new VariableNode(name, t));
+    return std::make_shared<VariableNode>(name, t);
 }
 
 void VariableNode::name(std::string n) { _name = n; }

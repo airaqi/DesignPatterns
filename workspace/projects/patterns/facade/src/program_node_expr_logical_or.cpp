@@ -1,12 +1,13 @@
 #include "program_node_expr_logical_or.hpp"
 #include "program_node_expr_logical.hpp"
+#include <memory>
 
 OrNode::OrNode(Token::Ptr token, ExprNode::Ptr lhs, ExprNode::Ptr rhs) :
     LogicalNode(token, lhs, rhs) {}
 
 OrNode::Ptr OrNode::create(Token::Ptr token, ExprNode::Ptr lhs, ExprNode::Ptr rhs)
 {
-    return OrNode::Ptr(new OrNode(token, lhs, rhs));
+    return std::make_shared<OrNode>(token, lhs, rhs);
 }
 
 void OrNode::jumping(int t, int f)
