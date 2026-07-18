@@ -1,24 +1,38 @@
 #ifndef __COMPILER_COMPILER_H__
 #define __COMPILER_COMPILER_H__ 
 
-#include "compiler_byte_code.hpp"
+#include "program_node_stmt.hpp"
+#include <getopt.h>
 #include <istream>
-#include <sstream>
+#include <memory>
+#include <ostream>
 #include <string>
 
 class Compiler
 {
-    public:
-        Compiler();
+    private:
+        using Ptr = std::shared_ptr<Compiler>;
+        static Ptr _instance;
+        std::istream & _in;
+        std::ostream & _out;
 
-        virtual void compile(std::istream&, ByteCodeStream&);
+    public:
+        Compiler(std::istream&, std::ostream&);
+        static Ptr create(std::istream&, std::ostream&);
+
+    public:
+        static Ptr get_instance();
+        static Ptr get_instance(std::istream&, std::ostream&);
+        StmtNode::Ptr compile();
+
+        std::istream& get_in() const;
+        std::ostream& get_out() const;
 
     private:
         void error(int code, std::string message);
-        int find_arg(const std::string option, int argc, char *argv[]);
-        std::stringstream& load_file(std::string filename, std::stringstream& stream);
-        std::string usage();
-        std::string print_args(int argc, char *argv[]);
+
+    public:
+
 };
 
 #endif /* ifndef __COMPILER_COMPILER_H__ */
