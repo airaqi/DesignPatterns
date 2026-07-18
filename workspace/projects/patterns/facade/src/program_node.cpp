@@ -1,12 +1,15 @@
 #include "program_node.hpp"
-#include "compiler_compiler.hpp"
+#include "compiler_parser.hpp"
 #include "compiler_scanner.hpp"
 #include <ctime>
 #include <format>
 #include <iostream>
 #include <ostream>
+#include <sstream>
 #include <stdexcept>
 #include <string>
+
+std::stringstream ProgNode::_out;
 
 ProgNode::ProgNode() : _id(ProgNode::next_id()), _scope(nullptr), _line(Scanner::line()), _index(Scanner::index()) {}
 ProgNode::~ProgNode() {}
@@ -39,9 +42,10 @@ int ProgNode::index() const             { return _index; }  void ProgNode::index
 ProgNode::Ptr ProgNode::scope() const   { return _scope; }  void ProgNode::scope(ProgNode::Ptr s)   { _scope = s; }
 
 int ProgNode::next_id()     { return _next_id++; }
+std::stringstream& ProgNode::out() { return _out; }
 
-void ProgNode::emitlabel(int i) { Compiler::get_instance()->get_out() << "L" << i << ":"; }
-void ProgNode::emit(std::string s) const { Compiler::get_instance()->get_out() << "\t" << s << std::endl; }
+void ProgNode::emitlabel(int i) { out() << "L" << i << ":"; }
+void ProgNode::emit(std::string s) const { out() << "\t" << s << std::endl; }
 int ProgNode::newlabel() { return ++_labels; }
 
 bool ProgNode::operator==(const ProgNode& that) const { return equals(that); }

@@ -1,6 +1,8 @@
+#include "compiler_compiler.hpp"
 #include "compiler_parser.hpp"
 #include "compiler_scanner.hpp"
 #include "plog/Appenders/ConsoleAppender.h"
+#include "plog/Appenders/RollingFileAppender.h"
 #include "plog/Logger.h"
 #include "plog/Severity.h"
 #include "program_node_builder.hpp"
@@ -11,6 +13,7 @@
 #include <fstream>
 #include <iostream>
 #include <iterator>
+#include <memory>
 #include <ostream>
 #include <sstream>
 #include <stdexcept>
@@ -18,17 +21,15 @@
 #include <format>
 #include <plog/Log.h>
 #include <plog/Formatters/TxtFormatter.h>
+#include <plog/Formatters/MessageOnlyFormatter.h>
 #include <plog/Initializers/ConsoleInitializer.h>
+#include <plog/Initializers/RollingFileInitializer.h>
 #include <getopt.h>
 #include <vector>
 
 static const std::string ANSI_RESET = "\u001B[0m";
 static const std::string ANSI_RED = "\u001B[31m";
 
-
-// Commandline options
-static const std::string OPT_HELP = "-h";
-static const std::string OPT_INTERACT = "-i";
 
 // error messages
 static const std::string ERR_PREFIX = "Error: ";
@@ -37,14 +38,16 @@ static const std::string ERR_FILE_NOT_FOUND = "File not found, check file path";
 
 struct longoption : public option {
   std::string description;
+  std::string param_name;
 };
 
 struct longoption long_options[] = 
 {
-  { "source-file", required_argument, nullptr, 'f', "Source file" },
-  { "verbose", no_argument, nullptr, 'v', "Go Verbose" },
-  { "log-level", required_argument, nullptr, 'l', "Set log level" },
-  { "help", no_argument, nullptr, 'h', "Print help and Exit" }
+  { "source-file", required_argument, nullptr, 'f', "Source file", "src-file" },
+  { "destination-file", required_argument, nullptr, 'd', "Destination file", "dest-file" },
+  { "verbose", no_argument, nullptr, 'v', "Go Verbose", "" },
+  { "log-level", required_argument, nullptr, 'l', "Set log level", "level" },
+  { "help", no_argument, nullptr, 'h', "Print help and Exit", "" }
 };
 
 std::string get_short_options() {
@@ -86,20 +89,25 @@ std::stringstream& load_file(std::string filename, std::stringstream& stream)
 
 std::string usage()
 {
-    std::string strformat = "{}\n\t{}\n";
-    std::string optionsFormat = "\t{:<5}{:<15}{}\n";
-    std::string synopsis = std::vformat(strformat, std::make_format_args("Synopsis:", "Compiles input file"));
-
+    std::string syntaxformat = "{}\n\t{}\n";
+    std::string optionsFormat = "\t{:<15}{:<35}{}\n";
     std::stringstream options, parameters;
 
     for (int i = 0; i < std::size(long_options); i++)
     {
-        std::string val = std::format("-{}", static_cast<char>(long_options[i].val));
-        options << std::vformat(optionsFormat, std::make_format_args(val, long_options[i].name, long_options[i].description));
-        parameters << std::format("[{}]", val);
+        std::string shortOption = std::format("-{}{}", 
+            static_cast<char>(long_options[i].val), 
+            (long_options[i].has_arg ? std::format(" <{}>", long_options[i].param_name) : ""));
+        std::string longOption = std::format("--{}{}", 
+            long_options[i].name, 
+            (long_options[i].has_arg ? std::format(" <{}>", long_options[i].param_name) : ""));
+        options << std::vformat(optionsFormat,  std::make_format_args(shortOption, longOption, long_options[i].description));
+        parameters << std::format("[{}]", shortOption);
     }
+ 
+    std::string synopsis = std::vformat(syntaxformat, std::make_format_args("Synopsis:", "Compiles input file"));
     std::string param_str = std::format("facade_app {}", parameters.str());
-    std::string syntax = std::vformat(strformat, std::make_format_args("Syntax:", param_str));
+    std::string syntax = std::vformat(syntaxformat, std::make_format_args("Syntax:", param_str));
    
     std::stringstream sout;
     sout << synopsis << std::endl << syntax << std::endl << options.str() << std::endl;
@@ -142,20 +150,30 @@ plog::Severity get_plog_level(std::string level_str)
   return level;
 }
 
+enum { STDOUT = 0, STDERR = 1 };
+
+void initLogger() 
+{
+    plog::init<plog::TxtFormatter>(plog::info, plog::streamStdOut);
+    plog::init<plog::TxtFormatter, STDERR>(plog::verbose, plog::streamStdErr);
+}
+
+
 int main(int argc, char *argv[]) {
   try {
-    plog::init<plog::TxtFormatter>(plog::info, plog::streamStdOut);
+    initLogger();
 
     PLOGI << "Hello, Facade!";
     PLOGD << print_args(argc, argv);
     PLOGD << "current dir: " << std::filesystem::current_path();
 
     std::string default_filepath = "./input/in.txt", filepath = default_filepath;
+    std::string default_destpath = "./output/output.txt", destpath = default_destpath;
     std::string short_options = get_short_options();;
     int opt;
     int option_index = 0;
 
-    PLOGI << "short_options: " << short_options;
+    PLOGD << "short_options: " << short_options;
 
     while ((opt = getopt_long(argc, argv, short_options.c_str(), static_cast<struct option*>(long_options), &option_index)) != -1)
     {
@@ -164,6 +182,20 @@ int main(int argc, char *argv[]) {
         case 'f':
           PLOGI << "source-file: " << optarg;
           filepath = std::format("{}", optarg);
+          if (!std::filesystem::exists(filepath)) {
+            PLOGI << "ERROR: file: '" << filepath << "' doesn't exist!\n";
+            return -1;
+          }
+          break;
+        case 'd':
+          destpath = std::format("{}", optarg);
+          if (!std::filesystem::exists(destpath))
+          {
+            PLOGI << "ERROR: file: '" << destpath << "' doesn't exist!\n";
+          }
+          break;
+        case 'v':
+          plog::get()->setMaxSeverity(plog::verbose);
           break;
         case 'l':
           plog::get()->setMaxSeverity(get_plog_level(optarg));
@@ -179,16 +211,15 @@ int main(int argc, char *argv[]) {
 
     std::stringstream filein;
 
-    if (std::filesystem::exists(filepath))
-      PLOGI << "file: " << filepath << " exists";
-    else
-      PLOGI << "file: " << filepath << " doesn't exist";
-
     load_file(filepath, filein);
     PLOGI << "----- input file start: ----" << std::endl << filein.str();
-    PLOGI << "---- input file end ----" << std::endl;;
+    PLOGI << "---- input file end ----" << std::endl;
 
-    compile(filein);
+    std::ofstream fileout(destpath);
+
+    std::shared_ptr<Compiler> compiler = Compiler::get_instance(filein, fileout);
+    compiler->compile();
+    // compile(filein);
 
     PLOGI << "Compile complete!";
 

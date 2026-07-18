@@ -5,6 +5,7 @@
 #include <iostream>
 #include <memory>
 #include <ostream>
+#include <sstream>
 #include <string>
 
 /* Base composite of program nodes.
@@ -65,6 +66,7 @@ class ProgNode
         friend std::ostream& operator<<(std::ostream&, const ProgNode::Ptr);
 
         static int next_id();
+        static std::stringstream& out();
 
     private:
         int             _id;
@@ -73,6 +75,7 @@ class ProgNode
         static int      _next_id;
         static int      _labels;
         ProgNode::Ptr   _scope;
+        static std::stringstream _out;
 };
 
 #endif /* ifndef __COMPILER_PROGRAM_NODE_H__ */
