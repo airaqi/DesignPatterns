@@ -1,4 +1,5 @@
 #include "compiler_env.hpp"
+#include "plog/Log.h"
 #include <iostream>
 #include <ostream>
 #include <sstream>
@@ -9,7 +10,7 @@ Env::Ptr Env::Null = Env::create(nullptr);
 Env::Env(Env::Ptr n) : _prev(n) {}
 
 Env::Ptr Env::create(Env::Ptr n) {
-    return Env::Ptr(new Env(n));
+    return std::make_shared<Env>(n);
 }
 
 Env::Ptr Env::prev() { return _prev; }
@@ -21,17 +22,17 @@ void Env::put(Token::Ptr w, Id::Ptr i)
 
 Id::Ptr Env::get(Token::Ptr w) 
 {
-    std::cout << "Env::get(" << w << ") in" << std::endl;
+    PLOGD << "(" << w << ")";
     for (const auto& [key, val] : _table)
     {
         if (key->equals(w))
         {
-            std::cout << "Env::get(" << w << ") - _table[w]: " << key->print() << " -> " << val->print() << std::endl;
+            PLOGD << "(" << w << ") - _table[w]: " << key->print() << " -> " << val->print();
             return val;
         }
 
     }
-    std::cout << "Env::get(" << w << ") out"  << std::endl;
+    PLOGD << "(" << w << ") out";
     return _prev != Env::Null ? _prev->get(w) : nullptr;
 }
 

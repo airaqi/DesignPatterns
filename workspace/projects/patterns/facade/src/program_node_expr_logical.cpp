@@ -1,8 +1,10 @@
 #include "program_node_expr_logical.hpp"
 #include "compiler_token_word_type.hpp"
+#include "plog/Log.h"
 #include "program_node_expr_temp.hpp"
 #include <format>
 #include <iostream>
+#include <memory>
 #include <sstream>
 #include <string>
 
@@ -20,18 +22,18 @@ LogicalNode::LogicalNode(Token::Ptr token, ExprNode::Ptr l, ExprNode::Ptr r) :
 
 LogicalNode::Ptr LogicalNode::create(Token::Ptr tok, ExprNode::Ptr l, ExprNode::Ptr r) 
 {
-    LogicalNode::Ptr instance = LogicalNode::Ptr(new LogicalNode(tok, l, r));
+    LogicalNode::Ptr instance = std::make_shared<LogicalNode>(tok, l, r);
     instance->initialize();
     return instance;
 }
 
 void LogicalNode::initialize() 
 {
-    std::cout << "LogicalNode::initialize()\n";
+    PLOGD << "()";
     Type::Ptr t = this->check(lhs()->type(), rhs()->type());
-    std::cout << "LogicalNode::initialize() t check: " << t << std::endl;
+    PLOGD << " - t check: " << t;
     type(this->check(lhs()->type(), rhs()->type()));
-    std::cout << "LogicalNode::initialize() type: " << type() << std::endl;
+    PLOGD << " - type: " << type();
     if (*type() == *Type::Null)
         error(std::format("type error: {} cannot be null", this->to_string()));
 }
@@ -44,7 +46,7 @@ ExprNode::Ptr LogicalNode::rhs() const { return _rhs; }
 
 Type::Ptr LogicalNode::check(Type::Ptr l, Type::Ptr r)
 {
-    std::cout << "LogicalNode::check(" << l << ", " << r << ")\n";
+    PLOGD << "(" << l << ", " << r << ")";
 
     if (*l == *Type::Bool && *r == *Type::Bool)
         return Type::Bool;

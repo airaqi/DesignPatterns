@@ -8,7 +8,6 @@ class OrNode : public LogicalNode
     public:
         typedef std::shared_ptr<OrNode> Ptr;
 
-    protected:
         OrNode(Token::Ptr, ExprNode::Ptr, ExprNode::Ptr);
 
     public:

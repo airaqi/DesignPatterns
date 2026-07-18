@@ -16,19 +16,19 @@ ExprNode::ExprNode(Token::Ptr token, Type::Ptr type) : _op(token), _type(type) {
 
 ExprNode::Ptr ExprNode::create(Token::Ptr tok, Type::Ptr t)
 {
-    return ExprNode::Ptr(new ExprNode(tok, t));
+    return make_shared<ExprNode>(tok, t);
 }
 
 
 ExprNode::Ptr ExprNode::gen() 
 {
-    return ExprNode::Ptr(this);
+    return shared_from_this();
 }
 
 
 ExprNode::Ptr ExprNode::reduce() 
 {
-    return ExprNode::Ptr(this);
+    return shared_from_this();
 }
 
 void ExprNode::type(Type::Ptr t) { _type = t;}
@@ -65,7 +65,7 @@ void ExprNode::getSourcePosition(int &l, int &i)
 void ExprNode::add(ProgNode::Ptr node)
 {
     if (isBlock())
-        node->scope(ExprNode::Ptr(this));
+        node->scope(shared_from_this());
     else 
         node->scope(scope());
 
@@ -122,11 +122,15 @@ std::string ExprNode::print(std::string prefix) const
 {
     std::stringstream sout;
     std::string subfix = prefix + "  ";
+    std::string attribs = std::format("id:{}, op:{}, typ:{}", id(), op()->to_string(), type()->to_string());
 
-    sout << prefix << "[Expr(" << std::format("{}, {}, {}", id(), op()->to_string(), type()->to_string()) << "): ";
-    for (auto const& [key, value] : _children)
-        sout << value->to_string(subfix) << ", ";
-    sout << prefix << "]";
+    sout << prefix << "[Expr(" << attribs << ") ch: {";
+    if (!_children.empty()) 
+        for (auto const& [key, value] : _children)
+            sout << value->to_string(subfix) << ", ";
+    else
+        sout << "None";
+    sout << prefix << "}]";
     return sout.str();    
 }
 

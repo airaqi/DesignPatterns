@@ -17,7 +17,7 @@ class AccessNode : public OpNode
         Id::Ptr         _array;
         ExprNode::Ptr   _index;
 
-    protected:
+    public:
         AccessNode(Id::Ptr, ExprNode::Ptr, Type::Ptr);
 
     public:

@@ -3,6 +3,7 @@
 #include "compiler_token.hpp"
 #include "compiler_token_num.hpp"
 #include "compiler_token_word_type_array.hpp"
+#include "plog/Log.h"
 #include "program_node_expr_const.hpp"
 #include "program_node_expr_id.hpp"
 #include "program_node_expr_logical_and.hpp"
@@ -25,11 +26,10 @@
 #include <ostream>
 #include <sstream>
 
-
 Parser::Parser(Scanner& scanner, ProgramNodeBuilder& builder) : 
     _scanner(scanner), 
     _builder(builder), 
-    _look(_scanner.scan()), 
+    _look(_scanner.scan()),
     _top(Env::Null),
     _used(0) {}
 
@@ -38,7 +38,7 @@ Parser::~Parser() {}
 
 void Parser::move() {
     _look = _scanner.scan();
-    std::cout << "Parser::move() _look : " << _look->print() << std::endl;
+    PLOGD << "() _look : " << _look->print();
 }
 
 void Parser::error(std::string s) {
@@ -46,7 +46,7 @@ void Parser::error(std::string s) {
 }
 
 void Parser::match(Tag::Kind t) {
-    std::cout << "Parser::match(" << Tag::to_string(t) << ") _look.tag: " << _look->print() << std::endl;
+    PLOGD << "(" << Tag::to_string(t) << ") _look.tag: " << _look->print();
     if (_look->tag() == t) {
         move(); 
     } else {
@@ -57,7 +57,7 @@ void Parser::match(Tag::Kind t) {
 
 StmtNode::Ptr Parser::parse()
 {
-    std::cout << "Parser::parse() look: " << _look->print() << std::endl;
+    PLOGD << "() look: " << _look->print();
 
     StmtNode::Ptr s = block();
     int begin = s->newlabel();
@@ -65,13 +65,13 @@ StmtNode::Ptr Parser::parse()
     s->emitlabel(begin);
     s->gen(begin, after);
     s->emitlabel(after);
-    std::cout << "\n\n" << "Parser::parse() s : " << s->print() << std::endl;
+    // PLOGD <<"s : " << s->print();
     return s;
 }
 
 StmtNode::Ptr Parser::block() 
 {
-    std::cout << "block()" << std::endl;
+    PLOGD << "()";
 
     match(Tag::CUBO);
     Env::Ptr savedEnv = _top;
@@ -80,7 +80,7 @@ StmtNode::Ptr Parser::block()
     StmtNode::Ptr s = stmts();
     match(Tag::CUBC);
     _top = savedEnv;
-    std::cout << "Parser::block() s: " << s->print() << std::endl;
+    PLOGD << "s: " << s->print();
     return s;
 }
 
@@ -94,10 +94,9 @@ void Parser::decls()
         match(Tag::SCLN);
         Id::Ptr id = Id::create(std::static_pointer_cast<Word>(tok), typ, _used);
         _top->put(tok, id);
-        std::cout << "Parser::decls() type: " << typ->print() << " token: " << tok->print() << " _used: " << _used << std::endl;
-        std::cout << "Parser::decls() - top: " << _top << std::endl;
+        PLOGD << "type: " << typ->print() << " token: " << tok->print() << " _used: " << _used << "- top: " << _top->to_string();
         _used = _used + typ->width();
-        std::cout << "<<<" << std::endl;
+        // PLOGD << "<<<";
     }
 }
 
@@ -105,7 +104,7 @@ Type::Ptr Parser::type()
 {
     // TODO find a way to eleminate this cast
     Type::Ptr p = std::static_pointer_cast<Type>(_look);
-    std::cout << "Parser::type() _look: " << _look->print() << " p: " << p << std::endl;
+    PLOGD << "_look: " << _look->print() << " p: " << p;
     match(Tag::BASIC);
     if (_look->tag() != Tag::SQBO)
         return p;
@@ -121,21 +120,21 @@ Type::Ptr Parser::dims(Type::Ptr p)
     match(Tag::SQBC);
     if (_look->tag() == Tag::SQBO)
         p = dims(p);
-    std::cout << "Parser::dims() - p: " << p << std::endl;
+    PLOGD << "(" << p << ")";
     Array::Ptr arr = Array::create(std::static_pointer_cast<Num>(tok)->value(), p); 
-    std::cout << "Parser::dims() <<<" << std::endl;
+    // PLOGD << "<<<";
     return arr;
 }
 
 StmtNode::Ptr Parser::stmts()
 {
-    std::cout << "Parser::stmts() - look: " << _look->print() << std::endl;
+    PLOGD << "() - look: " << _look->print();
     if (_look->tag() == Tag::CUBC)
         return StmtNode::Null;
     else 
     {
         StmtNode::Ptr st = stmt(), sts = stmts();
-        std::cout << "Parser::stmts() - stmt: " << st->print() << " stmts: " << sts->print() << std::endl;
+        PLOGD << "- stmt: " << st->print() << " stmts: " << sts->print();
         return SeqNode::create(st, sts);
     }
 }
@@ -146,7 +145,7 @@ StmtNode::Ptr Parser::stmt()
     StmtNode::Ptr s, s1, s2;
     StmtNode::Ptr savedStmt;        // Save enclosing loops for breaks
 
-    std::cout << "Parser::stmt() - look: " << _look->print() << std::endl;
+    PLOGD << "() - look: " << _look->print();
 
     switch(_look->tag())
     {
@@ -168,9 +167,8 @@ StmtNode::Ptr Parser::stmt()
         
         case Tag::WHILE:
             {
-                std::cout << "Parser::stmt() while : look: " << _look->print() << std::endl;
+                PLOGD << "while : look: " << _look->print();
                 WhileNode::Ptr  whileNode = WhileNode::create();
-                std::cout << "Parser::stmt() while : \n";
                 savedStmt = StmtNode::Enclosing;
                 StmtNode::Enclosing = whileNode;
                 
@@ -217,48 +215,48 @@ StmtNode::Ptr Parser::stmt()
 
 StmtNode::Ptr Parser::assign()    
 {
-    std::cout << "Parser::assign() _look: " << _look->print() << std::endl;
+    PLOGD << "() _look: " << _look->print();
 
     StmtNode::Ptr st;
     Token::Ptr t = _look;
     match(Tag::ID);
 
-    std::cout << "Parser::assign() - top: " << _top << std::endl;
-    //if (_top->prev() != nullptr)    std::cout << "Parser::assign() - _top->prev(): " << _top->prev() << std::endl;    
+    PLOGD << " - top: " << _top;
+    //if (_top->prev() != nullptr)    PLOGD << "Parser::assign() - _top->prev(): " << _top->prev();
 
     Id::Ptr id = _top->get(t);
 
-    if (id != nullptr) std::cout << "Parser::assign() - id: " << id->print() << std::endl;
+    if (id != nullptr) { PLOGD << " - id: " << id->print(); }
     if (id == nullptr) error(std::format("{} {}", t->to_string(), "undeclaired"));
 
     if (_look->tag() == Tag::ASGN)
     {
-        std::cout << "Parser::assign() =\n";
+        PLOGD << " =";
         move();
         st = SetNode::create(id, boolean());
-        std::cout << "Parser::assign() = st: " << st->print() << std::endl;
+        PLOGD << " - st: " << st->print();
     }
     else 
     {
-        std::cout << "Parser::assign() accessNode\n";
+        // PLOGD << "accessNode";
         AccessNode::Ptr x = offset(id);
         match(Tag::ASGN);
         ExprNode::Ptr b = boolean();
         st = SetElemNode::create(x, b);
-        std::cout << "Parser::assign() accessNode st = " << st << std::endl;
+        PLOGD << "accessNode st = " << st;
     }
     match(Tag::SCLN);
 
-    std::cout << "Parser::assign() - stmt: " << st->print() << std::endl;
+    PLOGD << " - stmt: " << st->print();
     return st; 
 }
 
 ExprNode::Ptr Parser::boolean() 
 {
-    std::cout << "Parser::boolean() I _look: " << _look->print() << std::endl;
+    PLOGD << "() - I _look: " << _look->print();
 
     ExprNode::Ptr x = join();
-    std::cout << "Parser::boolean() II _look: " <<_look->print() << std::endl;
+    PLOGD << " - II _look: " <<_look->print();
 
     while(_look->tag() == Tag::OR)
     {
@@ -271,7 +269,7 @@ ExprNode::Ptr Parser::boolean()
 
 ExprNode::Ptr Parser::join()   
 {
-    std::cout << "Parser::join() _look: " << _look->print() << std::endl;
+    PLOGD << "() _look: " << _look->print();
 
     ExprNode::Ptr x = equality();
     while(_look->tag() == Tag::AND)
@@ -285,7 +283,7 @@ ExprNode::Ptr Parser::join()
 
 ExprNode::Ptr Parser::equality()   
 {
-    std::cout << "Parser::equality() _look: " << _look->print() << std::endl;
+    PLOGD << "() _look: " << _look->print();
 
     ExprNode::Ptr x = rel();
     while (_look->tag() == Tag::EQ || _look->tag() == Tag::NE)
@@ -299,10 +297,10 @@ ExprNode::Ptr Parser::equality()
 
 ExprNode::Ptr Parser::rel() 
 {
-    std::cout << "Parser::rel() I _look: " << _look->print() << std::endl;
+    PLOGD << "() I _look: " << _look->print();
 
     ExprNode::Ptr x = expr();
-    std::cout << "Parser::rel() II look: " << _look->print() << std::endl;
+    PLOGD << " - II look: " << _look->print();
     switch(_look->tag())
     {
         case Tag::LT:
@@ -310,7 +308,7 @@ ExprNode::Ptr Parser::rel()
         case Tag::GT:
         case Tag::GE:
             {
-                std::cout << "Parser::rel() III look: " << _look->print() << " x: " << x->print() << std::endl;
+                PLOGD << " - III look: " << _look->print() << " x: " << x->print() << std::endl;
                 Token::Ptr tok = _look;
                 move();
                 return RelNode::create(tok, x, expr());
@@ -322,24 +320,24 @@ ExprNode::Ptr Parser::rel()
 
 ExprNode::Ptr Parser::expr()
 {
-    std::cout << "Parser::expr() I _look: " << _look->print() << std::endl;
+    PLOGD << "() - I _look: " << _look->print();
 
     ExprNode::Ptr x = term();
-    std::cout << "Parser::expr() II _look: " << _look->print() << " plus: " << Tag::to_string(Tag::PLUS) << " x: " << x->print() << std::endl;
+    // PLOGD << " - II _look: " << _look->print() << " plus: " << Tag::to_string(Tag::PLUS) << " x: " << x->print();
     while (_look->tag() == Tag::PLUS || _look->tag() == Tag::HYPH)
     {
-        std::cout << "Parser::expr() III _look: " << _look->print() << std::endl;
+        PLOGD << " - III _look: " << _look->print();
         Token::Ptr tok = _look;
         move();
         x = ArithNode::create(tok, x, term());
     }
-    std::cout << "Parser::expr() IV x: " << x->print() << std::endl;
+    // PLOGD << " - IV x: " << x->print();
     return x; 
 }
 
 ExprNode::Ptr Parser::term()   
 {
-    std::cout << "Parser::term() _look: " << _look->print() << std::endl;
+    PLOGD << "() - _look: " << _look->print() << std::endl;
 
     ExprNode::Ptr x = unary();
     while (_look->tag() == Tag::MULT || _look->tag() == Tag::SLSH)
@@ -353,7 +351,7 @@ ExprNode::Ptr Parser::term()
 
 ExprNode::Ptr Parser::unary()   
 {
-    std::cout << "Parser::unary() _look: " << _look->print() << std::endl;
+    PLOGD << "() - _look: " << _look->print() << std::endl;
 
     if (_look->tag() == Tag::MINUS)
     {
@@ -371,7 +369,7 @@ ExprNode::Ptr Parser::unary()
 
 ExprNode::Ptr Parser::factor()   
 {
-    std::cout << "Parser::factor() _look: " << _look->print() << std::endl;
+    PLOGD << "() - _look: " << _look->print() << std::endl;
 
     ExprNode::Ptr x = ExprNode::Null;
     switch (_look->tag()) 
@@ -425,7 +423,7 @@ ExprNode::Ptr Parser::factor()
 
 AccessNode::Ptr Parser::offset(Id::Ptr a) 
 {
-    std::cout << "Parser::offset(" << a << ") _look: " << _look->print() << std::endl;
+    PLOGD << "(" << a << ") - _look: " << _look;
 
     ExprNode::Ptr i, w, t1, t2, loc;
     Type::Ptr typ = a->type();

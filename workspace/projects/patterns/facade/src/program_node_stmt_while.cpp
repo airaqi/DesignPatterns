@@ -3,11 +3,11 @@
 #include <ostream>
 #include <string>
 
-WhileNode::WhileNode() : _expr(nullptr), _stmt(nullptr) {}
+WhileNode::WhileNode() {}
 
 WhileNode::Ptr WhileNode::create()
 {
-    return WhileNode::Ptr(new WhileNode());
+    return std::make_shared<WhileNode>(); 
 }
 
 ExprNode::Ptr WhileNode::expr() const { return _expr; }

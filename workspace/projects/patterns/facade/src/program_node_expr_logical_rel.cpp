@@ -1,8 +1,8 @@
 #include "program_node_expr_logical_rel.hpp"
 #include "compiler_token_word_type.hpp"
 #include "compiler_token_word_type_array.hpp"
+#include "plog/Log.h"
 #include "program_node_expr_logical.hpp"
-#include <iostream>
 #include <memory>
 #include <sstream>
 #include <string>
@@ -12,20 +12,19 @@ RelNode::RelNode(Token::Ptr token, ExprNode::Ptr l, ExprNode::Ptr r) :
 
 RelNode::Ptr RelNode::create(Token::Ptr token, ExprNode::Ptr l, ExprNode::Ptr r)
 {
-    RelNode::Ptr inst = RelNode::Ptr(new RelNode(token, l, r));
+    RelNode::Ptr inst = std::make_shared<RelNode>(token, l, r);
     inst->initialize();
     return inst;
 }
 
 Type::Ptr RelNode::check(Type::Ptr p1, Type::Ptr p2)
 {
-    std::cout << "RelNode::check(" << p1 << ", " << p2 << ")\n";
+    PLOGD << "(" << p1 << ", " << p2 << ")";
 
-    std::cout << "RelNode::check()" 
+    PLOGD << " - " 
         << " p1 cast: " << std::dynamic_pointer_cast<Array>(p1) 
         << " p2 cast: " << std::dynamic_pointer_cast<Array>(p2)
-        << " p1 == p2: " << (p1 == p2)
-        << std::endl;
+        << " p1 == p2: " << (p1 == p2);
     if ((std::dynamic_pointer_cast<Array>(p1)) != nullptr || (std::dynamic_pointer_cast<Array>(p2) != nullptr))
         return Type::Null;
     else if (*p1 == *p2)

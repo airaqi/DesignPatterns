@@ -11,6 +11,7 @@ class Id : public ExprNode
 {
     public: 
         typedef std::shared_ptr<Id> Ptr;
+        typedef std::weak_ptr<Id> Wptr;
 
     public: 
         Id(Word::Ptr id, Type::Ptr p, int b);

@@ -13,10 +13,9 @@ class UnaryNode : public OpNode
     private:
         ExprNode::Ptr _expr;
 
-    protected:
+    public:
         UnaryNode(Token::Ptr, ExprNode::Ptr);
 
-    public:
         static Ptr create(Token::Ptr, ExprNode::Ptr);
 
         void expr(ExprNode::Ptr e);

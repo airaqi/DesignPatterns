@@ -1,6 +1,8 @@
 #include "program_node_expr_op_arith.hpp"
+#include "plog/Log.h"
 #include "program_node_expr.hpp"
 #include <format>
+#include <memory>
 #include <string>
 
 ArithNode::ArithNode(Token::Ptr token, ExprNode::Ptr lhs, ExprNode::Ptr rhs) :
@@ -14,15 +16,19 @@ ArithNode::ArithNode(Token::Ptr token, ExprNode::Ptr lhs, ExprNode::Ptr rhs) :
 
 ArithNode::Ptr ArithNode::create(Token::Ptr token, ExprNode::Ptr lhs, ExprNode::Ptr rhs) 
 {
-    return ArithNode::Ptr(new ArithNode(token, lhs, rhs));
+    return std::make_shared<ArithNode>(token, lhs, rhs);
 }
 
 ExprNode::Ptr ArithNode::gen()
 {
-    //std::cout << "ArithNode::gen() lhs: " << lhs()->print() << " rhs: " << rhs()->print() << std::endl;
+    PLOGV << "() lhs: " << lhs()->print() << " rhs: " << rhs()->print();
+
+    ExprNode::Ptr keep_lhs_alive = _lhs;
+    ExprNode::Ptr keep_rhs_alive = _rhs;
+
     Token::Ptr o = op();
-    ExprNode::Ptr l = lhs()->reduce();
-    ExprNode::Ptr r = rhs()->reduce();
+    ExprNode::Ptr l = keep_lhs_alive->reduce();
+    ExprNode::Ptr r = keep_rhs_alive->reduce();
     return ArithNode::create(o, l, r);
 }
 

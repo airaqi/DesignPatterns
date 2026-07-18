@@ -1,4 +1,5 @@
 #include "program_node.hpp"
+#include "compiler_compiler.hpp"
 #include "compiler_scanner.hpp"
 #include <ctime>
 #include <format>
@@ -39,8 +40,8 @@ ProgNode::Ptr ProgNode::scope() const   { return _scope; }  void ProgNode::scope
 
 int ProgNode::next_id()     { return _next_id++; }
 
-void ProgNode::emitlabel(int i) { std::cout << "L" << i << ":"; }
-void ProgNode::emit(std::string s) const { std::cout << "\t" << s << std::endl; }
+void ProgNode::emitlabel(int i) { Compiler::get_instance()->get_out() << "L" << i << ":"; }
+void ProgNode::emit(std::string s) const { Compiler::get_instance()->get_out() << "\t" << s << std::endl; }
 int ProgNode::newlabel() { return ++_labels; }
 
 bool ProgNode::operator==(const ProgNode& that) const { return equals(that); }

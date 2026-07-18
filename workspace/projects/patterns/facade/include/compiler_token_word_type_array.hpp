@@ -10,7 +10,6 @@ class Array : public Type
     public:
         typedef std::shared_ptr<Array> Ptr;
 
-    protected:
         Array(int, Type::Ptr);
 
     public:

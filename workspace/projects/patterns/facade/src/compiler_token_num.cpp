@@ -1,5 +1,6 @@
 #include "compiler_token_num.hpp"
 #include <format>
+#include <memory>
 #include <ostream>
 #include <string>
 
@@ -8,7 +9,7 @@ Num::Num(int t) : Token(Tag::NUM), _value(t) {}
 
 Num::Ptr Num::create(int t)
 {
-    return std::shared_ptr<Num>(new Num(t));
+    return std::make_shared<Num>(t);
 }
 
 int Num::value() const {return _value;}

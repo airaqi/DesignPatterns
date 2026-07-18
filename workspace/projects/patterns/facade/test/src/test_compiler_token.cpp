@@ -6,7 +6,7 @@
 #include "compiler_token_word_type.hpp"
 #include "compiler_token_word_type_array.hpp"
 #include "doctest_main.h"
-#include <iostream>
+#include "plog/Log.h"
 #include <memory>
 
 TEST_CASE("Token")
@@ -33,7 +33,7 @@ TEST_CASE("Token")
         CHECK_EQ(*Word::create("Hello", Tag::ID), *word);
         CHECK(Word::create("Hello", Tag::ID)->equals(word));
 
-        std::cout << word << "\n";
+        PLOGD << word;
     }
 
     SUBCASE("Num")
@@ -46,7 +46,7 @@ TEST_CASE("Token")
         CHECK_EQ(*Num::create(10), *num);
         CHECK_EQ("10", num->to_string());
         CHECK_EQ("[Num(10): [Token(NUM)]]", num->print());
-        std::cout << num << "\n";
+        PLOGD << num;
     }
 
     SUBCASE("Real")
@@ -59,7 +59,7 @@ TEST_CASE("Token")
         CHECK_EQ(*Real::create(1.5), *real);
         CHECK_EQ("1.5", real->to_string());
         CHECK_EQ("[Real(1.5): [Token(REAL)]]", real->print());
-        std::cout << real << "\n";
+        PLOGD << real;
     }
 
     SUBCASE("Type")
@@ -83,7 +83,7 @@ TEST_CASE("Token")
         CHECK_EQ(Type::Int, Type::max(Type::Int, Type::Char));
         CHECK_EQ(Type::Char, Type::max(Type::Char, Type::Char));
         
-        std::cout << *Type::Int << "\n";
+        PLOGD << Type::Int->to_string();
     }
 
     SUBCASE("Array")
@@ -94,7 +94,7 @@ TEST_CASE("Token")
         CHECK_EQ(10, array->size());
         CHECK_NE(array, array2);
 
-        std::cout << *array << "\n";
+        PLOGD << array->to_string();
     }
 }
 

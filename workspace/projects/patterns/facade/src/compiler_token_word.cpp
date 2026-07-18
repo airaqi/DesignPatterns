@@ -3,6 +3,7 @@
 #include "compiler_token.hpp"
 #include <format>
 #include <iostream>
+#include <memory>
 #include <ostream>
 #include <string>
 
@@ -41,12 +42,12 @@ Word::Word(std::string s, Tag::Kind kind) : Token(kind), _value(s) {}
 
 Word::Ptr Word::create(std::string s, Tag::Kind kind)
 {
-    return Word::Ptr(new Word(s, kind));
+    return std::make_shared<Word>(s, kind);
 }
 
 Token::Ptr Word::clone()
 {
-    return Word::Ptr(new Word(_value, tag()));
+    return make_shared<Word>(_value, tag());
 }
 
 std::string Word::value() const { return _value; }

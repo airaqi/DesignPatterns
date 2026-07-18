@@ -2,6 +2,7 @@
 #include "program_node_expr_id.hpp"
 #include "program_node_expr_op.hpp"
 #include <format>
+#include <memory>
 #include <string>
 
 AccessNode::AccessNode(Id::Ptr a, ExprNode::Ptr i, Type::Ptr p) : 
@@ -11,7 +12,7 @@ AccessNode::AccessNode(Id::Ptr a, ExprNode::Ptr i, Type::Ptr p) :
 
 AccessNode::Ptr AccessNode::create(Id::Ptr a, ExprNode::Ptr i, Type::Ptr p) 
 {
-    return AccessNode::Ptr(new AccessNode(a, i, p));
+    return std::make_shared<AccessNode>(a, i, p);
 }
 
 ExprNode::Ptr AccessNode::gen()
@@ -27,7 +28,7 @@ void AccessNode::jumping(int t, int f)
 
 std::string AccessNode::to_string(std::string prefix) const
 {
-    return std::format("[{}]", _index->to_string());
+    return std::format("{}[{}]", _array->to_string(), _index->to_string());
 }
 
 std::string AccessNode::print(std::string prefix) const

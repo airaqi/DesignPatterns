@@ -11,7 +11,6 @@ class Num : public Token
     public:
         typedef std::shared_ptr<Num> Ptr;
 
-    protected:
         Num(int t);
 
     public:

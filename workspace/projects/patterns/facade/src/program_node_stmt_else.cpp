@@ -1,5 +1,6 @@
 #include "program_node_stmt_else.hpp"
 #include <format>
+#include <memory>
 #include <ostream>
 #include <sstream>
 #include <string>
@@ -15,7 +16,7 @@ ElseNode::ElseNode(ExprNode::Ptr e, StmtNode::Ptr s1, StmtNode::Ptr s2) :
 
 ElseNode::Ptr ElseNode::create(ExprNode::Ptr e, StmtNode::Ptr s1, StmtNode::Ptr s2) 
 {
-    return ElseNode::Ptr(new ElseNode(e, s1, s2));
+    return std::make_shared<ElseNode>(e, s1, s2);
 }
 
 void ElseNode::gen(int b, int a)

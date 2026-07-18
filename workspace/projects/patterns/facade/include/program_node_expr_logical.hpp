@@ -14,7 +14,7 @@ class LogicalNode : public ExprNode
         ExprNode::Ptr _lhs;
         ExprNode::Ptr _rhs;
 
-    protected:
+    public:
         LogicalNode(Token::Ptr, ExprNode::Ptr, ExprNode::Ptr);
 
     public:

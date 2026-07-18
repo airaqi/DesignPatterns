@@ -11,7 +11,6 @@ class DoNode : public StmtNode
     public:
         typedef std::shared_ptr<DoNode> Ptr;
     
-    protected:
         DoNode();
 
     public:

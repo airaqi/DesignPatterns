@@ -7,6 +7,10 @@
 #include "program_node_expr_op_access.hpp"
 #include "program_node_stmt.hpp"
 #include <string>
+#include <plog/Log.h>
+#include <plog/Formatters/TxtFormatter.h>
+#include <plog/Initializers/ConsoleInitializer.h>
+
 
 class Parser
 {

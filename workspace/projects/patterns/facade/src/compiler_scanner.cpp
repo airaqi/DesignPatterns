@@ -48,17 +48,22 @@ void Scanner::reserve(Word::Ptr word)
 Word::Ptr Scanner::find(std::string s) 
 {
     Word::Ptr word = _words.find(s) != _words.end() ? _words[s] : Type::Null;
-    std::cout << "Scanner::find() s: " << s << " word: " << word << std::endl;
+    // PLOGD << "s: " << s << " word: " << word;
     return word;
+}
+
+void Scanner::putback(char ch)
+{
+    _in.putback(decrement(ch));
 }
 
 void Scanner::putback(Token::Ptr t)
 {
-    //if (_empty) std::cout << "putback() into a full buffer" << "\n";
+    // if (_empty) { PLOGD << "() into a full buffer"; }
     _buf.push_back(t);
     _buffer = t;
     _empty = false;
-    std::cout << "<<- " << t << "\n";
+    // PLOGD << "<<- " << t;
 }
 
 char Scanner::increment(char c)
@@ -71,7 +76,7 @@ char Scanner::increment(char c)
         _column = 0;
     }
 
-    //std::cout << "Scanner::increment('" << c << "') " << _index << " (" << _line << ", " << _column << ")\n";
+    //PLOGD << "increment('" << c << "') " << _index << " (" << _line << ", " << _column;
 
     return c;
 }
@@ -122,7 +127,7 @@ int Scanner::dread(double& val)
     _in >> val;
     std::string sval = std::to_string(val);
     int count = sval.length();
-    std::cout << "Scanner::dread(" << val << ") - val = " << sval << "count = " << count << "\n";
+    PLOGD << "(" << val << ") - val = " << sval << "count = " << count;
     _index += count;
     _column += count;
     _peek = ' ';
@@ -154,7 +159,7 @@ bool Scanner::readch(char c)
 Token::Ptr Scanner::scan(std::string logo)
 {
     auto t = get();
-    std::cout << "--> Scanner::scan(" << logo << ") " << t << " " << logo << "\n";
+    PLOGD << "--> scan(" << logo << ") " << t->to_string() << " " << logo;
     return t;
 }
 
@@ -252,8 +257,10 @@ Token::Ptr Scanner::get()
         {
             ss << _peek;
             read();
-            std::cout << "Scanner::get() _peek: " << _peek << " ss: " << ss.str() << std::endl;
+            // PLOGD << " - _peek: " << _peek << " ss: " << ss.str();
         } while ((isalnum(_peek) || _peek == '_') && !eof());
+
+        // PLOGD << " - _peek: " << _peek << " ss: " << ss.str();
 
         if (!eof()) putback(_peek);
         std::string s = ss.str();
@@ -308,7 +315,7 @@ Token::Ptr Scanner::get()
     // TODO refactor out
     else if (std::isspace(_peek))
     {
-        //std::cout << static_cast<int>(ch) << "\n";
+        //PLOGD << static_cast<int>(ch);
         increment(_peek);
         return get();
     }
@@ -332,15 +339,11 @@ Token::Ptr Scanner::get()
 
 bool Scanner::eof()
 {
-    //std::cout << (char)_in.peek() << " " << _in.eof() << " " << _in.good() << "\n";
+    //PLOGD << (char)_in.peek() << " " << _in.eof() << " " << _in.good();
     //return ((_in.peek() == -1 || _in.eof()) && _empty);
     //return !_in.good();
     return _in.eof() && _empty;
 }
 
-void Scanner::putback(char ch)
-{
-    _in.putback(decrement(ch));
-}
 
 

@@ -2,6 +2,7 @@
 #include "compiler_code_generator.hpp"
 #include "program_node.hpp"
 #include <format>
+#include <memory>
 #include <ostream>
 #include <stdexcept>
 
@@ -12,7 +13,7 @@ StmtNode::StmtNode() : _after(0) {}
 
 StmtNode::Ptr StmtNode::create()
 {
-    return StmtNode::Ptr(new StmtNode());
+    return std::make_shared<StmtNode>();
 }
 
 void StmtNode::traverse(CodeGenerator& generator)
@@ -33,9 +34,9 @@ std::string StmtNode::to_string(std::string prefix) const
 
 std::string StmtNode::print(std::string prefix) const
 {
-    return std::format("{}[Stmt({}, {}){}]", 
+    return std::format("{}[Stmt(id:{}, af:{}){}]", 
             prefix, id(), _after, 
-            (*this == *StmtNode::Null) ? ": Null" : "");
+            (this == StmtNode::Null.get()) ? ": Null" : "");
 }
 
 void StmtNode::add(ProgNode::Ptr) {}
@@ -46,6 +47,8 @@ void StmtNode::getSourcePosition(int &l, int &i) {}
 
 bool StmtNode::equals(const ProgNode &other) const
 {
+    if (typeid(other) == typeid(*this))
+      return true;
     return false;
 }
 

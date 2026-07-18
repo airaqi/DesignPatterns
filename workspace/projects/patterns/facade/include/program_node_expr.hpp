@@ -11,10 +11,11 @@
 
 /* Represents an expression.
  */
-class ExprNode : public ProgNode
+class ExprNode : public ProgNode, public std::enable_shared_from_this<ExprNode>
 {
     public: 
         typedef std::shared_ptr<ExprNode> Ptr;
+        typedef std::weak_ptr<ExprNode> Wptr;
 
     public:
         ExprNode(Token::Ptr token, Type::Ptr type);

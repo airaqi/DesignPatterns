@@ -9,7 +9,6 @@ class NotNode : public LogicalNode
     public:
         typedef std::shared_ptr<NotNode> Ptr;
 
-    protected:
         //virtual ~NotNode() {}
         NotNode(Token::Ptr token, ExprNode::Ptr e);
 

@@ -3,11 +3,12 @@
 #include "program_node_expr.hpp"
 #include <format>
 #include <iostream>
+#include <memory>
 #include <ostream>
 
 Id::Id(Word::Ptr id, Type::Ptr p, int b) : ExprNode(id, p), _offset(b) {}
 
-Id::Ptr Id::create(Word::Ptr id, Type::Ptr p, int b) { return Id::Ptr(new Id(id, p, b)); }
+Id::Ptr Id::create(Word::Ptr id, Type::Ptr p, int b) { return std::make_shared<Id>(id, p, b); }
 
 int Id::offset() const { return _offset; }
 void Id::offset(int o) { _offset = o; }
@@ -19,7 +20,8 @@ std::string Id::to_string(std::string prefix) const
 
 std::string Id::print(std::string prefix) const
 {
-    return std::format("{}[Id({}): {}]", prefix, _offset, ExprNode::print());
+    std::string attribs = std::format("id:{}, op:{}, typ:{}", id(), op()->to_string(), type()->to_string());
+    return std::format("{}[Id(off:{}, {})]", prefix, _offset, attribs);
 }
 
 bool Id::equals(const ProgNode& that) const

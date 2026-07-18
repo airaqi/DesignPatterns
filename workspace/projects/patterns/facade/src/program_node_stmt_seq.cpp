@@ -1,6 +1,7 @@
 #include "program_node_stmt_seq.hpp"
 #include "program_node.hpp"
 #include <format>
+#include <memory>
 #include <ostream>
 #include <string>
 
@@ -8,7 +9,7 @@ SeqNode::SeqNode(StmtNode::Ptr s1, StmtNode::Ptr s2) : _stmt1(s1), _stmt2(s2) {}
 
 SeqNode::Ptr SeqNode::create(StmtNode::Ptr s1, StmtNode::Ptr s2) 
 { 
-    return SeqNode::Ptr(new SeqNode(s1, s2)); 
+    return std::make_shared<SeqNode>(s1, s2); 
 }
 
 StmtNode::Ptr SeqNode::stmt1() const { return _stmt1; }
@@ -45,7 +46,7 @@ std::string SeqNode::to_string(std::string prefix) const
 
 std::string SeqNode::print(std::string prefix) const
 {
-    return std::format("{}[Seq({}, {}, {})]", prefix, id(), _stmt1->print(), _stmt2->print());
+    return std::format("{}\n[Seq({}, {}, {}\n)]", prefix, id(), _stmt1->print(), _stmt2->print());
 }
 
 bool SeqNode::operator==(const ProgNode & that) const { return equals(that); }
