@@ -2,7 +2,6 @@
 #define __COMPILER_PROGRAM_NODE_EXPR_TEMP_H__
 
 #include "program_node_expr.hpp"
-#include <format>
 #include <memory>
 #include <string>
 class TempNode : public ExprNode
@@ -11,16 +10,16 @@ class TempNode : public ExprNode
         typedef std::shared_ptr<TempNode> Ptr;
 
     private:
-        inline static int  _count = 0;
-        int         _number;
-
-    protected:
-        TempNode(Type::Ptr p) : ExprNode(Word::temp, p), _number(++_count) {}
+        inline static int   _count = 0;
+        int                 _number;
 
     public:
-        static Ptr create(Type::Ptr p) { return Ptr(new TempNode(p)); }
+        TempNode(Type::Ptr p);
 
-        virtual std::string to_string(std::string prefix="") { return std::format("t{}", _number); }
+    public:
+        static Ptr create(Type::Ptr p);
+
+        virtual std::string to_string(std::string prefix="");
 
 };
 
