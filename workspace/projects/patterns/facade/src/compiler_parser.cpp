@@ -337,7 +337,7 @@ ExprNode::Ptr Parser::expr()
 
 ExprNode::Ptr Parser::term()   
 {
-    PLOGD << "() - _look: " << _look->print() << std::endl;
+    PLOGD << "() - _look: " << _look->print();
 
     ExprNode::Ptr x = unary();
     while (_look->tag() == Tag::MULT || _look->tag() == Tag::SLSH)
@@ -351,7 +351,7 @@ ExprNode::Ptr Parser::term()
 
 ExprNode::Ptr Parser::unary()   
 {
-    PLOGD << "() - _look: " << _look->print() << std::endl;
+    PLOGD << "() - _look: " << _look->print();
 
     if (_look->tag() == Tag::MINUS)
     {
@@ -369,7 +369,7 @@ ExprNode::Ptr Parser::unary()
 
 ExprNode::Ptr Parser::factor()   
 {
-    PLOGD << "() - _look: " << _look->print() << std::endl;
+    PLOGD << "() - _look: " << _look->print();
 
     ExprNode::Ptr x = ExprNode::Null;
     switch (_look->tag()) 

@@ -22,7 +22,7 @@ class Id : public ExprNode
         int offset() const;
         void offset(int);
 
-        virtual bool equals(const ProgNode&) const override;
+        virtual bool is_equals(const ProgNode&) const override;
         virtual std::string to_string(std::string = "") const override;
         virtual std::string print(std::string = "") const override;
 

@@ -1,6 +1,6 @@
 #include "program_node.hpp"
-#include "compiler_parser.hpp"
 #include "compiler_scanner.hpp"
+#include "plog/Log.h"
 #include <ctime>
 #include <format>
 #include <iostream>
@@ -12,7 +12,6 @@
 std::stringstream ProgNode::_out;
 
 ProgNode::ProgNode() : _id(ProgNode::next_id()), _scope(nullptr), _line(Scanner::line()), _index(Scanner::index()) {}
-ProgNode::~ProgNode() {}
 
 void ProgNode::error(std::string s) 
 {
@@ -48,8 +47,30 @@ void ProgNode::emitlabel(int i) { out() << "L" << i << ":"; }
 void ProgNode::emit(std::string s) const { out() << "\t" << s << std::endl; }
 int ProgNode::newlabel() { return ++_labels; }
 
-bool ProgNode::operator==(const ProgNode& that) const { return equals(that); }
-bool ProgNode::operator!=(const ProgNode& that) const { return !equals(that); }
+bool ProgNode::equals(const ProgNode& that) const 
+{
+    PLOGD << print() << " = " << that.print();
+
+    if (this == &that) return true;
+    if (typeid(*this) != typeid(that)) return false;
+
+    return is_equals(that);
+}
+
+bool ProgNode::equals(const ProgNode::Ptr& that) const {
+  PLOGD << print() << " = " << that->print();
+
+  if (!that) return false;
+  if (this == that.get()) return true;
+  if (typeid(*this) != typeid(that.get())) return false;
+  return is_equals(*that);
+}
+
+bool ProgNode::operator==(const ProgNode::Ptr& that) const { return is_equals(*that); }
+bool ProgNode::operator!=(const ProgNode::Ptr& that) const { return !is_equals(*that); }
+
+bool ProgNode::operator==(const ProgNode& that) const { return that.is_equals(*this); }
+bool ProgNode::operator!=(const ProgNode& that) const { return !that.is_equals(*this); }
 
 std::ostream& operator<<(std::ostream& out, const ProgNode& that) { out << that.to_string(); return out; }
 std::ostream& operator<<(std::ostream& out, const ProgNode::Ptr that) { return operator<<(out, *that.get()); }

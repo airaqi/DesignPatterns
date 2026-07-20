@@ -1,5 +1,6 @@
 #include "program_node_stmt.hpp"
 #include "compiler_code_generator.hpp"
+#include "plog/Log.h"
 #include "program_node.hpp"
 #include <format>
 #include <memory>
@@ -45,11 +46,18 @@ const ProgNode& StmtNode::child(const int) const { throw std::runtime_error("Ill
 void StmtNode::getSourcePosition(int &l, int &i) {}
  
 
-bool StmtNode::equals(const ProgNode &other) const
+bool StmtNode::is_equals(const ProgNode &that) const
 {
-    if (typeid(other) == typeid(*this))
-      return true;
-    return false;
+    PLOGD << print() << " == " << that.print();
+    if (typeid(*this) != typeid(that)) return false;
+    PLOGD << "<<<<";
+    if (this == &that) return true;
+    PLOGD << "<<<<";
+    const StmtNode& other = static_cast<const StmtNode&>(that);
+    PLOGD << "<<<<";
+    bool ret = (*this == other);
+    PLOGD << this->print() << " == " << other.print() << " = " << ret;
+    return ret;
 }
 
 std::ostream& operator<<(std::ostream& out, const StmtNode& that) { out << that.to_string(); return out; }

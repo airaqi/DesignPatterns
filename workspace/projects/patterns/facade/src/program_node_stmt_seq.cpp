@@ -1,4 +1,5 @@
 #include "program_node_stmt_seq.hpp"
+#include "plog/Log.h"
 #include "program_node.hpp"
 #include <format>
 #include <memory>
@@ -33,10 +34,15 @@ void SeqNode::gen(int b, int a)
     }
 }
 
-bool SeqNode::equals(const ProgNode & that) const 
+bool SeqNode::is_equals(const ProgNode & that) const 
 {
-    const SeqNode& th = static_cast<const SeqNode &>(that);
-    return (stmt1() == th.stmt1() && stmt2() == th.stmt2());
+    if (typeid(that) != typeid(*this)) return false;
+    const SeqNode& other = static_cast<const SeqNode &>(that);
+    bool stmt1Ret = stmt1()->equals(other.stmt1());
+    bool stmt2Ret = stmt2()->equals(other.stmt2());
+    bool ret = (stmt1()->equals(other.stmt1()) && stmt2()->equals(other.stmt2()));
+    PLOGD << print() << " == " << that.print() << " = " << ret << " " << stmt1Ret << " " << stmt2Ret;
+    return ret;
 }
 
 std::string SeqNode::to_string(std::string prefix) const
@@ -46,11 +52,11 @@ std::string SeqNode::to_string(std::string prefix) const
 
 std::string SeqNode::print(std::string prefix) const
 {
-    return std::format("{}\n[Seq({}, {}, {}\n)]", prefix, id(), _stmt1->print(), _stmt2->print());
+    return std::format("{}[Seq({}, {}, {})]", prefix, id(), _stmt1->print(), _stmt2->print());
 }
 
-bool SeqNode::operator==(const ProgNode & that) const { return equals(that); }
-bool SeqNode::operator!=(const ProgNode & that) const { return !(*this == that); }
+// bool SeqNode::operator==(const ProgNode & that) const { return is_equals(that); }
+// bool SeqNode::operator!=(const ProgNode & that) const { return !(*this == that); }
 
 std::ostream& operator<<(std::ostream& out, const SeqNode & that) { out << that.to_string(); return out; }
 std::ostream& operator<<(std::ostream& out, const SeqNode::Ptr that) { return operator<<(out, *that); }

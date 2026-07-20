@@ -24,13 +24,13 @@ std::string Id::print(std::string prefix) const
     return std::format("{}[Id(off:{}, {})]", prefix, _offset, attribs);
 }
 
-bool Id::equals(const ProgNode& that) const
+bool Id::is_equals(const ProgNode& that) const
 {
     const Id& id = dynamic_cast<const Id&>(that);
-    return ExprNode::equals(that) && (_offset == id.offset());
+    return ExprNode::is_equals(that) && (_offset == id.offset());
 }
 
-bool operator==(const Id& lhs, const Id& rhs)           { return lhs.equals(rhs); }
+bool operator==(const Id& lhs, const Id& rhs)           { return lhs.is_equals(rhs); }
 bool operator==(const Id::Ptr lhs, const Id::Ptr rhs)   { return *lhs.get() == *rhs.get(); }
 
 bool operator!=(const Id& lhs, const Id& rhs)           { return !(lhs == rhs); }

@@ -36,7 +36,7 @@ void DoNode::gen(int b, int a)
     _expr->jumping(b, 0);
 }
 
-bool DoNode::equals(const ProgNode & that) const
+bool DoNode::is_equals(const ProgNode & that) const
 {
     const DoNode& th = static_cast<const DoNode &>(that);
     return (expr() == th.expr() && stmt() == th.stmt()) ;
@@ -44,7 +44,7 @@ bool DoNode::equals(const ProgNode & that) const
 
 bool DoNode::operator==(const ProgNode & that) const
 {
-    return equals(that);
+    return is_equals(that);
 }
 
 bool DoNode::operator!=(const ProgNode & that) const

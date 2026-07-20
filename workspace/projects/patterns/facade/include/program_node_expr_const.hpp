@@ -20,6 +20,8 @@ class ConstNode : public ExprNode
 
         virtual void jumping(int, int) override;
 
+        virtual bool is_equals(const ProgNode &) const override;
+
         virtual std::string print(std::string = "") const override;
 };
 

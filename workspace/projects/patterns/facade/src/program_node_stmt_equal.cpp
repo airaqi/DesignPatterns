@@ -10,7 +10,7 @@ EqualNode::Ptr EqualNode::create(ProgNode::Ptr lhs, ProgNode::Ptr rhs)
   
 }
 
-bool EqualNode::equals(const ProgNode &) const {
+bool EqualNode::is_equals(const ProgNode &) const {
   return false;
 }
 

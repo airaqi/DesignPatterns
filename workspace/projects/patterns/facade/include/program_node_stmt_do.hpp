@@ -25,7 +25,7 @@ class DoNode : public StmtNode
         void init(StmtNode::Ptr, ExprNode::Ptr);
         void gen(int, int) override;
 
-        virtual bool equals(const ProgNode &) const override;
+        virtual bool is_equals(const ProgNode &) const override;
 
         virtual bool operator==(const ProgNode &) const override;
         virtual bool operator!=(const ProgNode &) const override;

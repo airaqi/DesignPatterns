@@ -28,7 +28,7 @@ void AccessNode::jumping(int t, int f)
 
 std::string AccessNode::to_string(std::string prefix) const
 {
-    return std::format("{}[{}]", _array->to_string(), _index->to_string());
+    return std::format("{}[ {} ]", _array->to_string(), _index->to_string());
 }
 
 std::string AccessNode::print(std::string prefix) const

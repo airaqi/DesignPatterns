@@ -20,7 +20,7 @@ ExprNode::Ptr OpNode::reduce()
     ExprNode::Ptr x = gen();
     TempNode::Ptr t = TempNode::create(_type);
     emit(std::format("{} = {}", t->to_string(), x->to_string()));
-    PLOGD << " - x: " << x << " t: " << t;
+    PLOGD << " - x: " << x->print() << " t: " << t->print();
     return t;
 }
 

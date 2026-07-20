@@ -26,7 +26,7 @@ class SetNode : public StmtNode
         Type::Ptr check(Type::Ptr, Type::Ptr);
         virtual void gen(int, int) override;
 
-        virtual bool equals(const ProgNode &) const override;
+        virtual bool is_equals(const ProgNode &) const override;
         virtual std::string print(std::string = "") const override;
 
         virtual bool operator==(const ProgNode &) const override;

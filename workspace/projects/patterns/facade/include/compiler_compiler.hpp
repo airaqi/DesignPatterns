@@ -3,30 +3,31 @@
 
 #include "program_node_stmt.hpp"
 #include <getopt.h>
-#include <istream>
 #include <memory>
-#include <ostream>
+#include <sstream>
 #include <string>
 
 class Compiler
 {
-    private:
+    public:
         using Ptr = std::shared_ptr<Compiler>;
-        static Ptr _instance;
-        std::istream & _in;
-        std::ostream & _out;
+    private:
+        std::string _infile, _outfile;
+        std::stringstream _in;
+        std::stringstream _out;
 
     public:
-        Compiler(std::istream&, std::ostream&);
-        static Ptr create(std::istream&, std::ostream&);
+        Compiler(std::string&, std::string&);
+        static Ptr create(std::string&, std::string&);
 
     public:
-        static Ptr get_instance();
-        static Ptr get_instance(std::istream&, std::ostream&);
         StmtNode::Ptr compile();
 
-        std::istream& get_in() const;
-        std::ostream& get_out() const;
+        std::stringstream& in();
+        std::stringstream& out();
+
+        void load_file(std::string& filename);
+        void save(std::string& filename);
 
     private:
         void error(int code, std::string message);

@@ -4,17 +4,18 @@
 #include "compiler_scanner.hpp"
 #include "plog/Log.h"
 #include "program_node_builder.hpp"
+#include <filesystem>
+#include <format>
+#include <fstream>
 #include <iostream>
-#include <istream>
 #include <memory>
 #include <ostream>
-#include <stdexcept>
+#include <sstream>
 #include <string>
 
 // Color codes
 static const std::string ANSI_RESET = "\u001B[0m";
 static const std::string ANSI_RED = "\u001B[31m";
-
 
 // Commandline options
 static const std::string OPT_HELP = "-h";
@@ -24,34 +25,48 @@ static const std::string OPT_INTERACT = "-i";
 static const std::string ERR_PREFIX = "Error: ";
 static const std::string ERR_INVALID_OPTION = "Not a valid option";
 static const std::string ERR_FILE_NOT_FOUND = "File not found, check file path";
+static const std::string INF_FILE_NAME_NOT_FOUND = "File '{}' not found, and will be created";
 
-std::shared_ptr<Compiler> Compiler::_instance = nullptr;
+Compiler::Compiler(std::string& infile, std::string& outfile) : _infile(infile), _outfile(outfile) 
+{
+    if (std::filesystem::exists(infile))
+      load_file(infile); 
+    std::filesystem::path filepath(outfile);
 
+    if (!std::filesystem::exists(filepath.parent_path())) 
+    {
+      PLOGI << std::vformat(INF_FILE_NAME_NOT_FOUND, std::make_format_args(outfile));
+    }
+}
 
-Compiler::Compiler(std::istream& in, std::ostream& out) : _in(in), _out(out) {}
-
-Compiler::Ptr Compiler::create(std::istream& in, std::ostream& out) 
+Compiler::Ptr Compiler::create(std::string& in, std::string& out) 
 {
   return std::make_shared<Compiler>(in, out);
 }
 
-std::shared_ptr<Compiler> Compiler::get_instance() 
+std::stringstream& Compiler::in() { return _in; }
+std::stringstream& Compiler::out() { return _out; }
+
+void Compiler::load_file(std::string& filename) 
 {
-    if (_instance)
-      return _instance;
-    throw std::runtime_error("Uninistialized compiler");
+    std::ifstream inputfile(filename);
+    if (!inputfile.is_open())
+        error(1, ERR_FILE_NOT_FOUND);
+
+    _in << inputfile.rdbuf();
+
+    inputfile.close();
 }
 
-std::shared_ptr<Compiler> Compiler::get_instance(std::istream& in, std::ostream& out) 
+void Compiler::save(std::string& filename) 
 {
-  if (!_instance) 
-    _instance = Compiler::create(in, out);
-  return _instance;
+  std::ofstream outputfile(filename);
+  if (!outputfile.is_open())
+    error(2, ERR_FILE_NOT_FOUND);
+
+  outputfile << _out.rdbuf();
+  outputfile.close();
 }
-
-std::istream& Compiler::get_in() const { return _in; }
-std::ostream& Compiler::get_out() const { return _out; }
-
 
 StmtNode::Ptr Compiler::compile()
 {
@@ -60,7 +75,8 @@ StmtNode::Ptr Compiler::compile()
     Parser parser(scanner, builder);
 
     StmtNode::Ptr s = parser.parse();
-    get_out() << s->out().str();
+    out() << s->out().str();
+    save(_outfile);
     return s;
 }
 

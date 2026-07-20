@@ -1,7 +1,6 @@
 #include "program_node_stmt_set.hpp"
 #include "plog/Log.h"
 #include "program_node_expr.hpp"
-#include "program_node_stmt.hpp"
 #include <format>
 #include <memory>
 #include <ostream>
@@ -41,8 +40,10 @@ void SetNode::gen(int b, int a)
                 << expr()->gen()->to_string()).str());
 }
 
-bool SetNode::equals(const ProgNode & that) const 
+bool SetNode::is_equals(const ProgNode & that) const 
 {
+    PLOGD << print() << " == " << that.print();
+    if (typeid(*this) != typeid(that)) return false;
     const SetNode & th = static_cast<const SetNode &>(that);
     return (tid() == th.tid() && expr() == th.expr());
 }
@@ -52,7 +53,7 @@ std::string SetNode::print(std::string prefix) const
     return std::format("{}[Set({}, {}, {})]", prefix, id(), tid()->print(), _expr->print());
 }
 
-bool SetNode::operator==(const ProgNode & that) const { return equals(that); }
+bool SetNode::operator==(const ProgNode & that) const { return is_equals(that); }
 bool SetNode::operator!=(const ProgNode & that) const { return !(*this == that); }
 
 std::ostream& operator<<(std::ostream& out, const SetNode & that) { out << that.to_string(); return out; }

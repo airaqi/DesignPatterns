@@ -19,7 +19,8 @@ class TempNode : public ExprNode
     public:
         static Ptr create(Type::Ptr p);
 
-        virtual std::string to_string(std::string prefix="");
+        virtual std::string to_string(std::string prefix="") const override;
+        virtual std::string print(std::string prefix="") const override;
 
 };
 

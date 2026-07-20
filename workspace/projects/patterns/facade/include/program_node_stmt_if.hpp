@@ -27,7 +27,7 @@ class IfNode : public StmtNode
 
         virtual void traverse(CodeGenerator &) override;
 
-        virtual bool equals(const ProgNode &) const override;
+        virtual bool is_equals(const ProgNode &) const override;
         virtual std::string print(std::string = "") const override;
 
         virtual bool operator==(const ProgNode &) const override;

@@ -44,7 +44,7 @@ class ExprNode : public ProgNode, public std::enable_shared_from_this<ExprNode>
         virtual std::string to_string(std::string = "") const override;
         virtual std::string print(std::string = "") const override;
 
-        virtual bool equals(const ProgNode&) const override;
+        virtual bool is_equals(const ProgNode&) const override;
 
         virtual bool operator==(const ProgNode&) const override;
         virtual bool operator!=(const ProgNode&) const override;
