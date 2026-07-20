@@ -13,7 +13,6 @@ struct PlogTestIniitializer
     static plog::ColorConsoleAppender<plog::TxtFormatter> consoleAppender;
     if (plog::get() == nullptr)
       plog::init(plog::debug, &consoleAppender);
-
   }
 };
 
