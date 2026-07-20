@@ -1,5 +1,7 @@
 #include "program_node_stmt_while.hpp"
+#include "plog/Log.h"
 #include <format>
+#include <memory>
 #include <ostream>
 #include <string>
 
@@ -34,10 +36,15 @@ void WhileNode::gen(int b, int a)
     emit(std::format("{}{}", "goto L", b));
 }
 
-bool WhileNode::equals(const ProgNode & that) const 
+bool WhileNode::is_equals(const ProgNode & that) const 
 {
+    PLOGD << that;
+    if (typeid(that) != typeid(WhileNode))
+      return false;
     const WhileNode & th = static_cast<const WhileNode &>(that);
-    return (expr() == th.expr() && stmt() == th.stmt());
+    bool ret = (expr() == th.expr() && stmt() == th.stmt());
+    PLOGD << "(" << this->print() << ") == " << that.print();
+    return ret;
 }
 
 std::string WhileNode::print(std::string prefix) const
@@ -45,8 +52,8 @@ std::string WhileNode::print(std::string prefix) const
     return std::format("{}[While({},{},{})]", prefix, id(), _expr->print(), _stmt->print());
 }
 
-bool WhileNode::operator==(const ProgNode & that) const { return equals(that); }
-bool WhileNode::operator!=(const ProgNode & that) const { return !(*this == that); }
+bool WhileNode::operator==(const ProgNode & that) const { return is_equals(that); }
+bool WhileNode::operator!=(const ProgNode & that) const { return !(is_equals(that)); }
 
 std::ostream& operator<<(std::ostream& out, const WhileNode & that) { out << that.to_string(); return out; }
 std::ostream& operator<<(std::ostream& out, const WhileNode::Ptr that) { return operator<<(out, *that); }

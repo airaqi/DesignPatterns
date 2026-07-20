@@ -33,13 +33,13 @@ void ElseNode::gen(int b, int a)
     stmt2()->gen(label2, a);
 }
 
-bool ElseNode::equals(const ProgNode & that) const
+bool ElseNode::is_equals(const ProgNode & that) const
 {
     const ElseNode &th = static_cast<const ElseNode &>(that);
     return (expr() == th.expr() && stmt1() == th.stmt1() && stmt2() == th.stmt2()); 
 }
 
-bool ElseNode::operator==(const ProgNode & that) const { return equals(that); }
+bool ElseNode::operator==(const ProgNode & that) const { return is_equals(that); }
 bool ElseNode::operator!=(const ProgNode & that) const { return !(*this == that); }
 
 std::ostream& operator<<(std::ostream& out, const ElseNode & that) { out << that.to_string(); return out; }

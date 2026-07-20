@@ -10,7 +10,7 @@
 /* Represents a statement of the system such as 
  * if, else, ...etc.
  */
-class StmtNode : public ProgNode
+class StmtNode : public ProgNode, public std::enable_shared_from_this<StmtNode>
 {
     public:
         typedef std::shared_ptr<StmtNode> Ptr;
@@ -35,7 +35,7 @@ class StmtNode : public ProgNode
         virtual void remove(ProgNode::Ptr) override;
         virtual const ProgNode& child(const int) const override;
         virtual void getSourcePosition(int &l, int &i) override;
-        virtual bool equals(const ProgNode &) const override;
+        virtual bool is_equals(const ProgNode &) const override;
 
         virtual void gen(int b, int a) {}
 

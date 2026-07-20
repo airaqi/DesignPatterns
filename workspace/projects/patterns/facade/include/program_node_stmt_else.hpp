@@ -22,7 +22,7 @@ class ElseNode : public StmtNode
 
         virtual void gen(int b, int a) override;
 
-        virtual bool equals(const ProgNode &) const override;
+        virtual bool is_equals(const ProgNode &) const override;
 
         virtual std::string print(std::string = "") const override;
 

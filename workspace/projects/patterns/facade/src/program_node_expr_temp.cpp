@@ -12,7 +12,12 @@ TempNode::Ptr TempNode::create(Type::Ptr p)
     return std::make_shared<TempNode>(p); 
 }
 
-std::string TempNode::to_string(std::string prefix)
+std::string TempNode::to_string(std::string prefix) const
 {
     return std::format("t{}", _number);
+}
+
+std::string TempNode::print(std::string prefix) const
+{
+    return std::format("{}[Temp(id:{}, op:{}, typ:{}, no:{})]", prefix, id(), op()->to_string(), type()->to_string(), _number);
 }

@@ -2,7 +2,6 @@
 #include "compiler_parser.hpp"
 #include "compiler_scanner.hpp"
 #include "plog/Appenders/ConsoleAppender.h"
-#include "plog/Appenders/RollingFileAppender.h"
 #include "plog/Logger.h"
 #include "plog/Severity.h"
 #include "program_node_builder.hpp"
@@ -13,7 +12,6 @@
 #include <fstream>
 #include <iostream>
 #include <iterator>
-#include <memory>
 #include <ostream>
 #include <sstream>
 #include <stdexcept>
@@ -61,32 +59,6 @@ std::string get_short_options() {
   return short_options;
 }
 
-void error(int code, std::string message)
-{
-    std::cout << ANSI_RED << ERR_PREFIX << message << ANSI_RESET << std::endl;
-    exit(code);
-}
-
-int find_arg(const std::string option, int argc, char *argv[]) {
-    for(int i = 0; i < argc; i++)
-        if (option == argv[i])
-            return i;
-    return -1;
-}
-
-std::stringstream& load_file(std::string filename, std::stringstream& stream)
-{
-    std::ifstream inputfile(filename);
-    if (!inputfile.is_open())
-        error(1, ERR_FILE_NOT_FOUND);
-
-    stream << inputfile.rdbuf();
-
-    inputfile.close();
-
-    return stream;
-}
-
 std::string usage()
 {
     std::string syntaxformat = "{}\n\t{}\n";
@@ -128,15 +100,6 @@ std::string print_args(int argc, char *argv[])
     return sout.str();
 }
 
-void compile(std::stringstream& stream)
-{
-    Scanner scanner(stream);
-    ProgramNodeBuilder builder;
-    Parser parser(scanner, builder);
-    StmtNode::Ptr s = parser.parse();
-    std::cout << std::endl;
-}
-
 plog::Severity get_plog_level(std::string level_str) 
 {
   plog::Severity level = plog::info;
@@ -160,6 +123,9 @@ void initLogger()
 
 
 int main(int argc, char *argv[]) {
+  std::string default_filepath = "./input/in.txt", filepath = default_filepath;
+  std::string default_destpath = "./output/output.txt", destpath = default_destpath;
+
   try {
     initLogger();
 
@@ -167,8 +133,6 @@ int main(int argc, char *argv[]) {
     PLOGD << print_args(argc, argv);
     PLOGD << "current dir: " << std::filesystem::current_path();
 
-    std::string default_filepath = "./input/in.txt", filepath = default_filepath;
-    std::string default_destpath = "./output/output.txt", destpath = default_destpath;
     std::string short_options = get_short_options();;
     int opt;
     int option_index = 0;
@@ -203,22 +167,18 @@ int main(int argc, char *argv[]) {
         case 'h':
         case '?':
           std::cout << usage() << "\n";
-          return 0;
+          exit(0);
         default:
           break;
       }
     }
 
-    std::stringstream filein;
+    Compiler::Ptr compiler = Compiler::create(filepath, destpath);
+    PLOGI << "----- input file start: ----" << std::endl 
+          << compiler->in().str()
+          << "---- input file end ----" << std::endl;
 
-    load_file(filepath, filein);
-    PLOGI << "----- input file start: ----" << std::endl << filein.str();
-    PLOGI << "---- input file end ----" << std::endl;
-
-    std::ofstream fileout(destpath);
-
-    std::shared_ptr<Compiler> compiler = Compiler::get_instance(filein, fileout);
-    compiler->compile();
+    auto s = compiler->compile();
     // compile(filein);
 
     PLOGI << "Compile complete!";
@@ -235,69 +195,6 @@ int main(int argc, char *argv[]) {
     std::cerr << "Error: unknown exception." << std::endl;
     return 3;
   }
-
-  /*    std::string j = "int a = 10;\n"*/
-  /*"String test = \"Hello\";\n"*/
-  /*"if(a == 1 && x != 79) {\n"*/
-  /*"\ttest = 0;\n"*/
-  /*"\ty=5.4;\n"*/
-  /*"\tname_1=100;\n"*/
-  /*"}";*/
-  /*std::string p = "a = 10\n"*/
-  /*"test = \"Hello\"\n"*/
-  /*"if a == 1 and x != 79:\n"*/
-  /*"\ttest = 0\n"*/
-  /*"\ty = 5.4\n"*/
-  /*"\tname_1 = 'Me'"*/
-  /*"\n";*/
-
-  /*std::cout << "\nJava: \n" << j << "\n"; */
-
-  /*std::stringstream sj(j);*/
-  /*//TokenStream jin(sj);*/
-  /*TagJv jsym;*/
-  /*Scanner jscan(jsym, sj);*/
-
-  /*while (!jscan.eof())*/
-  /*{*/
-  /*//Token t = jin.get();*/
-  /*Token t = jscan.scan();*/
-  /*std::cout << t << "\n";*/
-  /*}*/
-
-  /*std::cout << "\nPython: \n" << p << "\n";*/
-
-  /*std::stringstream sp(p);*/
-  /*//TokenStream pin(sp);*/
-  /*TagPy psym;*/
-  /*Scanner pscan(psym, sp);*/
-
-  /*while (!pscan.eof())*/
-  /*{*/
-  /*//Token t = pin.get();*/
-  /*Token t = pscan.scan();*/
-  /*std::cout << t << "\n";*/
-  /*}*/
-
-  /*std::cout << "\nParser: \n\n";*/
-
-  /*std::stringstream ssq("{ int x = 10; \nx = 15;\nString s = \"Hello\";\nint y
-   * = 5;\nif (x == y)  {\n\tdouble z = 1.5;\n\tx = y + 20 + 5;\n}\n}");*/
-  /*std::stringstream ssp("{ int x = 10; x = 15; }");*/
-  /*std::stringstream ssm("{ int x = 10; }");*/
-  /*std::stringstream sss("{ int x = 10; String s = \"Hi There\"; }");*/
-
-  /*std::stringstream sin(ssq.str());*/
-
-  /*std::cout << sin.str() << "\n\n";*/
-  /*Scanner scanner(jsym, sin);*/
-  /*ProgramNodeBuilder builder;*/
-  /*ParserJava parser(scanner, builder);*/
-  /*parser.parse(builder.getRootNode());*/
-
-  /*std::cout */
-  /*<< sin.str() << "\n" */
-  /*<< *builder.getRootNode() << "\n";*/
 
   return 0;
 }

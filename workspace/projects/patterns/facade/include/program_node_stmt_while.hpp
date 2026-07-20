@@ -14,6 +14,8 @@ class WhileNode : public StmtNode
 
         WhileNode();
 
+        Ptr ptr() const;
+
     public:
         static Ptr create();
 
@@ -26,7 +28,7 @@ class WhileNode : public StmtNode
         void init(ExprNode::Ptr, StmtNode::Ptr);
         virtual void gen(int b, int a) override;
 
-        virtual bool equals(const ProgNode &) const override;
+        virtual bool is_equals(const ProgNode &) const override;
         virtual std::string print(std::string = "") const override;
 
         virtual bool operator==(const ProgNode &) const override;

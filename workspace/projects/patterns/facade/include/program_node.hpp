@@ -19,7 +19,7 @@ class ProgNode
         ProgNode();
 
     public:
-        virtual ~ProgNode();
+        virtual ~ProgNode() = default;
         // program node manipulation
         virtual void getSourcePosition(int& l, int& i) = 0;
 
@@ -56,8 +56,14 @@ class ProgNode
 
         virtual std::string to_string(std::string = "") const = 0;
         virtual std::string print(std::string = "") const = 0;
+  
+        bool equals(const ProgNode&) const;
+        bool equals(const Ptr&) const;
 
-        virtual bool equals(const ProgNode&) const = 0;
+        virtual bool is_equals(const ProgNode&) const = 0;
+
+        virtual bool operator==(const ProgNode::Ptr&) const;
+        virtual bool operator!=(const ProgNode::Ptr&) const;
 
         virtual bool operator==(const ProgNode&) const;
         virtual bool operator!=(const ProgNode&) const;

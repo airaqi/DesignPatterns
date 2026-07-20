@@ -28,7 +28,7 @@ class BreakNode : public StmtNode
 
         StmtNode::Ptr stmt() const { return _stmt; }
 
-        virtual bool equals(const ProgNode & other) const override { return stmt() == static_cast<const BreakNode&>(other).stmt(); }
+        virtual bool is_equals(const ProgNode & other) const override { return stmt() == static_cast<const BreakNode&>(other).stmt(); }
 
     private:
         StmtNode::Ptr   _stmt;

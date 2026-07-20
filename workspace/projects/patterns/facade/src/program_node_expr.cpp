@@ -1,5 +1,6 @@
 #include "program_node_expr.hpp"
 #include "compiler_token_word_type.hpp"
+#include "plog/Log.h"
 #include "program_node_expr_variable.hpp"
 #include <format>
 #include <iostream>
@@ -135,17 +136,19 @@ std::string ExprNode::print(std::string prefix) const
 }
 
 
-bool ExprNode::equals(const ProgNode& that) const
+bool ExprNode::is_equals(const ProgNode& that) const
 {
-    const ExprNode& th = dynamic_cast<const ExprNode&>(that);
-    return (_op == th._op) && (_type == th._type) ;
-/*    bool ret = true;*/
+    const ExprNode& other = static_cast<const ExprNode&>(that);
+    bool ret = (other._op == _op) && (other._type == _type);
+    PLOGD << print() << " = " << that.print() << " = " << ret;
+    return ret;
+    /*    bool ret = true;*/
     /*for(auto& it : _children)*/
         /*ret = ret && it.second->equals(that.child(it.first));*/
     /*return (ret && line() == that.line() && index() == that.index());*/
 }
 
-bool ExprNode::operator==(const ProgNode& that) const { return equals(that); }
+bool ExprNode::operator==(const ProgNode& that) const { return is_equals(that); }
 bool ExprNode::operator!=(const ProgNode& that) const { return !(*this == that); }
 
 std::ostream& operator<<(std::ostream& out, const ExprNode& e)

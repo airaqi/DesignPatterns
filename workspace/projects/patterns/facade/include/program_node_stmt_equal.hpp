@@ -20,7 +20,7 @@ class EqualNode : public StmtNode
         ProgNode::Ptr lhs() const {  return _lhs; }
         ProgNode::Ptr rhs() const { return _rhs; }
 
-       virtual bool equals(const ProgNode &) const override; 
+       virtual bool is_equals(const ProgNode &) const override; 
         virtual std::string to_string(std::string prefix = "") const override;
 
     private:

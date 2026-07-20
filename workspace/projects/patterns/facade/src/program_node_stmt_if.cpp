@@ -48,7 +48,7 @@ void IfNode::gen(int b, int a)
     stmt()->gen(label, a);
 }
 
-bool IfNode::equals(const ProgNode & that) const 
+bool IfNode::is_equals(const ProgNode & that) const 
 {
     const IfNode & th = static_cast<const IfNode &>(that);
     return (expr() == th.expr() && stmt() == th.stmt());
@@ -64,7 +64,7 @@ std::string IfNode::print(std::string prefix) const
     return sout.str();
 }
 
-bool IfNode::operator==(const ProgNode & that) const { return equals(that); }
+bool IfNode::operator==(const ProgNode & that) const { return is_equals(that); }
 bool IfNode::operator!=(const ProgNode & that) const { return !(*this == that); }
 
 std::ostream& operator<<(std::ostream& out, const IfNode & that) { out << that.to_string(); return out; }
