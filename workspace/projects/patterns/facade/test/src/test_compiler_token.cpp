@@ -59,7 +59,7 @@ TEST_CASE("Token")
         CHECK_EQ(*Real::create(1.5), *real);
         CHECK_EQ("1.5", real->to_string());
         CHECK_EQ("[Real(1.5): [Token(REAL)]]", real->print());
-        PLOGD << real;
+        PLOGD << *real;
     }
 
     SUBCASE("Type")

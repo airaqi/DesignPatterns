@@ -7,3 +7,4 @@
 //#include "test_program_node_expr_block.cpp"
 #include "test_program_node_expr_op.cpp"
 // #include "test_compiler_logger.cpp"
+#include "test_program_node_expr_temp.cpp"
