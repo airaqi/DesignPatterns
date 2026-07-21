@@ -49,24 +49,27 @@ int ProgNode::newlabel() { return ++_labels; }
 
 bool ProgNode::equals(const ProgNode& that) const 
 {
-    PLOGD << print() << " = " << that.print();
+    PLOGD << ">> " << print() << " = " << that.print();
 
     if (this == &that) return true;
     if (typeid(*this) != typeid(that)) return false;
 
+    PLOGD << "<< " << print() << " = " << that.print();
     return is_equals(that);
 }
 
 bool ProgNode::equals(const ProgNode::Ptr& that) const {
-  PLOGD << print() << " = " << that->print();
+  PLOGD << ">> " << print() << " = " << that->print();
 
   if (!that) return false;
   if (this == that.get()) return true;
-  if (typeid(*this) != typeid(that.get())) return false;
+
+  PLOGD << "<< " << print() << " = " << that->print();
+
   return is_equals(*that);
 }
 
-bool ProgNode::operator==(const ProgNode::Ptr& that) const { return is_equals(*that); }
+bool ProgNode::operator==(const ProgNode::Ptr& that) const { return equals(*that); }
 bool ProgNode::operator!=(const ProgNode::Ptr& that) const { return !is_equals(*that); }
 
 bool ProgNode::operator==(const ProgNode& that) const { return that.is_equals(*this); }

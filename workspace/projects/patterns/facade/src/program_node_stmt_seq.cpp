@@ -36,12 +36,12 @@ void SeqNode::gen(int b, int a)
 
 bool SeqNode::is_equals(const ProgNode & that) const 
 {
+    PLOGD << " >> " << print() << " == " << that.print();
+
     if (typeid(that) != typeid(*this)) return false;
     const SeqNode& other = static_cast<const SeqNode &>(that);
-    bool stmt1Ret = stmt1()->equals(other.stmt1());
-    bool stmt2Ret = stmt2()->equals(other.stmt2());
     bool ret = (stmt1()->equals(other.stmt1()) && stmt2()->equals(other.stmt2()));
-    PLOGD << print() << " == " << that.print() << " = " << ret << " " << stmt1Ret << " " << stmt2Ret;
+    PLOGD << " >> " << print() << " == " << that.print() << " = " << ret;
     return ret;
 }
 

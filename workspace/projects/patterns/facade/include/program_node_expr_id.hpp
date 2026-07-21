@@ -26,10 +26,10 @@ class Id : public ExprNode
         virtual std::string to_string(std::string = "") const override;
         virtual std::string print(std::string = "") const override;
 
-        friend bool operator==(const Id&, const Id&);
-        friend bool operator==(const Id::Ptr, const Id::Ptr);
-        friend bool operator!=(const Id&, const Id&);
-        friend bool operator!=(const Id::Ptr, const Id::Ptr);
+        // friend bool operator==(const Id&, const Id&);
+        // friend bool operator==(const Id::Ptr, const Id::Ptr);
+        // friend bool operator!=(const Id&, const Id&);
+        // friend bool operator!=(const Id::Ptr, const Id::Ptr);
 
         friend std::ostream& operator<<(std::ostream&, const Id&);
         friend std::ostream& operator<<(std::ostream&, const Id::Ptr);

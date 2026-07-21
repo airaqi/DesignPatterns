@@ -26,8 +26,8 @@ class ElseNode : public StmtNode
 
         virtual std::string print(std::string = "") const override;
 
-        virtual bool operator==(const ProgNode &) const override;
-        virtual bool operator!=(const ProgNode &) const override;
+        // virtual bool operator==(const ProgNode &) const override;
+        // virtual bool operator!=(const ProgNode &) const override;
 
         friend std::ostream& operator<<(std::ostream &, const ElseNode &);
         friend std::ostream& operator<<(std::ostream &, const ElseNode::Ptr &);

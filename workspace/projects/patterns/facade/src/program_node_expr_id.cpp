@@ -1,5 +1,6 @@
 #include "program_node_expr_id.hpp"
 #include "compiler_token_word_type.hpp"
+#include "plog/Log.h"
 #include "program_node_expr.hpp"
 #include <format>
 #include <iostream>
@@ -26,15 +27,17 @@ std::string Id::print(std::string prefix) const
 
 bool Id::is_equals(const ProgNode& that) const
 {
+    PLOGD << print() << " = " << that.print();
+
     const Id& id = dynamic_cast<const Id&>(that);
     return ExprNode::is_equals(that) && (_offset == id.offset());
 }
 
-bool operator==(const Id& lhs, const Id& rhs)           { return lhs.is_equals(rhs); }
-bool operator==(const Id::Ptr lhs, const Id::Ptr rhs)   { return *lhs.get() == *rhs.get(); }
+// bool operator==(const Id& lhs, const Id& rhs)           { return lhs.is_equals(rhs); }
+// bool operator==(const Id::Ptr lhs, const Id::Ptr rhs)   { return *lhs.get() == *rhs.get(); }
 
-bool operator!=(const Id& lhs, const Id& rhs)           { return !(lhs == rhs); }
-bool operator!=(const Id::Ptr lhs, const Id::Ptr rhs)   { return !(lhs == rhs); }
+// bool operator!=(const Id& lhs, const Id& rhs)           { return !(lhs == rhs); }
+// bool operator!=(const Id::Ptr lhs, const Id::Ptr rhs)   { return !(lhs == rhs); }
 
 std::ostream& operator<<(std::ostream& out, const Id& that)
 {
