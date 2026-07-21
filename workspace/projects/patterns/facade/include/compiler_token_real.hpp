@@ -3,6 +3,7 @@
 
 #include "compiler_token.hpp"
 #include <memory>
+#include <ostream>
 
 class Real : public Token
 {
@@ -22,6 +23,9 @@ class Real : public Token
         virtual std::string print(std::string = "") const override;
 
         friend bool operator==(const Real&, const Real&);
+        friend bool operator!=(const Real&, const Real&);
+
+        friend std::ostream& operator<<(std::ostream&, const Real&);
 
     private:
         float _value;
