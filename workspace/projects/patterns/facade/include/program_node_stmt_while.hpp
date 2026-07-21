@@ -31,8 +31,8 @@ class WhileNode : public StmtNode
         virtual bool is_equals(const ProgNode &) const override;
         virtual std::string print(std::string = "") const override;
 
-        virtual bool operator==(const ProgNode &) const override;
-        virtual bool operator!=(const ProgNode &) const override;
+        // virtual bool operator==(const ProgNode &) const override;
+        // virtual bool operator!=(const ProgNode &) const override;
 
         friend std::ostream& operator<<(std::ostream &, const WhileNode &);
         friend std::ostream& operator<<(std::ostream &, const WhileNode::Ptr);

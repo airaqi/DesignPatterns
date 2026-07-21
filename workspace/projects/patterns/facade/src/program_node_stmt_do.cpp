@@ -42,15 +42,15 @@ bool DoNode::is_equals(const ProgNode & that) const
     return (expr() == th.expr() && stmt() == th.stmt()) ;
 }
 
-bool DoNode::operator==(const ProgNode & that) const
-{
-    return is_equals(that);
-}
-
-bool DoNode::operator!=(const ProgNode & that) const
-{
-    return !(*this == that);
-}
+/* bool DoNode::operator==(const ProgNode & that) const */
+/* { */
+/*     return is_equals(that); */
+/* } */
+/*  */
+/* bool DoNode::operator!=(const ProgNode & that) const */
+/* { */
+/*     return !(*this == that); */
+/* } */
 
 std::string DoNode::print(std::string prefix) const
 {

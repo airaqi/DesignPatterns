@@ -52,8 +52,8 @@ std::string WhileNode::print(std::string prefix) const
     return std::format("{}[While({},{},{})]", prefix, id(), _expr->print(), _stmt->print());
 }
 
-bool WhileNode::operator==(const ProgNode & that) const { return is_equals(that); }
-bool WhileNode::operator!=(const ProgNode & that) const { return !(is_equals(that)); }
+// bool WhileNode::operator==(const ProgNode & that) const { return is_equals(that); }
+// bool WhileNode::operator!=(const ProgNode & that) const { return !(is_equals(that)); }
 
 std::ostream& operator<<(std::ostream& out, const WhileNode & that) { out << that.to_string(); return out; }
 std::ostream& operator<<(std::ostream& out, const WhileNode::Ptr that) { return operator<<(out, *that); }

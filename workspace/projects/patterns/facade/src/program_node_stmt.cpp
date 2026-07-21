@@ -48,15 +48,13 @@ void StmtNode::getSourcePosition(int &l, int &i) {}
 
 bool StmtNode::is_equals(const ProgNode &that) const
 {
-    PLOGD << print() << " == " << that.print();
+    PLOGD << " >> " << print() << " == " << that.print();
+
     if (typeid(*this) != typeid(that)) return false;
-    PLOGD << "<<<<";
     if (this == &that) return true;
-    PLOGD << "<<<<";
     const StmtNode& other = static_cast<const StmtNode&>(that);
-    PLOGD << "<<<<";
     bool ret = (*this == other);
-    PLOGD << this->print() << " == " << other.print() << " = " << ret;
+    PLOGD << " << " << this->print() << " == " << other.print() << " = " << ret;
     return ret;
 }
 

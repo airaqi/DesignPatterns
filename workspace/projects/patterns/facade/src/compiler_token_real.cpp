@@ -1,5 +1,7 @@
 #include "compiler_token_real.hpp"
+#include "compiler_token_num.hpp"
 #include <format>
+#include <ostream>
 #include <string>
 
 
@@ -29,7 +31,7 @@ std::string Real::print(std::string prefix) const
 }
 
 
-bool operator==(const Real& lhs, const Real& rhs)
-{
-    return lhs.equal(rhs);
-}
+bool operator==(const Real& lhs, const Real& rhs) { return lhs.equal(rhs); }
+bool operator!=(const Real& lhs, const Real& rhs) { return !(lhs == rhs); }
+
+std::ostream& operator<<(std::ostream& out, const Real& that) { out << that.to_string(); return out; }

@@ -42,10 +42,11 @@ void SetNode::gen(int b, int a)
 
 bool SetNode::is_equals(const ProgNode & that) const 
 {
-    PLOGD << print() << " == " << that.print();
+    PLOGD << " >> " << print() << " == " << that.print();
+
     if (typeid(*this) != typeid(that)) return false;
     const SetNode & th = static_cast<const SetNode &>(that);
-    return (tid() == th.tid() && expr() == th.expr());
+    return (tid()->equals(th.tid()) && expr()->equals(th.expr()));
 }
 
 std::string SetNode::print(std::string prefix) const
@@ -53,8 +54,8 @@ std::string SetNode::print(std::string prefix) const
     return std::format("{}[Set({}, {}, {})]", prefix, id(), tid()->print(), _expr->print());
 }
 
-bool SetNode::operator==(const ProgNode & that) const { return is_equals(that); }
-bool SetNode::operator!=(const ProgNode & that) const { return !(*this == that); }
+// bool SetNode::operator==(const ProgNode & that) const { return is_equals(that); }
+// bool SetNode::operator!=(const ProgNode & that) const { return !(*this == that); }
 
 std::ostream& operator<<(std::ostream& out, const SetNode & that) { out << that.to_string(); return out; }
 std::ostream& operator<<(std::ostream& out, const SetNode::Ptr that) { return operator<<(out, *that); }

@@ -138,9 +138,10 @@ std::string ExprNode::print(std::string prefix) const
 
 bool ExprNode::is_equals(const ProgNode& that) const
 {
+    PLOGD << ">> " << print() << " = " << that.print();
     const ExprNode& other = static_cast<const ExprNode&>(that);
-    bool ret = (other._op == _op) && (other._type == _type);
-    PLOGD << print() << " = " << that.print() << " = " << ret;
+    bool ret = (other._op->equals(_op)) && (other._type->equals(*_type));
+    PLOGV << "<< " << print() << " = " << that.print() << " = " << ret;
     return ret;
     /*    bool ret = true;*/
     /*for(auto& it : _children)*/
@@ -148,8 +149,8 @@ bool ExprNode::is_equals(const ProgNode& that) const
     /*return (ret && line() == that.line() && index() == that.index());*/
 }
 
-bool ExprNode::operator==(const ProgNode& that) const { return is_equals(that); }
-bool ExprNode::operator!=(const ProgNode& that) const { return !(*this == that); }
+// bool ExprNode::operator==(const ProgNode& that) const { return is_equals(that); }
+// bool ExprNode::operator!=(const ProgNode& that) const { return !(*this == that); }
 
 std::ostream& operator<<(std::ostream& out, const ExprNode& e)
 {

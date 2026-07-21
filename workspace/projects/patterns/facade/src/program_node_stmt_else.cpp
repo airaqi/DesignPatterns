@@ -39,8 +39,8 @@ bool ElseNode::is_equals(const ProgNode & that) const
     return (expr() == th.expr() && stmt1() == th.stmt1() && stmt2() == th.stmt2()); 
 }
 
-bool ElseNode::operator==(const ProgNode & that) const { return is_equals(that); }
-bool ElseNode::operator!=(const ProgNode & that) const { return !(*this == that); }
+// bool ElseNode::operator==(const ProgNode & that) const { return is_equals(that); }
+// bool ElseNode::operator!=(const ProgNode & that) const { return !(*this == that); }
 
 std::ostream& operator<<(std::ostream& out, const ElseNode & that) { out << that.to_string(); return out; }
 std::ostream& operator<<(std::ostream& out, const ElseNode::Ptr that) { return operator<<(out, *that); }

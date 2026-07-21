@@ -64,8 +64,8 @@ std::string IfNode::print(std::string prefix) const
     return sout.str();
 }
 
-bool IfNode::operator==(const ProgNode & that) const { return is_equals(that); }
-bool IfNode::operator!=(const ProgNode & that) const { return !(*this == that); }
+// bool IfNode::operator==(const ProgNode & that) const { return is_equals(that); }
+// bool IfNode::operator!=(const ProgNode & that) const { return !(*this == that); }
 
 std::ostream& operator<<(std::ostream& out, const IfNode & that) { out << that.to_string(); return out; }
 std::ostream& operator<<(std::ostream& out, const IfNode::Ptr that) { return operator<<(out, *that); }
