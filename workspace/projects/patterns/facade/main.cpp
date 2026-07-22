@@ -1,17 +1,15 @@
 #include "compiler_compiler.hpp"
-#include "compiler_parser.hpp"
-#include "compiler_scanner.hpp"
 #include "plog/Appenders/ConsoleAppender.h"
 #include "plog/Logger.h"
 #include "plog/Severity.h"
-#include "program_node_builder.hpp"
+#include "program_node_stmt_seq.hpp"
 #include <bits/getopt_core.h>
 #include <cstdlib>
 #include <exception>
 #include <filesystem>
-#include <fstream>
 #include <iostream>
 #include <iterator>
+#include <memory>
 #include <ostream>
 #include <sstream>
 #include <stdexcept>
@@ -173,12 +171,12 @@ int main(int argc, char *argv[]) {
       }
     }
 
-    Compiler::Ptr compiler = Compiler::create(filepath, destpath);
+    Compiler compiler(filepath, destpath);
     PLOGI << "----- input file start: ----" << std::endl 
-          << compiler->in().str()
+          << compiler.in().str()
           << "---- input file end ----" << std::endl;
 
-    auto s = compiler->compile();
+    auto s = compiler.compile();
     // compile(filein);
 
     PLOGI << "Compile complete!";

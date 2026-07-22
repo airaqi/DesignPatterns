@@ -26,10 +26,10 @@ Type::Ptr RelNode::check(Type::Ptr p1, Type::Ptr p2)
         << " p2 cast: " << std::dynamic_pointer_cast<Array>(p2)
         << " p1 == p2: " << (p1 == p2);
     if ((std::dynamic_pointer_cast<Array>(p1)) != nullptr || (std::dynamic_pointer_cast<Array>(p2) != nullptr))
-        return Type::Null;
+        return Type::Null();
     else if (*p1 == *p2)
-        return Type::Bool;
-    return Type::Null;
+        return Type::Bool();
+    return Type::Null();
 }
 
 void RelNode::jumping(int t, int f) 

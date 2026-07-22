@@ -62,7 +62,7 @@ TEST_CASE("Scanner")
         Scanner tin(ss);
 
         CHECK_EQ(*Word::create(s1, Tag::ID), *tin.scan());
-        CHECK_EQ(*Word::asgn, *tin.scan());
+        CHECK_EQ(*Word::asgn(), *tin.scan());
         CHECK_EQ(*Num::create(n), *tin.scan());
     }
 
@@ -75,7 +75,7 @@ TEST_CASE("Scanner")
         Scanner tin(ss);
 
         CHECK_EQ(*Word::create(s1, Tag::ID), *tin.scan());
-        CHECK_EQ(*Word::eq, *tin.scan());
+        CHECK_EQ(*Word::eq(), *tin.scan());
         CHECK_EQ(*Num::create(n), *tin.scan());
     }
 
@@ -105,14 +105,14 @@ TEST_CASE("Scanner")
         auto t1 = tin.scan(),
               t2 = tin.scan();
 
-        CHECK_EQ(*Type::Int, *t1);
+        CHECK_EQ(*Type::Int(), *t1);
         CHECK_EQ(*Word::create("a", Tag::ID), *t2);
 
         tin.putback(t1);
         tin.putback(t2);
 
         CHECK_EQ(*Word::create("a", Tag::ID), *tin.scan());
-        CHECK_EQ(*Type::Int, *tin.scan());
+        CHECK_EQ(*Type::Int(), *tin.scan());
         
     }
 
@@ -122,7 +122,7 @@ TEST_CASE("Scanner")
         Scanner tin(ss);
 
         auto t = tin.scan();
-        CHECK_EQ(*Type::Int, *t);
+        CHECK_EQ(*Type::Int(), *t);
         CHECK_EQ(3, t->index());
         CHECK_EQ(3, t->column());
         CHECK_EQ(0, t->line());
@@ -134,7 +134,7 @@ TEST_CASE("Scanner")
         CHECK_EQ(0, t->line());
 
         t = tin.scan();
-        CHECK_EQ(*Word::asgn, *t);
+        CHECK_EQ(*Word::asgn(), *t);
         CHECK_EQ(7, t->index());
         CHECK_EQ(7, t->column());
         CHECK_EQ(0, t->line());
@@ -146,7 +146,7 @@ TEST_CASE("Scanner")
         CHECK_EQ(0, t->line());
 
         t = tin.scan();
-        CHECK_EQ(*Word::scln, *t);
+        CHECK_EQ(*Word::scln(), *t);
         CHECK_EQ(11, t->index());
         CHECK_EQ(11, t->column());
         CHECK_EQ(0, t->line());
@@ -158,7 +158,7 @@ TEST_CASE("Scanner")
         CHECK_EQ(1, t->line());
 
         t = tin.scan();
-        CHECK_EQ(*Word::asgn, *t);
+        CHECK_EQ(*Word::asgn(), *t);
         CHECK_EQ(15, t->index());
         CHECK_EQ(3, t->column());
         CHECK_EQ(1, t->line());
@@ -170,7 +170,7 @@ TEST_CASE("Scanner")
         CHECK_EQ(1, t->line());
 
         t = tin.scan();
-        CHECK_EQ(*Word::scln, *t);
+        CHECK_EQ(*Word::scln(), *t);
         CHECK_EQ(18, t->index());
         CHECK_EQ(6, t->column());
         CHECK_EQ(1, t->line());
@@ -186,8 +186,8 @@ TEST_CASE("Scanner")
             "if", "else", "while", "do", 
             "break" };
         Token::Ptr types[sz] = { 
-            Type::Int, Type::Float, Type::Bool, Type::Char, 
-            Word::And, Word::Or, Word::True, Word::False,
+            Type::Int(), Type::Float(), Type::Bool(), Type::Char(), 
+            Word::And(), Word::Or(), Word::True(), Word::False(),
             Word::create("if", Tag::IF), 
             Word::create("else", Tag::ELSE), 
             Word::create("while", Tag::WHILE), 

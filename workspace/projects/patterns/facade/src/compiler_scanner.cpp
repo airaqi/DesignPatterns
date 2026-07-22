@@ -26,18 +26,19 @@ Scanner::Scanner(std::istream& in)
     reserve(Word::create("while", Tag::WHILE));
     reserve(Word::create("do", Tag::DO));
     reserve(Word::create("break", Tag::BREAK));
-    reserve(Word::True);
-    reserve(Word::False);
-    reserve(Type::Int);
-    reserve(Type::Char);
-    reserve(Type::Float);
-    reserve(Type::Bool);
+    reserve(Word::True());
+    reserve(Word::False());
+    reserve(Type::Int());
+    reserve(Type::Char());
+    reserve(Type::Float());
+    reserve(Type::Bool());
 
 }
 
 Scanner::~Scanner() 
 {
     reset();
+    _words.clear();
 }
 
 void Scanner::reserve(Word::Ptr word) 
@@ -47,7 +48,7 @@ void Scanner::reserve(Word::Ptr word)
 
 Word::Ptr Scanner::find(std::string s) 
 {
-    Word::Ptr word = _words.find(s) != _words.end() ? _words[s] : Type::Null;
+    Word::Ptr word = _words.find(s) != _words.end() ? _words[s] : Type::Null();
     // PLOGD << "s: " << s << " word: " << word;
     return word;
 }
@@ -185,35 +186,35 @@ Token::Ptr Scanner::get()
     switch(_peek)
     {
         case '&':
-           return (readch('&')) ? Word::And->clone() : Word::ambr->clone();
+           return (readch('&')) ? Word::And()->clone() : Word::ambr()->clone();
 
         case '|':
-           return (readch('|')) ? Word::Or->clone() : Word::pipe->clone();
+           return (readch('|')) ? Word::Or()->clone() : Word::pipe()->clone();
 
         case '=':
-           return (readch('=')) ? Word::eq->clone() : Word::asgn->clone();
+           return (readch('=')) ? Word::eq()->clone() : Word::asgn()->clone();
 
         case '!':
-           return (readch('=')) ? Word::ne->clone() : Word::Not->clone();
+           return (readch('=')) ? Word::ne()->clone() : Word::Not()->clone();
 
         case '<':
-           return (readch('=')) ? Word::le->clone() : Word::lt->clone();
+           return (readch('=')) ? Word::le()->clone() : Word::lt()->clone();
 
         case '>':
-           return (readch('=')) ? Word::ge->clone() : Word::gt->clone();
+           return (readch('=')) ? Word::ge()->clone() : Word::gt()->clone();
 
-        case ';':   return Word::scln->clone();
-        case '{':   return Word::cubo->clone();
-        case '}':   return Word::cubc->clone();
-        case '(':   return Word::paro->clone();
-        case ')':   return Word::parc->clone();
-        case '[':   return Word::sqbo->clone();
-        case ']':   return Word::sqbc->clone();
+        case ';':   return Word::scln()->clone();
+        case '{':   return Word::cubo()->clone();
+        case '}':   return Word::cubc()->clone();
+        case '(':   return Word::paro()->clone();
+        case ')':   return Word::parc()->clone();
+        case '[':   return Word::sqbo()->clone();
+        case ']':   return Word::sqbc()->clone();
 
-        case '+':   return Word::plus->clone();
-        case '-':   return Word::hyph->clone();
-        case '*':   return Word::mult->clone();
-        case '/':   return Word::slsh->clone();
+        case '+':   return Word::plus()->clone();
+        case '-':   return Word::hyph()->clone();
+        case '*':   return Word::mult()->clone();
+        case '/':   return Word::slsh()->clone();
     }
 
     if (std::isdigit(_peek))
@@ -265,7 +266,7 @@ Token::Ptr Scanner::get()
         if (!eof()) putback(_peek);
         std::string s = ss.str();
         Word::Ptr word = find(s);
-        if (word != Type::Null)
+        if (word != Type::Null())
             return word->clone();
         word = Word::create(s, Tag::ID);
         reserve(word);

@@ -8,7 +8,7 @@
 
 IfNode::IfNode(ExprNode::Ptr e, StmtNode::Ptr s) : _expr(e), _stmt(s) 
 {
-    if (expr()->type() != Type::Bool)
+    if (expr()->type() != Type::Bool())
         expr()->error("boolean required in if");
 }
 

@@ -12,7 +12,7 @@ class Env
 {
     public:
         typedef std::shared_ptr<Env> Ptr;
-        static Env::Ptr Null;
+        static Env::Ptr& Null();
 
     public:
         Env(Ptr n);

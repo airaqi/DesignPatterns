@@ -16,7 +16,7 @@ Token::Ptr Token::create(Tag::Kind kind)
 
 Token::Ptr Token::clone()
 {
-    return Token::Ptr(new Token(_tag));
+    return std::make_shared<Token>(_tag);
 }
 
 int Token::line()           { return _line; }

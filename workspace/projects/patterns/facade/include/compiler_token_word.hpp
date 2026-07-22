@@ -34,12 +34,34 @@ class Word : public Token
         friend bool operator!=(const Word&, const Word&);
 
     public:
-        static Ptr 
-            And, Or, eq, ne, le, ge, minus, True, False, temp, 
-            ambr, pipe, asgn, Not, gt, lt, 
-            scln, cubo, cubc, paro, parc, sqbo, sqbc,
-            plus, hyph, mult, slsh,
-            idx;
+        static Ptr& And();
+        static Ptr& Or();
+        static Ptr& eq();
+        static Ptr& ne();
+        static Ptr& le();
+        static Ptr& ge();
+        static Ptr& minus();
+        static Ptr& True();
+        static Ptr& False();
+        static Ptr& temp();
+        static Ptr& ambr();
+        static Ptr& pipe();
+        static Ptr& asgn();
+        static Ptr& Not();
+        static Ptr& gt();
+        static Ptr& lt();
+        static Ptr& scln();
+        static Ptr& cubo();
+        static Ptr& cubc();
+        static Ptr& paro();
+        static Ptr& parc();
+        static Ptr& sqbo();
+        static Ptr& sqbc();
+        static Ptr& plus();
+        static Ptr& hyph();
+        static Ptr& mult();
+        static Ptr& slsh();
+        static Ptr& idx();
 
     private:
         std::string _value;

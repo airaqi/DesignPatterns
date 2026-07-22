@@ -19,10 +19,16 @@ class StmtNode : public ProgNode, public std::enable_shared_from_this<StmtNode>
         int _after;
 
     public:
-        static const StmtNode::Ptr Null;
+        // static const StmtNode::Ptr Null;
         static StmtNode::Ptr Enclosing;
 
+        static const StmtNode::Ptr Null();
+
+
         StmtNode();
+
+    public:
+        virtual ~StmtNode() = default;
 
     public:
         static Ptr create();

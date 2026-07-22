@@ -7,36 +7,36 @@
 #include <ostream>
 #include <string>
 
-Word::Ptr Word::And     = Word::create("&&", Tag::AND);
-Word::Ptr Word::Or      = Word::create("||", Tag::OR);
-Word::Ptr Word::eq      = Word::create("==", Tag::EQ);
-Word::Ptr Word::ne      = Word::create("!=", Tag::NE);
-Word::Ptr Word::ge      = Word::create(">=", Tag::GE);
-Word::Ptr Word::le      = Word::create("<=", Tag::LE);
-Word::Ptr Word::minus   = Word::create("minus", Tag::MINUS);
-Word::Ptr Word::True    = Word::create("true", Tag::TRUE);
-Word::Ptr Word::False   = Word::create("false", Tag::FALSE);
-Word::Ptr Word::temp    = Word::create("t", Tag::TEMP);
+Word::Ptr& Word::And() { static Word::Ptr instance = Word::create("&&", Tag::AND); return instance; }
+Word::Ptr& Word::Or() { static Word::Ptr instance = Word::create("||", Tag::OR); return instance; }
+Word::Ptr& Word::eq() { static Word::Ptr instance = Word::create("==", Tag::EQ); return instance; }
+Word::Ptr& Word::ne() { static Word::Ptr instance = Word::create("!=", Tag::NE); return instance; }
+Word::Ptr& Word::le() { static Word::Ptr instance = Word::create("<=", Tag::LE); return instance; }
+Word::Ptr& Word::ge() { static Word::Ptr instance = Word::create(">=", Tag::GE); return instance; }
+Word::Ptr& Word::minus() { static Word::Ptr instance = Word::create("minus", Tag::MINUS); return instance; }
+Word::Ptr& Word::True() { static Word::Ptr instance = Word::create("true", Tag::TRUE); return instance; }
+Word::Ptr& Word::False() { static Word::Ptr instance = Word::create("false", Tag::FALSE); return instance; }
+Word::Ptr& Word::temp() { static Word::Ptr instance = Word::create("t", Tag::TEMP); return instance; }
 
-Word::Ptr Word::ambr    = Word::create("&", Tag::AMBR);
-Word::Ptr Word::pipe    = Word::create("|", Tag::PIPE);
-Word::Ptr Word::asgn    = Word::create("=", Tag::ASGN);
-Word::Ptr Word::Not     = Word::create("!", Tag::NOT);
-Word::Ptr Word::gt      = Word::create(">", Tag::GT);
-Word::Ptr Word::lt      = Word::create("<", Tag::LT);
+Word::Ptr& Word::ambr() { static Word::Ptr instance = Word::create("&", Tag::AMBR); return instance; }
+Word::Ptr& Word::pipe() { static Word::Ptr instance = Word::create("|", Tag::PIPE); return instance; }
+Word::Ptr& Word::asgn() { static Word::Ptr instance = Word::create("=", Tag::ASGN); return instance; }
+Word::Ptr& Word::Not() { static Word::Ptr instance = Word::create("!", Tag::NOT); return instance; }
+Word::Ptr& Word::gt() { static Word::Ptr instance = Word::create(">", Tag::GT); return instance; }
+Word::Ptr& Word::lt() { static Word::Ptr instance = Word::create("<", Tag::LT); return instance; }
+Word::Ptr& Word::scln() { static Word::Ptr instance = Word::create(";", Tag::SCLN); return instance; }
+Word::Ptr& Word::cubo() { static Word::Ptr instance = Word::create("{", Tag::CUBO); return instance; }
+Word::Ptr& Word::cubc() { static Word::Ptr instance = Word::create("}", Tag::CUBC); return instance; }
+Word::Ptr& Word::paro() { static Word::Ptr instance = Word::create("(", Tag::PARO); return instance; }
+Word::Ptr& Word::parc() { static Word::Ptr instance = Word::create(")", Tag::PARC); return instance; }
+Word::Ptr& Word::sqbo() { static Word::Ptr instance = Word::create("[", Tag::SQBO); return instance; }
+Word::Ptr& Word::sqbc() { static Word::Ptr instance = Word::create("]", Tag::SQBC); return instance; }
+Word::Ptr& Word::plus() { static Word::Ptr instance = Word::create("+", Tag::PLUS); return instance; }
+Word::Ptr& Word::hyph() { static Word::Ptr instance = Word::create("-", Tag::HYPH); return instance; }
+Word::Ptr& Word::mult() { static Word::Ptr instance = Word::create("*", Tag::MULT); return instance; }
+Word::Ptr& Word::slsh() { static Word::Ptr instance = Word::create("/", Tag::SLSH); return instance; }
+Word::Ptr& Word::idx() { static Word::Ptr instance = Word::create("[]", Tag::INDEX); return instance; }
 
-Word::Ptr Word::scln    = Word::create(";", Tag::SCLN);
-Word::Ptr Word::cubo    = Word::create("{", Tag::CUBO);
-Word::Ptr Word::cubc    = Word::create("}", Tag::CUBC);
-Word::Ptr Word::paro    = Word::create("(", Tag::PARO);
-Word::Ptr Word::parc    = Word::create(")", Tag::PARC);
-Word::Ptr Word::sqbo    = Word::create("[", Tag::SQBO);
-Word::Ptr Word::sqbc    = Word::create("]", Tag::SQBC);
-Word::Ptr Word::plus    = Word::create("+", Tag::PLUS);
-Word::Ptr Word::hyph    = Word::create("-", Tag::HYPH);
-Word::Ptr Word::mult    = Word::create("*", Tag::MULT);
-Word::Ptr Word::slsh    = Word::create("/", Tag::SLSH);
-Word::Ptr Word::idx     = Word::create("[]", Tag::INDEX);
 
 Word::Word(std::string s, Tag::Kind kind) : Token(kind), _value(s) {}
 

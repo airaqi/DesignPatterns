@@ -29,9 +29,6 @@ class SeqNode : public StmtNode
         virtual std::string to_string(std::string = "") const override;
         virtual std::string print(std::string = "") const override;
 
-        // virtual bool operator==(const ProgNode &) const override;
-        // virtual bool operator!=(const ProgNode &) const override;
-
         friend std::ostream& operator<<(std::ostream &, const SeqNode &);
         friend std::ostream& operator<<(std::ostream &, const SeqNode::Ptr);
 

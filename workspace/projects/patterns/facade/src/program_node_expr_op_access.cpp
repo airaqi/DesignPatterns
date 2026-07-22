@@ -6,7 +6,7 @@
 #include <string>
 
 AccessNode::AccessNode(Id::Ptr a, ExprNode::Ptr i, Type::Ptr p) : 
-    OpNode(Word::idx, p), 
+    OpNode(Word::idx()->clone(), p), 
     _array(a), 
     _index(i) {}
 

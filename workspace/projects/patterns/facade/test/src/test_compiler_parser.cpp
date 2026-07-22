@@ -27,7 +27,7 @@ TEST_CASE("Parser")
       Parser parser(scanner, builder);
       StmtNode::Ptr expected = parser.parse();
 
-      StmtNode::Ptr actual = StmtNode::Null;
+      StmtNode::Ptr actual = StmtNode::Null();
 
       CHECK(expected->isStatement());
       CHECK_EQ(*actual, *expected);
@@ -49,7 +49,7 @@ TEST_CASE("Parser")
         Parser parser(scanner, builder);
         StmtNode::Ptr actual = parser.parse();
 
-        StmtNode::Ptr expected = StmtNode::Null;
+        StmtNode::Ptr expected = StmtNode::Null();
 
         CHECK(actual->isStatement());
         CHECK_EQ(*expected, *actual);
@@ -70,7 +70,7 @@ TEST_CASE("Parser")
         Parser parser(scanner, builder);
         StmtNode::Ptr actual = parser.parse();
 
-        StmtNode::Ptr expected = StmtNode::Null;
+        StmtNode::Ptr expected = StmtNode::Null();
 
         CHECK(actual->isStatement());
         CHECK_EQ(*expected, *actual);
@@ -91,7 +91,7 @@ TEST_CASE("Parser")
         Parser parser(scanner, builder);
         StmtNode::Ptr actual = parser.parse();
 
-        StmtNode::Ptr expected = StmtNode::Null;
+        StmtNode::Ptr expected = StmtNode::Null();
 
         CHECK(actual->isStatement());
         CHECK_EQ(*expected, *actual);
@@ -116,10 +116,10 @@ TEST_CASE("Parser")
           SetNode::create(
             Id::create(
               Word::create("b", Tag::ID), 
-              Type::Bool, 
+              Type::Bool(), 
               0), 
-            ConstNode::True), 
-          StmtNode::Null);
+            ConstNode::True()), 
+          StmtNode::Null());
       StmtNode::Ptr expected = seqNode;
        
       CHECK(actual->isStatement());
@@ -144,9 +144,9 @@ TEST_CASE("Parser")
         StmtNode::Ptr actual = parser.parse();
 
         WhileNode::Ptr whilenode = WhileNode::create();
-        ConstNode::Ptr trueConst = ConstNode::create(Word::True, Type::Bool);
-        whilenode->init(ConstNode::True, StmtNode::Null);
-        SeqNode::Ptr seq = SeqNode::create(whilenode, StmtNode::Null);
+        ConstNode::Ptr trueConst = ConstNode::create(Word::True(), Type::Bool());
+        whilenode->init(ConstNode::True(), StmtNode::Null());
+        SeqNode::Ptr seq = SeqNode::create(whilenode, StmtNode::Null());
         StmtNode::Ptr expected = seq;
 
         CHECK(actual->isStatement());
@@ -169,8 +169,8 @@ TEST_CASE("Parser")
         StmtNode::Ptr actual = parser.parse();
 
         DoNode::Ptr doNode = DoNode::create();
-        doNode->init(StmtNode::Null, ConstNode::True);
-        SeqNode::Ptr seq = SeqNode::create(doNode, StmtNode::Null);
+        doNode->init(StmtNode::Null(), ConstNode::True());
+        SeqNode::Ptr seq = SeqNode::create(doNode, StmtNode::Null());
         StmtNode::Ptr expected = seq;
 
         CHECK(actual->isStatement());
@@ -193,8 +193,8 @@ TEST_CASE("Parser")
         Parser parser(scanner, builder);
         StmtNode::Ptr actual = parser.parse();
 
-        IfNode::Ptr ifNode = IfNode::create(ConstNode::True, StmtNode::Null);
-        auto seq = SeqNode::create(ifNode, StmtNode::Null);
+        IfNode::Ptr ifNode = IfNode::create(ConstNode::True(), StmtNode::Null());
+        auto seq = SeqNode::create(ifNode, StmtNode::Null());
         StmtNode::Ptr expected = seq;
 
         CHECK(actual->isStatement());

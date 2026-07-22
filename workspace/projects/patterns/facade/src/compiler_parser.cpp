@@ -30,7 +30,7 @@ Parser::Parser(Scanner& scanner, ProgramNodeBuilder& builder) :
     _scanner(scanner), 
     _builder(builder), 
     _look(_scanner.scan()),
-    _top(Env::Null),
+    _top(Env::Null()),
     _used(0) {}
 
 
@@ -130,7 +130,7 @@ StmtNode::Ptr Parser::stmts()
 {
     PLOGD << "() - look: " << _look->print();
     if (_look->tag() == Tag::CUBC)
-        return StmtNode::Null;
+        return StmtNode::Null();
     else 
     {
         StmtNode::Ptr st = stmt(), sts = stmts();
@@ -151,7 +151,7 @@ StmtNode::Ptr Parser::stmt()
     {
         case Tag::SCLN:
             move();
-            return StmtNode::Null;
+            return StmtNode::Null();
 
         case Tag::IF:
             match(Tag::IF);
@@ -356,7 +356,7 @@ ExprNode::Ptr Parser::unary()
     if (_look->tag() == Tag::MINUS)
     {
         move();
-        return UnaryNode::create(Word::minus, unary());
+        return UnaryNode::create(Word::minus(), unary());
     }
     else if (_look->tag() == Tag::NOT) 
     {
@@ -381,22 +381,22 @@ ExprNode::Ptr Parser::factor()
             return x;
 
         case Tag::NUM:
-            x = ConstNode::create(_look, Type::Int);
+            x = ConstNode::create(_look, Type::Int());
             move();
             return x;
 
         case Tag::REAL:
-            x = ConstNode::create(_look, Type::Float);
+            x = ConstNode::create(_look, Type::Float());
             move();
             return x;
 
         case Tag::TRUE:
-            x = ConstNode::True;
+            x = ConstNode::True();
             move();
             return x;
 
         case Tag::FALSE:
-            x = ConstNode::False;
+            x = ConstNode::False();
             move();
             return x;
 
@@ -434,7 +434,7 @@ AccessNode::Ptr Parser::offset(Id::Ptr a)
     
     typ = std::static_pointer_cast<Array>(typ)->of();
     w = ConstNode::create(typ->width());
-    t1 = ArithNode::create(Word::mult, i, w);
+    t1 = ArithNode::create(Word::mult()->clone(), i, w);
     loc = t1;
 
     while (_look->tag() == Tag::SQBO)
@@ -445,8 +445,8 @@ AccessNode::Ptr Parser::offset(Id::Ptr a)
 
         typ = std::static_pointer_cast<Array>(typ)->of();
         w = ConstNode::create(typ->width());
-        t1 = ArithNode::create(Word::mult, i, w);
-        t2 = ArithNode::create(Word::plus, loc, t1);
+        t1 = ArithNode::create(Word::mult()->clone(), i, w);
+        t2 = ArithNode::create(Word::plus()->clone(), loc, t1);
         loc = t2;
     }
 

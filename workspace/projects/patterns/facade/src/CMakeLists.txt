@@ -32,6 +32,7 @@ add_library(${LIBRARY_NAME}
     program_node_expr_multiply.cpp
     program_node_stmt.cpp
     #program_node_stmt_assignment.cpp
+    program_node_stmt_break.cpp
     program_node_stmt_if.cpp
     program_node_stmt_seq.cpp
     program_node_stmt_else.cpp

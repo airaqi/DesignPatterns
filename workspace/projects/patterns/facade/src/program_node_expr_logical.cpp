@@ -3,13 +3,12 @@
 #include "plog/Log.h"
 #include "program_node_expr_temp.hpp"
 #include <format>
-#include <iostream>
 #include <memory>
 #include <sstream>
 #include <string>
 
 LogicalNode::LogicalNode(Token::Ptr token, ExprNode::Ptr l, ExprNode::Ptr r) : 
-    ExprNode(token, Type::Null),
+    ExprNode(token, Type::Null()),
     _lhs(l),
     _rhs(r) 
 {
@@ -34,7 +33,7 @@ void LogicalNode::initialize()
     PLOGD << " - t check: " << t;
     type(this->check(lhs()->type(), rhs()->type()));
     PLOGD << " - type: " << type();
-    if (*type() == *Type::Null)
+    if (*type() == *Type::Null())
         error(std::format("type error: {} cannot be null", this->to_string()));
 }
 
@@ -48,10 +47,10 @@ Type::Ptr LogicalNode::check(Type::Ptr l, Type::Ptr r)
 {
     PLOGD << "(" << l << ", " << r << ")";
 
-    if (*l == *Type::Bool && *r == *Type::Bool)
-        return Type::Bool;
+    if (*l == *Type::Bool() && *r == *Type::Bool())
+        return Type::Bool();
     else
-        return Type::Null;
+        return Type::Null();
 }
 
 ExprNode::Ptr LogicalNode::gen()

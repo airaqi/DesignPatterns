@@ -6,12 +6,12 @@
 #include <string>
 
 ArithNode::ArithNode(Token::Ptr token, ExprNode::Ptr lhs, ExprNode::Ptr rhs) :
-    OpNode(token, Type::Null),
+    OpNode(token, Type::Null()),
     _lhs(lhs),
     _rhs(rhs) 
 {
         type(Type::max(lhs->type(), rhs->type()));
-        if (type() == Type::Null) error(std::format("type error: {} type cannot be null", this->print()));
+        if (type() == Type::Null()) error(std::format("type error: {} type cannot be null", this->print()));
 }
 
 ArithNode::Ptr ArithNode::create(Token::Ptr token, ExprNode::Ptr lhs, ExprNode::Ptr rhs) 

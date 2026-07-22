@@ -5,7 +5,7 @@
 #include <memory>
 #include <string>
 
-TempNode::TempNode(Type::Ptr p) : ExprNode(Word::temp, p), _number(++_count) {}
+TempNode::TempNode(Type::Ptr p) : ExprNode(Word::temp(), p), _number(++_count) {}
 
 TempNode::Ptr TempNode::create(Type::Ptr p) 
 { 

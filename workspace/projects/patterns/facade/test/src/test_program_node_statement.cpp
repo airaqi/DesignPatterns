@@ -16,12 +16,12 @@ TEST_CASE("StatementNode")
     SUBCASE("While Sequence Equality")
     {
       WhileNode::Ptr whileNode = WhileNode::create();
-      whileNode->init(ConstNode::True, StmtNode::Null);
-      SeqNode::Ptr seq1 = SeqNode::create(whileNode, StmtNode::Null);
+      whileNode->init(ConstNode::True(), StmtNode::Null());
+      SeqNode::Ptr seq1 = SeqNode::create(whileNode, StmtNode::Null());
 
       WhileNode::Ptr whileNode2 = WhileNode::create();
-      whileNode2->init(ConstNode::True, StmtNode::Null);
-      SeqNode::Ptr seq2 = SeqNode::create(whileNode2, StmtNode::Null);
+      whileNode2->init(ConstNode::True(), StmtNode::Null());
+      SeqNode::Ptr seq2 = SeqNode::create(whileNode2, StmtNode::Null());
 
       CHECK_EQ(*whileNode, *whileNode2);
       CHECK_EQ(*seq1, *seq2);
@@ -32,24 +32,24 @@ TEST_CASE("StatementNode")
 
     SUBCASE("Null Equality") 
     {
-      CHECK_EQ(*StmtNode::Null, *StmtNode::Null);
+      CHECK_EQ(*StmtNode::Null(), *StmtNode::Null());
     }
 
     SUBCASE("Boolean Equality") 
     {
-      CHECK_EQ(ConstNode::True, ConstNode::True);
-      CHECK_EQ(ConstNode::False, ConstNode::False);
-      CHECK_NE(ConstNode::True, ConstNode::False);
+      CHECK_EQ(ConstNode::True(), ConstNode::True());
+      CHECK_EQ(ConstNode::False(), ConstNode::False());
+      CHECK_NE(ConstNode::True(), ConstNode::False());
 
     }
 
     SUBCASE("While Equality")
     {
       WhileNode::Ptr whileNode1 = WhileNode::create();
-      whileNode1->init(ConstNode::True, StmtNode::Null);
+      whileNode1->init(ConstNode::True(), StmtNode::Null());
 
       WhileNode::Ptr whileNode2 = WhileNode::create();
-      whileNode2->init(ConstNode::True, StmtNode::Null);
+      whileNode2->init(ConstNode::True(), StmtNode::Null());
 
       CHECK_EQ(*whileNode1, *whileNode2);
 
@@ -57,8 +57,8 @@ TEST_CASE("StatementNode")
 
     SUBCASE("Sequence Equality")
     {
-      SeqNode::Ptr nseq1 = SeqNode::create(StmtNode::Null, StmtNode::Null);
-      SeqNode::Ptr nseq2 = SeqNode::create(StmtNode::Null, StmtNode::Null);
+      SeqNode::Ptr nseq1 = SeqNode::create(StmtNode::Null(), StmtNode::Null());
+      SeqNode::Ptr nseq2 = SeqNode::create(StmtNode::Null(), StmtNode::Null());
 
       CHECK_EQ(*nseq1, *nseq2);
 

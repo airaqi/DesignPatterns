@@ -38,8 +38,11 @@ class Type : public Word
         friend bool operator!=(const Type&, const Type&);
 
     public:
-        static Ptr Int, Float, Char, Bool;
-        static Ptr Null;
+        static Ptr& Int();
+        static Ptr& Float();
+        static Ptr& Char();
+        static Ptr& Bool();
+        static Ptr& Null();
 
     private:
         std::string _name;
