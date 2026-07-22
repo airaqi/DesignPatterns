@@ -1,16 +1,17 @@
 #include "program_node_expr_const.hpp"
 #include "compiler_token_num.hpp"
+#include "compiler_token_word.hpp"
 #include "compiler_token_word_type.hpp"
 #include "plog/Log.h"
 #include <format>
 #include <memory>
 #include <sstream>
 
-ConstNode::Ptr ConstNode::True = ConstNode::create(Word::True, Type::Bool);
-ConstNode::Ptr ConstNode::False = ConstNode::create(Word::False, Type::Bool);
+ConstNode::Ptr& ConstNode::True() { static ConstNode::Ptr instance = ConstNode::create(Word::True(), Type::Bool()); return instance; }
+ConstNode::Ptr& ConstNode::False() { static ConstNode::Ptr instance = ConstNode::create(Word::False(), Type::Bool()); return instance; }
 
 ConstNode::ConstNode(Token::Ptr token, Type::Ptr type) : ExprNode(token, type) {}
-ConstNode::ConstNode(int i) : ExprNode(Num::create(i), Type::Int) {}
+ConstNode::ConstNode(int i) : ExprNode(Num::create(i), Type::Int()) {}
 
 ConstNode::Ptr ConstNode::create(Token::Ptr token, Type::Ptr type) 
 {
@@ -24,9 +25,9 @@ ConstNode::Ptr ConstNode::create(int i)
 
 void ConstNode::jumping(int t, int f)
 {
-    if (this == True.get() && t != 0)
+    if (this == True().get() && t != 0)
         emit(static_cast<std::ostringstream>(std::ostringstream() << "goto L" << f).str());
-    else if (this == False.get() && f != 0)
+    else if (this == False().get() && f != 0)
         emit(static_cast<std::ostringstream>(std::ostringstream() << "goto L" << f).str());
 }
 

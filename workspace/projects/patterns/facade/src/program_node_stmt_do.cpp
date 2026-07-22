@@ -24,7 +24,7 @@ void DoNode::init(StmtNode::Ptr s, ExprNode::Ptr e)
 
     _expr = e;
     _stmt = s;
-    if (_expr->type() != Type::Bool)
+    if (_expr->type() != Type::Bool())
         _expr->error("boolean required in do");
 }
 void DoNode::gen(int b, int a)

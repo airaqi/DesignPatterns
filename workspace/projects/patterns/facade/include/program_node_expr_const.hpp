@@ -9,7 +9,8 @@ class ConstNode : public ExprNode
     public:
         typedef std::shared_ptr<ConstNode> Ptr;
 
-        static Ptr True, False;
+        static Ptr& True();
+        static Ptr& False();
 
         ConstNode(Token::Ptr, Type::Ptr);
         ConstNode(int i);

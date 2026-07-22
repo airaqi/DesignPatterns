@@ -10,7 +10,7 @@ ElseNode::ElseNode(ExprNode::Ptr e, StmtNode::Ptr s1, StmtNode::Ptr s2) :
     _stmt1(s1),
     _stmt2(s2) 
 {
-    if (expr()->type() != Type::Bool)
+    if (expr()->type() != Type::Bool())
         expr()->error("Boolean required in if");
 }
 

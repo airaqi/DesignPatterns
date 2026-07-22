@@ -7,7 +7,8 @@
 #include <ostream>
 #include <stdexcept>
 
-const StmtNode::Ptr StmtNode::Null = StmtNode::create();
+// const StmtNode::Ptr StmtNode::Null = StmtNode::create();
+const StmtNode::Ptr StmtNode::Null() { static StmtNode::Ptr instance = StmtNode::create(); return instance; }
 StmtNode::Ptr StmtNode::Enclosing = StmtNode::create();
 
 StmtNode::StmtNode() : _after(0) {}
@@ -37,7 +38,7 @@ std::string StmtNode::print(std::string prefix) const
 {
     return std::format("{}[Stmt(id:{}, af:{}){}]", 
             prefix, id(), _after, 
-            (this == StmtNode::Null.get()) ? ": Null" : "");
+            (this == StmtNode::Null().get()) ? ": Null" : "");
 }
 
 void StmtNode::add(ProgNode::Ptr) {}

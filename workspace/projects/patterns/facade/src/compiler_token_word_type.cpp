@@ -4,11 +4,11 @@
 #include <memory>
 #include <ostream>
 
-Type::Ptr Type::Int = Type::create("int", Tag::BASIC, 4);
-Type::Ptr Type::Float = Type::create("float", Tag::BASIC, 8);
-Type::Ptr Type::Char = Type::create("char", Tag::BASIC, 1);
-Type::Ptr Type::Bool = Type::create("bool", Tag::BASIC, 1);
-Type::Ptr Type::Null = Type::create("null", Tag::BASIC, 0);
+Type::Ptr& Type::Int() { static Type::Ptr instance = Type::create("int", Tag::BASIC, 4); return instance; }
+Type::Ptr& Type::Float() { static Type::Ptr instance = Type::create("float", Tag::BASIC, 8); return instance; }
+Type::Ptr& Type::Char() { static Type::Ptr instance = Type::create("char", Tag::BASIC, 1); return instance; }
+Type::Ptr& Type::Bool() { static Type::Ptr instance = Type::create("bool", Tag::BASIC, 1); return instance; }
+Type::Ptr& Type::Null() { static Type::Ptr instance = Type::create("null", Tag::BASIC, 0); return instance; }
 
 Type::Type(std::string s, Tag::Kind tag, int w) : 
     Word(s, tag), _width(w), _name(s) {}
@@ -36,20 +36,20 @@ std::string Type::name() const
 
 bool Type::numeric(Type::Ptr t)
 {
-    return (*t == *Type::Char || *t == *Type::Int || *t == *Type::Float) ? true : false;
+    return (*t == *Type::Char() || *t == *Type::Int() || *t == *Type::Float()) ? true : false;
 }
 
 
 Type::Ptr Type::max(const Type::Ptr p1, const Type::Ptr p2)
 {
     if (!numeric(p1) || !numeric(p2)) 
-        return Type::Null;
-    else if (*p1 == *Type::Float || *p2 == *Type::Float) 
-        return Type::Float;
-    else if (*p1 == *Type::Int || *p2 == *Type::Int)
-        return Type::Int;
+        return Type::Null();
+    else if (*p1 == *Type::Float() || *p2 == *Type::Float()) 
+        return Type::Float();
+    else if (*p1 == *Type::Int() || *p2 == *Type::Int())
+        return Type::Int();
     else 
-        return Type::Char;
+        return Type::Char();
 }
 
 

@@ -5,7 +5,7 @@
 #include <sstream>
 #include <string>
 
-Env::Ptr Env::Null = Env::create(nullptr);
+Env::Ptr& Env::Null() { static Env::Ptr instance = Env::create(nullptr); return instance; }
 
 Env::Env(Env::Ptr n) : _prev(n) {}
 
@@ -33,7 +33,7 @@ Id::Ptr Env::get(Token::Ptr w)
 
     }
     PLOGD << "(" << w << ") out";
-    return _prev != Env::Null ? _prev->get(w) : nullptr;
+    return _prev != Env::Null() ? _prev->get(w) : nullptr;
 }
 
 std::string Env::to_string(std::string prefix) const

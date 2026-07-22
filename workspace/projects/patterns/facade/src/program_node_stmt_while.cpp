@@ -22,7 +22,7 @@ void WhileNode::init(ExprNode::Ptr e, StmtNode::Ptr s)
 {
     _expr = e;
     _stmt = s;
-    if (_expr->type() != Type::Bool)
+    if (_expr->type() != Type::Bool())
         _expr->error("booleam required in while");
 }
 

@@ -3,10 +3,10 @@
 #include <memory>
 #include <string>
 
-UnaryNode::UnaryNode(Token::Ptr token, ExprNode::Ptr e) : OpNode(token, Type::Null), _expr(e) 
+UnaryNode::UnaryNode(Token::Ptr token, ExprNode::Ptr e) : OpNode(token, Type::Null()), _expr(e) 
 {
-    type(Type::max(Type::Int, expr()->type()));
-    if (*type() == *Type::Null)
+    type(Type::max(Type::Int(), expr()->type()));
+    if (*type() == *Type::Null())
         error(std::format("type error: {} cannot be null", type()->to_string()));
 }
 

@@ -64,33 +64,33 @@ TEST_CASE("Token")
 
     SUBCASE("Type")
     {
-        CHECK_EQ(Tag::BASIC, Type::Int->tag());
-        CHECK_EQ(Tag::BASIC, Type::Float->tag());
-        CHECK_EQ(Tag::BASIC, Type::Char->tag());
+        CHECK_EQ(Tag::BASIC, Type::Int()->tag());
+        CHECK_EQ(Tag::BASIC, Type::Float()->tag());
+        CHECK_EQ(Tag::BASIC, Type::Char()->tag());
 
-        CHECK_EQ("int", Type::Int->value());
-        CHECK_EQ("float", Type::Float->value());
-        CHECK_EQ("char", Type::Char->value());
+        CHECK_EQ("int", Type::Int()->value());
+        CHECK_EQ("float", Type::Float()->value());
+        CHECK_EQ("char", Type::Char()->value());
 
-        CHECK_EQ(true, Type::numeric(Type::Int));
-        CHECK_EQ(true, Type::numeric(Type::Float));
-        CHECK_EQ(true, Type::numeric(Type::Char));
-        CHECK_EQ(false, Type::numeric(Type::Bool));
+        CHECK_EQ(true, Type::numeric(Type::Int()));
+        CHECK_EQ(true, Type::numeric(Type::Float()));
+        CHECK_EQ(true, Type::numeric(Type::Char()));
+        CHECK_EQ(false, Type::numeric(Type::Bool()));
 
-        CHECK_EQ(Type::Int, Type::max(Type::Int, Type::Int));
-        CHECK_EQ(Type::Float, Type::max(Type::Int, Type::Float));
-        CHECK_EQ(Type::Null, Type::max(Type::Bool, Type::Bool));
-        CHECK_EQ(Type::Int, Type::max(Type::Int, Type::Char));
-        CHECK_EQ(Type::Char, Type::max(Type::Char, Type::Char));
+        CHECK_EQ(Type::Int(), Type::max(Type::Int(), Type::Int()));
+        CHECK_EQ(Type::Float(), Type::max(Type::Int(), Type::Float()));
+        CHECK_EQ(Type::Null(), Type::max(Type::Bool(), Type::Bool()));
+        CHECK_EQ(Type::Int(), Type::max(Type::Int(), Type::Char()));
+        CHECK_EQ(Type::Char(), Type::max(Type::Char(), Type::Char()));
         
-        PLOGD << Type::Int->to_string();
+        PLOGD << Type::Int()->to_string();
     }
 
     SUBCASE("Array")
     {
-        auto array = Array::create(10, Type::Int),
-                array2 = Array::create(20, Type::Int);
-        CHECK_EQ(Type::Int, array->of());
+        auto array = Array::create(10, Type::Int()),
+                array2 = Array::create(20, Type::Int());
+        CHECK_EQ(Type::Int(), array->of());
         CHECK_EQ(10, array->size());
         CHECK_NE(array, array2);
 

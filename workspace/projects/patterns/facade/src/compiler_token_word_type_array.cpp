@@ -1,7 +1,6 @@
 #include "compiler_token_word_type_array.hpp"
 #include <format>
 #include <memory>
-#include <sstream>
 #include <string>
 
 

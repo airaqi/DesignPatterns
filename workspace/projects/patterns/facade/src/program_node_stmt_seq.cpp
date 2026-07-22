@@ -21,9 +21,9 @@ void SeqNode::stmt2(const StmtNode::Ptr s) { _stmt2 = s; }
 
 void SeqNode::gen(int b, int a)
 {
-    if (_stmt1 == StmtNode::Null)
+    if (_stmt1 == StmtNode::Null())
         _stmt2->gen(b, a);
-    else if (_stmt2 == StmtNode::Null)
+    else if (_stmt2 == StmtNode::Null())
         _stmt1->gen(b, a);
     else 
     {
@@ -54,9 +54,6 @@ std::string SeqNode::print(std::string prefix) const
 {
     return std::format("{}[Seq({}, {}, {})]", prefix, id(), _stmt1->print(), _stmt2->print());
 }
-
-// bool SeqNode::operator==(const ProgNode & that) const { return is_equals(that); }
-// bool SeqNode::operator!=(const ProgNode & that) const { return !(*this == that); }
 
 std::ostream& operator<<(std::ostream& out, const SeqNode & that) { out << that.to_string(); return out; }
 std::ostream& operator<<(std::ostream& out, const SeqNode::Ptr that) { return operator<<(out, *that); }
