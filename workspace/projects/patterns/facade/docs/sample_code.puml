@@ -38,9 +38,9 @@ together {
         abstract class ExprNode
 
    
-        class VarNode
+        class IdNode
         class TempNode
-        class ConstantNode
+        class ConstNode
         
         class OpNode
         class ArithNode
@@ -56,14 +56,13 @@ together {
     
         together {
             class StmtNode
-            class ReturnNode <<Not Implemented>>
             class IfNode
             class ElseNode
             class SeqNode
             class WhileNode
             class DoNode 
             class SetNode
-            class SetArrayNode
+            class SetElemNode
             class BreakNode
         }
         
@@ -73,8 +72,8 @@ together {
 ProgNode <|-- ExprNode
 ProgNode <|--------- StmtNode
 
-ExprNode <|-- ConstantNode
-ExprNode <|-- VarNode
+ExprNode <|-- ConstNode
+ExprNode <|-- IdNode
 ExprNode <|------ OpNode
 ExprNode <|---- LogicalNode
 ExprNode <|-- TempNode
@@ -88,14 +87,13 @@ LogicalNode <|-- OrNode
 LogicalNode <|-- NotNode
 LogicalNode <|-- RelNode
 
-StmtNode <|-- ReturnNode
 StmtNode <|--- IfNode
 StmtNode <|--- ElseNode
 StmtNode <|--- SetNode
 StmtNode <|-- SeqNode
 StmtNode <|--- WhileNode
 StmtNode <|-- DoNode
-StmtNode <|-- SetArrayNode
+StmtNode <|-- SetElemNode
 StmtNode <|--- BreakNode
 
 Token <|-- Num
@@ -268,16 +266,16 @@ ExprNode : +isValue() : bool
 ExprNode : +isVariable() : bool
 ExprNode : +isBlock() : bool
 
-VarNode : -offset : int
-VarNode : +VarNode(Word, Type, int)
-VarNode : +isVariable() : bool
+IdNode : -offset : int
+IdNode : +IdNode(Word, Type, int)
+IdNode : +isId() : bool
 
-ConstantNode : +{field}{static} True : Constant = Constant(Word.True, Type.Bool)
-ConstantNode : +{field}{static} False : Constant = Constant(Word.False, Type.Bool)
-ConstantNode : +ConstantNode(int)
-ConstantNode : +ConstantNode(Token, Type)
-ConstantNode : +isValue() : bool
-ConstantNode : +strValue() : String
+ConstNode : +{field}{static} True : ConstNode = ConstNode(Word.True, Type.Bool)
+ConstNode : +{field}{static} False : ConstNode = ConstNode(Word.False, Type.Bool)
+ConstNode : +ConstantNode(int)
+ConstNode : +ConstantNode(Token, Type)
+ConstNode : +isValue() : bool
+ConstNode : +strValue() : String
 
 TempNode : -{static} count : int = 0
 TempNode : -number : int = 0
@@ -310,7 +308,7 @@ UnaryNode : -expr : ExprNode
 UnaryNode : +UnaryNode(Token, ExprNode)
 UnaryNode : +toString() : String
 
-AccessNode : -var : VarNode
+AccessNode : -var : IdNode
 AccessNode : -index : ExprNode
 AccessNode : +AccessNode(Id, ExprNode, Type)
 AccessNode : +toString() : String
@@ -318,21 +316,18 @@ AccessNode : +toString() : String
 
 StmtNode : +{static}{field}Null : StmtNode()
 StmtNode : #{static}{field}EnclosingStmt : StmtNode
-StmtNode : #{static}{field}EnclosingFunc : VarNode
+StmtNode : #{static}{field}EnclosingFunc : IdNode
 StmtNode : #StmtNode()
 StmtNode : +isStatement() : bool
-
-ReturnNode : -expr : ExprNode
-ReturnNode : +ReturnNode()
 
 SetNode : -variable : ProgNode
 SetNode : -expression : ProgNode
 SetNode : +SetNode(AccessNode, ExprNode)
 
-SetArrayNode : -array : VarNode
-SetArrayNode : -index : ExprNode
-SetArrayNode : -expr : ExprNode
-SetArrayNode : +SetArrayNode(Access, ExprNode)
+SetElemNode : -array : IdNode
+SetElemNode : -index : ExprNode
+SetElemNode : -expr : ExprNode
+SetElemNode : +SetElemNode(Access, ExprNode)
 
 IfNode : -condition : ProgNode
 IfNode : -truePart : ProgNode
@@ -363,24 +358,13 @@ BreakNode : +BreakNode()
 
 
 note as nGeneral
-    <b>convert sample python 
-    <b>code  to C++ and vice-
-    <b>versa:
-    <b>from:
+    Implementation of sample compiler in the 
+    <b>'Compilers : Principles, Techniques & Tools'</b> 
+    Book in C++.
     
-    def test:
-        x = 10
-        if x < 10
-            print(x)
-
-    <b>to:
-            
-     void test()
-     {
-         int x = 10;
-         if (x < 10)
-             cout << x << "\n";
-     }
+    Note:
+    ---
+    A memory leak in distructing the AST, and needs to be fixed.
 end note
 
 note as nScanner
