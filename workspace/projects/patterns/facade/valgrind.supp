@@ -1,0 +1,9 @@
+{
+  Ignore_Reachable_singletons
+  Memcheck:Leak
+  match-leak-kinds: reachable
+  fun:_Znwm
+  fun:*Type*Int*
+  fun:*Type*Bool*
+}
+

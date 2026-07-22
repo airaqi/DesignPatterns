@@ -15,6 +15,12 @@ add_subdirectory(test)
 add_executable(${PROJECT_NAME} main.cpp)
 add_test(run_memtest_${PATTERN_NAME} ${EXEC_NAME})
 
+# 2. Append local execution flags to Valgrind just for this specific test
+# This changes VALGRIND_OPTS for this target's runtime, leaving other projects untouched!
+# set_tests_properties(run_memtest_${PATTERN_NAME} PROPERTIES
+    # ENVIRONMENT "VALGRIND_OPTS=--leak-check=full --show-leak-kinds=definite,indirect,possible"
+# )
+
 target_link_libraries(${PROJECT_NAME} ${LIBRARY_NAME} ${EXTRA_LINK_LIBS})
 
 set(INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
