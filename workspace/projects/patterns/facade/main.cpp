@@ -2,14 +2,12 @@
 #include "plog/Appenders/ConsoleAppender.h"
 #include "plog/Logger.h"
 #include "plog/Severity.h"
-#include "program_node_stmt_seq.hpp"
 #include <bits/getopt_core.h>
 #include <cstdlib>
 #include <exception>
 #include <filesystem>
 #include <iostream>
 #include <iterator>
-#include <memory>
 #include <ostream>
 #include <sstream>
 #include <stdexcept>
@@ -121,15 +119,22 @@ void initLogger()
 
 
 int main(int argc, char *argv[]) {
-  std::string default_filepath = "./input/in.txt", filepath = default_filepath;
-  std::string default_destpath = "./output/output.txt", destpath = default_destpath;
+  std::filesystem::path source_file(__FILE__);
+  std::filesystem::path workspace = source_file.parent_path().parent_path().parent_path().parent_path();
+
+  std::filesystem::path def_input_file = workspace / "input" / "in.txt";
+  std::filesystem::path def_output_file = workspace / "output" / "output.txt";
+
+  std::string default_filepath = def_input_file.string(), filepath = default_filepath;
+  std::string default_destpath = def_output_file.string(), destpath = default_destpath;
 
   try {
     initLogger();
 
     PLOGI << "Hello, Facade!";
+    PLOGI << "Working dir: " << std::filesystem::current_path();
+    PLOGI << "Workspace dir: " << workspace;
     PLOGD << print_args(argc, argv);
-    PLOGD << "current dir: " << std::filesystem::current_path();
 
     std::string short_options = get_short_options();;
     int opt;
@@ -171,12 +176,20 @@ int main(int argc, char *argv[]) {
       }
     }
 
+    filepath = std::filesystem::absolute(filepath);
     Compiler compiler(filepath, destpath);
-    PLOGI << "----- input file start: ----" << std::endl 
-          << compiler.in().str()
+    PLOGI << "Input file: '" << filepath << "'"
+          << "\n----- input file start: ----" << "\n\n"
+          << compiler.in().str() << "\n\n"
           << "---- input file end ----" << std::endl;
 
     auto s = compiler.compile();
+
+    destpath = std::filesystem::absolute(destpath);
+    PLOGI << "Output file: "
+          << "\n---- output file start: ----" << "\n\n"
+          << compiler.out().str() << "\n\n"
+          << "---- output file end ----" << std::endl;
     // compile(filein);
 
     PLOGI << "Compile complete!";
