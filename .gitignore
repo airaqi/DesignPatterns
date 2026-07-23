@@ -2,4 +2,6 @@ workspace/build
 **/.cache/
 tags
 vgcore.*
+workspace/output
+!/workspace/output/dummy
 
