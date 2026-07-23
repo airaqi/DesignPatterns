@@ -5,6 +5,35 @@ Facade Pattern
 Provide a unified interface to a set of interfaces in a subsystem. Facade defines a
 higher-level interface that makes the subsystem easier to use.
 
+.. note:: Example Code
+    The example code used here is a migration from Dragon Compilers book.
+
+Usage
+------
+to compile an example application based on AST in the book is:
+
+
+.. code-block:: console
+    
+    $ ./build/projects/facade/facade_app -f <input-file> -d <output-file> -l <log-level> -h
+
+**-h**
+    display usage help screen and exit.
+**-f <input-file>**
+    the path to the input file
+**-d <output-file>**
+    destination file to save
+**-l <log-level>**
+    set log level, default is info
+
+    #. none
+    #. fatal
+    #. error
+    #. warning
+    #. info
+    #. debug
+    #. verbose
+
 Structure
 ---------
 

@@ -84,7 +84,7 @@ All patterns structures has been documented and samples has been implemented.
     "", `Strategy <workspace/projects/patterns/strategy/>`_, "Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it."
     "", `Visitor <workspace/projects/patterns/visitor/>`_, "Represent an operation to be performed on the elements of an object structure"
 
-Lexi Test Editor
+Lexi Text Editor
 ================
 
 Lexi text editor case study provided in chapter two has been implemented in lexi project
