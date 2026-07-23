@@ -49,7 +49,7 @@ std::stringstream& Compiler::out() { return _out; }
 
 void Compiler::load_file(std::string& filename) 
 {
-    std::ifstream inputfile(filename);
+    std::ifstream inputfile(std::filesystem::absolute(filename));
     if (!inputfile.is_open())
         error(1, ERR_FILE_NOT_FOUND);
 
@@ -60,7 +60,7 @@ void Compiler::load_file(std::string& filename)
 
 void Compiler::save(std::string& filename) 
 {
-  std::ofstream outputfile(filename);
+  std::ofstream outputfile(std::filesystem::absolute(filename));
   if (!outputfile.is_open())
     error(2, ERR_FILE_NOT_FOUND);
 
