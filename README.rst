@@ -78,6 +78,7 @@ All patterns structures has been documented and samples has been implemented.
     "", `Composite <workspace/projects/patterns/composite/>`_, "Compose objects into tree structures to represent part-whole hierarchies."
     "", `Decorator <workspace/projects/patterns/decorator/>`_, "Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality"
     "", `Facade <workspace/projects/patterns/facade/>`_, "Provide a unified interface to a set of interfaces in a subsystem"
+    "", `Flyweight <workspace/projects/patterns/flyweight/>`_, "Use sharing to support large numbers of fine-grained objects efficiently."
     "Behavioural", `Command <workspace/projects/patterns/command/>`_, "Encapsulate a request as an object, thereby letting you parameterize clients with different requests, queue or log requests, and support undoable operations."
     "", `Iterator <workspace/projects/patterns/iterator/>`_, "Provide a way to access the elements of an aggregate object sequentially without exposing its underlying representation."
     "", `Memento <workspace/projects/patterns/memento>`_, "Without violating encapsulation, capture and externalize an object's internal state so that the object can be restored to this state later."

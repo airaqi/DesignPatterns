@@ -1,0 +1,163 @@
+@startuml
+
+skinparam linetype ortho
+
+title Flyweight Pattern Sample Code
+
+interface Glyph
+class GlyphComposite
+class GlyphDocument
+class GlyphRow
+class GlyphColumn
+class GlyphCharacter
+
+class GlyphFactory <<singleton>>
+class GlyphContext
+class Font
+
+class Btree<T>
+class Node<T>
+
+interface Window
+class ConsoleWindow
+
+Glyph <|-- GlyphComposite
+Glyph <|-- GlyphLeaf
+GlyphComposite <|-- GlyphDocument
+GlyphComposite <|-- GlyphColumn
+GlyphComposite <|-- GlyphRow
+GlyphLeaf <|-- GlyphCharacter
+
+Window <|-- ConsoleWindow
+
+Glyph -> GlyphContext
+GlyphContext --> Btree : use
+GlyphContext *-> Font : use
+
+Btree *-> Node
+
+GlyphDocument *-->GlyphColumn 
+GlyphColumn *--> GlyphRow
+GlyphRow o-> GlyphCharacter
+
+GlyphFactory .> Glyph : create
+
+Glyph o..> Window
+
+Glyph : # Glyph()
+Glyph : + ~Glyph()
+Glyph : + size() : int
+Glyph : + isLeaf() : bool
+Glyph : + draw(Window, GlyphContext) : void
+Glyph : + setFont(Font, GlyphContext) : void
+Glyph : + first(GlyphContext) : void
+Glyph : + next(GlyphContext) : void
+Glyph : + seek(index : int, GlyphContext) : void
+Glyph : + isDone(GlyphContext) : void
+Glyph : + current(GlyphContext) : Glyph
+Glyph : + insert(Glyph, GelyphContext) : void
+Glyph : + set(index : int, Glyph, GlyphContext) : void
+Glyph : + get(index : int, GlyphContext) : Glyph
+Glyph : + remove(index : int, GlyphContext) : void
+
+GlyphComposite : - children : List[...]
+GlyphComposite : + size() : int
+GlyphComposite : + isLeaf() : bool
+GlyphComposite : + draw(Window, GlyphContext) : void
+GlyphComposite : + insert(Glyph, GlyphContext) : void
+GlyphComposite : + set(index : int, Glyph, GlyphContext) : Glyph
+GlyphComposite : + get(index : int, GlyphContext) : Glyph
+GlyphComposite : + remove(index : int, GlyphContext) : Glyph
+
+GlyphDocument : + draw(Window, GlyphContext) : void
+GlyphDocument : + insert(Glyph, GlyphContext) : void
+GlyphDocument : + current(GlyphContext) : Glyph
+
+GlyphColumn : + draw(Window, GlyphContext) : void
+GlyphColumn : + insert(Glyph, GlyphContext) : void
+GlyphColumn : + current(GlyphContext) : void
+
+GlyphRow : + draw(Window, GlyphContext) : void
+GlyphRow : + insert(Glyph, GlyphContext) : void
+GlyphRow : + current(GlyphContext) : Glyph
+
+GlyphLeaf : + size() : bool
+GlyphLeaf : + isLeaf() : bool
+GlyphLeaf : + draw(Window, GlyphContext) : void
+GlyphLeaf : + current(GlyphContext) : Glyph
+
+GlyphCharacter : _charcode : char
+GlyphCharacter : + Character(char)
+GlyphCharacter : + getCharacter() : char
+GlyphCharacter : + draw(Window, GlyphContext) : void
+
+GlyphContext : - index : int
+GlyphContext : - styles: BTree<int, Font>
+GlyphContext : + GlyphContext()
+GlyphContext : + next(step : int) : void
+GlyphContext : + insert(quantity : int) : void
+GlyphContext : + getFont() : Font
+GlyphContext : + setFont(Font, span : int) : void
+
+GlyphFactory : - instance : GlyphFactory
+GlyphFactory : - fontPool : Font[...]
+GlyphFactory : - charPool : GlyphCharacter[...]
+GlyphFactory : - GlyphFactory()
+GlyphFactory : + {static} get() : GlyphFactory
+GlyphFactory : + createDocument() : GlyphDocument
+GlyphFactory : + createColumn(GlyphDocument, int) : GlyphColumn
+GlyphFactory : + createRow(GlyphDocument, int, int) : GlyphRow
+GlyphFactory : + createCharacter(char) : GlyphCharacter
+GlyphFactory : + createFont(String, int) : Font
+
+Font : - name : String
+Font : - size : int
+Font : - color : Color
+Font : + Font(name : String, size : int)
+Font : + setColor(Color) : void
+Font : + toString() : String
+
+Btree : - index : int
+Btree : - root : Node<T>
+Btree : - defaultValue : T
+Btree : + Btree(T)
+Btree : + Btree(span : int, defValue : T)
+Btree : +  size() : int
+Btree : + next() : void
+Btree : + prev() : void
+Btree : + seek(index : int) : void
+Btree : + getTotalSpan() : int
+Btree : + insert(index : int, span : int) : void
+Btree : + getValue(index : int) : optional<T>
+Btree : + setValue(index : int, span : int, value : T) : void
+
+Node : - {static} next_id : int
+Node : - id : int
+Node : - span : int
+Node : - value : T
+Node : - isLeaf : bool
+Node : - children : Node[...]
+Node : + Node(id : int, span : int, value : T)
+Node : + Node(span : int, value : T)
+Node : + size() : int
+Node : + addChild(Node<T>) : void
+Node : + addChildren(Node<T>[...]) : void
+Node : + getChild(index : int) : Node<T>
+Node : + getTail() : Node<T>
+Node : + removeChild(index : int) : Node<T>
+Node : + removeAll() : Node<T>[...]
+Node : + insert(index : int, span : int) : void
+Node : + setValue(index : int, span : int, value : T) : void
+Node : + getValue(index : int) : optioanl<T>
+Node : + getValue(index : int, acc : int) : optional<T>
+
+Window : + draw(GlyphDocument, GlyphContext) : void
+Window : + draw(GlyphColumn, GlyphContext) : void
+Window : + draw(GlyphRow, GlyphContext) : void
+Window : + draw(GlyphCharacter, GlyphContext) : void
+
+ConsoleWindow : + draw(GlyphDocument, GlyphContext) : void
+ConsoleWindow : + draw(GlyphColumn, GlyphContext) : void
+ConsoleWindow : + draw(GlyphRow, GlyphContext) : void
+ConsoleWindow : + draw(GlyphCharacter, GlyphContext) : void
+@enduml

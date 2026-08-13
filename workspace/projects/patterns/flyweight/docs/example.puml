@@ -1,0 +1,33 @@
+@startuml
+
+skinparam linetype ortho
+
+title Flyweight Example
+
+class Glyph
+
+class Row
+class Character
+class Column
+
+Glyph <|-- Row
+Glyph <|-- Column
+Glyph <|-- Character
+
+Column o..> Glyph
+Row o..> Glyph
+
+Glyph : Draw(Context)
+Glyph : intersects(Point, Context)
+
+Row : Draw(Context)
+Row : intersects(Point, Context)
+
+Column : Draw(Context)
+Column : intersects(Point, Context)
+
+Character : c : char
+Character : Draw(Context)
+Character : intersects(Point, Context)
+
+@enduml

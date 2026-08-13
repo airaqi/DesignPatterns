@@ -1,0 +1,52 @@
+@startuml
+
+allowmixing
+skinparam linetype ortho
+
+title Flyweight Pattern
+
+together {
+class FlyweightFactory
+
+note as nFlyweightFactoryGetFlyweight
+    if (flyweight[key] exists) {
+        return existing flyweight;
+    } else {
+        creaate new flyweight;
+        add it to pool of flyweights;
+        return the new flyweight;
+    }
+end note
+nFlyweightFactoryGetFlyweight .up. FlyweightFactory::GetFlyweight
+
+together {
+class Flyweight
+class ConcreteFlyweight
+class UnsharedConcreteFlyweight
+}
+
+rectangle Client
+}
+
+Flyweight <|-- ConcreteFlyweight
+Flyweight <|-- UnsharedConcreteFlyweight
+
+FlyweightFactory "flyweights" o-right-> Flyweight
+
+Client --> FlyweightFactory
+Client -> ConcreteFlyweight
+Client -> UnsharedConcreteFlyweight
+
+FlyweightFactory : + GetFlyweight(key)
+
+Flyweight : + Operation(extrinsicState)
+
+ConcreteFlyweight : - intrinsicState
+ConcreteFlyweight : + Operation(extrinsicState)
+
+UnsharedConcreteFlyweight  : - allState
+UnsharedConcreteFlyweight : + Operation(extrinsicState)
+
+
+
+@enduml
