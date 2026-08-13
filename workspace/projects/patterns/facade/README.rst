@@ -56,7 +56,7 @@ Sample Code
 .. figure:: docs/sample_code.svg
    :width: 1227
    :height: 4365
-   :scale: 70%
+   :scale: 80%
    :figwidth: 90%
    :alt: Facade Pattern Structure
    :align: center
