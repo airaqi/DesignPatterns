@@ -1,0 +1,93 @@
+@startuml
+
+skinparam linetype ortho
+
+title Observer Pattern Sample Code
+
+together {
+interface Subject
+
+class ClockTimer
+}
+
+interface Observer
+
+class DigitalClock
+class AnalogClock
+
+interface Window
+interface Widget
+
+class ConsoleWindow
+class ConsoleWidget
+
+Subject <|-- ClockTimer
+
+Observer <|--- ConsoleWidget
+
+Window <|-- Widget
+Window <|-- ConsoleWindow
+
+Widget <|-- ConsoleWidget
+
+ConsoleWidget <|-- DigitalClock
+ConsoleWidget <|-- AnalogClock
+
+Subject "observers" *-> Observer
+
+Subject : - observers : Observer[...]
+Subject :  # Subject()
+Subject : + attach(Observer) : void
+Subject : + detach(Observer) : void
+Subject : + notify() : void
+
+Observer : # Observer()
+Observer : + update(Subject) : void
+
+ClockTimer : - time : time_t
+ClockTimer : + ClockTimer(interval : int)
+ClockTimer : + start() : void
+ClockTimer : + stop() : void
+ClockTimer : + hour(bool) : int
+ClockTimer : + minute(bool) : int
+ClockTimer : + second(bool) : int
+ClockTimer : + tick() : void
+
+Window : + draw() : void
+
+ConsoleWindow : - children : Window[...]
+ConsoleWindow : + ConsoleWindow()
+ConsoleWindow : + add(Window) : void
+ConsoleWindow : + set(int, Window) : void
+ConsoleWindow : + remove(int) : Window
+ConsoleWindow : + start() : void
+ConsoleWindow : + clear() : void
+ConsoleWindow : + flush() : void
+ConsoleWindow : + sleep(int) : void
+
+Widget : + draw() : void
+
+ConsoleWidget : - cx : int
+ConsoleWidget : - cy : int
+ConsoleWidget : - width : int
+ConsoleWidget : - height : int
+ConsoleWidget : - subject :ClockTimer
+ConsoleWidget : + ConsoleWidget(ClockTimer, x : int, y : int, h : int, w : int)
+ConsoleWidget : + draw() : void
+ConsoleWidget : + drawFrame() : void
+ConsoleWidget : + update(Subject) : void
+
+
+
+DigitalClock : + DigitalClock(ClockTimer, x : int, y : int, w : int, h : int)
+DigitalClock : + draw() : void
+
+AnalogClock : - radius : int
+AnalogClock : - x : int
+AnalogClock : - y : int    
+AnalogClock : + DigitalClock(ClockTimer, x : int, y : int, w : int, h : int, r : int, ax : int, ay : int)
+AnalogClock : + update(Subject) : void
+AnalogClock : + draw() : void
+AnalogClock : + drawDial() : void
+AnalogClock : + drawHand(char, percent : double, angle : double, color : int) : void
+@enduml

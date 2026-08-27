@@ -1,0 +1,50 @@
+@startuml
+
+skinparam linetype ortho
+
+title Observer Pattern Structure
+
+together {
+interface Subject
+class ConcreteSubject
+
+note left of Subject::Notify
+    for all o in observers 
+        o->Update()
+end note
+
+note left of ConcreteSubject::GetState
+    return subjectState
+end note
+}
+
+together {
+interface Observer
+class ConcreteObserver
+
+note right of ConcreteObserver::Update
+    observerState = subject->GetState()
+end note
+}
+
+
+Subject <|-- ConcreteSubject
+Observer <|-- ConcreteObserver
+
+Subject "observers" *-> Observer
+ConcreteObserver "subject" -> ConcreteSubject
+
+Subject : Attach(Observer)
+Subject : Detach(Observer)
+Subject : Notify()
+
+ConcreteSubject : subjectState
+ConcreteSubject : GetState()
+ConcreteSubject : SetState()
+
+Observer : Update()
+
+ConcreteObserver : observerState
+ConcreteObserver : Update()
+
+@enduml

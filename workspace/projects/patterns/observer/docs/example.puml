@@ -1,0 +1,72 @@
+@startuml
+
+skinparam linetype ortho
+
+title Observer Pattern Change Manager Example
+
+interface Subject
+
+note as nSubjectAttach
+    chman->Register(this, o)
+end note
+nSubjectAttach .right. Subject::Attach
+
+note as nSubjectNotify
+    chman->Notify()
+end note
+nSubjectNotify .up. Subject::Notify
+
+interface Observer
+
+
+
+together {
+class ChangeManager
+
+class SimpleChangeManager
+class DAGChangeManager
+}
+
+note as nSimpleChangeManagerNotify
+    forall s in subjects
+        forall o in s.observers
+            0->Update(s)
+end note
+nSimpleChangeManagerNotify .up. SimpleChangeManager::Notify
+
+note as nDAGChangeManagerNotify
+    mark all observers to update
+    update all marked observers
+end note
+nDAGChangeManagerNotify .up.DAGChangeManager::Notify
+
+ChangeManager <|-- SimpleChangeManager
+ChangeManager <|-- DAGChangeManager
+
+ChangeManager "subjects" -left-> Subject
+ChangeManager "observers" -right-> Observer
+
+Subject "chman" --> ChangeManager
+
+Subject : Attache(Observer)
+Subject : Detach(Observer)
+Subject : Notify()
+
+Observer : Update(Subject)
+
+ChangeManager : subjectObserverMap : Map
+ChangeManager : Register(Subject, Observer)
+ChangeManager : Unregister(Subject, Observer)
+ChangeManager : Notify()
+
+SimpleChangeManager : subjectObserverMap : Map
+SimpleChangeManager : Register(Subject, Observer)
+SimpleChangeManager : Unregister(Subject, Observer)
+SimpleChangeManager : Notify()
+
+DAGChangeManager : subjectObserverMap : Map
+DAGChangeManager : Register(Subject, Observer)
+DAGChangeManager : Unregister(Subject, Observer)
+DAGChangeManager : Notify()
+
+@enduml

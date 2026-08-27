@@ -82,6 +82,7 @@ All patterns structures has been documented and samples has been implemented.
     "Behavioural", `Command <workspace/projects/patterns/command/>`_, "Encapsulate a request as an object, thereby letting you parameterize clients with different requests, queue or log requests, and support undoable operations."
     "", `Iterator <workspace/projects/patterns/iterator/>`_, "Provide a way to access the elements of an aggregate object sequentially without exposing its underlying representation."
     "", `Memento <workspace/projects/patterns/memento>`_, "Without violating encapsulation, capture and externalize an object's internal state so that the object can be restored to this state later."
+    "", `Observer <workspace/projects/patterns/observer>`_, "Define a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically."
     "", `Strategy <workspace/projects/patterns/strategy/>`_, "Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it."
     "", `Visitor <workspace/projects/patterns/visitor/>`_, "Represent an operation to be performed on the elements of an object structure"
 

@@ -1,0 +1,28 @@
+@startuml
+
+skinparam linetype ortho
+
+title Observer Pattern Typical Interactions Sequence
+
+participant aConcreteSubject as S
+participant aConcreteObserver as O1
+participant anotherConcreteObserver as O2
+
+activate O1
+O1 -> S : SetState()
+
+S -> S : Notify()
+deactivate O1
+
+S -> O1 : Update()
+activate O1
+O1 -> S : GetState()
+deactivate O1
+
+S -> O2 : Update()
+activate O2
+O2 -> S : GetState()
+deactivate O2
+
+
+@enduml
